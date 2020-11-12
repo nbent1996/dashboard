@@ -11,12 +11,14 @@ public class OpPais implements IOperaciones<Pais> {
 
  
 /*Estado*/
-public static Database database;
+private static Database database;
+private OpLogSistema logging;
 /*Estado*/
 
 /*Constructores*/
 public OpPais(){
     this.database = Database.getInstancia();
+    this.logging = new OpLogSistema();
 }
 /*Constructores*/
 
@@ -82,14 +84,15 @@ public OpPais(){
     }
 
     @Override
-    public void registroConsola(ArrayList<String> listaSQL, String operacion, String textoError) {
-        LogSistema log = new LogSistema(-1, operacion, textoError, new ArrayList<QueryEjecutada>());
+    public void registroConsola(ArrayList<String> listaSQL, String operacion, String textoError) throws Exception, SQLException {
+        LogSistema log = new LogSistema(-1, operacion, textoError, new ArrayList<>());
         
         System.out.println("----------------------------------");
         for (String sentencia : listaSQL) {
             log.getListaQuerys().add(new QueryEjecutada(sentencia));
             System.out.println(sentencia);
         }
+        logging.insertar(log);
         System.out.println("----------------------------------");
         /*Evidencia en consola*/  
     }

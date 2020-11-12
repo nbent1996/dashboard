@@ -1,8 +1,10 @@
 package Datos;
 
+import Modelo.LogSistema;
 import Modelo.Operador;
 import Modelo.Persona;
 import Modelo.Principal;
+import Modelo.QueryEjecutada;
 import Modelo.Secundario;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,11 +15,13 @@ public class OpPersona implements IOperaciones<Persona> {
     
 /*Estado*/
 private static Database database;
+private OpLogSistema logging;
 /*Estado*/
 
 /*Constructores*/
 public OpPersona(){
     this.database = Database.getInstancia();
+    this.logging = new OpLogSistema();
 }
 /*Constructores*/
 
@@ -63,31 +67,82 @@ public OpPersona(){
 
     @Override
     public void modificar(Persona cAnterior, Persona c) throws Exception, SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ArrayList<String> listaSQL = new ArrayList<>();
+        String sqlA, sqlB, sqlC, sqlD;
+        sqlA = "UPDATE Personas SET usuarioSistema='"+c.getUsuarioSistema()+"', nombreCompleto='"+c.getNombreCompleto()+"' where usuarioSistema='"+c.getUsuarioSistema()+"'";
+        
+        /*Validar consistencia de los datos tabla Personas*/
+        ResultSet validarDependencias = null;
+        validarDependencias = database.consultar("SELECT * FROM Personas WHERE Personas.usuarioSistema='"+c.getUsuarioSistema()+"' ");
+        if(validarDependencias.next()){
+            registroConsola(listaSQL, "Modificación", "El usuario que usted desea asignar ya está en uso en el sistema.");
+            throw new Exception("El usuario que usted desea asignar ya está en uso en el sistema.");
+        }
+        /*Validar consistencia de los datos tabla Personas*/
+        
+        listaSQL.add(sqlA);
+        switch(c.getClass().getName()){
+            case "Operador":
+                Operador operador = (Operador) c;
+                sqlB = "UPDATE OperadoresDashboard SET eliminado='Y' where usuarioSistema='"+operador.getUsuarioSistema()+"'";
+                /*No se valida la no repetición del usuarioSistema porque ya fue validado desde la tabla Personas*/
+                listaSQL.add(sqlB);
+            break;
+            case "Principal":
+                Principal principal = (Principal) c;
+                String servicioActivo = "N";
+                if(principal.getServicioActivo()){
+                    servicioActivo = "S";
+                }
+                sqlC = "UPDATE Principales SET nroDocumento='"+principal.getNroDocumento()+"', servicioActivo='"+servicioActivo+"' where nroDocumento='"+principal.getNroDocumento()+"' and Principales.usuarioSistema='"+principal.getUsuarioSistema()+"'";
+                validarDependencias = database.consultar("SELECT * FROM Principales WHERE Principales.nroDocumento='"+principal.getNroDocumento()+"' and Principales.usuarioSistema='"+principal.getUsuarioSistema()+"'");
+                if(validarDependencias.next()){
+                    registroConsola(listaSQL, "Modificación", "El número de documento que usted desea asignar ya está en uso en el sistema.");
+                    throw new Exception("El número de documento que usted desea asignar ya está en uso en el sistema.");
+                }
+                listaSQL.add(sqlC);
+            break;
+            
+            case "Secundario":
+                Secundario secundario = (Secundario) c;  
+                sqlD = "UPDATE Secundarios SET eliminado='Y' where usuarioSistema='"+secundario.getUsuarioSistema()+"'";
+                 /*No se valida la no repetición del usuarioSistema porque ya fue validado desde la tabla Personas*/
+                listaSQL.add(sqlD);
+            break;
+
+        }
+        database.actualizarMultiple(listaSQL, "UPDATE");
+        registroConsola(listaSQL, "Modificación", "NOERROR");    
     }
 
     @Override
     public void borrar(Persona c) throws Exception, SQLException {
         ResultSet validarDependencias = null;
         ArrayList<String> listaSQL = new ArrayList<>();
-        String sqlA, sqlB, sqlC, sqlD, sqlE;
+        String sqlA, sqlB, sqlC, sqlD;
         sqlA = "UPDATE Personas SET eliminado='Y' where usuarioSistema='"+c.getUsuarioSistema()+"'";
+        listaSQL.add(sqlA);
         switch(c.getClass().getName()){
             case "Operador":
                 Operador operador = (Operador) c;
                 sqlB = "UPDATE OperadoresDashboard SET eliminado='Y' where usuarioSistema='"+operador.getUsuarioSistema()+"'";
+                listaSQL.add(sqlB);
             break;
             case "Principal":
                 Principal principal = (Principal) c;
                 sqlC = "UPDATE Principales SET eliminado='Y' where nroDocumento='"+principal.getNroDocumento()+"'";
+                listaSQL.add(sqlC);
             break;
             
             case "Secundario":
-                Secundario secundario = (Secundario) c;
-                sqlD = "UPDATE Secundarios SET eliminado='Y' where ----";
+                Secundario secundario = (Secundario) c;  
+                sqlD = "UPDATE Secundarios SET eliminado='Y' where usuarioSistema='"+secundario.getUsuarioSistema()+"'";
+                listaSQL.add(sqlD);
             break;
 
         }
+        database.actualizarMultiple(listaSQL, "UPDATE");
+        registroConsola(listaSQL, "Modificación", "NOERROR");
     }
 
     @Override
@@ -98,6 +153,7 @@ public OpPersona(){
     @Override
     public ArrayList<Persona> buscar(String filtro, String extras) throws Exception, SQLException {
         ArrayList<Persona> personas = new ArrayList<>();
+        
         return null;
     }
 
@@ -112,8 +168,17 @@ public OpPersona(){
     }
 
     @Override
-    public void registroConsola(ArrayList<String> listaSQL, String operacion, String textoError) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void registroConsola(ArrayList<String> listaSQL, String operacion, String textoError) throws Exception, SQLException {
+        LogSistema log = new LogSistema(-1, operacion, textoError, new ArrayList<>());
+        
+        System.out.println("----------------------------------");
+        for (String sentencia : listaSQL) {
+            log.getListaQuerys().add(new QueryEjecutada(sentencia));
+            System.out.println(sentencia);
+        }
+        logging.insertar(log);
+        System.out.println("----------------------------------");
+        /*Evidencia en consola*/  
     }
 /*Comportamiento*/
 

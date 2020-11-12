@@ -10,5 +10,5 @@ public interface IOperaciones <T> {
     public ArrayList<T> buscar(String filtro, String extras)throws Exception, SQLException;
     public boolean existsAllID(ArrayList<Integer> lista) throws Exception, SQLException;
     public boolean borradoMultiplePorIds(ArrayList<Integer> listaIds) throws Exception, SQLException;
-    public void registroConsola(ArrayList<String> listaSQL, String operacion, String textoError);
+    public void registroConsola(ArrayList<String> listaSQL, String operacion, String textoError) throws Exception, SQLException;
 }
