@@ -10,11 +10,13 @@ import java.util.ArrayList;
 public class OpMonedas implements IOperaciones<Moneda> {
 /*Estado*/
 private static Database database;
+private OpLogSistema logging;
 /*Estado*/
 
 /*Constructores*/
 public OpMonedas(){
     this.database = Database.getInstancia();
+    this.logging = new OpLogSistema();
 }
 /*Constructores*/
 
@@ -81,15 +83,16 @@ public OpMonedas(){
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-      @Override
-    public void registroConsola(ArrayList<String> listaSQL, String operacion, String textoError) {
-        LogSistema log = new LogSistema(-1, operacion, textoError, new ArrayList<QueryEjecutada>());
+    @Override
+    public void registroConsola(ArrayList<String> listaSQL, String operacion, String textoError) throws Exception, SQLException {
+        LogSistema log = new LogSistema(-1, operacion, textoError, new ArrayList<>());
         
         System.out.println("----------------------------------");
         for (String sentencia : listaSQL) {
             log.getListaQuerys().add(new QueryEjecutada(sentencia));
             System.out.println(sentencia);
         }
+        logging.insertar(log);
         System.out.println("----------------------------------");
         /*Evidencia en consola*/  
     }

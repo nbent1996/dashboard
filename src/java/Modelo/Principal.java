@@ -48,7 +48,7 @@ public String getNroDocumento() {
         this.nroDocumento = nroDocumento;
     }
 
-    public boolean isServicioActivo() {
+    public boolean getServicioActivo() {
         return servicioActivo;
     }
 
@@ -63,6 +63,7 @@ public String getNroDocumento() {
     public void setTipoDocumento(TipoDocumento tipoDocumento) {
         this.tipoDocumento = tipoDocumento;
     }
+    
 /*Getters y Setters*/
 
     
