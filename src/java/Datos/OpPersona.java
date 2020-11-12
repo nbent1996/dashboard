@@ -84,7 +84,7 @@ public OpPersona(){
             
             case "Secundario":
                 Secundario secundario = (Secundario) c;
-                sqlD = "UPDATE Secundarios SET eliminado='Y' where "
+                sqlD = "UPDATE Secundarios SET eliminado='Y' where ----";
             break;
 
         }
