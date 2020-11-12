@@ -12,4 +12,6 @@ package controlador;
 public class ControladorAsignarCuentasSecundarias {
     private String pruebaGit;
     
+    private String pruebaGit2;
+    
 }
