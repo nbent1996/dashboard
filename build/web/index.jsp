@@ -8,7 +8,6 @@
 
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <!--PARA PRUEBA GIT-->
 
         <!--CSS-->  
         <link rel="stylesheet" href="css/styles.css">
@@ -72,7 +71,7 @@
             
             <div class="w3-bar-block">
                 <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>&nbsp; Cerrar Menu</a>
-                <a href="altaUsuario.jsp" class="w3-bar-item w3-button w3-padding w3-pale-red"><i class="fa fa-users fa-fw"></i>&nbsp; Usuarios</a>
+                <a href="manejoUsuarios.jsp" class="w3-bar-item w3-button w3-padding w3-pale-red"><i class="fa fa-users fa-fw"></i>&nbsp; Usuarios</a>
                 <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-address-card fa-fw"></i>&nbsp; Clientes</a>
                 <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa fa-cubes fa-fw"></i>&nbsp; Paquetes</a>
                 <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa fa-suitcase fa-fw"></i>&nbsp; Suscripciones</a>
