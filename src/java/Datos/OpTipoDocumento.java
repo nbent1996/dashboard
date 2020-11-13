@@ -58,16 +58,24 @@ public class OpTipoDocumento implements IOperaciones<TipoDocumento> {
         }else{
             sql+=" where eliminado='N' order by nombreDocumento asc ";
         }
+        ArrayList<String> listaSQL = new ArrayList<>();
+        listaSQL.add(sql);
+        try{
         ResultSet rs = database.consultar(sql);
         while(rs.next()){
             codDocumento = rs.getString("codDocumento");
             nombreDocumento = rs.getString("nombreDocumento");
             lista.add(new TipoDocumento(codDocumento, nombreDocumento));
         }
-        rs.close();
-        ArrayList<String> listaSQL = new ArrayList<>();
-        listaSQL.add(sql);
-        registroConsola(listaSQL,"Búsqueda", "NOERROR");
+            rs.close();
+        } catch (SQLException ex) {
+            registroConsola(listaSQL, "Búsqueda", ex.getMessage());
+            throw ex;
+        } catch (Exception ex) {
+            registroConsola(listaSQL, "Búsqueda", ex.getMessage());
+            throw ex;
+        }
+        registroConsola(listaSQL, "Búsqueda", "NOERROR");
         return lista;
     }
 

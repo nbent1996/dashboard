@@ -59,6 +59,9 @@ public OpMonedas(){
         }else{
             sql+=" where eliminado='N' order by nombreMoneda ";
         }
+        ArrayList<String> listaSQL = new ArrayList<>();
+        listaSQL.add(sql);
+        try{
         ResultSet rs = database.consultar(sql);
         while(rs.next()){
             codigo = rs.getString("codigo");
@@ -67,8 +70,13 @@ public OpMonedas(){
             lista.add(new Moneda(codigo, nombreMoneda,simbolo));
         }
         rs.close();
-         ArrayList<String> listaSQL = new ArrayList<>();
-         listaSQL.add(sql);
+        }catch(SQLException ex){
+            registroConsola(listaSQL, "Búsqueda", ex.getMessage());
+            throw ex;
+        }catch(Exception ex){
+            registroConsola(listaSQL, "Búsqueda", ex.getMessage());
+            throw ex;
+        }
          registroConsola(listaSQL, "Búsqueda", "NOERROR");
          return lista;
     }

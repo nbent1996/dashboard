@@ -26,7 +26,7 @@ public OpLogSistema(){
 
     @Override
     public void insertar(LogSistema c) throws Exception, SQLException {/*Usuario Sistema hardcodeado resolver eso*/
-        ArrayList<String> listaSQL = new ArrayList();
+        ArrayList<String> listaSQL  = new ArrayList();
         String sql = "INSERT INTO LogsSistema (usuarioSistema, operacion, textoError) values ('bentancor','"+c.getOperacion()+"','"+c.getTextoError()+"')";
         listaSQL.add(sql);
         for (QueryEjecutada q: c.getListaQuerys()){

@@ -16,6 +16,9 @@ private Pais paisAsociado;
         this.idiomaAsociado = idiomaAsociado;
         this.paisAsociado = paisAsociado;
     }
+    public Empresa(String identificacionTributaria){
+        this.identificacionTributaria = identificacionTributaria;
+    }
 /*Constructores*/
 
 /*Comportamiento*/

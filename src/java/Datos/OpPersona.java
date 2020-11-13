@@ -1,11 +1,15 @@
 package Datos;
 
+import Modelo.Empresa;
 import Modelo.LogSistema;
 import Modelo.Operador;
+import Modelo.Pais;
 import Modelo.Persona;
 import Modelo.Principal;
 import Modelo.QueryEjecutada;
 import Modelo.Secundario;
+import Modelo.TipoDocumento;
+import Modelo.TipoUsuario;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -152,9 +156,101 @@ public OpPersona(){
 
     @Override
     public ArrayList<Persona> buscar(String filtro, String extras) throws Exception, SQLException {
+        /*En el String extras se deberá almacenar el tipo de persona sobre el cual se quiere hacer búsqueda*/
         ArrayList<Persona> personas = new ArrayList<>();
-        
-        return null;
+        String usuarioSistema, nombreCompleto, codigo, identificacionTributaria; /*Tabla Persona*/
+        String nombreTipoUsuario; /*Tabla OperadoresDashboard*/
+        String nroCliente, email; /*Tabla Cliente*/
+        String nroDocumento, servicioActivo, codDocumento; /*Tabla Principales*/
+        String nroDocumentoPrincipal; /*Tabla Secundarios*/
+        String sqlA ="", sqlB="", sqlC="";
+        ResultSet rs = null;
+        ArrayList<String> listaSQL = new ArrayList<>();
+        try{
+            
+            switch (extras) {
+                case "Operador":
+                    sqlA = "SELECT Personas.usuarioSistema, Personas.nombreCompleto, Personas.codigo, Personas.identificacionTributaria, OperadoresDashboard.nombre from Personas, OperadoresDashboard ";
+                    if (filtro != null) {
+                        sqlA += filtro;
+                        sqlA += " AND Personas.usuarioSistema = OperadoresDashboard.usuarioSistema AND Personas.eliminado='N' AND OperadoresDashboard.eliminado='N' ";
+                    } else {
+                        sqlA += " WHERE Personas.usuarioSistema = OperadoresDashboard.usuarioSistema  AND Personas.eliminado='N' AND OperadoresDashboard.eliminado='N' ";
+                    }
+                    rs = database.consultar(sqlA);
+                    while(rs.next()){
+                        usuarioSistema = rs.getString("usuarioSistema");
+                        nombreCompleto = rs.getString("nombreCompleto");
+                        codigo = rs.getString("codigo");
+                        identificacionTributaria = rs.getString("identificacionTributaria");
+                        nombreTipoUsuario = rs.getString("nombre");
+                        personas.add(new Operador("", usuarioSistema, nombreCompleto, new Empresa(identificacionTributaria),new Pais(codigo),new TipoUsuario(nombreTipoUsuario)));
+                    }
+                    rs.close();
+                    listaSQL.add(sqlA);
+                    break;
+                case "Principal":
+                    sqlB = "SELECT Personas.usuarioSistema, Personas.nombreCompleto, Personas.codigo, Personas.identificacionTributaria, Principales.nroDocumento, Principales.servicioActivo, Principales.codDocumento, Clientes.email from Personas, Principales, Clientes ";
+                    if (filtro != null) {
+                        sqlB += filtro;
+                        sqlB += " AND Personas.usuarioSistema = Principales.usuarioSistema AND Principales.nroCliente = Clientes.nroCliente AND Personas.eliminado='N' AND Principales.eliminado='N' ";
+                    } else {
+                        sqlB += " WHERE Personas.usuarioSistema = Principales.usuarioSistema AND Principales.nroCliente = Clientes.nroCliente AND Personas.eliminado='N' AND Principales.eliminado='N' ";
+                    }
+                    rs=database.consultar(sqlB);
+                    while(rs.next()){
+                        usuarioSistema = rs.getString("usuarioSistema");
+                        nombreCompleto = rs.getString("nombreCompleto");
+                        codigo = rs.getString("codigo");
+                        identificacionTributaria = rs.getString("identificacionTributaria");
+                        nroDocumento = rs.getString("nroDocumento");
+                        servicioActivo = rs.getString("servicioActivo");
+                        codDocumento =  rs.getString("codDocumento");
+                        nroCliente = rs.getString("nroCliente");
+                        email = rs.getString("email");
+                        int nroC = Integer.parseInt(nroCliente);
+                        boolean servActivo = false;
+                        if(servicioActivo.equals("S"))
+                            servActivo = true;
+                        personas.add(new Principal(usuarioSistema, nombreCompleto, new Empresa(identificacionTributaria), new Pais(codigo), nroC, email, nroDocumento, servActivo, new TipoDocumento(codDocumento)));
+                    }
+                    rs.close();
+                    listaSQL.add(sqlB);
+                    break;
+                case "Secundario":
+                    sqlC = "SELECT Personas.usuarioSistema, Personas.nombreCompleto, Personas.codigo, Personas.identificacionTributaria, Secundarios.nroDocumento from Personas, Clientes, Secundarios ";
+                    if (filtro != null) {
+                        sqlC += filtro;
+                        sqlC += " AND Personas.usuarioSistema = Clientes.usuarioSistema AND Clientes.nroCliente = Secundarios.nroCliente AND Personas.eliminado='N' AND Secundarios.eliminado='N' ";
+                    } else {
+                        sqlC += " WHERE Personas.usuarioSistema = Clientes.usuarioSistema AND Clientes.nroCliente = Secundarios.nroCliente AND Personas.eliminado='N' AND Secundarios.eliminado='N' ";
+                    }
+                    rs=database.consultar(sqlC);
+                    while(rs.next()){
+                        usuarioSistema = rs.getString("usuarioSistema");
+                        nombreCompleto = rs.getString("nombreCompleto");
+                        codigo = rs.getString("codigo");
+                        identificacionTributaria = rs.getString("identificacionTributaria");
+                        nroDocumentoPrincipal = rs.getString("nroDocumento");
+                        nroCliente = rs.getString("nroCliente");
+                        email = rs.getString("email");
+                        int nroC = Integer.parseInt(nroCliente);
+                        personas.add(new Secundario(usuarioSistema, nombreCompleto, new Empresa(identificacionTributaria), new Pais(codigo), nroC, email, new Principal(nroDocumentoPrincipal)));
+                    }
+                    rs.close();
+                    listaSQL.add(sqlC);
+                    break;
+            }
+        }
+        catch(SQLException ex){
+            registroConsola(listaSQL, "Búsqueda", ex.getLocalizedMessage());
+            throw ex;
+        }
+        catch(Exception ex){
+            registroConsola(listaSQL, "Búsqueda", ex.getLocalizedMessage());
+            throw ex;
+        }
+        return personas;
     }
 
     @Override

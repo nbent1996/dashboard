@@ -30,7 +30,15 @@ public OpCategoria(){
     public void insertar(Categoria c) throws Exception, SQLException {
         ArrayList<String> listaSQL = new ArrayList<>();
         listaSQL.add("INSERT INTO Categorias (nombreCategoria) values ('"+c.getNombreCategoria()+"')");
+        try{
         database.actualizarMultiple(listaSQL, "INSERT");
+        }catch(SQLException ex){
+            registroConsola(listaSQL, "Alta", ex.getMessage());
+            throw ex;
+        }catch(Exception ex){
+            registroConsola(listaSQL, "Alta", ex.getMessage());
+            throw ex;
+        }
         registroConsola(listaSQL, "Alta", "NOERROR");
     }
 
@@ -60,14 +68,22 @@ public OpCategoria(){
         }else{
             sql+=" where eliminado='N' order by nombreCategoria ";
         }
+        ArrayList<String> listaSQL = new ArrayList<>();
+        listaSQL.add(sql);
+        try{
         ResultSet rs = database.consultar(sql);
         while(rs.next()){
             nombreCategoria = rs.getString("nombreCategoria");
             lista.add(new Categoria(nombreCategoria));
         }
         rs.close();
-        ArrayList<String> listaSQL = new ArrayList<>();
-        listaSQL.add(sql);
+        }catch(SQLException ex){
+            registroConsola(listaSQL, "Búsqueda", ex.getMessage());
+            throw ex;   
+        }catch(Exception ex){
+            registroConsola(listaSQL, "Búsqueda", ex.getMessage());
+            throw ex;
+        }
         registroConsola(listaSQL, "Búsqueda", "NOERROR");
         return lista;
     }

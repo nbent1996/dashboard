@@ -30,8 +30,8 @@ public Principal(String usuarioSistema, String nombreCompleto, int nroCliente, S
     this.tipoDocumento = tipoDocumento;
 }
 /*SOLO USUARIO SISTEMA*/
-public Principal(String usuarioSistema){
-    this.usuarioSistema = usuarioSistema;
+public Principal(String nroDocumento){
+    this.nroDocumento = nroDocumento;
 }
 /*Constructores*/
 

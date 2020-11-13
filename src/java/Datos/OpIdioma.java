@@ -30,7 +30,16 @@ public OpIdioma(){
     public void insertar(Idioma c) throws Exception, SQLException {
         ArrayList<String> listaSQL = new ArrayList<>();
         listaSQL.add("INSERT INTO Idiomas (nombreIdioma) values ('"+c.getNombre()+"')");
-        database.actualizarMultiple(listaSQL, "INSERT");
+        try{
+            database.actualizarMultiple(listaSQL, "INSERT");
+        }catch(SQLException ex){
+            registroConsola(listaSQL, "Alta", ex.getMessage());
+            throw ex;
+        }catch(Exception ex){
+            registroConsola(listaSQL, "Alta", ex.getMessage());
+            throw ex;
+        }
+        registroConsola(listaSQL, "Alta", "NOERROR");
     }
 
     @Override
@@ -59,14 +68,22 @@ public OpIdioma(){
         }else{
             sql+=" where eliminado='N' order by nombreIdioma ";
         }
+        ArrayList<String> listaSQL = new ArrayList<>();
+        listaSQL.add(sql);
+        try{
         ResultSet rs = database.consultar(sql);
         while(rs.next()){
             nombreIdioma = rs.getString("nombreIdioma");
             lista.add(new Idioma(nombreIdioma));
         }
         rs.close();
-        ArrayList<String> listaSQL = new ArrayList<>();
-        listaSQL.add(sql);
+        }catch(SQLException ex){
+            registroConsola(listaSQL, "Búsqueda", ex.getMessage());
+            throw ex;
+        }catch(Exception ex){
+            registroConsola(listaSQL, "Búsqueda", ex.getMessage());
+            throw ex;
+        }
         registroConsola(listaSQL, "Búsqueda", "NOERROR");
         return lista;
     }
