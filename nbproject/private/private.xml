@@ -4,7 +4,12 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/src/java/Datos/OpPersona.java</file>
-            <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/src/java/Modelo/Principal.java</file>
+            <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/src/java/Resources/DTOs/Fecha.java</file>
+            <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/src/java/Resources/DTOs/DTOFechas.java</file>
+            <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/src/java/controlador/IControlador.java</file>
+            <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/src/java/Datos/OpSuscripcion.java</file>
+            <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/src/java/Datos/OpFacturas.java</file>
+            <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/src/java/Datos/OpMonedas.java</file>
         </group>
     </open-files>
 </project-private>

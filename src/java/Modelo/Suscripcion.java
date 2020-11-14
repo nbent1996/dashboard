@@ -86,7 +86,7 @@ public Suscripcion(DTOFechas fechaInicio, float tiempoContrato, DTOFechas fechaF
         this.fechaFin = fechaFin;
     }
 
-    public boolean isActiva() {
+    public boolean getActiva() {
         return activa;
     }
 
@@ -102,6 +102,8 @@ public Suscripcion(DTOFechas fechaInicio, float tiempoContrato, DTOFechas fechaF
         this.listaPaquetes = listaPaquetes;
     }
 /*Getters y Setters*/
+
+
 
     
 }

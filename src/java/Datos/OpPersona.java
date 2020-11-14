@@ -65,7 +65,15 @@ public OpPersona(){
             listaSQL.add(sqlD);
             break;
         }
+        try{
         database.actualizarMultiple(listaSQL, "INSERT");
+        }catch(SQLException ex){
+            registroConsola(listaSQL, "Alta", ex.getMessage());
+            throw ex;
+        }catch(Exception ex){
+            registroConsola(listaSQL, "Alta", ex.getMessage());
+            throw ex;
+        }
         registroConsola(listaSQL, "Alta", "NOERROR");
     }
 
@@ -115,7 +123,15 @@ public OpPersona(){
             break;
 
         }
+        try{
         database.actualizarMultiple(listaSQL, "UPDATE");
+        }catch(SQLException ex){
+            registroConsola(listaSQL, "Modificación", ex.getMessage());
+            throw ex;
+        }catch(Exception ex){
+            registroConsola(listaSQL, "Modificación", ex.getMessage());
+            throw ex;
+        }
         registroConsola(listaSQL, "Modificación", "NOERROR");    
     }
 
@@ -145,13 +161,21 @@ public OpPersona(){
             break;
 
         }
+        try{
         database.actualizarMultiple(listaSQL, "UPDATE");
-        registroConsola(listaSQL, "Modificación", "NOERROR");
+        }catch(SQLException ex){
+            registroConsola(listaSQL, "Baja", ex.getMessage());
+            throw ex;
+        }catch(Exception ex){
+            registroConsola(listaSQL, "Baja", ex.getMessage());
+            throw ex;
+        }
+        registroConsola(listaSQL, "Baja", "NOERROR");
     }
 
     @Override
     public ArrayList<Persona> obtenerTodos() throws Exception, SQLException {
-        return buscar(null, null);
+        throw new UnsupportedOperationException("No implementado.");
     }
 
     @Override
