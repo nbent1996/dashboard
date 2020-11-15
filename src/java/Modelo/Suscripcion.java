@@ -3,7 +3,7 @@ package Modelo;
 import Resources.DTOs.DTOFechas;
 import java.util.ArrayList;
 
-public class Suscripcion {
+public class Suscripcion implements Comparable<Suscripcion> {
 /*Estado*/
 private int idSuscripcion;
 private DTOFechas fechaInicio;
@@ -52,6 +52,19 @@ public Suscripcion(DTOFechas fechaInicio, float tiempoContrato, DTOFechas fechaF
     }
 /*Constructores*/
 /*Comportamiento*/
+
+    @Override
+    public int compareTo(Suscripcion o) {
+        int resultado = 0;
+        if(this.getIdSuscripcion()<(o.getIdSuscripcion())){
+            resultado = -1;
+        }
+        if(this.getIdSuscripcion()>(o.getIdSuscripcion())){
+            resultado = 1;
+        }
+        return resultado;
+    }
+
 /*Comportamiento*/
 /*Getters y Setters*/
     public int getIdSuscripcion() {

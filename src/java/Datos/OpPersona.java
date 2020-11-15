@@ -87,9 +87,12 @@ public OpPersona(){
         ResultSet validarDependencias = null;
         validarDependencias = database.consultar("SELECT * FROM Personas WHERE Personas.usuarioSistema='"+c.getUsuarioSistema()+"' ");
         if(validarDependencias.next()){
+            validarDependencias.close();
             registroConsola(listaSQL, "Modificación", "El usuario que usted desea asignar ya está en uso en el sistema.");
             throw new Exception("El usuario que usted desea asignar ya está en uso en el sistema.");
         }
+        validarDependencias.close();
+
         /*Validar consistencia de los datos tabla Personas*/
         
         listaSQL.add(sqlA);
@@ -109,9 +112,11 @@ public OpPersona(){
                 sqlC = "UPDATE Principales SET nroDocumento='"+principal.getNroDocumento()+"', servicioActivo='"+servicioActivo+"' where nroDocumento='"+principal.getNroDocumento()+"' and Principales.usuarioSistema='"+principal.getUsuarioSistema()+"'";
                 validarDependencias = database.consultar("SELECT * FROM Principales WHERE Principales.nroDocumento='"+principal.getNroDocumento()+"' and Principales.usuarioSistema='"+principal.getUsuarioSistema()+"'");
                 if(validarDependencias.next()){
+                    validarDependencias.close();
                     registroConsola(listaSQL, "Modificación", "El número de documento que usted desea asignar ya está en uso en el sistema.");
                     throw new Exception("El número de documento que usted desea asignar ya está en uso en el sistema.");
                 }
+                validarDependencias.close();
                 listaSQL.add(sqlC);
             break;
             
@@ -137,7 +142,6 @@ public OpPersona(){
 
     @Override
     public void borrar(Persona c) throws Exception, SQLException {
-        ResultSet validarDependencias = null;
         ArrayList<String> listaSQL = new ArrayList<>();
         String sqlA, sqlB, sqlC, sqlD;
         sqlA = "UPDATE Personas SET eliminado='Y' where usuarioSistema='"+c.getUsuarioSistema()+"'";
