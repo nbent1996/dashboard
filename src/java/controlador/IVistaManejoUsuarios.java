@@ -10,5 +10,9 @@ package controlador;
  * @author Andres
  */
 public interface IVistaManejoUsuarios {
+
+    public void mensajeAltaUsuario(String mensaje);
+    
+    
     
 }

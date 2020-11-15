@@ -1,6 +1,13 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+
+
+<%
+    String msg = request.getParameter("msg");
+%>
+
+
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -26,12 +33,12 @@
                     <button>create</button>
                     <p class="message">Already registered? <a href="#">Sign In</a></p>
                 </form>-->
-                <form class="login-form" action="">
-                    <input type="text" id="txtUsuarioAlta" placeholder="usuario" required="true"/>
-                    <input type="text" id="txtNombreCompletoAlta" placeholder="nombre completo" required="true"/>
-                    <input type="text" id="txtNombreEmpresaAlta" placeholder="empresa" required="true"/>
-                    <input type="text" id="txtNombrePaisAlta" placeholder="pais" required="true"/>
-                    <input type="text" id="txtTipoUsuarioAlta" placeholder="tipo usuario" required="true"/>
+                <form class="login-form" method="post" onsubmit="return validarCamposAltaUsr(this)" action="/ManejoUsuariosServlet">
+                    <input type="text" id="txtUsuarioAlta" name="usuario" placeholder="usuario" required="true"/>
+                    <input type="text" id="txtNombreCompletoAlta" name="nombreCompleto" placeholder="nombre completo" required="true"/>
+                    <input type="text" id="txtNombreEmpresaAlta" name="nombreEmpresa" placeholder="empresa" required="true"/>
+                    <input type="text" id="txtNombrePaisAlta" name="nombrePais" placeholder="pais" required="true"/>
+                    <input type="text" id="txtTipoUsuarioAlta" name="tipoUsuario" placeholder="tipo usuario" required="true"/>
                     
                     <!--
                         <select name="pais" id="pais">
@@ -44,8 +51,15 @@
                             <option value="administrador">Administrador</option>
                         </select>
                     -->
-                    
+                    <input type="submit" id="btnSubmit" value="crear" >
                     <button>crear</button>
+                    
+                    <%if (msg != null) {%>
+                    <div>
+                        <p class="message"><%=msg%></p>                        
+                    </div>
+                    <%}%>
+                    
                     <!--<p class="message">Not registered? <a href="#">Create an account</a></p>-->
                 </form>
             </div>
