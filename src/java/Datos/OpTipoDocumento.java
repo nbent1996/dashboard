@@ -23,7 +23,11 @@ public class OpTipoDocumento implements IOperaciones<TipoDocumento> {
     /*Comportamiento*/
     @Override
     public void guardar(TipoDocumento cAnterior, TipoDocumento c) throws Exception, SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if(cAnterior == null){
+            insertar(c);
+        }else{
+            modificar(cAnterior, c);
+        }
     }
 
     @Override

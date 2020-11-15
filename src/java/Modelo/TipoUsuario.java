@@ -2,7 +2,7 @@ package Modelo;
 
 import java.util.ArrayList;
 
-public class TipoUsuario {
+public class TipoUsuario{
 /*Estado*/
 private String nombre;
 private ArrayList<Privilegio> listaPrivilegios;
@@ -39,6 +39,7 @@ public String getNombre() {
         this.listaPrivilegios = listaPrivilegios;
     }
 /*Getters y Setters*/
+
 
     
 }

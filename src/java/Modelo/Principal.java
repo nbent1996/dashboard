@@ -33,6 +33,10 @@ public Principal(String usuarioSistema, String nombreCompleto, int nroCliente, S
 public Principal(String nroDocumento){
     this.nroDocumento = nroDocumento;
 }
+/*SOLO NROCLIENTE*/
+public Principal(int nroCliente){
+    this.nroCliente = nroCliente;
+}
 /*Constructores*/
 
 /*Comportamiento*/

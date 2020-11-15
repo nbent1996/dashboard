@@ -5,9 +5,12 @@ import Modelo.Empresa;
 import Modelo.Factura;
 import Modelo.LogSistema;
 import Modelo.Moneda;
+import Modelo.Principal;
 import Modelo.QueryEjecutada;
 import Modelo.Suscripcion;
 import Resources.DTOs.DTOFechas;
+import Resources.DTOs.Fecha;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -118,8 +121,68 @@ public OpFacturas(){
         Cliente clienteAsociado;
         Moneda monedaAsociada;
         Empresa empresaAsociada;
+        String sql = "SELECT day(fechaPago) as 'diaPago', month(fechaPago) as 'mesPago', year(fechaPago) as 'anioPago',"
+                + " day(fechaEmision) as 'diaEmision', month(fechaEmision) as 'mesEmision', year(fechaEmision) as 'anioEmision', "
+                + " day(fechaVencimiento) as 'diaVencimiento', month(fechaVencimiento) as 'mesVencimiento', year(fechaVencimiento) as 'anioVencimiento', "
+                + " day(periodoServicioInicio) as 'diaPSI', month(periodoServicioInicio) as 'mesPSI', year(periodoServicioInicio) as 'anioPSI', "
+                + " day(periodoServicioFin) as 'diaPSF', month(periodoServicioFin) as 'mesPSF', year(periodoServicioFin) as 'anioPSF', "
+                + " monto, tipoRecibo, nroCliente, codigo, identificacionTributaria FROM Facturas ";
+        ArrayList<String> listaSQL = new ArrayList<>();
+        if(filtro!=null){
+            sql+= filtro;
+            sql+= " AND eliminado='N' ";
+        }else{
+            sql+=" WHERE eliminado='N' ";
+        }
+        listaSQL.add(sql);
         
         
+        try{
+            ResultSet rs = database.consultar(sql);
+            while(rs.next()){
+                /**/
+                diaPago = rs.getInt("diaPago");
+                mesPago = rs.getInt("mesPago");
+                anioPago = rs.getInt("anioPago");
+                fechaPago = new DTOFechas(new Fecha(diaPago, mesPago, anioPago));
+                /**/
+                diaEmision = rs.getInt("diaEmision");
+                mesEmision = rs.getInt("mesEmision");
+                anioEmision = rs.getInt("anioEmision");
+                fechaEmision = new DTOFechas(new Fecha(diaEmision, mesEmision, anioEmision));
+                /**/
+                diaVencimiento = rs.getInt("diaVencimiento");
+                mesVencimiento = rs.getInt("mesVencimiento");
+                anioVencimiento = rs.getInt("anioVencimiento");
+                fechaVencimiento = new DTOFechas(new Fecha(diaVencimiento, mesVencimiento, anioVencimiento));
+                /**/
+                diaPSI = rs.getInt("diaPSI");
+                mesPSI = rs.getInt("mesPSI");
+                anioPSI = rs.getInt("anioPSI");
+                periodoServicioInicio = new DTOFechas(new Fecha(diaPSI, mesPSI, anioPSI));
+                /**/
+                diaPSF = rs.getInt("diaPSF");
+                mesPSF = rs.getInt("mesPSF");
+                anioPSF = rs.getInt("anioPSF");
+                periodoServicioFin = new DTOFechas(new Fecha(diaPSF, mesPSF, anioPSF));
+                /**/
+                monto = rs.getFloat("monto");
+                tipoRecibo = rs.getString("tipoRecibo");
+                clienteAsociado = new Principal(rs.getInt("nroCliente"));
+                monedaAsociada = new Moneda(rs.getString("codigo"));
+                empresaAsociada = new Empresa(rs.getString("identificacionTributaria"));
+                lista.add(new Factura(fechaPago, fechaEmision, fechaVencimiento, periodoServicioInicio, periodoServicioFin, monto, tipoRecibo, clienteAsociado, null, monedaAsociada, empresaAsociada));
+            }
+            rs.close();
+        }catch(SQLException ex){
+            registroConsola(listaSQL, "Búsqueda", ex.getMessage());
+            throw ex;
+        }catch(Exception ex){
+            registroConsola(listaSQL, "Búsqueda", ex.getMessage());
+            throw ex;
+        }
+         registroConsola(listaSQL, "Búsqueda", "NOERROR");
+         return lista;   
     }
 
     @Override
@@ -129,7 +192,34 @@ public OpFacturas(){
 
     @Override
     public boolean borradoMultiplePorIds(ArrayList<Integer> listaIds) throws Exception, SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ArrayList<String> listaSQL = new ArrayList<>();
+        /*Armando listado de IDS para la Query*/
+        String listaIdsStr = "";
+        for(Integer i: listaIds){
+            listaIdsStr += i + " , ";
+        }
+        listaIdsStr = listaIdsStr.substring(0, (listaIdsStr.length()-2));
+        /*Armando listado de IDS para la Query*/
+        
+        listaSQL.add("UPDATE GeneraSF set eliminado='Y' WHERE idFactura in("+listaIdsStr+")");
+        listaSQL.add("UPDATE Facturas set eliminado='Y' WHERE idFactura in("+listaIdsStr+")");
+        /*Validaciones*/
+        if(listaIds.isEmpty()){
+            registroConsola(listaSQL, "Baja", "ERROR: Lista de IDs llegó vacia al metodo borradoMultiplePorIds");
+            return false;
+        }
+        /*Validaciones*/
+        try{
+            database.actualizarMultiple(listaSQL,"UPDATE");
+        }catch(SQLException ex){
+            registroConsola(listaSQL, "Baja", ex.getMessage());
+            throw ex;
+        }catch(Exception ex){
+            registroConsola(listaSQL, "Baja", ex.getMessage());
+            throw ex;
+        }
+        registroConsola(listaSQL, "Baja", "NOERROR");    
+        return true;
     }
 
     @Override

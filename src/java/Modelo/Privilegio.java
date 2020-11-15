@@ -1,19 +1,12 @@
 package Modelo;
-public class Privilegio {
+public class Privilegio implements Comparable<Privilegio> {
 /*Estado*/
-private int idPrivilegio;
 private String nombrePrivilegio;
 /*Estado*/
 
 /*Constructores*/
     /*FULL*/
-public Privilegio(int idPrivilegio, String nombrePrivilegio){
-    this.idPrivilegio = idPrivilegio;
-    this.nombrePrivilegio = nombrePrivilegio;
-}
-/*ID -1*/
 public Privilegio(String nombrePrivilegio){
-    this.idPrivilegio = -1;
     this.nombrePrivilegio = nombrePrivilegio;
 }
 /*Constructores*/
@@ -23,13 +16,6 @@ public Privilegio(String nombrePrivilegio){
 /*Comportamiento*/
 
 /*Getters y Setters*/
-    public int getIdPrivilegio() {
-        return idPrivilegio;
-    }
-
-    public void setIdPrivilegio(int idPrivilegio) {
-        this.idPrivilegio = idPrivilegio;
-    }
 
     public String getNombrePrivilegio() {
         return nombrePrivilegio;
@@ -39,6 +25,18 @@ public Privilegio(String nombrePrivilegio){
         this.nombrePrivilegio = nombrePrivilegio;
     }
 /*Getters y Setters*/
+
+    @Override
+    public int compareTo(Privilegio o) {
+        int resultado = 0;
+        if(this.getNombrePrivilegio().compareTo(o.getNombrePrivilegio())==-1){
+            resultado = -1;
+        }
+        if(this.getNombrePrivilegio().compareTo(o.getNombrePrivilegio())==1){
+            resultado = 1;
+        }
+        return resultado;
+    }
 
 
 }

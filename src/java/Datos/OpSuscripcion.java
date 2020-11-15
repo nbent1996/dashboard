@@ -72,7 +72,7 @@ public OpSuscripcion(){
     @Override
     public void borrar(Suscripcion c) throws Exception, SQLException {
         ArrayList<String> listaSQL = new ArrayList<>();
-        listaSQL.add("UPDATE Suscripcion set eliminado='Y' WHERE idSuscripcion='"+c.getIdSuscripcion()+"'");
+        listaSQL.add("UPDATE Suscripciones set eliminado='Y' WHERE idSuscripcion='"+c.getIdSuscripcion()+"'");
         try{
             database.actualizarMultiple(listaSQL,"UPDATE");
         }catch(SQLException ex){
@@ -161,7 +161,7 @@ public OpSuscripcion(){
         /*Armando listado de IDS para la Query*/
         
         listaSQL.add("UPDATE GeneraSF set eliminado='Y' WHERE idSuscripcion in("+listaIdsStr+")");
-        listaSQL.add("UPDATE Suscripcion set eliminado='Y' WHERE idSuscripcion in("+listaIdsStr+")");
+        listaSQL.add("UPDATE Suscripciones set eliminado='Y' WHERE idSuscripcion in("+listaIdsStr+")");
         /*Validaciones*/
         if(listaIds.isEmpty()){
             registroConsola(listaSQL, "Baja", "ERROR: Lista de IDs llegó vacia al metodo borradoMultiplePorIds");

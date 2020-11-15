@@ -1,20 +1,19 @@
 package Datos;
 
 import Modelo.LogSistema;
-import Modelo.Moneda;
 import Modelo.QueryEjecutada;
-import java.sql.ResultSet;
+import Modelo.TipoDispositivo;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class OpMonedas implements IOperaciones<Moneda> {
+public class OpTiposDispositivos implements IOperaciones<TipoDispositivo> {
 /*Estado*/
 private static Database database;
 private OpLogSistema logging;
 /*Estado*/
 
 /*Constructores*/
-public OpMonedas(){
+public OpTiposDispositivos(){
     this.database = Database.getInstancia();
     this.logging = new OpLogSistema();
 }
@@ -22,63 +21,37 @@ public OpMonedas(){
 
 /*Comportamiento*/
  @Override
-    public void guardar(Moneda cAnterior, Moneda c) throws Exception, SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void insertar(Moneda c) throws Exception, SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void modificar(Moneda cAnterior, Moneda c) throws Exception, SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void borrar(Moneda c) throws Exception, SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public ArrayList<Moneda> obtenerTodos() throws Exception, SQLException {
-        return buscar(null,null);
-    }
-
-    @Override
-    public ArrayList<Moneda> buscar(String filtro, String extras) throws Exception, SQLException {
-        ArrayList<Moneda> lista = new ArrayList<>();
-        String codigo = "";
-        String nombreMoneda = "";
-        String simbolo = "";
-        String sql = "SELECT * FROM Monedas ";
-        if(filtro!=null){
-            sql+=filtro;
-            sql+=" and eliminado='N' order by nombreMoneda "; 
+    public void guardar(TipoDispositivo cAnterior, TipoDispositivo c) throws Exception, SQLException {
+        if(cAnterior == null){
+            insertar(c);
         }else{
-            sql+=" where eliminado='N' order by nombreMoneda ";
+            modificar(cAnterior, c);
         }
-        ArrayList<String> listaSQL = new ArrayList<>();
-        listaSQL.add(sql);
-        try{
-        ResultSet rs = database.consultar(sql);
-        while(rs.next()){
-            codigo = rs.getString("codigo");
-            nombreMoneda = rs.getString("nombreMoneda");
-            simbolo = rs.getString("simbolo");
-            lista.add(new Moneda(codigo, nombreMoneda,simbolo));
-        }
-        rs.close();
-        }catch(SQLException ex){
-            registroConsola(listaSQL, "Búsqueda", ex.getMessage());
-            throw ex;
-        }catch(Exception ex){
-            registroConsola(listaSQL, "Búsqueda", ex.getMessage());
-            throw ex;
-        }
-         registroConsola(listaSQL, "Búsqueda", "NOERROR");
-         return lista;
+    }
+
+    @Override
+    public void insertar(TipoDispositivo c) throws Exception, SQLException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void modificar(TipoDispositivo cAnterior, TipoDispositivo c) throws Exception, SQLException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void borrar(TipoDispositivo c) throws Exception, SQLException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public ArrayList<TipoDispositivo> obtenerTodos() throws Exception, SQLException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public ArrayList<TipoDispositivo> buscar(String filtro, String extras) throws Exception, SQLException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
