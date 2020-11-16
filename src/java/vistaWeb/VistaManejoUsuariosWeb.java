@@ -36,7 +36,7 @@ public class VistaManejoUsuariosWeb implements IVistaManejoUsuarios{
 
     @Override
     public void mensajeAltaUsuario(String mensaje) { //mensaje de si se dió de alta o no (en el controlador)
-        destino = "usuario_alta.jsp?msg=" + mensaje;
+        destino = "usuario_Alta.jsp?msg=" + mensaje;
     }
     
     
