@@ -19,7 +19,7 @@ public class ControladorManejoUsuarios {
     
 
     public void altaUsuario(String usuarioAltaUsr, String nombreCompletoAltaUsr, String nombreEmpresaAltaUsr, String nombrePaisAltaUsr, String tipoUsuarioAltaUsr) {
-        
+        vista.mensajeAltaUsuario(usuarioAltaUsr); //solo para probar que funcione el ciclo
         //desde acá ir al modelo, insertar en tabla BD
         //llamar a métodos de la vista dependiendo si se pudo insertar o no
         
