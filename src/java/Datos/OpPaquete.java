@@ -61,7 +61,6 @@ public OpPaquete(){
     @Override
     public void modificar(Paquete cAnterior, Paquete c) throws Exception, SQLException {
         ArrayList<String> listaSQL = new ArrayList<>();
-        ResultSet validarConsistencia = null;
         listaSQL.add("UPDATE Paquetes SET costoBruto='"+c.getCostoBruto()+"', identificacionTributaria='"+c.getEmpresaAsociada().getIdentificacionTributaria()+"' WHERE idPaquete = '"+c.getIdPaquete()+"' AND eliminado = 'N' ");
         /*Actualizando Tipos de Dispositivos asociados al Paquete solo si es necesario*/
         if(!listasSonIguales(c.getListaTieneTP(), cAnterior.getListaTieneTP())){
@@ -169,41 +168,42 @@ public OpPaquete(){
         ArrayList<String> listaSQL = new ArrayList<>();
         /*Armando listado de IDS para la Query*/
         String listaIdsStr = "";
-        for(Integer i: listaIds){
+        for (Integer i : listaIds) {
             listaIdsStr += i + " , ";
         }
-        listaIdsStr = listaIdsStr.substring(0, (listaIdsStr.length()-2));
+        listaIdsStr = listaIdsStr.substring(0, (listaIdsStr.length() - 2));
         /*Armando listado de IDS para la Query*/
         ResultSet validarConsistencia = null;
-        listaSQL.add("UPDATE Paquetes SET eliminado='Y' WHERE idPaquete in ("+listaIdsStr+ ") ");
-        /*Validar que este Paquete no tenga registros en la tabla TieneTP (Relación TipoDispositivo-Paquete)*/
-        validarConsistencia = database.consultar("SELECT * FROM TieneTP WHERE idPaquete in ("+listaIdsStr+")");
-        if(validarConsistencia.next()){
-            validarConsistencia.close();
-            registroConsola(listaSQL, "Baja", "Alguno de los Paquetes que usted desea borrar está relacionado con algún Tipo de Dispositivo.");
-            throw new Exception("Alguno de los Paquetes que usted desea borrar está relacionado con algún Tipo de Dispositivo.");
-        }
-        validarConsistencia.close();
-        /*Validar que este Paquete no tenga registros en la tabla TieneTP (Relación TipoDispositivo-Paquete)*/
+        listaSQL.add("UPDATE Paquetes SET eliminado='Y' WHERE idPaquete in (" + listaIdsStr + ") ");
+
         /*Validar lista de IDs vacia*/
-        if(listaIds.isEmpty()){
+        if (listaIds.isEmpty()) {
             registroConsola(listaSQL, "Baja", "ERROR: Lista de IDs llegó vacia al metodo borradoMultiplePorIds");
             return false;
         }
         /*Validar lista de IDs vacia*/
-        
-        listaSQL.add("UPDATE TieneTP set eliminado='Y' WHERE idPaquete in("+listaIdsStr+")");
-        listaSQL.add("UPDATE Paquetes set eliminado='Y' WHERE idPaquete in("+listaIdsStr+")");
-        try{
-            database.actualizarMultiple(listaSQL,"UPDATE");
-        }catch(SQLException ex){
+
+        listaSQL.add("UPDATE TieneTP set eliminado='Y' WHERE idPaquete in(" + listaIdsStr + ")");
+        listaSQL.add("UPDATE Paquetes set eliminado='Y' WHERE idPaquete in(" + listaIdsStr + ")");
+        try {
+            /*Validar que este Paquete no tenga registros en la tabla TieneTP (Relación TipoDispositivo-Paquete)*/
+            validarConsistencia = database.consultar("SELECT * FROM TieneTP WHERE idPaquete in (" + listaIdsStr + ")");
+            if (validarConsistencia.next()) {
+                validarConsistencia.close();
+                registroConsola(listaSQL, "Baja", "Alguno de los Paquetes que usted desea borrar está relacionado con algún Tipo de Dispositivo.");
+                throw new Exception("Alguno de los Paquetes que usted desea borrar está relacionado con algún Tipo de Dispositivo.");
+            }
+            validarConsistencia.close();
+            /*Validar que este Paquete no tenga registros en la tabla TieneTP (Relación TipoDispositivo-Paquete)*/
+            database.actualizarMultiple(listaSQL, "UPDATE");
+        } catch (SQLException ex) {
             registroConsola(listaSQL, "Baja", ex.getMessage());
             throw ex;
-        }catch(Exception ex){
+        } catch (Exception ex) {
             registroConsola(listaSQL, "Baja", ex.getMessage());
             throw ex;
         }
-        registroConsola(listaSQL, "Baja", "NOERROR");    
+        registroConsola(listaSQL, "Baja", "NOERROR");
         return true;
     }
 

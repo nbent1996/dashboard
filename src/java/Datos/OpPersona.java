@@ -81,54 +81,54 @@ public OpPersona(){
     public void modificar(Persona cAnterior, Persona c) throws Exception, SQLException {
         ArrayList<String> listaSQL = new ArrayList<>();
         String sqlA, sqlB, sqlC, sqlD;
-        sqlA = "UPDATE Personas SET usuarioSistema='"+c.getUsuarioSistema()+"', nombreCompleto='"+c.getNombreCompleto()+"' where usuarioSistema='"+c.getUsuarioSistema()+"'";
-        
-        /*Validar consistencia de los datos tabla Personas*/
-        ResultSet validarDependencias = null;
-        validarDependencias = database.consultar("SELECT * FROM Personas WHERE Personas.usuarioSistema='"+c.getUsuarioSistema()+"' ");
-        if(validarDependencias.next()){
-            validarDependencias.close();
-            registroConsola(listaSQL, "Modificación", "El usuario que usted desea asignar ya está en uso en el sistema.");
-            throw new Exception("El usuario que usted desea asignar ya está en uso en el sistema.");
-        }
-        validarDependencias.close();
-
-        /*Validar consistencia de los datos tabla Personas*/
-        
-        listaSQL.add(sqlA);
-        switch(c.getClass().getName()){
-            case "Operador":
-                Operador operador = (Operador) c;
-                sqlB = "UPDATE OperadoresDashboard SET eliminado='Y' where usuarioSistema='"+operador.getUsuarioSistema()+"'";
-                /*No se valida la no repetición del usuarioSistema porque ya fue validado desde la tabla Personas*/
-                listaSQL.add(sqlB);
-            break;
-            case "Principal":
-                Principal principal = (Principal) c;
-                String servicioActivo = "N";
-                if(principal.getServicioActivo()){
-                    servicioActivo = "S";
-                }
-                sqlC = "UPDATE Principales SET nroDocumento='"+principal.getNroDocumento()+"', servicioActivo='"+servicioActivo+"' where nroDocumento='"+principal.getNroDocumento()+"' and Principales.usuarioSistema='"+principal.getUsuarioSistema()+"'";
-                validarDependencias = database.consultar("SELECT * FROM Principales WHERE Principales.nroDocumento='"+principal.getNroDocumento()+"' and Principales.usuarioSistema='"+principal.getUsuarioSistema()+"'");
-                if(validarDependencias.next()){
-                    validarDependencias.close();
-                    registroConsola(listaSQL, "Modificación", "El número de documento que usted desea asignar ya está en uso en el sistema.");
-                    throw new Exception("El número de documento que usted desea asignar ya está en uso en el sistema.");
-                }
+        sqlA = "UPDATE Personas SET usuarioSistema='" + c.getUsuarioSistema() + "', nombreCompleto='" + c.getNombreCompleto() + "' where usuarioSistema='" + c.getUsuarioSistema() + "'";
+        try {
+            /*Validar consistencia de los datos tabla Personas*/
+            ResultSet validarDependencias = null;
+            validarDependencias = database.consultar("SELECT * FROM Personas WHERE Personas.usuarioSistema='" + c.getUsuarioSistema() + "' ");
+            if (validarDependencias.next()) {
                 validarDependencias.close();
-                listaSQL.add(sqlC);
-            break;
-            
-            case "Secundario":
-                Secundario secundario = (Secundario) c;  
-                sqlD = "UPDATE Secundarios SET eliminado='Y' where usuarioSistema='"+secundario.getUsuarioSistema()+"'";
-                 /*No se valida la no repetición del usuarioSistema porque ya fue validado desde la tabla Personas*/
-                listaSQL.add(sqlD);
-            break;
+                registroConsola(listaSQL, "Modificación", "El usuario que usted desea asignar ya está en uso en el sistema.");
+                throw new Exception("El usuario que usted desea asignar ya está en uso en el sistema.");
+            }
+            validarDependencias.close();
+            /*Validar consistencia de los datos tabla Personas*/
+            listaSQL.add(sqlA);
+            switch (c.getClass().getName()) {
+                case "Operador":
+                    Operador operador = (Operador) c;
+                    sqlB = "UPDATE OperadoresDashboard SET eliminado='Y' where usuarioSistema='" + operador.getUsuarioSistema() + "'";
+                    /*No se valida la no repetición del usuarioSistema porque ya fue validado desde la tabla Personas*/
+                    listaSQL.add(sqlB);
+                    break;
+                case "Principal":
+                    Principal principal = (Principal) c;
+                    String servicioActivo = "N";
+                    if (principal.getServicioActivo()) {
+                        servicioActivo = "S";
+                    }
+                    sqlC = "UPDATE Principales SET nroDocumento='" + principal.getNroDocumento() + "', servicioActivo='" + servicioActivo + "' where nroDocumento='" + principal.getNroDocumento() + "' and Principales.usuarioSistema='" + principal.getUsuarioSistema() + "'";
+                    /*Validar que el nuevo nroDocumento no exista en el sistema ahora.*/
+                    validarDependencias = database.consultar("SELECT * FROM Principales WHERE Principales.nroDocumento='" + principal.getNroDocumento() + "' and Principales.usuarioSistema='" + principal.getUsuarioSistema() + "'");
+                    if (validarDependencias.next()) {
+                        validarDependencias.close();
+                        registroConsola(listaSQL, "Modificación", "El número de documento que usted desea asignar ya está en uso en el sistema.");
+                        throw new Exception("El número de documento que usted desea asignar ya está en uso en el sistema.");
+                    }
+                    validarDependencias.close();
+                    /*Validar que el nuevo nroDocumento no exista en el sistema ahora.*/
+
+                    listaSQL.add(sqlC);
+                    break;
+
+                case "Secundario":
+                    Secundario secundario = (Secundario) c;
+                    sqlD = "UPDATE Secundarios SET eliminado='Y' where usuarioSistema='" + secundario.getUsuarioSistema() + "'";
+                    /*No se valida la no repetición del usuarioSistema porque ya fue validado desde la tabla Personas*/
+                    listaSQL.add(sqlD);
+                    break;
 
         }
-        try{
         database.actualizarMultiple(listaSQL, "UPDATE");
         }catch(SQLException ex){
             registroConsola(listaSQL, "Modificación", ex.getMessage());

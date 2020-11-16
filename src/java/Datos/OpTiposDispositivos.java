@@ -53,27 +53,27 @@ public OpTiposDispositivos(){
     public void modificar(TipoDispositivo cAnterior, TipoDispositivo c) throws Exception, SQLException {
         ArrayList<String> listaSQL = new ArrayList<>();
         ResultSet validarConsistencia = null;
-        listaSQL.add("UPDATE TiposDispositivos SET modelo='"+c.getModelo()+"', nombre='"+c.getNombre()+"', tipoComunicacion='"+c.getTipoComunicacion()+"' WHERE idTipoDispositivo='"+cAnterior.getIdTipoDispositivo()+"' ");
-        /*Validar que el modelo nuevo no existe ya en la db.*/
-        validarConsistencia = database.consultar("SELECT * FROM TiposDispositivos WHERE modelo='"+c.getModelo()+"' ");
-        if(validarConsistencia.next()){
+        listaSQL.add("UPDATE TiposDispositivos SET modelo='" + c.getModelo() + "', nombre='" + c.getNombre() + "', tipoComunicacion='" + c.getTipoComunicacion() + "' WHERE idTipoDispositivo='" + cAnterior.getIdTipoDispositivo() + "' ");
+
+        try {
+            /*Validar que el modelo nuevo no existe ya en la db.*/
+            validarConsistencia = database.consultar("SELECT * FROM TiposDispositivos WHERE modelo='" + c.getModelo() + "' ");
+            if (validarConsistencia.next()) {
+                validarConsistencia.close();
+                registroConsola(listaSQL, "Modificación", "El modelo que usted desea asignar ya está en uso en el sistema.");
+                throw new Exception("El modelo que usted desea asignar ya está en uso en el sistema.");
+            }
             validarConsistencia.close();
-            registroConsola(listaSQL, "Modificación", "El modelo que usted desea asignar ya está en uso en el sistema.");
-            throw new Exception("El modelo que usted desea asignar ya está en uso en el sistema.");
-        }
-        validarConsistencia.close();
-        /*Validar que el modelo nuevo no existe ya en la db.*/
-        try{
+            /*Validar que el modelo nuevo no existe ya en la db.*/
             database.actualizarMultiple(listaSQL, "UPDATE");
-        }catch(SQLException ex){
+        } catch (SQLException ex) {
             registroConsola(listaSQL, "Modificación", ex.getMessage());
             throw ex;
-        }catch(Exception ex){
+        } catch (Exception ex) {
             registroConsola(listaSQL, "Modificación", ex.getMessage());
             throw ex;
         }
         registroConsola(listaSQL, "Modificación", "NOERROR");
-
     }
 
     @Override

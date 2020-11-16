@@ -10,10 +10,8 @@ public class Database {
     private static Connection conexion;
     private static Statement stmt;
     private static String user = "administrador";
-    private static String pass = "39475109";
-    //private static String url= "jdbc:mysql://192.168.0.99:3306" + "/binstalaciones" + "?user=" + user + "&password=" + pass;
-    private static String url = "jdbc:mysql://localhost/barometricaColon"+"?user="+user+"&password="+pass;
-    private static String ejecucion = "";
+    private static String pass = "alfacomuruguay4828!";
+    private static String url = "jdbc:mysql://localhost/alfacomPlatform"+"?user="+user+"&password="+pass;
     /*Atributos*/
  /*Constructores*/
 
@@ -190,14 +188,6 @@ public class Database {
     public static String getPass() {
         return pass;
     }
-
-    public static String getEjecucion() {
-        return ejecucion;
-    }
-
-    public static void setEjecucion(String ejecucion) {
-        Database.ejecucion = ejecucion;
-    }    
     /*Setters y Getters*/
 
 
