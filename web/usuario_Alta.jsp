@@ -33,7 +33,7 @@
                     <button>create</button>
                     <p class="message">Already registered? <a href="#">Sign In</a></p>
                 </form>-->
-                <form class="login-form" method="post" onsubmit="return validarCamposAltaUsr(this)" action="/ManejoUsuariosServlet">
+                <form name="formAltaUsuario" action="ManejoUsuariosServlet" method="post" onsubmit="return validarCamposAltaUsr(this)">
                     <input type="text" id="txtUsuarioAlta" name="usuario" placeholder="usuario" required="true"/>
                     <input type="text" id="txtNombreCompletoAlta" name="nombreCompleto" placeholder="nombre completo" required="true"/>
                     <input type="text" id="txtNombreEmpresaAlta" name="nombreEmpresa" placeholder="empresa" required="true"/>

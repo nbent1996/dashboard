@@ -7,6 +7,9 @@ package vistaWeb;
 
 import controlador.ControladorManejoUsuarios;
 import controlador.IVistaManejoUsuarios;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -19,6 +22,13 @@ public class VistaManejoUsuariosWeb implements IVistaManejoUsuarios{
     private ControladorManejoUsuarios controlador;
     private String destino;
     private HttpServletRequest request;
+    private HttpServletResponse response;
+
+    public VistaManejoUsuariosWeb() {
+        controlador = new ControladorManejoUsuarios(this);
+    }
+    
+    
 
     public void procesarRequest(HttpServletRequest request, HttpServletResponse response) {
         
@@ -29,14 +39,25 @@ public class VistaManejoUsuariosWeb implements IVistaManejoUsuarios{
         String tipoUsuarioAltaUsr = request.getParameter("tipoUsuario");
         
         this.request = request;
+        this.response = response;
         
         controlador.altaUsuario(usuarioAltaUsr, nombreCompletoAltaUsr, nombreEmpresaAltaUsr, nombrePaisAltaUsr, tipoUsuarioAltaUsr);
         
     }
 
     @Override
-    public void mensajeAltaUsuario(String mensaje) { //mensaje de si se dió de alta o no (en el controlador)
-        destino = "usuario_alta.jsp?msg=" + mensaje;
+    public void mensajeAltaUsuario(String mensaje){ //mensaje de si se dió de alta o no (en el controlador)
+        destino = "usuario_Alta.jsp?msg=" + mensaje; //en usuario_Alta hay una expression msg que lo aplica abajo del botón
+        try {
+            this.redireccionPrueba();//esto es para probar que aplique el mensaje
+        } catch (IOException ex) {
+            Logger.getLogger(VistaManejoUsuariosWeb.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+
+    private void redireccionPrueba() throws IOException {
+        response.sendRedirect(destino);
     }
     
     
