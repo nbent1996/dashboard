@@ -13,6 +13,7 @@ import Resources.DTOs.Fecha;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class OpFacturas implements IOperaciones<Factura> {
 
@@ -62,12 +63,13 @@ public OpFacturas(){
         ArrayList<String> listaSQL = new ArrayList<>();
         listaSQL.add("UPDATE Facturas SET fechaPago='"+c.getFechaPago().getFechaAStr(1)+"', monto='"+c.getMonto()+"' WHERE idFactura='"+cAnterior.getIdFactura()+"'");
         /*Actualizando facturas asociadas a la suscripcion solo si es necesario*/
-        if(!c.getListaSuscripciones().isEmpty()){
+        if(!listasSonIguales(c.getListaSuscripciones(), cAnterior.getListaSuscripciones())){
             listaSQL.add("DELETE FROM GeneraSF WHERE idFactura='"+cAnterior.getIdFactura()+"'");
             for(Suscripcion s: c.getListaSuscripciones()){
                 listaSQL.add("INSERT INTO GeneraSF (idSuscripcion, idFactura) values ('"+cAnterior.getIdFactura()+"','"+s.getIdSuscripcion()+"')");
             }
-        }
+        
+    }
         /*Actualizando facturas asociadas a la suscripcion solo si es necesario*/
         
         try{
@@ -96,13 +98,13 @@ public OpFacturas(){
         try{
             database.actualizarMultiple(listaSQL,"UPDATE");
         }catch(SQLException ex){
-            registroConsola(listaSQL, "Modificación", ex.getMessage());
+            registroConsola(listaSQL, "Baja", ex.getMessage());
             throw ex;
         }catch(Exception ex){
-            registroConsola(listaSQL, "Modificación", ex.getMessage());
+            registroConsola(listaSQL, "Baja", ex.getMessage());
             throw ex;
         }
-        registroConsola(listaSQL, "Modificación", "NOERROR");    
+        registroConsola(listaSQL, "Baja", "NOERROR");    
     }
 
     @Override
@@ -126,7 +128,7 @@ public OpFacturas(){
                 + " day(fechaVencimiento) as 'diaVencimiento', month(fechaVencimiento) as 'mesVencimiento', year(fechaVencimiento) as 'anioVencimiento', "
                 + " day(periodoServicioInicio) as 'diaPSI', month(periodoServicioInicio) as 'mesPSI', year(periodoServicioInicio) as 'anioPSI', "
                 + " day(periodoServicioFin) as 'diaPSF', month(periodoServicioFin) as 'mesPSF', year(periodoServicioFin) as 'anioPSF', "
-                + " monto, tipoRecibo, nroCliente, codigo, identificacionTributaria FROM Facturas ";
+                + " monto, tipoRecibo, nroCliente, codigo, identificacionTributaria, idFactura FROM Facturas ";
         ArrayList<String> listaSQL = new ArrayList<>();
         if(filtro!=null){
             sql+= filtro;
@@ -140,6 +142,7 @@ public OpFacturas(){
         try{
             ResultSet rs = database.consultar(sql);
             while(rs.next()){
+                idFactura = rs.getInt("idFactura");
                 /**/
                 diaPago = rs.getInt("diaPago");
                 mesPago = rs.getInt("mesPago");
@@ -171,7 +174,7 @@ public OpFacturas(){
                 clienteAsociado = new Principal(rs.getInt("nroCliente"));
                 monedaAsociada = new Moneda(rs.getString("codigo"));
                 empresaAsociada = new Empresa(rs.getString("identificacionTributaria"));
-                lista.add(new Factura(fechaPago, fechaEmision, fechaVencimiento, periodoServicioInicio, periodoServicioFin, monto, tipoRecibo, clienteAsociado, null, monedaAsociada, empresaAsociada));
+                lista.add(new Factura(idFactura, fechaPago, fechaEmision, fechaVencimiento, periodoServicioInicio, periodoServicioFin, monto, tipoRecibo, clienteAsociado, null, monedaAsociada, empresaAsociada));
             }
             rs.close();
         }catch(SQLException ex){
@@ -234,6 +237,22 @@ public OpFacturas(){
         logging.insertar(log);
         System.out.println("----------------------------------");
         /*Evidencia en consola*/  
+    }
+
+    public boolean listasSonIguales(ArrayList<Suscripcion> a, ArrayList<Suscripcion> b) {
+        // comprobar que tienen el mismo tamaño y que no son nulos
+        if ((a.size() != b.size()) || (a == null && b != null) || (a != null && b == null)) {
+            return false;
+        }
+
+        if (a == null && b == null) {
+            return true;
+        }
+
+        // ordenar las ArrayList y comprobar que son iguales          
+        Collections.sort(a);
+        Collections.sort(b);
+        return a.equals(b);
     }
 /*Comportamiento*/
 

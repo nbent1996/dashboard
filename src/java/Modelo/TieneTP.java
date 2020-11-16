@@ -1,5 +1,5 @@
 package Modelo;
-public class TieneTP {
+public class TieneTP implements Comparable<TieneTP> {
 /*Estado*/
 private int cantidadDispositivos;
 private TipoDispositivo tipoDispositivo;
@@ -16,6 +16,17 @@ private TipoDispositivo tipoDispositivo;
     }
 /*Constructores*/
 /*Comportamiento*/
+    @Override
+    public int compareTo(TieneTP o) {
+        int resultado = 0;
+        if (this.getTipoDispositivo().getIdTipoDispositivo()< (o.getTipoDispositivo().getIdTipoDispositivo())) {
+            resultado = -1;
+        }
+        if (this.getTipoDispositivo().getIdTipoDispositivo() > (o.getTipoDispositivo().getIdTipoDispositivo())) {
+            resultado = 1;
+        }
+        return resultado;
+    }
 /*Comportamiento*/
 /*Getters y Setters*/
     public int getCantidadDispositivos() {
@@ -34,6 +45,8 @@ private TipoDispositivo tipoDispositivo;
         this.tipoDispositivo = tipoDispositivo;
     }
 /*Getters y Setters*/
+
+
 
    
 }

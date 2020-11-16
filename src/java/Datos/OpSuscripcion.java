@@ -1,6 +1,5 @@
 package Datos;
 
-import Modelo.Factura;
 import Modelo.LogSistema;
 import Modelo.QueryEjecutada;
 import Modelo.Suscripcion;
