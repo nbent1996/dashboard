@@ -9,6 +9,10 @@ private Categoria categoria;
 /*Estado*/
 
 /*Constructores*/
+/*SOLO ID*/
+public TipoDispositivo(int idTipoDispositivo){
+    this.idTipoDispositivo = idTipoDispositivo;
+}
 /*FULL*/
 public TipoDispositivo(int idTipoDispositivo, String modelo, String nombre, String tipoComunicacion, Categoria categoria){
     this.idTipoDispositivo = idTipoDispositivo;

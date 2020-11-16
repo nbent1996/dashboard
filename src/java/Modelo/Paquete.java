@@ -11,6 +11,10 @@ private ArrayList<TieneTP> listaTieneTP;
 /*Estado*/
 
 /*Constructores*/
+/*SOLO ID*/
+public Paquete(int idPaquete){
+    this.idPaquete = idPaquete;
+}
 /*ID -1 FULL*/
 public Paquete(float costoBruto, Empresa empresaAsociada, ArrayList<TieneTP> listaTieneTP){
     this.idPaquete = -1;

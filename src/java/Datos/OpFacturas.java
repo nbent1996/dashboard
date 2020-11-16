@@ -98,13 +98,13 @@ public OpFacturas(){
         try{
             database.actualizarMultiple(listaSQL,"UPDATE");
         }catch(SQLException ex){
-            registroConsola(listaSQL, "Modificación", ex.getMessage());
+            registroConsola(listaSQL, "Baja", ex.getMessage());
             throw ex;
         }catch(Exception ex){
-            registroConsola(listaSQL, "Modificación", ex.getMessage());
+            registroConsola(listaSQL, "Baja", ex.getMessage());
             throw ex;
         }
-        registroConsola(listaSQL, "Modificación", "NOERROR");    
+        registroConsola(listaSQL, "Baja", "NOERROR");    
     }
 
     @Override
