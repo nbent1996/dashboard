@@ -17,27 +17,29 @@ public class OpPaquete implements IOperaciones<Paquete> {
 /*Estado*/
 private static Database database;
 private OpLogSistema logging;
+private String usuarioSistema;
 /*Estado*/
 
 /*Constructores*/
-public OpPaquete(){
+public OpPaquete(String usuarioSistema){
     this.database = Database.getInstancia();
     this.logging = new OpLogSistema();
+    this.usuarioSistema = usuarioSistema;
 }
 /*Constructores*/
 
 /*Comportamiento*/
   @Override
-    public void guardar(Paquete cAnterior, Paquete c) throws Exception, SQLException {
+    public LogSistema guardar(Paquete cAnterior, Paquete c) throws Exception, SQLException {
         if(cAnterior == null){
-            insertar(c);
+            return insertar(c);
         }else{
-            modificar(cAnterior, c);
+            return modificar(cAnterior, c);
         }
     }
 
     @Override
-    public void insertar(Paquete c) throws Exception, SQLException {
+    public LogSistema insertar(Paquete c) throws Exception, SQLException {
         ArrayList<String> listaSQL = new ArrayList<>();
         listaSQL.add("INSERT INTO Paquetes (costoBruto, identificacionTributaria) values ('"+c.getCostoBruto()+"','"+c.getEmpresaAsociada().getIdentificacionTributaria()+"') ");
         if(!c.getListaTieneTP().isEmpty()){
@@ -48,18 +50,18 @@ public OpPaquete(){
         try{
             database.actualizarMultiple(listaSQL, "INSERT");
         }catch(SQLException ex){
-            registroConsola(listaSQL, "Alta", ex.getMessage());
+            registroConsola(this.usuarioSistema, listaSQL, "Alta", ex.getMessage());
             throw ex;
         }catch(Exception ex){
-            registroConsola(listaSQL, "Alta", ex.getMessage());
+            registroConsola(this.usuarioSistema, listaSQL, "Alta", ex.getMessage());
             throw ex;
         }
-        registroConsola(listaSQL, "Alta", "NOERROR");
+        return registroConsola(this.usuarioSistema, listaSQL, "Alta", "NOERROR");
 
     }
 
     @Override
-    public void modificar(Paquete cAnterior, Paquete c) throws Exception, SQLException {
+    public LogSistema modificar(Paquete cAnterior, Paquete c) throws Exception, SQLException {
         ArrayList<String> listaSQL = new ArrayList<>();
         listaSQL.add("UPDATE Paquetes SET costoBruto='"+c.getCostoBruto()+"', identificacionTributaria='"+c.getEmpresaAsociada().getIdentificacionTributaria()+"' WHERE idPaquete = '"+c.getIdPaquete()+"' AND eliminado = 'N' ");
         /*Actualizando Tipos de Dispositivos asociados al Paquete solo si es necesario*/
@@ -73,18 +75,18 @@ public OpPaquete(){
         try{
             database.actualizarMultiple(listaSQL, "UPDATE");
         }catch(SQLException ex){
-            registroConsola(listaSQL, "Modificación", ex.getMessage());
+            registroConsola(this.usuarioSistema, listaSQL, "Modificación", ex.getMessage());
             throw ex;
         }catch(Exception ex){
-            registroConsola(listaSQL, "Modificación", ex.getMessage());
+            registroConsola(this.usuarioSistema, listaSQL, "Modificación", ex.getMessage());
             throw ex;
         }
-        registroConsola(listaSQL, "Modificación", "NOERROR");
+        return registroConsola(this.usuarioSistema, listaSQL, "Modificación", "NOERROR");
     }
     
 
     @Override
-    public void borrar(Paquete c) throws Exception, SQLException {
+    public LogSistema borrar(Paquete c) throws Exception, SQLException {
         ArrayList<String> listaSQL = new ArrayList<>();
         /*Borrar registros de tabla relacionaria entre el Paquete y el Tipo de Dispositivo (TieneTP)*/
         if(!c.getListaTieneTP().isEmpty()){
@@ -97,13 +99,13 @@ public OpPaquete(){
         try{
             database.actualizarMultiple(listaSQL,"UPDATE");
         }catch(SQLException ex){
-            registroConsola(listaSQL, "Baja", ex.getMessage());
+            registroConsola(this.usuarioSistema, listaSQL, "Baja", ex.getMessage());
             throw ex;
         }catch(Exception ex){
-            registroConsola(listaSQL, "Baja", ex.getMessage());
+            registroConsola(this.usuarioSistema, listaSQL, "Baja", ex.getMessage());
             throw ex;
         }
-        registroConsola(listaSQL, "Baja", "NOERROR");    
+        return registroConsola(this.usuarioSistema, listaSQL, "Baja", "NOERROR");    
     }
 
     @Override
@@ -148,23 +150,18 @@ public OpPaquete(){
             }
             rs.close();
         }catch(SQLException ex){
-            registroConsola(listaSQL, "Búsqueda", ex.getMessage());
+            registroConsola(this.usuarioSistema, listaSQL, "Búsqueda", ex.getMessage());
             throw ex;
         }catch(Exception ex){
-            registroConsola(listaSQL, "Búsqueda", ex.getMessage());
+            registroConsola(this.usuarioSistema, listaSQL, "Búsqueda", ex.getMessage());
             throw ex;
         }
-         registroConsola(listaSQL, "Búsqueda", "NOERROR");
+         registroConsola(this.usuarioSistema, listaSQL, "Búsqueda", "NOERROR");
          return lista;   
     }
 
     @Override
-    public boolean existsAllID(ArrayList<Integer> lista) throws Exception, SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public boolean borradoMultiplePorIds(ArrayList<Integer> listaIds) throws Exception, SQLException {
+    public LogSistema borradoMultiplePorIds(ArrayList<Integer> listaIds) throws Exception, SQLException {
         ArrayList<String> listaSQL = new ArrayList<>();
         /*Armando listado de IDS para la Query*/
         String listaIdsStr = "";
@@ -178,8 +175,7 @@ public OpPaquete(){
 
         /*Validar lista de IDs vacia*/
         if (listaIds.isEmpty()) {
-            registroConsola(listaSQL, "Baja", "ERROR: Lista de IDs llegó vacia al metodo borradoMultiplePorIds");
-            return false;
+            return registroConsola(this.usuarioSistema, listaSQL, "Baja", "ERROR: Lista de IDs llegó vacia al metodo borradoMultiplePorIds");
         }
         /*Validar lista de IDs vacia*/
 
@@ -190,38 +186,39 @@ public OpPaquete(){
             validarConsistencia = database.consultar("SELECT * FROM TieneTP WHERE idPaquete in (" + listaIdsStr + ")");
             if (validarConsistencia.next()) {
                 validarConsistencia.close();
-                registroConsola(listaSQL, "Baja", "Alguno de los Paquetes que usted desea borrar está relacionado con algún Tipo de Dispositivo.");
+                registroConsola(this.usuarioSistema, listaSQL, "Baja", "Alguno de los Paquetes que usted desea borrar está relacionado con algún Tipo de Dispositivo.");
                 throw new Exception("Alguno de los Paquetes que usted desea borrar está relacionado con algún Tipo de Dispositivo.");
             }
             validarConsistencia.close();
             /*Validar que este Paquete no tenga registros en la tabla TieneTP (Relación TipoDispositivo-Paquete)*/
             database.actualizarMultiple(listaSQL, "UPDATE");
         } catch (SQLException ex) {
-            registroConsola(listaSQL, "Baja", ex.getMessage());
+            registroConsola(this.usuarioSistema, listaSQL, "Baja", ex.getMessage());
             throw ex;
         } catch (Exception ex) {
-            registroConsola(listaSQL, "Baja", ex.getMessage());
+            registroConsola(this.usuarioSistema, listaSQL, "Baja", ex.getMessage());
             throw ex;
         }
-        registroConsola(listaSQL, "Baja", "NOERROR");
-        return true;
+        return registroConsola(this.usuarioSistema, listaSQL, "Baja", "NOERROR");
     }
 
-   @Override
-    public void registroConsola(ArrayList<String> listaSQL, String operacion, String textoError) throws Exception, SQLException {
-        LogSistema log = new LogSistema(-1, operacion, textoError, new ArrayList<>());
-        
+    @Override
+    public LogSistema registroConsola(String usuarioSistema, ArrayList<String> listaSQL, String operacion, String textoError) throws Exception, SQLException {
+        LogSistema log = new LogSistema(usuarioSistema, operacion, textoError, new ArrayList<>());
         System.out.println("----------------------------------");
+        System.out.println("Usuario: " + usuarioSistema + "\nOperación: " + operacion + "\nTexto Error: " + textoError);
+        System.out.println("Listado de Sentencias SQL:");
         for (String sentencia : listaSQL) {
             log.getListaQuerys().add(new QueryEjecutada(sentencia));
             System.out.println(sentencia);
         }
         logging.insertar(log);
         System.out.println("----------------------------------");
-        /*Evidencia en consola*/  
+        /*Evidencia en consola*/
+        return log;
     }
     
-        public boolean listasSonIguales(ArrayList<TieneTP> a, ArrayList<TieneTP> b) {
+    public boolean listasSonIguales(ArrayList<TieneTP> a, ArrayList<TieneTP> b) {
         // comprobar que tienen el mismo tamaño y que no son nulos
         if ((a.size() != b.size()) || (a == null && b != null) || (a != null && b == null)) {
             return false;

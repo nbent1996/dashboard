@@ -21,27 +21,29 @@ public class OpFacturas implements IOperaciones<Factura> {
 /*Estado*/
 private static Database database;
 private OpLogSistema logging;
+private String usuarioSistema;
 /*Estado*/
 
 /*Constructores*/
-public OpFacturas(){
+public OpFacturas(String usuarioSistema){
     this.database = Database.getInstancia();
     this.logging = new OpLogSistema();
+    this.usuarioSistema = usuarioSistema;
 }
 /*Constructores*/
 
 /*Comportamiento*/
 @Override
-    public void guardar(Factura cAnterior, Factura c) throws Exception, SQLException {
+    public LogSistema guardar(Factura cAnterior, Factura c) throws Exception, SQLException {
         if(cAnterior == null){
-            insertar(c);
+            return insertar(c);
         }else{
-            modificar(cAnterior, c);
+            return modificar(cAnterior, c);
         }
     }
 
     @Override
-    public void insertar(Factura c) throws Exception, SQLException {
+    public LogSistema insertar(Factura c) throws Exception, SQLException {
         ArrayList<String> listaSQL = new ArrayList<>();
         listaSQL.add("INSERT INTO Facturas (fechaVencimiento, periodoServicioInicio, periodoServicioFin, tipoRecibo, monto, codigo, nroCliente, identificacionTributaria) "
                 + "values ('"+c.getFechaVencimiento().getFechaAStr(1)+"','"+c.getPeriodoServicioInicio().getFechaAStr(1)+"','"+c.getPeriodoServicioFin().getFechaAStr(1)+"','"+c.getTipoRecibo()+"',"
@@ -49,17 +51,17 @@ public OpFacturas(){
         try{
             database.actualizarMultiple(listaSQL, "INSERT");
         }catch(SQLException ex){
-            registroConsola(listaSQL, "Alta", ex.getMessage());
+            registroConsola(this.usuarioSistema,listaSQL, "Alta", ex.getMessage());
             throw ex;
         }catch(Exception ex){
-            registroConsola(listaSQL, "Alta", ex.getMessage());
+            registroConsola(this.usuarioSistema,listaSQL, "Alta", ex.getMessage());
             throw ex;
         }
-        registroConsola(listaSQL, "Alta", "NOERROR");
+        return registroConsola(this.usuarioSistema,listaSQL, "Alta", "NOERROR");
     }
 
     @Override
-    public void modificar(Factura cAnterior, Factura c) throws Exception, SQLException {
+    public LogSistema modificar(Factura cAnterior, Factura c) throws Exception, SQLException {
         ArrayList<String> listaSQL = new ArrayList<>();
         listaSQL.add("UPDATE Facturas SET fechaPago='"+c.getFechaPago().getFechaAStr(1)+"', monto='"+c.getMonto()+"' WHERE idFactura='"+cAnterior.getIdFactura()+"'");
         /*Actualizando facturas asociadas a la suscripcion solo si es necesario*/
@@ -75,17 +77,17 @@ public OpFacturas(){
         try{
             database.actualizarMultiple(listaSQL, "UPDATE");
         }catch(SQLException ex){
-            registroConsola(listaSQL, "Modificación", ex.getMessage());
+            registroConsola(this.usuarioSistema,listaSQL, "Modificación", ex.getMessage());
             throw ex;
         }catch(Exception ex){
-            registroConsola(listaSQL, "Modificación", ex.getMessage());
+            registroConsola(this.usuarioSistema,listaSQL, "Modificación", ex.getMessage());
             throw ex;
         }
-        registroConsola(listaSQL, "Modificación", "NOERROR");
+        return registroConsola(this.usuarioSistema,listaSQL, "Modificación", "NOERROR");
     }
 
     @Override
-    public void borrar(Factura c) throws Exception, SQLException {
+    public LogSistema borrar(Factura c) throws Exception, SQLException {
         ArrayList<String> listaSQL = new ArrayList<>();     
         /*Borrar registros de tabla relacionaria entre la Suscripción y Factura (GeneraSF)*/
         if(!c.getListaSuscripciones().isEmpty()){
@@ -98,13 +100,13 @@ public OpFacturas(){
         try{
             database.actualizarMultiple(listaSQL,"UPDATE");
         }catch(SQLException ex){
-            registroConsola(listaSQL, "Baja", ex.getMessage());
+            registroConsola(this.usuarioSistema,listaSQL, "Baja", ex.getMessage());
             throw ex;
         }catch(Exception ex){
-            registroConsola(listaSQL, "Baja", ex.getMessage());
+            registroConsola(this.usuarioSistema,listaSQL, "Baja", ex.getMessage());
             throw ex;
         }
-        registroConsola(listaSQL, "Baja", "NOERROR");    
+        return registroConsola(this.usuarioSistema,listaSQL, "Baja", "NOERROR");    
     }
 
     @Override
@@ -178,23 +180,17 @@ public OpFacturas(){
             }
             rs.close();
         }catch(SQLException ex){
-            registroConsola(listaSQL, "Búsqueda", ex.getMessage());
+            registroConsola(this.usuarioSistema,listaSQL, "Búsqueda", ex.getMessage());
             throw ex;
         }catch(Exception ex){
-            registroConsola(listaSQL, "Búsqueda", ex.getMessage());
+            registroConsola(this.usuarioSistema,listaSQL, "Búsqueda", ex.getMessage());
             throw ex;
         }
-         registroConsola(listaSQL, "Búsqueda", "NOERROR");
+         registroConsola(this.usuarioSistema,listaSQL, "Búsqueda", "NOERROR");
          return lista;   
     }
-
     @Override
-    public boolean existsAllID(ArrayList<Integer> lista) throws Exception, SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public boolean borradoMultiplePorIds(ArrayList<Integer> listaIds) throws Exception, SQLException {
+    public LogSistema borradoMultiplePorIds(ArrayList<Integer> listaIds) throws Exception, SQLException {
         ArrayList<String> listaSQL = new ArrayList<>();
         /*Armando listado de IDS para la Query*/
         String listaIdsStr = "";
@@ -208,35 +204,35 @@ public OpFacturas(){
         listaSQL.add("UPDATE Facturas set eliminado='Y' WHERE idFactura in("+listaIdsStr+")");
         /*Validaciones*/
         if(listaIds.isEmpty()){
-            registroConsola(listaSQL, "Baja", "ERROR: Lista de IDs llegó vacia al metodo borradoMultiplePorIds");
-            return false;
+            registroConsola(this.usuarioSistema,listaSQL, "Baja", "ERROR: Lista de IDs llegó vacia al metodo borradoMultiplePorIds");
         }
         /*Validaciones*/
         try{
             database.actualizarMultiple(listaSQL,"UPDATE");
         }catch(SQLException ex){
-            registroConsola(listaSQL, "Baja", ex.getMessage());
+            registroConsola(this.usuarioSistema,listaSQL, "Baja", ex.getMessage());
             throw ex;
         }catch(Exception ex){
-            registroConsola(listaSQL, "Baja", ex.getMessage());
+            registroConsola(this.usuarioSistema,listaSQL, "Baja", ex.getMessage());
             throw ex;
         }
-        registroConsola(listaSQL, "Baja", "NOERROR");    
-        return true;
+        return registroConsola(this.usuarioSistema,listaSQL, "Baja", "NOERROR");    
     }
 
     @Override
-    public void registroConsola(ArrayList<String> listaSQL, String operacion, String textoError) throws Exception, SQLException {
-        LogSistema log = new LogSistema(-1, operacion, textoError, new ArrayList<>());
-        
+    public LogSistema registroConsola(String usuarioSistema, ArrayList<String> listaSQL, String operacion, String textoError) throws Exception, SQLException {
+        LogSistema log = new LogSistema(usuarioSistema, operacion, textoError, new ArrayList<>());
         System.out.println("----------------------------------");
+        System.out.println("Usuario: " + usuarioSistema + "\nOperación: " + operacion + "\nTexto Error: " + textoError);
+        System.out.println("Listado de Sentencias SQL:");
         for (String sentencia : listaSQL) {
             log.getListaQuerys().add(new QueryEjecutada(sentencia));
             System.out.println(sentencia);
         }
         logging.insertar(log);
         System.out.println("----------------------------------");
-        /*Evidencia en consola*/  
+        /*Evidencia en consola*/
+        return log;
     }
 
     public boolean listasSonIguales(ArrayList<Suscripcion> a, ArrayList<Suscripcion> b) {

@@ -3,12 +3,16 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/C:/Users/andre/Desktop/Dashboard/dashboard/src/java/vistaWeb/VistaManejoUsuariosWeb.java</file>
             <file>file:/C:/Users/andre/Desktop/Dashboard/dashboard/web/css/seccionesUsuarios.css</file>
             <file>file:/C:/Users/andre/Desktop/Dashboard/dashboard/web/js/seccionesUsuarios.js</file>
             <file>file:/C:/Users/andre/Desktop/Dashboard/dashboard/src/java/vistaWeb/ManejoUsuariosServlet.java</file>
             <file>file:/C:/Users/andre/Desktop/Dashboard/dashboard/src/java/controlador/ControladorManejoUsuarios.java</file>
             <file>file:/C:/Users/andre/Desktop/Dashboard/dashboard/web/usuario_Alta.jsp</file>
+=======
+            <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/test/TestingDatos/TestingOpCategorias.java</file>
+>>>>>>> b4b6c196a7c998f6a02f39613b0631b1ec2224e3
         </group>
     </open-files>
 </project-private>

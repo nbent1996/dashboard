@@ -15,27 +15,29 @@ public class OpTiposUsuarios implements IOperaciones<TipoUsuario> {
 /*Estado*/
 private static Database database;
 private OpLogSistema logging;
+private String usuarioSistema;
 /*Estado*/
 
 /*Constructores*/
-public OpTiposUsuarios(){
+public OpTiposUsuarios(String usuarioSistema){
     this.database = Database.getInstancia();
     this.logging = new OpLogSistema();
+    this.usuarioSistema = usuarioSistema;
 }
 /*Constructores*/
 
 /*Comportamiento*/
   @Override
-    public void guardar(TipoUsuario cAnterior, TipoUsuario c) throws Exception, SQLException {
+    public LogSistema guardar(TipoUsuario cAnterior, TipoUsuario c) throws Exception, SQLException {
         if(cAnterior == null){
-            insertar(c);
+            return insertar(c);
         }else{
-            modificar(cAnterior, c);
+            return modificar(cAnterior, c);
         }
     }
 
     @Override
-    public void insertar(TipoUsuario c) throws Exception, SQLException {
+    public LogSistema insertar(TipoUsuario c) throws Exception, SQLException {
         ArrayList<String> listaSQL = new ArrayList<>();
         listaSQL.add("INSERT INTO TiposUsuarios (nombre) values ('"+c.getNombre()+"')");
         if(!c.getListaPrivilegios().isEmpty()){
@@ -46,21 +48,21 @@ public OpTiposUsuarios(){
         try{
         database.actualizarMultiple(listaSQL, "INSERT");
         }catch(SQLException ex){
-            registroConsola(listaSQL, "Alta", ex.getMessage());
+            registroConsola(this.usuarioSistema,listaSQL, "Alta", ex.getMessage());
             throw ex;
         }catch(Exception ex){
-            registroConsola(listaSQL, "Alta", ex.getMessage());
+            registroConsola(this.usuarioSistema,listaSQL, "Alta", ex.getMessage());
             throw ex;
         }
-        registroConsola(listaSQL, "Alta", "NOERROR");
+        return registroConsola(this.usuarioSistema,listaSQL, "Alta", "NOERROR");
     }
 
     @Override
-    public void modificar(TipoUsuario cAnterior, TipoUsuario c) throws Exception, SQLException {
+    public LogSistema modificar(TipoUsuario cAnterior, TipoUsuario c) throws Exception, SQLException {
         //Solo modifica la lista de privilegios de ese tipo de usuario y no el nombre del tipo de usuario.
         ArrayList<String> listaSQL = new ArrayList<>();
         if(listasSonIguales(cAnterior.getListaPrivilegios(), c.getListaPrivilegios())){
-            return;
+            return new LogSistema( null,null, "NOERROR");
         }
 //        if(!c.getNombre().equals(cAnterior.getNombre())){
 //        listaSQL.add("UPDATE TiposUsuarios SET nombre='"+c.getNombre()+"' WHERE nombre='"+cAnterior.getNombre()+"' AND nombre not in(select nombre from TiposUsuario)");
@@ -70,11 +72,20 @@ public OpTiposUsuarios(){
         for(Privilegio p: c.getListaPrivilegios()){
             listaSQL.add("INSERT INTO TieneTUP (nombreTipoUsuario, nombrePrivilegio) VALUES ('"+c.getNombre()+"','"+p.getNombrePrivilegio()+"')");
         }
-           
+        try{
+        database.actualizarMultiple(listaSQL, "UPDATE");
+        }catch(SQLException ex){
+            registroConsola(this.usuarioSistema,listaSQL, "Modificación", ex.getMessage());
+            throw ex;
+        }catch(Exception ex){
+            registroConsola(this.usuarioSistema,listaSQL, "Modificación", ex.getMessage());
+            throw ex;
+        }
+        return registroConsola(this.usuarioSistema,listaSQL, "Modificación", "NOERROR");   
     }
 
     @Override
-    public void borrar(TipoUsuario c) throws Exception, SQLException {
+    public LogSistema borrar(TipoUsuario c) throws Exception, SQLException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -104,38 +115,35 @@ public OpTiposUsuarios(){
         }
         rs.close();
         }catch(SQLException ex){
-            registroConsola(listaSQL, "Búsqueda", ex.getMessage());
+            registroConsola(this.usuarioSistema, listaSQL, "Búsqueda", ex.getMessage());
             throw ex;   
         }catch(Exception ex){
-            registroConsola(listaSQL, "Búsqueda", ex.getMessage());
+            registroConsola(this.usuarioSistema, listaSQL, "Búsqueda", ex.getMessage());
             throw ex;
         }
-        registroConsola(listaSQL, "Búsqueda", "NOERROR");
+        registroConsola(this.usuarioSistema, listaSQL, "Búsqueda", "NOERROR");
         return lista;
     }
 
     @Override
-    public boolean existsAllID(ArrayList<Integer> lista) throws Exception, SQLException {
+    public LogSistema borradoMultiplePorIds(ArrayList<Integer> listaIds) throws Exception, SQLException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public boolean borradoMultiplePorIds(ArrayList<Integer> listaIds) throws Exception, SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void registroConsola(ArrayList<String> listaSQL, String operacion, String textoError) throws Exception, SQLException {
-        LogSistema log = new LogSistema(-1, operacion, textoError, new ArrayList<>());
-        
+    public LogSistema registroConsola(String usuarioSistema, ArrayList<String> listaSQL, String operacion, String textoError) throws Exception, SQLException {
+        LogSistema log = new LogSistema(usuarioSistema, operacion, textoError, new ArrayList<>());
         System.out.println("----------------------------------");
+        System.out.println("Usuario: " + usuarioSistema + "\nOperación: " + operacion + "\nTexto Error: " + textoError);
+        System.out.println("Listado de Sentencias SQL:");
         for (String sentencia : listaSQL) {
             log.getListaQuerys().add(new QueryEjecutada(sentencia));
             System.out.println(sentencia);
         }
         logging.insertar(log);
         System.out.println("----------------------------------");
-        /*Evidencia en consola*/  
+        /*Evidencia en consola*/
+        return log;
     }
     public  boolean listasSonIguales(ArrayList<Privilegio> a, ArrayList<Privilegio> b){     
     // comprobar que tienen el mismo tamaño y que no son nulos

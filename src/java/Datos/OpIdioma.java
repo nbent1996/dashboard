@@ -11,44 +11,50 @@ public class OpIdioma implements IOperaciones<Idioma>{
 /*Estado*/
 private static Database database;
 private OpLogSistema logging;
+private String usuarioSistema;
 /*Estado*/
 
 /*Constructores*/
-public OpIdioma(){
+public OpIdioma(String usuarioSistema){
     this.database = Database.getInstancia();
     this.logging = new OpLogSistema();
+    this.usuarioSistema = usuarioSistema;
 }
 /*Constructores*/
 
 /*Comportamiento*/
  @Override
-    public void guardar(Idioma cAnterior, Idioma c) throws Exception, SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public LogSistema guardar(Idioma cAnterior, Idioma c) throws Exception, SQLException {
+        if(cAnterior == null){
+            return insertar(c);
+        }else{
+            return modificar(cAnterior, c);
+        }
     }
 
     @Override
-    public void insertar(Idioma c) throws Exception, SQLException {
+    public LogSistema insertar(Idioma c) throws Exception, SQLException {
         ArrayList<String> listaSQL = new ArrayList<>();
         listaSQL.add("INSERT INTO Idiomas (nombreIdioma) values ('"+c.getNombre()+"')");
         try{
             database.actualizarMultiple(listaSQL, "INSERT");
         }catch(SQLException ex){
-            registroConsola(listaSQL, "Alta", ex.getMessage());
+            registroConsola(this.usuarioSistema, listaSQL, "Alta", ex.getMessage());
             throw ex;
         }catch(Exception ex){
-            registroConsola(listaSQL, "Alta", ex.getMessage());
+            registroConsola(this.usuarioSistema, listaSQL, "Alta", ex.getMessage());
             throw ex;
         }
-        registroConsola(listaSQL, "Alta", "NOERROR");
+        return registroConsola(this.usuarioSistema, listaSQL, "Alta", "NOERROR");
     }
 
     @Override
-    public void modificar(Idioma cAnterior, Idioma c) throws Exception, SQLException {
+    public LogSistema modificar(Idioma cAnterior, Idioma c) throws Exception, SQLException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void borrar(Idioma c) throws Exception, SQLException {
+    public LogSistema borrar(Idioma c) throws Exception, SQLException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -78,38 +84,35 @@ public OpIdioma(){
         }
         rs.close();
         }catch(SQLException ex){
-            registroConsola(listaSQL, "Búsqueda", ex.getMessage());
+            registroConsola(this.usuarioSistema, listaSQL, "Búsqueda", ex.getMessage());
             throw ex;
         }catch(Exception ex){
-            registroConsola(listaSQL, "Búsqueda", ex.getMessage());
+            registroConsola(this.usuarioSistema, listaSQL, "Búsqueda", ex.getMessage());
             throw ex;
         }
-        registroConsola(listaSQL, "Búsqueda", "NOERROR");
+        registroConsola(this.usuarioSistema, listaSQL, "Búsqueda", "NOERROR");
         return lista;
     }
 
     @Override
-    public boolean existsAllID(ArrayList<Integer> lista) throws Exception, SQLException {
+    public LogSistema borradoMultiplePorIds(ArrayList<Integer> listaIds) throws Exception, SQLException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public boolean borradoMultiplePorIds(ArrayList<Integer> listaIds) throws Exception, SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void registroConsola(ArrayList<String> listaSQL, String operacion, String textoError) throws Exception, SQLException {
-        LogSistema log = new LogSistema(-1, operacion, textoError, new ArrayList<>());
-        
+    public LogSistema registroConsola(String usuarioSistema, ArrayList<String> listaSQL, String operacion, String textoError) throws Exception, SQLException {
+        LogSistema log = new LogSistema(usuarioSistema, operacion, textoError, new ArrayList<>());
         System.out.println("----------------------------------");
+        System.out.println("Usuario: " + usuarioSistema + "\nOperación: " + operacion + "\nTexto Error: " + textoError);
+        System.out.println("Listado de Sentencias SQL:");
         for (String sentencia : listaSQL) {
             log.getListaQuerys().add(new QueryEjecutada(sentencia));
             System.out.println(sentencia);
         }
         logging.insertar(log);
         System.out.println("----------------------------------");
-        /*Evidencia en consola*/  
+        /*Evidencia en consola*/
+        return log;
     }
 /*Comportamiento*/
 

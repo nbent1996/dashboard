@@ -15,27 +15,29 @@ public class OpDispositivos implements IOperaciones<Dispositivo> {
 /*Estado*/
 private static Database database;
 private OpLogSistema logging;
+private String usuarioSistema;
 /*Estado*/
 
 /*Constructores*/
-public OpDispositivos(){
+public OpDispositivos(String usuarioSistema){
     this.database = Database.getInstancia();
     this.logging = new OpLogSistema();
+    this.usuarioSistema = usuarioSistema;
 }
 /*Constructores*/
 
 /*Comportamiento*/
   @Override
-    public void guardar(Dispositivo cAnterior, Dispositivo c) throws Exception, SQLException {
+    public LogSistema guardar(Dispositivo cAnterior, Dispositivo c) throws Exception, SQLException {
         if(cAnterior == null){
-            insertar(c);
+            return insertar(c);
         }else{
-            modificar(cAnterior, c);
+            return modificar(cAnterior, c);
         }
     }
 
     @Override
-    public void insertar(Dispositivo c) throws Exception, SQLException {
+    public LogSistema insertar(Dispositivo c) throws Exception, SQLException {
         ArrayList<String> listaSQL = new ArrayList<>();
         listaSQL.add("INSERT INTO Dispositivos (nroSerie, estado, idTipoDispositivo, identificacionTributaria, nroCliente) values ('"+c.getNroSerie()+"','"+c.getEstado()+"','"+c.getTipoDispositivo().getIdTipoDispositivo()+"','"+c.getEmpresaAsociada().getIdentificacionTributaria()+"','"+c.getClienteAsociado().getNroCliente()+"') ");
 
@@ -44,52 +46,52 @@ public OpDispositivos(){
             ResultSet validarConsistencia = database.consultar("SELECT * FROM Dispositivos WHERE nroSerie='" + c.getNroSerie() + "' ");
             if (validarConsistencia.next()) {
                 validarConsistencia.close();
-                registroConsola(listaSQL, "Alta", "El Número de serie ingresado ya existe en el sistema.");
+                registroConsola(this.usuarioSistema, listaSQL, "Alta", "El Número de serie ingresado ya existe en el sistema.");
                 throw new Exception("El Número de serie ingresado ya existe en el sistema.");
             }
             validarConsistencia.close();
             /*Validar que el nroSerie no exista ya en la base de datos*/
             database.actualizarMultiple(listaSQL, "INSERT");
         } catch (SQLException ex) {
-            registroConsola(listaSQL, "Alta", ex.getMessage());
+            registroConsola(this.usuarioSistema, listaSQL, "Alta", ex.getMessage());
             throw ex;
         } catch (Exception ex) {
-            registroConsola(listaSQL, "Alta", ex.getMessage());
+            registroConsola(this.usuarioSistema, listaSQL, "Alta", ex.getMessage());
             throw ex;
         }
-        registroConsola(listaSQL, "Alta", "NOERROR");
+        return registroConsola(this.usuarioSistema, listaSQL, "Alta", "NOERROR");
     }
 
     @Override
-    public void modificar(Dispositivo cAnterior, Dispositivo c) throws Exception, SQLException {
+    public LogSistema modificar(Dispositivo cAnterior, Dispositivo c) throws Exception, SQLException {
         ArrayList<String> listaSQL = new ArrayList<>();
         listaSQL.add("UPDATE Dispositivos SET estado='"+c.getEstado()+"', idTipoDispositivo='"+c.getTipoDispositivo().getIdTipoDispositivo()+"', nroCliente='"+c.getClienteAsociado().getNroCliente()+"' WHERE nroSerie ='"+c.getNroSerie()+"' ");
         try{
             database.actualizarMultiple(listaSQL, "UPDATE");
         }catch(SQLException ex){
-            registroConsola(listaSQL, "Modificación", ex.getMessage());
+            registroConsola(this.usuarioSistema, listaSQL, "Modificación", ex.getMessage());
             throw ex;
         }catch(Exception ex){
-            registroConsola(listaSQL, "Modificación", ex.getMessage());
+            registroConsola(this.usuarioSistema, listaSQL, "Modificación", ex.getMessage());
             throw ex;
         }
-        registroConsola(listaSQL, "Modificación", "NOERROR");
+        return registroConsola(this.usuarioSistema, listaSQL, "Modificación", "NOERROR");
     }
 
     @Override
-    public void borrar(Dispositivo c) throws Exception, SQLException {
+    public LogSistema borrar(Dispositivo c) throws Exception, SQLException {
        ArrayList<String> listaSQL = new ArrayList<>();
        listaSQL.add("UPDATE Dispositivos SET eliminado='Y' WHERE nroSerie='"+c.getNroSerie()+"' ");
        try{
             database.actualizarMultiple(listaSQL, "UPDATE");
         }catch(SQLException ex){
-            registroConsola(listaSQL, "Baja", ex.getMessage());
+            registroConsola(this.usuarioSistema, listaSQL, "Baja", ex.getMessage());
             throw ex;
         }catch(Exception ex){
-            registroConsola(listaSQL, "Baja", ex.getMessage());
+            registroConsola(this.usuarioSistema, listaSQL, "Baja", ex.getMessage());
             throw ex;
         }
-        registroConsola(listaSQL, "Baja", "NOERROR");
+        return registroConsola(this.usuarioSistema, listaSQL, "Baja", "NOERROR");
     }
 
     @Override
@@ -126,24 +128,19 @@ public OpDispositivos(){
             }
             rs.close();
         }catch(SQLException ex){
-            registroConsola(listaSQL, "Búsqueda", ex.getMessage());
+            registroConsola(this.usuarioSistema,listaSQL, "Búsqueda", ex.getMessage());
             throw ex;
         }catch(Exception ex){
-            registroConsola(listaSQL, "Búsqueda", ex.getMessage());
+            registroConsola(this.usuarioSistema,listaSQL, "Búsqueda", ex.getMessage());
             throw ex;
         }
-         registroConsola(listaSQL, "Búsqueda", "NOERROR");
+         registroConsola(this.usuarioSistema,listaSQL, "Búsqueda", "NOERROR");
          return lista; 
         
     }
 
     @Override
-    public boolean existsAllID(ArrayList<Integer> lista) throws Exception, SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public boolean borradoMultiplePorIds(ArrayList<Integer> listaIds) throws Exception, SQLException {
+    public LogSistema borradoMultiplePorIds(ArrayList<Integer> listaIds) throws Exception, SQLException {
        ArrayList<String> listaSQL = new ArrayList<>();
        /*Armando listado de IDS para la Query*/
         String listaIdsStr = "";
@@ -157,28 +154,29 @@ public OpDispositivos(){
        try{
             database.actualizarMultiple(listaSQL, "UPDATE");
         }catch(SQLException ex){
-            registroConsola(listaSQL, "Baja", ex.getMessage());
+            registroConsola(this.usuarioSistema, listaSQL, "Baja", ex.getMessage());
             throw ex;
         }catch(Exception ex){
-            registroConsola(listaSQL, "Baja", ex.getMessage());
+            registroConsola(this.usuarioSistema, listaSQL, "Baja", ex.getMessage());
             throw ex;
         }
-        registroConsola(listaSQL, "Baja", "NOERROR");
-        return true;
+        return registroConsola(this.usuarioSistema, listaSQL, "Baja", "NOERROR");
     }
 
     @Override
-    public void registroConsola(ArrayList<String> listaSQL, String operacion, String textoError) throws Exception, SQLException {
-        LogSistema log = new LogSistema(-1, operacion, textoError, new ArrayList<>());
-        
+    public LogSistema registroConsola(String usuarioSistema, ArrayList<String> listaSQL, String operacion, String textoError) throws Exception, SQLException {
+        LogSistema log = new LogSistema(usuarioSistema, operacion, textoError, new ArrayList<>());
         System.out.println("----------------------------------");
+        System.out.println("Usuario: " + usuarioSistema + "\nOperación: " + operacion + "\nTexto Error: " + textoError);
+        System.out.println("Listado de Sentencias SQL:");
         for (String sentencia : listaSQL) {
             log.getListaQuerys().add(new QueryEjecutada(sentencia));
             System.out.println(sentencia);
         }
         logging.insertar(log);
         System.out.println("----------------------------------");
-        /*Evidencia en consola*/  
+        /*Evidencia en consola*/
+        return log;
     }
 
 /*Comportamiento*/

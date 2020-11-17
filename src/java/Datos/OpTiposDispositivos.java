@@ -12,27 +12,29 @@ public class OpTiposDispositivos implements IOperaciones<TipoDispositivo> {
 /*Estado*/
 private static Database database;
 private OpLogSistema logging;
+private String usuarioSistema;
 /*Estado*/
 
 /*Constructores*/
-public OpTiposDispositivos(){
+public OpTiposDispositivos(String usuarioSistema){
     this.database = Database.getInstancia();
     this.logging = new OpLogSistema();
+    this.usuarioSistema = usuarioSistema;
 }
 /*Constructores*/
 
 /*Comportamiento*/
  @Override
-    public void guardar(TipoDispositivo cAnterior, TipoDispositivo c) throws Exception, SQLException {
+    public LogSistema guardar(TipoDispositivo cAnterior, TipoDispositivo c) throws Exception, SQLException {
         if(cAnterior == null){
-            insertar(c);
+            return insertar(c);
         }else{
-            modificar(cAnterior, c);
+            return modificar(cAnterior, c);
         }
     }
 
     @Override
-    public void insertar(TipoDispositivo c) throws Exception, SQLException {
+    public LogSistema insertar(TipoDispositivo c) throws Exception, SQLException {
         ArrayList<String> listaSQL = new ArrayList<>();
         listaSQL.add("INSERT INTO TiposDispositivos (modelo, nombre, tipoComunicacion, nombreCategoria) values "
                 + " ('"+c.getModelo()+"','"+c.getNombre()+"','"+c.getTipoComunicacion()+"','"+c.getCategoria().getNombreCategoria()+"') ");
@@ -40,17 +42,17 @@ public OpTiposDispositivos(){
         try{
             database.actualizarMultiple(listaSQL, "INSERT");
         }catch(SQLException ex){
-            registroConsola(listaSQL, "Alta", ex.getMessage());
+            registroConsola(this.usuarioSistema, listaSQL, "Alta", ex.getMessage());
             throw ex;
         }catch(Exception ex){
-            registroConsola(listaSQL, "Alta", ex.getMessage());
+            registroConsola(this.usuarioSistema,listaSQL,  "Alta", ex.getMessage());
             throw ex;
         }
-        registroConsola(listaSQL, "Alta", "NOERROR");
+        return registroConsola(this.usuarioSistema, listaSQL, "Alta", "NOERROR");
     }
 
     @Override
-    public void modificar(TipoDispositivo cAnterior, TipoDispositivo c) throws Exception, SQLException {
+    public LogSistema modificar(TipoDispositivo cAnterior, TipoDispositivo c) throws Exception, SQLException {
         ArrayList<String> listaSQL = new ArrayList<>();
         ResultSet validarConsistencia = null;
         listaSQL.add("UPDATE TiposDispositivos SET modelo='" + c.getModelo() + "', nombre='" + c.getNombre() + "', tipoComunicacion='" + c.getTipoComunicacion() + "' WHERE idTipoDispositivo='" + cAnterior.getIdTipoDispositivo() + "' ");
@@ -60,24 +62,24 @@ public OpTiposDispositivos(){
             validarConsistencia = database.consultar("SELECT * FROM TiposDispositivos WHERE modelo='" + c.getModelo() + "' ");
             if (validarConsistencia.next()) {
                 validarConsistencia.close();
-                registroConsola(listaSQL, "Modificación", "El modelo que usted desea asignar ya está en uso en el sistema.");
+                registroConsola(this.usuarioSistema,listaSQL, "Modificación", "El modelo que usted desea asignar ya está en uso en el sistema.");
                 throw new Exception("El modelo que usted desea asignar ya está en uso en el sistema.");
             }
             validarConsistencia.close();
             /*Validar que el modelo nuevo no existe ya en la db.*/
             database.actualizarMultiple(listaSQL, "UPDATE");
         } catch (SQLException ex) {
-            registroConsola(listaSQL, "Modificación", ex.getMessage());
+            registroConsola(this.usuarioSistema,listaSQL, "Modificación", ex.getMessage());
             throw ex;
         } catch (Exception ex) {
-            registroConsola(listaSQL, "Modificación", ex.getMessage());
+            registroConsola(this.usuarioSistema,listaSQL, "Modificación", ex.getMessage());
             throw ex;
         }
-        registroConsola(listaSQL, "Modificación", "NOERROR");
+        return registroConsola(this.usuarioSistema,listaSQL, "Modificación", "NOERROR");
     }
 
     @Override
-    public void borrar(TipoDispositivo c) throws Exception, SQLException {
+    public LogSistema borrar(TipoDispositivo c) throws Exception, SQLException {
         ArrayList<String> listaSQL = new ArrayList<>();
         ResultSet validarConsistencia= null;
         listaSQL.add("UPDATE TiposDispositivos SET eliminado='Y' WHERE idTipoDispositivo='"+c.getIdTipoDispositivo()+"'");
@@ -85,7 +87,7 @@ public OpTiposDispositivos(){
         validarConsistencia = database.consultar("SELECT * FROM TieneTP WHERE idTipoDispositivo ='"+c.getIdTipoDispositivo()+"' AND eliminado='N' ");
         if(validarConsistencia.next()){
             validarConsistencia.close();
-            registroConsola(listaSQL, "Baja", "El Tipo de Dispositivo que usted desea borrar existe en algún Paquete.");
+            registroConsola(this.usuarioSistema,listaSQL, "Baja", "El Tipo de Dispositivo que usted desea borrar existe en algún Paquete.");
             throw new Exception("El Tipo de Dispositivo que usted desea borrar existe en algún Paquete.");
         }
         validarConsistencia.close();
@@ -93,13 +95,13 @@ public OpTiposDispositivos(){
         try{
             database.actualizarMultiple(listaSQL, "UPDATE");
         }catch(SQLException ex){
-            registroConsola(listaSQL, "Baja", ex.getMessage());
+            registroConsola(this.usuarioSistema,listaSQL, "Baja", ex.getMessage());
             throw ex;
         }catch(Exception ex){
-            registroConsola(listaSQL, "Baja", ex.getMessage());
+            registroConsola(this.usuarioSistema,listaSQL, "Baja", ex.getMessage());
             throw ex;
         }
-        registroConsola(listaSQL, "Baja", "NOERROR");
+        return registroConsola(this.usuarioSistema,listaSQL, "Baja", "NOERROR");
     }
 
     @Override
@@ -135,23 +137,18 @@ public OpTiposDispositivos(){
             }
             rs.close();
         }catch(SQLException ex){
-            registroConsola(listaSQL, "Búsqueda", ex.getMessage());
+            registroConsola(this.usuarioSistema, listaSQL, "Búsqueda", ex.getMessage());
             throw ex;   
         }catch(Exception ex){
-            registroConsola(listaSQL, "Búsqueda", ex.getMessage());
+            registroConsola(this.usuarioSistema, listaSQL, "Búsqueda", ex.getMessage());
             throw ex;
         }
-        registroConsola(listaSQL, "Búsqueda", "NOERROR");
+        registroConsola(this.usuarioSistema, listaSQL, "Búsqueda", "NOERROR");
         return lista;
     }
 
     @Override
-    public boolean existsAllID(ArrayList<Integer> lista) throws Exception, SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public boolean borradoMultiplePorIds(ArrayList<Integer> listaIds) throws Exception, SQLException {
+    public LogSistema borradoMultiplePorIds(ArrayList<Integer> listaIds) throws Exception, SQLException {
         ArrayList<String> listaSQL = new ArrayList<>();
         /*Armando listado de IDS para la Query*/
         String listaIdsStr = "";
@@ -166,15 +163,14 @@ public OpTiposDispositivos(){
         validarConsistencia = database.consultar("SELECT * FROM TieneTP WHERE idTipoDispositivo in(" +listaIdsStr+ ") and eliminado = 'N' ");
         if(validarConsistencia.next()){
             validarConsistencia.close();
-            registroConsola(listaSQL, "Baja", "Alguno de los Tipos de Dispositivos que usted desea borrar existe en algún Paquete.");
+            registroConsola(this.usuarioSistema,listaSQL, "Baja", "Alguno de los Tipos de Dispositivos que usted desea borrar existe en algún Paquete.");
             throw new Exception("Alguno de los Tipos de Dispositivos que usted desea borrar existe en algún Paquete.");
         }
         validarConsistencia.close();
         /*Validar que este tipo de dispositivo no exista en ningun paquete de suscripción*/    
         /*Validar lista de IDs vacia*/
         if(listaIds.isEmpty()){
-            registroConsola(listaSQL, "Baja", "ERROR: Lista de IDs llegó vacia al metodo borradoMultiplePorIds");
-            return false;
+            return registroConsola(this.usuarioSistema,listaSQL, "Baja", "ERROR: Lista de IDs llegó vacia al metodo borradoMultiplePorIds");
         }
         /*Validar lista de IDs vacia*/
         
@@ -183,28 +179,29 @@ public OpTiposDispositivos(){
         try{
             database.actualizarMultiple(listaSQL,"UPDATE");
         }catch(SQLException ex){
-            registroConsola(listaSQL, "Baja", ex.getMessage());
+            registroConsola(this.usuarioSistema,listaSQL, "Baja", ex.getMessage());
             throw ex;
         }catch(Exception ex){
-            registroConsola(listaSQL, "Baja", ex.getMessage());
+            registroConsola(this.usuarioSistema,listaSQL, "Baja", ex.getMessage());
             throw ex;
         }
-        registroConsola(listaSQL, "Baja", "NOERROR");    
-        return true;
+        return registroConsola(this.usuarioSistema,listaSQL, "Baja", "NOERROR");    
     }
 
     @Override
-    public void registroConsola(ArrayList<String> listaSQL, String operacion, String textoError) throws Exception, SQLException {
-        LogSistema log = new LogSistema(-1, operacion, textoError, new ArrayList<>());
-        
+    public LogSistema registroConsola(String usuarioSistema, ArrayList<String> listaSQL, String operacion, String textoError) throws Exception, SQLException {
+        LogSistema log = new LogSistema(usuarioSistema, operacion, textoError, new ArrayList<>());
         System.out.println("----------------------------------");
+        System.out.println("Usuario: " + usuarioSistema + "\nOperación: " + operacion + "\nTexto Error: " + textoError);
+        System.out.println("Listado de Sentencias SQL:");
         for (String sentencia : listaSQL) {
             log.getListaQuerys().add(new QueryEjecutada(sentencia));
             System.out.println(sentencia);
         }
         logging.insertar(log);
         System.out.println("----------------------------------");
-        /*Evidencia en consola*/  
+        /*Evidencia en consola*/
+        return log;
     }
     
 
