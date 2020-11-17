@@ -20,12 +20,16 @@ public OpLogSistema(){
 
 /*Comportamiento*/
     @Override
-    public void guardar(LogSistema cAnterior, LogSistema c) throws Exception, SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public LogSistema guardar(LogSistema cAnterior, LogSistema c) throws Exception, SQLException {
+        if(cAnterior == null){
+            return insertar(c);
+        }else{
+            return modificar(cAnterior, c);
+        }
     }
 
     @Override
-    public void insertar(LogSistema c) throws Exception, SQLException {/*Usuario Sistema hardcodeado resolver eso*/
+    public LogSistema insertar(LogSistema c) throws Exception, SQLException {/*Usuario Sistema hardcodeado resolver eso*/
         ArrayList<String> listaSQL  = new ArrayList();
         String sql = "INSERT INTO LogsSistema (usuarioSistema, operacion, textoError) values ('bentancor','"+c.getOperacion()+"','"+c.getTextoError()+"')";
         listaSQL.add(sql);
@@ -33,15 +37,16 @@ public OpLogSistema(){
             listaSQL.add("INSERT INTO QuerysEjecutadas (idLog, textoQuery) values (?, '"+q.getTextoQuery()+"')");
         }
         database.actualizarMultiple(listaSQL, "INSERT");
+        return new LogSistema(-1);
     }
 
     @Override
-    public void modificar(LogSistema cAnterior, LogSistema c) throws Exception, SQLException {
+    public LogSistema modificar(LogSistema cAnterior, LogSistema c) throws Exception, SQLException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void borrar(LogSistema c) throws Exception, SQLException {
+    public LogSistema borrar(LogSistema c) throws Exception, SQLException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -56,17 +61,12 @@ public OpLogSistema(){
     }
 
     @Override
-    public boolean existsAllID(ArrayList<Integer> lista) throws Exception, SQLException {
+    public LogSistema borradoMultiplePorIds(ArrayList<Integer> listaIds) throws Exception, SQLException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public boolean borradoMultiplePorIds(ArrayList<Integer> listaIds) throws Exception, SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void registroConsola(ArrayList<String> listaSQL, String operacion, String textoError) {
+    public LogSistema registroConsola(String usuarioSistema, ArrayList<String> listaSQL, String operacion, String textoError) {
         throw new UnsupportedOperationException("Not supported yet."); //Objeto no Auditado
     }
 /*Comportamiento*/

@@ -10,26 +10,36 @@ public class LogSistema {
     private String operacion;
     private String textoError;
     private DTOFechas fechaHora;
+    private String usuarioSistema;
     private ArrayList<QueryEjecutada> listaQuerys;
     /*Estado*/
     
     /*Constructores*/
     public LogSistema(int idLog){
         this.idLog = idLog;
-        this.operacion = this.textoError = "";
+        this.operacion = this.textoError = usuarioSistema ="";
         this.fechaHora = new DTOFechas(new Fecha());
     }
        
-    public LogSistema(int idLog, String operacion, String textoError, ArrayList<QueryEjecutada> listaQuerys){
+    public LogSistema(int idLog,String usuarioSistema, String operacion, String textoError, ArrayList<QueryEjecutada> listaQuerys){
         this.idLog = idLog;
         this.operacion=operacion;
+        this.usuarioSistema = usuarioSistema;
         this.textoError = textoError;
         this.listaQuerys = listaQuerys;
     }
-    public LogSistema(String operacion, String textoError){
+        public LogSistema(String usuarioSistema, String operacion, String textoError, ArrayList<QueryEjecutada> listaQuerys){
+        this.idLog = -1;
+        this.operacion=operacion;
+        this.usuarioSistema = usuarioSistema;
+        this.textoError = textoError;
+        this.listaQuerys = listaQuerys;
+    }
+    public LogSistema(String usuarioSistema, String operacion, String textoError){
         this.idLog = -1;
         this.operacion=operacion;
         this.textoError = textoError;
+        this.usuarioSistema = usuarioSistema;
     }
     
     /*Constructores*/

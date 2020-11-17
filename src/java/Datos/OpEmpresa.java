@@ -13,27 +13,29 @@ public class OpEmpresa implements IOperaciones<Empresa> {
 /*Estado*/
 private static Database database;
 private OpLogSistema logging;
+private String usuarioSistema;
 /*Estado*/
 
 /*Constructores*/
-public OpEmpresa(){
+public OpEmpresa(String usuarioSistema){
     this.database = Database.getInstancia();
     this.logging = new OpLogSistema();
+    this.usuarioSistema = usuarioSistema;
 }
 /*Constructores*/
 
 /*Comportamiento*/
  @Override
-    public void guardar(Empresa cAnterior, Empresa c) throws Exception, SQLException {
+    public LogSistema guardar(Empresa cAnterior, Empresa c) throws Exception, SQLException {
         if(cAnterior == null){
-            insertar(c);
+            return insertar(c);
         }else{
-            modificar(cAnterior, c);
+            return modificar(cAnterior, c);
         }
     }
 
     @Override
-    public void insertar(Empresa c) throws Exception, SQLException {
+    public LogSistema insertar(Empresa c) throws Exception, SQLException {
         ArrayList<String> listaSQL = new ArrayList<>();
         listaSQL.add("INSERT INTO Empresas (identificacionTributaria, nombre, razonSocial, impuestos, nombreIdioma, codigo) values "
                 + "('"+c.getIdentificacionTributaria()+"','"+c.getNombre()+"','"+c.getRazonSocial()+"','"+c.getImpuestos()+"','"+c.getIdiomaAsociado().getNombre()+"','"+c.getPaisAsociado().getCodigo()+"') ");
@@ -42,40 +44,40 @@ public OpEmpresa(){
         ResultSet validarConsistencia = database.consultar("SELECT * FROM Empresas WHERE identificacionTributaria='"+c.getIdentificacionTributaria()+"' ");
         if(validarConsistencia.next()){
             validarConsistencia.close();
-            registroConsola(listaSQL, "Alta", "La identificación tributaria de la empresa ya existe en el sistema.");
+            registroConsola(this.usuarioSistema, listaSQL, "Alta", "La identificación tributaria de la empresa ya existe en el sistema.");
             throw new Exception("La identificación tributaria de la empresa ya existe en el sistema.");
         }
         validarConsistencia.close();
         /*Validar que la identificacionTributaria no exista ya en el sistema.*/
         database.actualizarMultiple(listaSQL, "INSERT");
         }catch(SQLException ex){
-            registroConsola(listaSQL, "Alta", ex.getMessage());
+            registroConsola(this.usuarioSistema, listaSQL, "Alta", ex.getMessage());
             throw ex;
         }catch(Exception ex){
-            registroConsola(listaSQL, "Alta", ex.getMessage());
+            registroConsola(this.usuarioSistema, listaSQL, "Alta", ex.getMessage());
             throw ex;
         }
-        registroConsola(listaSQL, "Alta", "NOERROR");  
+        return registroConsola(this.usuarioSistema, listaSQL, "Alta", "NOERROR");  
     }
 
     @Override
-    public void modificar(Empresa cAnterior, Empresa c) throws Exception, SQLException {
+    public LogSistema modificar(Empresa cAnterior, Empresa c) throws Exception, SQLException {
         ArrayList<String> listaSQL = new ArrayList<>();
         listaSQL.add("UPDATE Empresas SET nombre='"+c.getNombre()+"', razonSocial='"+c.getRazonSocial()+"', impuestos='"+c.getImpuestos()+"', nombreIdioma='"+c.getIdiomaAsociado().getNombre()+"', codigo='"+c.getPaisAsociado().getCodigo()+"' WHERE identificacionTributaria='"+c.getIdentificacionTributaria()+"' ");
         try{
             database.actualizarMultiple(listaSQL, "UPDATE");
         }catch(SQLException ex){
-            registroConsola(listaSQL, "Modificación", ex.getMessage());
+            registroConsola(this.usuarioSistema, listaSQL, "Modificación", ex.getMessage());
             throw ex;
         }catch(Exception ex){
-            registroConsola(listaSQL, "Modificación", ex.getMessage());
+            registroConsola(this.usuarioSistema, listaSQL, "Modificación", ex.getMessage());
             throw ex;
         }
-        registroConsola(listaSQL, "Modificación", "NOERROR");  
+        return registroConsola(this.usuarioSistema, listaSQL, "Modificación", "NOERROR");  
     }
 
     @Override
-    public void borrar(Empresa c) throws Exception, SQLException {
+    public LogSistema borrar(Empresa c) throws Exception, SQLException {
         ArrayList<String> listaSQL = new ArrayList<>();
         listaSQL.add("UPDATE Empresas SET eliminado='Y' WHERE identificacionTributaria='"+c.getIdentificacionTributaria()+"' ");
         try{
@@ -90,7 +92,7 @@ public OpEmpresa(){
                 validarConsistencia = database.consultar("SELECT * FROM "+str+" WHERE identificacionTributaria='" + c.getIdentificacionTributaria() + "' ");
                 if (validarConsistencia.next()) {
                     validarConsistencia.close();
-                    registroConsola(listaSQL, "Baja", "No se puede eliminar a la empresa porque hay "+str+" asociadas a la misma.");
+                    registroConsola(this.usuarioSistema, listaSQL, "Baja", "No se puede eliminar a la empresa porque hay "+str+" asociadas a la misma.");
                     throw new Exception("No se puede eliminar a la empresa porque hay "+str+" asociadas a la misma.");
                 }
                 validarConsistencia.close();
@@ -98,12 +100,14 @@ public OpEmpresa(){
             /*Validaciones, que la empresa no tenga Facturas, Personas, Dispositivos o Paquetes asociados.*/
             database.actualizarMultiple(listaSQL, "UPDATE");
         }catch(SQLException ex){
-            registroConsola(listaSQL, "Baja", ex.getMessage());
+            registroConsola(this.usuarioSistema, listaSQL, "Baja", ex.getMessage());
             throw ex;
         }catch(Exception ex){
-            registroConsola(listaSQL, "Baja", ex.getMessage());
+            registroConsola(this.usuarioSistema, listaSQL, "Baja", ex.getMessage());
             throw ex;
         }
+        return registroConsola(this.usuarioSistema, listaSQL, "Baja", "NOERROR");
+    
     }
 
     @Override
@@ -142,38 +146,35 @@ public OpEmpresa(){
             rs.close();
         
         }catch(SQLException ex){
-            registroConsola(listaSQL, "Búsqueda", ex.getMessage());
+            registroConsola(this.usuarioSistema,listaSQL, "Búsqueda", ex.getMessage());
             throw ex;
         }catch(Exception ex){
-            registroConsola(listaSQL, "Búsqueda", ex.getMessage());
+            registroConsola(this.usuarioSistema,listaSQL, "Búsqueda", ex.getMessage());
             throw ex;
         }
-         registroConsola(listaSQL, "Búsqueda", "NOERROR");
+         registroConsola(this.usuarioSistema,listaSQL, "Búsqueda", "NOERROR");
          return lista;   
     }
 
     @Override
-    public boolean existsAllID(ArrayList<Integer> lista) throws Exception, SQLException {
+    public LogSistema borradoMultiplePorIds(ArrayList<Integer> listaIds) throws Exception, SQLException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public boolean borradoMultiplePorIds(ArrayList<Integer> listaIds) throws Exception, SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void registroConsola(ArrayList<String> listaSQL, String operacion, String textoError) throws Exception, SQLException {
-        LogSistema log = new LogSistema(-1, operacion, textoError, new ArrayList<>());
-        
+    public LogSistema registroConsola(String usuarioSistema, ArrayList<String> listaSQL, String operacion, String textoError) throws Exception, SQLException {
+        LogSistema log = new LogSistema(usuarioSistema, operacion, textoError, new ArrayList<>());
         System.out.println("----------------------------------");
+        System.out.println("Usuario: " + usuarioSistema + "\nOperación: " + operacion + "\nTexto Error: " + textoError);
+        System.out.println("Listado de Sentencias SQL:");
         for (String sentencia : listaSQL) {
             log.getListaQuerys().add(new QueryEjecutada(sentencia));
             System.out.println(sentencia);
         }
         logging.insertar(log);
         System.out.println("----------------------------------");
-        /*Evidencia en consola*/  
+        /*Evidencia en consola*/
+        return log;
     }
 /*Comportamiento*/
 

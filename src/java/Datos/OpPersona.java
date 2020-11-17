@@ -20,27 +20,29 @@ public class OpPersona implements IOperaciones<Persona> {
 /*Estado*/
 private static Database database;
 private OpLogSistema logging;
+private String usuarioSistema;
 /*Estado*/
 
 /*Constructores*/
-public OpPersona(){
+public OpPersona(String usuarioSistema){
     this.database = Database.getInstancia();
     this.logging = new OpLogSistema();
+    this.usuarioSistema = usuarioSistema;
 }
 /*Constructores*/
 
 /*Comportamiento*/
 @Override
-    public void guardar(Persona cAnterior, Persona c) throws Exception, SQLException {
+    public LogSistema guardar(Persona cAnterior, Persona c) throws Exception, SQLException {
         if(cAnterior == null){
-            insertar(c);
+            return insertar(c);
         }else{
-            modificar(cAnterior, c);
+            return modificar(cAnterior, c);
         }
     }
 
     @Override
-    public void insertar(Persona c) throws Exception, SQLException {
+    public LogSistema insertar(Persona c) throws Exception, SQLException {
         ArrayList<String> listaSQL = new ArrayList<>();
         String sqlA = "INSERT INTO Personas (usuarioSistema, nombreCompleto, codigo, identificacionTributaria) values "
                 + "('"+c.getUsuarioSistema()+"','"+c.getNombreCompleto()+"','"+c.getPaisResidencia().getCodigo()+"','"+c.getEmpresaAsociada().getIdentificacionTributaria()+"')";
@@ -68,17 +70,17 @@ public OpPersona(){
         try{
         database.actualizarMultiple(listaSQL, "INSERT");
         }catch(SQLException ex){
-            registroConsola(listaSQL, "Alta", ex.getMessage());
+            registroConsola(this.usuarioSistema, listaSQL, "Alta", ex.getMessage());
             throw ex;
         }catch(Exception ex){
-            registroConsola(listaSQL, "Alta", ex.getMessage());
+            registroConsola(this.usuarioSistema, listaSQL, "Alta", ex.getMessage());
             throw ex;
         }
-        registroConsola(listaSQL, "Alta", "NOERROR");
+        return registroConsola(this.usuarioSistema, listaSQL, "Alta", "NOERROR");
     }
 
     @Override
-    public void modificar(Persona cAnterior, Persona c) throws Exception, SQLException {
+    public LogSistema modificar(Persona cAnterior, Persona c) throws Exception, SQLException {
         ArrayList<String> listaSQL = new ArrayList<>();
         String sqlA, sqlB, sqlC, sqlD;
         sqlA = "UPDATE Personas SET usuarioSistema='" + c.getUsuarioSistema() + "', nombreCompleto='" + c.getNombreCompleto() + "' where usuarioSistema='" + c.getUsuarioSistema() + "'";
@@ -88,7 +90,7 @@ public OpPersona(){
             validarDependencias = database.consultar("SELECT * FROM Personas WHERE Personas.usuarioSistema='" + c.getUsuarioSistema() + "' ");
             if (validarDependencias.next()) {
                 validarDependencias.close();
-                registroConsola(listaSQL, "Modificación", "El usuario que usted desea asignar ya está en uso en el sistema.");
+                registroConsola(this.usuarioSistema, listaSQL, "Modificación", "El usuario que usted desea asignar ya está en uso en el sistema.");
                 throw new Exception("El usuario que usted desea asignar ya está en uso en el sistema.");
             }
             validarDependencias.close();
@@ -112,7 +114,7 @@ public OpPersona(){
                     validarDependencias = database.consultar("SELECT * FROM Principales WHERE Principales.nroDocumento='" + principal.getNroDocumento() + "' and Principales.usuarioSistema='" + principal.getUsuarioSistema() + "'");
                     if (validarDependencias.next()) {
                         validarDependencias.close();
-                        registroConsola(listaSQL, "Modificación", "El número de documento que usted desea asignar ya está en uso en el sistema.");
+                        registroConsola(this.usuarioSistema, listaSQL, "Modificación", "El número de documento que usted desea asignar ya está en uso en el sistema.");
                         throw new Exception("El número de documento que usted desea asignar ya está en uso en el sistema.");
                     }
                     validarDependencias.close();
@@ -131,17 +133,17 @@ public OpPersona(){
         }
         database.actualizarMultiple(listaSQL, "UPDATE");
         }catch(SQLException ex){
-            registroConsola(listaSQL, "Modificación", ex.getMessage());
+            registroConsola(this.usuarioSistema, listaSQL, "Modificación", ex.getMessage());
             throw ex;
         }catch(Exception ex){
-            registroConsola(listaSQL, "Modificación", ex.getMessage());
+            registroConsola(this.usuarioSistema, listaSQL, "Modificación", ex.getMessage());
             throw ex;
         }
-        registroConsola(listaSQL, "Modificación", "NOERROR");    
+        return registroConsola(this.usuarioSistema, listaSQL, "Modificación", "NOERROR");    
     }
 
     @Override
-    public void borrar(Persona c) throws Exception, SQLException {
+    public LogSistema borrar(Persona c) throws Exception, SQLException {
         ArrayList<String> listaSQL = new ArrayList<>();
         String sqlA, sqlB, sqlC, sqlD;
         sqlA = "UPDATE Personas SET eliminado='Y' where usuarioSistema='"+c.getUsuarioSistema()+"'";
@@ -168,13 +170,13 @@ public OpPersona(){
         try{
         database.actualizarMultiple(listaSQL, "UPDATE");
         }catch(SQLException ex){
-            registroConsola(listaSQL, "Baja", ex.getMessage());
+            registroConsola(this.usuarioSistema, listaSQL, "Baja", ex.getMessage());
             throw ex;
         }catch(Exception ex){
-            registroConsola(listaSQL, "Baja", ex.getMessage());
+            registroConsola(this.usuarioSistema, listaSQL, "Baja", ex.getMessage());
             throw ex;
         }
-        registroConsola(listaSQL, "Baja", "NOERROR");
+        return registroConsola(this.usuarioSistema, listaSQL, "Baja", "NOERROR");
     }
 
     @Override
@@ -271,38 +273,35 @@ public OpPersona(){
             }
         }
         catch(SQLException ex){
-            registroConsola(listaSQL, "Búsqueda", ex.getLocalizedMessage());
+            registroConsola(this.usuarioSistema, listaSQL, "Búsqueda", ex.getLocalizedMessage());
             throw ex;
         }
         catch(Exception ex){
-            registroConsola(listaSQL, "Búsqueda", ex.getLocalizedMessage());
+            registroConsola(this.usuarioSistema, listaSQL, "Búsqueda", ex.getLocalizedMessage());
             throw ex;
         }
         return personas;
     }
 
     @Override
-    public boolean existsAllID(ArrayList<Integer> lista) throws Exception, SQLException {
+    public LogSistema borradoMultiplePorIds(ArrayList<Integer> listaIds) throws Exception, SQLException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public boolean borradoMultiplePorIds(ArrayList<Integer> listaIds) throws Exception, SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void registroConsola(ArrayList<String> listaSQL, String operacion, String textoError) throws Exception, SQLException {
-        LogSistema log = new LogSistema(-1, operacion, textoError, new ArrayList<>());
-        
+    public LogSistema registroConsola(String usuarioSistema, ArrayList<String> listaSQL, String operacion, String textoError) throws Exception, SQLException {
+        LogSistema log = new LogSistema(usuarioSistema, operacion, textoError, new ArrayList<>());
         System.out.println("----------------------------------");
+        System.out.println("Usuario: " + usuarioSistema + "\nOperación: " + operacion + "\nTexto Error: " + textoError);
+        System.out.println("Listado de Sentencias SQL:");
         for (String sentencia : listaSQL) {
             log.getListaQuerys().add(new QueryEjecutada(sentencia));
             System.out.println(sentencia);
         }
         logging.insertar(log);
         System.out.println("----------------------------------");
-        /*Evidencia en consola*/  
+        /*Evidencia en consola*/
+        return log;
     }
 /*Comportamiento*/
 

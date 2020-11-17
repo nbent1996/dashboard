@@ -11,37 +11,39 @@ public class OpTipoDocumento implements IOperaciones<TipoDocumento> {
     /*Estado*/
     private static Database database;
     private OpLogSistema logging; 
+    private String usuarioSistema;
     /*Estado*/
     
     /*Constructores*/
-    public OpTipoDocumento(){
+    public OpTipoDocumento(String usuarioSistema){
         this.database = Database.getInstancia();
         this.logging = new OpLogSistema();
+        this.usuarioSistema = usuarioSistema;
     }
     /*Constructores*/
     
     /*Comportamiento*/
     @Override
-    public void guardar(TipoDocumento cAnterior, TipoDocumento c) throws Exception, SQLException {
+    public LogSistema guardar(TipoDocumento cAnterior, TipoDocumento c) throws Exception, SQLException {
         if(cAnterior == null){
-            insertar(c);
+            return insertar(c);
         }else{
-            modificar(cAnterior, c);
+            return modificar(cAnterior, c);
         }
     }
 
     @Override
-    public void insertar(TipoDocumento c) throws Exception, SQLException {
+    public LogSistema insertar(TipoDocumento c) throws Exception, SQLException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void modificar(TipoDocumento cAnterior, TipoDocumento c) throws Exception, SQLException {
+    public LogSistema modificar(TipoDocumento cAnterior, TipoDocumento c) throws Exception, SQLException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void borrar(TipoDocumento c) throws Exception, SQLException {
+    public LogSistema borrar(TipoDocumento c) throws Exception, SQLException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -73,38 +75,35 @@ public class OpTipoDocumento implements IOperaciones<TipoDocumento> {
         }
             rs.close();
         } catch (SQLException ex) {
-            registroConsola(listaSQL, "Búsqueda", ex.getMessage());
+            registroConsola(this.usuarioSistema, listaSQL, "Búsqueda", ex.getMessage());
             throw ex;
         } catch (Exception ex) {
-            registroConsola(listaSQL, "Búsqueda", ex.getMessage());
+            registroConsola(this.usuarioSistema, listaSQL, "Búsqueda", ex.getMessage());
             throw ex;
         }
-        registroConsola(listaSQL, "Búsqueda", "NOERROR");
+        registroConsola(this.usuarioSistema, listaSQL, "Búsqueda", "NOERROR");
         return lista;
     }
 
     @Override
-    public boolean existsAllID(ArrayList<Integer> lista) throws Exception, SQLException {
+    public LogSistema borradoMultiplePorIds(ArrayList<Integer> listaIds) throws Exception, SQLException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public boolean borradoMultiplePorIds(ArrayList<Integer> listaIds) throws Exception, SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void registroConsola(ArrayList<String> listaSQL, String operacion, String textoError) throws Exception, SQLException {
-        LogSistema log = new LogSistema(-1, operacion, textoError, new ArrayList<>());
-        
+    public LogSistema registroConsola(String usuarioSistema, ArrayList<String> listaSQL, String operacion, String textoError) throws Exception, SQLException {
+        LogSistema log = new LogSistema(usuarioSistema, operacion, textoError, new ArrayList<>());
         System.out.println("----------------------------------");
+        System.out.println("Usuario: " + usuarioSistema + "\nOperación: " + operacion + "\nTexto Error: " + textoError);
+        System.out.println("Listado de Sentencias SQL:");
         for (String sentencia : listaSQL) {
             log.getListaQuerys().add(new QueryEjecutada(sentencia));
             System.out.println(sentencia);
         }
         logging.insertar(log);
         System.out.println("----------------------------------");
-        /*Evidencia en consola*/  
+        /*Evidencia en consola*/
+        return log;
     }
     /*Comportamiento*/
 
