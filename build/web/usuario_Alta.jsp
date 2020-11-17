@@ -26,13 +26,7 @@
         
         <div class="usuarios-page">
             <div class="form">
-                <!--<form class="register-form">
-                    <input type="text" placeholder="name"/>
-                    <input type="password" placeholder="password"/>
-                    <input type="text" placeholder="email address"/>
-                    <button>create</button>
-                    <p class="message">Already registered? <a href="#">Sign In</a></p>
-                </form>-->
+                
                 <form name="formAltaUsuario" action="ManejoUsuariosServlet" method="post" onsubmit="return validarCamposAltaUsr(this)">
                     <input type="text" id="txtUsuarioAlta" name="usuario" placeholder="usuario" required="true"/>
                     <input type="text" id="txtNombreCompletoAlta" name="nombreCompleto" placeholder="nombre completo" required="true"/>
@@ -51,8 +45,9 @@
                             <option value="administrador">Administrador</option>
                         </select>
                     -->
-                    <input type="submit" id="btnSubmit" value="crear" >
-                    <button>crear</button>
+                    <input type="submit" class="submitAlta" value="crear" >
+                    <!--<button>crear</button>-->
+                    
                     
                     <%if (msg != null) {%>
                     <div>
@@ -60,7 +55,7 @@
                     </div>
                     <%}%>
                     
-                    <!--<p class="message">Not registered? <a href="#">Create an account</a></p>-->
+                    <p class="message">Not registered? <a href="#">Create an account</a></p>
                 </form>
             </div>
         </div>
