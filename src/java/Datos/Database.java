@@ -9,9 +9,11 @@ public class Database {
     private static Database instancia;
     private static Connection conexion;
     private static Statement stmt;
-    private static String user = "administrador";
-    private static String pass = "alfacomuruguay4828!";
-    private static String url = "jdbc:mysql://localhost/alfacomPlatform"+"?user="+user+"&password="+pass;
+//    private static String user = "administrador";
+//    private static String pass = "alfacomuruguay4828!";
+      private static String user = "administrador";
+      private static String pass = "alfacomuruguay4828!";
+      private static String url = "jdbc:mysql://127.0.0.1:3306/alfacomPlatform"+"?user="+user+"&password="+pass;
     /*Atributos*/
  /*Constructores*/
 
