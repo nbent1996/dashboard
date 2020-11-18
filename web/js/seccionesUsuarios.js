@@ -50,3 +50,16 @@ function validarCamposAltaUsr(form){
     
     return true;
 }
+
+
+function validarCamposBajaUsr(form){
+    var usuario = form.usuario;
+    
+    if(usuario.value == ""){
+        alert("Debe escribir un nombre de usuario");
+        usuario.select();
+        usuario.focus();
+        return false;
+    }
+    return true;
+}

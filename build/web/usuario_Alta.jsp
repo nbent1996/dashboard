@@ -33,6 +33,7 @@
                     <input type="text" id="txtNombreEmpresaAlta" name="nombreEmpresa" placeholder="empresa" required="true"/>
                     <input type="text" id="txtNombrePaisAlta" name="nombrePais" placeholder="pais" required="true"/>
                     <input type="text" id="txtTipoUsuarioAlta" name="tipoUsuario" placeholder="tipo usuario" required="true"/>
+                    <input type="hidden" name="parametroOculto" value="formAlta">
                     
                     <!--
                         <select name="pais" id="pais">
@@ -45,7 +46,7 @@
                             <option value="administrador">Administrador</option>
                         </select>
                     -->
-                    <input type="submit" class="submitAlta" value="crear" >
+                    <input type="submit" class="submitAlta" value="crear">
                     <!--<button>crear</button>-->
                     
                     
@@ -55,7 +56,7 @@
                     </div>
                     <%}%>
                     
-                    <p class="message">Not registered? <a href="#">Create an account</a></p>
+                    <!--<p class="message">Not registered? <a href="#">Create an account</a></p>-->
                 </form>
             </div>
         </div>

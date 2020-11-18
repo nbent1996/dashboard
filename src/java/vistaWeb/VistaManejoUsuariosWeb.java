@@ -32,16 +32,31 @@ public class VistaManejoUsuariosWeb implements IVistaManejoUsuarios{
 
     public void procesarRequest(HttpServletRequest request, HttpServletResponse response) {
         
-        String usuarioAltaUsr = request.getParameter("usuario");
-        String nombreCompletoAltaUsr = request.getParameter("nombreCompleto");
-        String nombreEmpresaAltaUsr = request.getParameter("nombreEmpresa");
-        String nombrePaisAltaUsr = request.getParameter("nombrePais");
-        String tipoUsuarioAltaUsr = request.getParameter("tipoUsuario");
+        //ANDUVO ESTE CAMBIO, LO IMPLEMENTÉ PARA REUSAR EL MISMO SERVLET
+        if (request.getParameter("parametroOculto").equals("formAlta")){ //me llega el name parametroOculto del input hiden del form de alta usuario con value formAlta
+            altaUsuario(request, response);
+        }
         
-        this.request = request;
-        this.response = response;
+        if (request.getParameter("parametroOculto").equals("formBaja")){ //me llega el name parametroOculto del input hiden del form de baja usuario con value formBaja
+            bajaUsuario(request, response);
+        }
         
-        controlador.altaUsuario(usuarioAltaUsr, nombreCompletoAltaUsr, nombreEmpresaAltaUsr, nombrePaisAltaUsr, tipoUsuarioAltaUsr);
+        
+        
+        
+        
+        
+        
+//        String usuarioAltaUsr = request.getParameter("usuario");
+//        String nombreCompletoAltaUsr = request.getParameter("nombreCompleto");
+//        String nombreEmpresaAltaUsr = request.getParameter("nombreEmpresa");
+//        String nombrePaisAltaUsr = request.getParameter("nombrePais");
+//        String tipoUsuarioAltaUsr = request.getParameter("tipoUsuario");
+//        
+//        this.request = request;
+//        this.response = response;
+//        
+//        controlador.altaUsuario(usuarioAltaUsr, nombreCompletoAltaUsr, nombreEmpresaAltaUsr, nombrePaisAltaUsr, tipoUsuarioAltaUsr);
         
     }
 
@@ -58,6 +73,29 @@ public class VistaManejoUsuariosWeb implements IVistaManejoUsuarios{
 
     private void redireccionPrueba() throws IOException {
         response.sendRedirect(destino);
+    }
+
+    private void altaUsuario(HttpServletRequest request, HttpServletResponse response) {
+        
+        String usuarioAltaUsr = request.getParameter("usuario");
+        String nombreCompletoAltaUsr = request.getParameter("nombreCompleto");
+        String nombreEmpresaAltaUsr = request.getParameter("nombreEmpresa");
+        String nombrePaisAltaUsr = request.getParameter("nombrePais");
+        String tipoUsuarioAltaUsr = request.getParameter("tipoUsuario");
+
+        this.request = request;
+        this.response = response;
+
+        controlador.altaUsuario(usuarioAltaUsr, nombreCompletoAltaUsr, nombreEmpresaAltaUsr, nombrePaisAltaUsr, tipoUsuarioAltaUsr);
+        
+    }
+
+    private void bajaUsuario(HttpServletRequest request, HttpServletResponse response) {
+        
+        String usuarioBajaUsr = request.getParameter("usuarioBaja");
+        
+        //mandarlo al controlador y probar 
+        
     }
     
     

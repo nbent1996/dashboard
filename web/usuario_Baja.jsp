@@ -6,6 +6,14 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+
+
+<%
+    String msg = request.getParameter("msg");
+%>
+
+
+
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -30,8 +38,9 @@
                     <button>create</button>
                     <p class="message">Already registered? <a href="#">Sign In</a></p>
                 </form>-->
-                <form class="login-form" action="">
-                    <input type="text" id="txtUsuarioBaja" placeholder="usuario" required="true"/>
+                <form name="formBajaUsuario" action="ManejoUsuariosServlet" method="post" onsubmit="return validarCamposBajaUsr(this)">
+                    <input type="text" id="txtUsuarioBaja" name="usuarioBaja" placeholder="usuario" required="true"/>
+                    <input type="hidden" name="parametroOculto" value="formBaja">
                     
                     <!--
                         <select name="pais" id="pais">
@@ -45,7 +54,14 @@
                         </select>
                     -->
                     
-                    <button>borrar</button>
+                    <input type="submit" class="submitBaja" value="borrar" >
+                    
+                    <%if (msg != null) {%>
+                    <div>
+                        <p class="message"><%=msg%></p>                        
+                    </div>
+                    <%}%>
+                    
                     <!--<p class="message">Not registered? <a href="#">Create an account</a></p>-->
                 </form>
             </div>
