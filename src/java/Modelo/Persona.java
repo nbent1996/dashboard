@@ -1,22 +1,52 @@
 package Modelo;
+
 public abstract class Persona {
-/*Estado*/
-protected String usuarioSistema;
-protected String nombreCompleto;
-protected Empresa empresaAsociada;
-protected Pais paisResidencia;
-/*Estado*/
 
-/*Constructores*/
-/*-Clase abstracta-*/
-/*Constructores*/
+    /*Estado*/
+    protected String usuarioSistema;
+    protected String nombreCompleto;
+    protected Empresa empresaAsociada;
+    protected Pais paisResidencia;
 
-/*Comportamiento*/
+    /*Estado*/
 
-/*Comportamiento*/
+ /*Constructores*/
+ /*-Clase abstracta-*/
+ /*Constructores*/
 
-/*Getters y Setters*/
-  public String getUsuarioSistema() {
+ /*Comportamiento*/
+    
+    
+    public void validar() throws ProgramException {
+        String retorno = "";
+        if (nombreCompleto.equals("")) {
+            retorno += "El nombre está vacio.\n";
+        }
+        
+        if (usuarioSistema.equals("")) {
+            retorno += "El usuario está vacio.\n";
+        }
+        
+        if (empresaAsociada == null) {
+            retorno += "La empresa está vacía.\n";
+        }
+        
+        if (paisResidencia == null) {
+            retorno += "El país está vacío.\n";
+        }
+
+        if (!retorno.equals("")) {
+            throw new ProgramException(retorno);
+        }
+    }
+
+    /*Comportamiento*/
+
+    
+    
+    
+ /*Getters y Setters*/
+    public String getUsuarioSistema() {
         return usuarioSistema;
     }
 
@@ -47,7 +77,6 @@ protected Pais paisResidencia;
     public void setPaisResidencia(Pais paisResidencia) {
         this.paisResidencia = paisResidencia;
     }
-/*Getters y Setters*/
+    /*Getters y Setters*/
 
-  
 }

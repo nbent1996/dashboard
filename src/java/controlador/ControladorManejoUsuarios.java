@@ -6,9 +6,16 @@
 package controlador;
 
 import Datos.OpPersona;
+import Modelo.Empresa;
+import Modelo.Operador;
+import Modelo.Pais;
 import Modelo.Persona;
+import Modelo.ProgramException;
+import Modelo.TipoUsuario;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -26,11 +33,35 @@ public class ControladorManejoUsuarios implements IControlador<Persona>{
     }
     
 
-    public void altaUsuario(String usuarioAltaUsr, String nombreCompletoAltaUsr, String nombreEmpresaAltaUsr, String nombrePaisAltaUsr, String tipoUsuarioAltaUsr) {
+    public void altaUsuario(String usuarioAltaUsr, String nombreCompletoAltaUsr, String nombreEmpresaAltaUsr, String nombrePaisAltaUsr, String tipoUsuarioAltaUsr){
+        
+        //AGREGUÉ CLASE DE EXCEPTION PARA PODER CAPTURAR LOS ERRORES DE ESA CLASE ACÁ Y PODER MANDAR A LA VISTA LOS ERRORES ESPECÍFICOS CUANDO OCURRE UNA EXCEPCION DE ESE TIPO
+        //YA QUE LAS EXCEPCIONES DE LOS OP SON EXCEPTION (ADEMAS DE SQL EXCEPTION)
         
         
-        //validar los campos en el dominio
+        //validar los campos en el dominio -
         //pasarle al OpPersona el objeto Persona
+            //Averiguar la identificacion tributaria en base a nombreEmpresaAltaUsr
+            //Averiguar el codigo del Pais en base a nombrePaisAltaUsr
+            String codPais="", identificacionTributaria="";    
+            Operador operador = new Operador(usuarioAltaUsr, usuarioAltaUsr,nombreCompletoAltaUsr, new Empresa(identificacionTributaria), new Pais(codPais), new TipoUsuario(tipoUsuarioAltaUsr) );
+        try {
+            operador.validar(); //valido campos del operador (chequea en operador y en persona)
+            //ok validaciones
+        } catch (ProgramException ex) {
+            //error en las validaciones
+        }
+        try {
+            opPersona.guardar(null, operador); //inserto el operador en la base
+            //ok inserción
+        } catch (Exception ex) {
+            //error al insertar
+        }
+        
+            
+
+
+
         //Este método lanza excepciones (la de validaciones de campos del dominio)
         //Este metodo tambien lanza excepciones de sql Exception
         //ver ArcClienteAController de la barometrica como ejemplo 
