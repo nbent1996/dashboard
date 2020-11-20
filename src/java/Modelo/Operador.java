@@ -18,7 +18,19 @@ public Operador(String clave, String usuarioSistema, String nombreCompleto, Empr
 /*Constructores*/
 
 /*Comportamiento*/
-
+@Override
+public void validar() throws Exception{
+    super.validar();
+    String retorno = "";
+    
+    if(this.tipoUsuario==null){
+        retorno+="El tipo de usuario no puede ser nulo.\n";
+    }
+    
+    if(!retorno.equals("")){
+        throw new Exception(retorno);
+    }
+}
 /*Comportamiento*/
 
 /*Getters y Setters*/

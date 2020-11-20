@@ -9,11 +9,20 @@ public class Database {
     private static Database instancia;
     private static Connection conexion;
     private static Statement stmt;
-//    private static String user = "administrador";
-//    private static String pass = "alfacomuruguay4828!";
-      private static String user = "administrador";
-      private static String pass = "alfacomuruguay4828!";
-      private static String url = "jdbc:mysql://127.0.0.1:3306/alfacomPlatform"+"?user="+user+"&password="+pass;
+    
+    /*TRABAJANDO CON RDS*/
+      private static String user = "root";
+      private static String pass = "alfacom48282020!";
+      private static String url = "jdbc:mysql://alfacomplatform.cx3teiukxfae.us-east-1.rds.amazonaws.com:3306/alfacomPlatform"+"?user="+user+"&password="+pass;
+    /*TRABAJANDO CON RDS*/
+    
+    /*TRABAJANDO CON INSTANCIA LOCAL*/
+//     private static String url = "jdbc:mysql://localhost:3306/alfacomPlatform"+"?user="+user+"&password="+pass+"&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+//     private static String user = "root";
+//     private static String pass = "root";
+    /*TRABAJANDO CON INSTANCIA LOCAL*/
+    
+
     /*Atributos*/
  /*Constructores*/
 

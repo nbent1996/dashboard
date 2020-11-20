@@ -12,7 +12,16 @@ protected Pais paisResidencia;
 /*Constructores*/
 
 /*Comportamiento*/
-
+public void validar() throws Exception{
+    String retorno="";
+    if(nombreCompleto.equals("")){
+        retorno += "El nombre está vacio.\n";
+    }
+    
+    if(!retorno.equals("")){
+        throw new Exception(retorno);
+    }
+}
 /*Comportamiento*/
 
 /*Getters y Setters*/
