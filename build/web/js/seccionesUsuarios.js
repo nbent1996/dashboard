@@ -50,3 +50,21 @@ function validarCamposAltaUsr(form){
     
     return true;
 }
+
+
+function validarCamposBajaUsr(form){
+    var usuario = form.usuario;
+    
+    if(usuario.value == ""){
+        alert("Debe escribir un nombre de usuario");
+        usuario.select();
+        usuario.focus();
+        return false;
+    }
+    return true;
+}
+
+
+function validarCamposModificacionUsr(form){
+    //VER SI SE TIENE QUE VALIDAR ALGUN CAMPO, YA QUE NINGUNO DE ELLOS ES REQUERIDO EN EL FORMULARIO
+}
