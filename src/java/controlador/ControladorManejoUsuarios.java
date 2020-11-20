@@ -6,7 +6,11 @@
 package controlador;
 
 import Datos.OpPersona;
+import Modelo.Empresa;
+import Modelo.Operador;
+import Modelo.Pais;
 import Modelo.Persona;
+import Modelo.TipoUsuario;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
@@ -26,11 +30,19 @@ public class ControladorManejoUsuarios implements IControlador<Persona>{
     }
     
 
-    public void altaUsuario(String usuarioAltaUsr, String nombreCompletoAltaUsr, String nombreEmpresaAltaUsr, String nombrePaisAltaUsr, String tipoUsuarioAltaUsr) {
+    public void altaUsuario(String usuarioAltaUsr, String nombreCompletoAltaUsr, String nombreEmpresaAltaUsr, String nombrePaisAltaUsr, String tipoUsuarioAltaUsr) throws Exception, SQLException {
         
         
-        //validar los campos en el dominio
+        //validar los campos en el dominio -
         //pasarle al OpPersona el objeto Persona
+            //Averiguar la identificacion tributaria en base a nombreEmpresaAltaUsr
+            //Averiguar el codigo del Pais en base a nombrePaisAltaUsr
+            String codPais="", identificacionTributaria="";    
+            Operador operador = new Operador("CLAVEPRUEBA", usuarioAltaUsr,nombreCompletoAltaUsr, new Empresa(identificacionTributaria), new Pais(codPais), new TipoUsuario(tipoUsuarioAltaUsr) );
+            opPersona.guardar(null, operador);
+
+
+
         //Este método lanza excepciones (la de validaciones de campos del dominio)
         //Este metodo tambien lanza excepciones de sql Exception
         //ver ArcClienteAController de la barometrica como ejemplo 
