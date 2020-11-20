@@ -63,3 +63,8 @@ function validarCamposBajaUsr(form){
     }
     return true;
 }
+
+
+function validarCamposModificacionUsr(form){
+    //VER SI SE TIENE QUE VALIDAR ALGUN CAMPO, YA QUE NINGUNO DE ELLOS ES REQUERIDO EN EL FORMULARIO
+}

@@ -6,6 +6,11 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+
+<%
+    String msg = request.getParameter("msg");
+%>
+
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -19,28 +24,23 @@
         
         
         <div>
-            <h1>Modificación de Usuario</h1>
+            <h1 class="titulos">Modificación de Usuario</h1>
         </div>
         
         <div>
-            <h2>Complete los campos que desea modificar</h2>
+            <h2 class="subtitulos">Complete los campos que desea modificar</h2>
         </div>
         
         <div class="usuarios-page">
             <div class="form">
-                <!--<form class="register-form">
-                    <input type="text" placeholder="name"/>
-                    <input type="password" placeholder="password"/>
-                    <input type="text" placeholder="email address"/>
-                    <button>create</button>
-                    <p class="message">Already registered? <a href="#">Sign In</a></p>
-                </form>-->
-                <form class="login-form" action="">
-                    <input type="text" id="txtUsuarioMod" placeholder="usuario"/>
-                    <input type="text" id="txtNombreCompletoMod" placeholder="nombre completo"/>
-                    <input type="text" id="txtNombreEmpresaMod" placeholder="empresa"/>
-                    <input type="text" id="txtNombrePaisMod" placeholder="pais"/>
-                    <input type="password" id="txtPasswordMod" placeholder="contraseña"/>
+                
+                <form name="formModificacionUsuario" action="ManejoUsuariosServlet" method="post" onsubmit="return validarCamposModificacionUsr(this)">
+                    <input type="text" id="txtUsuarioMod" name="usuarioMod" placeholder="usuario"/>
+                    <input type="text" id="txtNombreCompletoMod" name="nombreCompletoMod" placeholder="nombre completo"/>
+                    <input type="text" id="txtNombreEmpresaMod" name="nombreEmpresaMod" placeholder="empresa"/>
+                    <input type="text" id="txtNombrePaisMod" name="nombrePaisMod" placeholder="pais"/>
+                    <input type="password" id="txtPasswordMod" name="passwordMod" placeholder="contraseña"/>
+                    <input type="hidden" name="parametroOculto" value="formModificacion">
                     
                     <!--
                         <select name="pais" id="pais">
@@ -54,8 +54,14 @@
                         </select>
                     -->
                     
-                    <button>Modificar</button>
-                    <!--<p class="message">Not registered? <a href="#">Create an account</a></p>-->
+                    <input type="submit" class="submitModificacion" value="modificar">
+                    
+                    <%if (msg != null) {%>
+                    <div>
+                        <p class="message"><%=msg%></p>                        
+                    </div>
+                    <%}%>
+                    
                 </form>
             </div>
         </div>

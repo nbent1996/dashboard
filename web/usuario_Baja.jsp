@@ -26,18 +26,12 @@
     <body>
         
         <div>
-            <h1>Baja de Usuario</h1>
+            <h1 class="titulos">Baja de Usuario</h1>
         </div>
         
         <div class="usuarios-page">
             <div class="form">
-                <!--<form class="register-form">
-                    <input type="text" placeholder="name"/>
-                    <input type="password" placeholder="password"/>
-                    <input type="text" placeholder="email address"/>
-                    <button>create</button>
-                    <p class="message">Already registered? <a href="#">Sign In</a></p>
-                </form>-->
+                
                 <form name="formBajaUsuario" action="ManejoUsuariosServlet" method="post" onsubmit="return validarCamposBajaUsr(this)">
                     <input type="text" id="txtUsuarioBaja" name="usuarioBaja" placeholder="usuario" required="true"/>
                     <input type="hidden" name="parametroOculto" value="formBaja">
@@ -62,7 +56,7 @@
                     </div>
                     <%}%>
                     
-                    <!--<p class="message">Not registered? <a href="#">Create an account</a></p>-->
+                    
                 </form>
             </div>
         </div>

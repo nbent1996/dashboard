@@ -21,10 +21,11 @@
     <body>
         
         <div>
-            <h1>Alta de Usuario</h1>
+            <h1 class="titulos">Alta de Usuario</h1>
         </div>
         
         <div class="usuarios-page">
+            
             <div class="form">
                 
                 <form name="formAltaUsuario" action="ManejoUsuariosServlet" method="post" onsubmit="return validarCamposAltaUsr(this)">
@@ -47,8 +48,6 @@
                         </select>
                     -->
                     <input type="submit" class="submitAlta" value="crear">
-                    <!--<button>crear</button>-->
-                    
                     
                     <%if (msg != null) {%>
                     <div>
@@ -56,7 +55,7 @@
                     </div>
                     <%}%>
                     
-                    <!--<p class="message">Not registered? <a href="#">Create an account</a></p>-->
+                    
                 </form>
             </div>
         </div>

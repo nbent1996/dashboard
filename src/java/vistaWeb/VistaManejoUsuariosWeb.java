@@ -41,6 +41,9 @@ public class VistaManejoUsuariosWeb implements IVistaManejoUsuarios{
             bajaUsuario(request, response);
         }
         
+        if (request.getParameter("parametroOculto").equals("formModificacion")){ //me llega el name parametroOculto del input hiden del form de modificacion usuario con value formModificacion
+            modificacionUsuario(request, response);
+        }
         
         
         
@@ -95,6 +98,17 @@ public class VistaManejoUsuariosWeb implements IVistaManejoUsuarios{
         String usuarioBajaUsr = request.getParameter("usuarioBaja");
         
         //mandarlo al controlador y probar 
+        
+    }
+
+    private void modificacionUsuario(HttpServletRequest request, HttpServletResponse response) {
+        String usuarioModUsr = request.getParameter("usuarioMod");
+        String nombreCompletoModUsr = request.getParameter("nombreCompletoMod");
+        String nombreEmpresaModUsr = request.getParameter("nombreEmpresaMod");
+        String nombrePaisModUsr = request.getParameter("nombrePaisMod");
+        String passwordModUsr = request.getParameter("passwordMod");
+        
+        //mandarlos al controlador (pueden ser nulos ya que no es necesario llenar todos los campos (se puede modificar un campo solo))
         
     }
     
