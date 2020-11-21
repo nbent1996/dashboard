@@ -1,31 +1,52 @@
 package Modelo;
+
 public abstract class Persona {
-/*Estado*/
-protected String usuarioSistema;
-protected String nombreCompleto;
-protected Empresa empresaAsociada;
-protected Pais paisResidencia;
-/*Estado*/
 
-/*Constructores*/
-/*-Clase abstracta-*/
-/*Constructores*/
+    /*Estado*/
+    protected String usuarioSistema;
+    protected String nombreCompleto;
+    protected Empresa empresaAsociada;
+    protected Pais paisResidencia;
 
-/*Comportamiento*/
-public void validar() throws Exception{
-    String retorno="";
-    if(nombreCompleto.equals("")){
-        retorno += "El nombre está vacio.\n";
-    }
+    /*Estado*/
+
+ /*Constructores*/
+ /*-Clase abstracta-*/
+ /*Constructores*/
+
+ /*Comportamiento*/
     
-    if(!retorno.equals("")){
-        throw new Exception(retorno);
-    }
-}
-/*Comportamiento*/
+    
+    public void validar() throws ProgramException {
+        String retorno = "";
+        if (nombreCompleto.equals("")) {
+            retorno += "El nombre está vacio.\n";
+        }
+        
+        if (usuarioSistema.equals("")) {
+            retorno += "El usuario está vacio.\n";
+        }
+        
+        if (empresaAsociada == null) {
+            retorno += "La empresa está vacía.\n";
+        }
+        
+        if (paisResidencia == null) {
+            retorno += "El país está vacío.\n";
+        }
 
-/*Getters y Setters*/
-  public String getUsuarioSistema() {
+        if (!retorno.equals("")) {
+            throw new ProgramException(retorno);
+        }
+    }
+
+    /*Comportamiento*/
+
+    
+    
+    
+ /*Getters y Setters*/
+    public String getUsuarioSistema() {
         return usuarioSistema;
     }
 
@@ -56,7 +77,6 @@ public void validar() throws Exception{
     public void setPaisResidencia(Pais paisResidencia) {
         this.paisResidencia = paisResidencia;
     }
-/*Getters y Setters*/
+    /*Getters y Setters*/
 
-  
 }
