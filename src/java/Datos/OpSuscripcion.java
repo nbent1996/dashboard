@@ -9,7 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class OpSuscripcion implements IOperaciones<Suscripcion> {
+public class OpSuscripcion implements IOperaciones<Suscripcion, Integer> {
 /*Estado*/
 private static Database database;
 private OpLogSistema logging;

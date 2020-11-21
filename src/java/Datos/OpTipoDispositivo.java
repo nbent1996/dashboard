@@ -8,7 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class OpTipoDispositivo implements IOperaciones<TipoDispositivo> {
+public class OpTipoDispositivo implements IOperaciones<TipoDispositivo, Integer> {
 /*Estado*/
 private static Database database;
 private OpLogSistema logging;

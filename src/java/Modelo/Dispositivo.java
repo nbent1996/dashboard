@@ -9,8 +9,12 @@ private Cliente clienteAsociado;
 /*Estado*/
 
 /*Constructores*/
-    /*SIN CLIENTE NI EMPRESA*/
-public Dispositivo(String nroSerie, String estado, TipoDispositivo tipoDispositivo) {
+    /*SOLO NROSERIE*/
+    public Dispositivo(String nroSerie){
+        this.nroSerie = nroSerie;
+    }
+ /*SIN CLIENTE NI EMPRESA*/
+    public Dispositivo(String nroSerie, String estado, TipoDispositivo tipoDispositivo) {
         this.nroSerie = nroSerie;
         this.estado = estado;
         this.tipoDispositivo = tipoDispositivo;

@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class OpMoneda implements IOperaciones<Moneda> {
+public class OpMoneda implements IOperaciones<Moneda, Integer> {
 /*Estado*/
 private static Database database;
 private OpLogSistema logging;

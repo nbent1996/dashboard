@@ -11,7 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class OpDispositivo implements IOperaciones<Dispositivo> {
+public class OpDispositivo implements IOperaciones<Dispositivo, String> {
 /*Estado*/
 private static Database database;
 private OpLogSistema logging;
@@ -39,8 +39,11 @@ public OpDispositivo(String usuarioSistema){
     @Override
     public LogSistema insertar(Dispositivo c) throws Exception, SQLException {
         ArrayList<String> listaSQL = new ArrayList<>();
-        listaSQL.add("INSERT INTO Dispositivos (nroSerie, estado, idTipoDispositivo, identificacionTributaria, nroCliente) values ('"+c.getNroSerie()+"','"+c.getEstado()+"','"+c.getTipoDispositivo().getIdTipoDispositivo()+"','"+c.getEmpresaAsociada().getIdentificacionTributaria()+"','"+c.getClienteAsociado().getNroCliente()+"') ");
-
+        if (c.getClienteAsociado() == null) {
+            listaSQL.add("INSERT INTO Dispositivos (nroSerie, estado, idTipoDispositivo, identificacionTributaria) values ('" + c.getNroSerie() + "','" + c.getEstado() + "','" + c.getTipoDispositivo().getIdTipoDispositivo() + "','" + c.getEmpresaAsociada().getIdentificacionTributaria() + "') ");
+        } else {
+            listaSQL.add("INSERT INTO Dispositivos (nroSerie, estado, idTipoDispositivo, identificacionTributaria, nroCliente) values ('" + c.getNroSerie() + "','" + c.getEstado() + "','" + c.getTipoDispositivo().getIdTipoDispositivo() + "','" + c.getEmpresaAsociada().getIdentificacionTributaria() + "','" + c.getClienteAsociado().getNroCliente() + "') ");
+        }
         try {
             /*Validar que el nroSerie no exista ya en la base de datos*/
             ResultSet validarConsistencia = database.consultar("SELECT * FROM Dispositivos WHERE nroSerie='" + c.getNroSerie() + "' ");
@@ -65,7 +68,12 @@ public OpDispositivo(String usuarioSistema){
     @Override
     public LogSistema modificar(Dispositivo cAnterior, Dispositivo c) throws Exception, SQLException {
         ArrayList<String> listaSQL = new ArrayList<>();
-        listaSQL.add("UPDATE Dispositivos SET estado='"+c.getEstado()+"', idTipoDispositivo='"+c.getTipoDispositivo().getIdTipoDispositivo()+"', nroCliente='"+c.getClienteAsociado().getNroCliente()+"' WHERE nroSerie ='"+c.getNroSerie()+"' ");
+        if(c.getClienteAsociado()==null){
+            listaSQL.add("UPDATE Dispositivos SET estado='"+c.getEstado()+"', idTipoDispositivo='"+c.getTipoDispositivo().getIdTipoDispositivo()+"' WHERE nroSerie ='"+c.getNroSerie()+"' ");
+        }else{
+            listaSQL.add("UPDATE Dispositivos SET estado='"+c.getEstado()+"', idTipoDispositivo='"+c.getTipoDispositivo().getIdTipoDispositivo()+"', nroCliente='"+c.getClienteAsociado().getNroCliente()+"' WHERE nroSerie ='"+c.getNroSerie()+"' ");
+
+        }
         try{
             database.actualizarMultiple(listaSQL, "UPDATE");
         }catch(SQLException ex){
@@ -140,11 +148,11 @@ public OpDispositivo(String usuarioSistema){
     }
 
     @Override
-    public LogSistema borradoMultiplePorIds(ArrayList<Integer> listaIds) throws Exception, SQLException {
+    public LogSistema borradoMultiplePorIds(ArrayList<String> listaIds) throws Exception, SQLException {
        ArrayList<String> listaSQL = new ArrayList<>();
        /*Armando listado de IDS para la Query*/
         String listaIdsStr = "";
-        for(Integer i: listaIds){
+        for(String i: listaIds){
             listaIdsStr += i + " , ";
         }
         listaIdsStr = listaIdsStr.substring(0, (listaIdsStr.length()-2));

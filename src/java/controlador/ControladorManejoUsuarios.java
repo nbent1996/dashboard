@@ -45,6 +45,9 @@ public class ControladorManejoUsuarios implements IControlador<Persona>{
             //Averiguar el codigo del Pais en base a nombrePaisAltaUsr
             String codPais="", identificacionTributaria="";    
             Operador operador = new Operador(usuarioAltaUsr, usuarioAltaUsr,nombreCompletoAltaUsr, new Empresa(identificacionTributaria), new Pais(codPais), new TipoUsuario(tipoUsuarioAltaUsr) );
+<<<<<<< HEAD
+            opPersona.guardar(null, operador);
+=======
         try {
             operador.validar(); //valido campos del operador (chequea en operador y en persona)
             //ok validaciones
@@ -59,6 +62,7 @@ public class ControladorManejoUsuarios implements IControlador<Persona>{
         }
         
             
+>>>>>>> a8ff4c9ec48e72400d4e180c1f983e10a5f25af0
 
 
 

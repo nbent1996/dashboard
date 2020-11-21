@@ -5,7 +5,7 @@ import Modelo.QueryEjecutada;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class OpLogSistema implements IOperaciones<LogSistema>{
+public class OpLogSistema implements IOperaciones<LogSistema, Integer>{
 
 
 /*Estado*/
@@ -31,10 +31,13 @@ public OpLogSistema(){
     @Override
     public LogSistema insertar(LogSistema c) throws Exception, SQLException {/*Usuario Sistema hardcodeado resolver eso*/
         ArrayList<String> listaSQL  = new ArrayList();
-        String sql = "INSERT INTO LogsSistema (usuarioSistema, operacion, textoError) values ('bentancor','"+c.getOperacion()+"','"+c.getTextoError()+"')";
+        String textoError = c.getTextoError().replace("'","");
+        String sql = "INSERT INTO LogsSistema (usuarioSistema, operacion, textoError) values ('bentancor','"+c.getOperacion()+"','"+textoError+"')";
         listaSQL.add(sql);
         for (QueryEjecutada q: c.getListaQuerys()){
-            listaSQL.add("INSERT INTO QuerysEjecutadas (idLog, textoQuery) values (?, '"+q.getTextoQuery()+"')");
+            String query = q.getTextoQuery();
+            query = query.replace("'","");
+            listaSQL.add("INSERT INTO QuerysEjecutadas (idLog, textoQuery) values (?, '"+query+"')");
         }
         database.actualizarMultiple(listaSQL, "INSERT");
         return new LogSistema(-1);
