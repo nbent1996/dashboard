@@ -5,6 +5,8 @@
  */
 package controlador;
 
+import Datos.OpEmpresa;
+import Datos.OpPais;
 import Datos.OpPersona;
 import Modelo.Empresa;
 import Modelo.Operador;
@@ -26,6 +28,8 @@ public class ControladorManejoUsuarios implements IControlador<Persona>{
     
     private IVistaManejoUsuarios vista;
     private OpPersona opPersona;
+    private OpEmpresa opEmpresa;
+    private OpPais opPais;
     
     public ControladorManejoUsuarios(IVistaManejoUsuarios vista) {
         this.vista = vista;
@@ -34,59 +38,54 @@ public class ControladorManejoUsuarios implements IControlador<Persona>{
     
 
     public void altaUsuario(String usuarioAltaUsr, String nombreCompletoAltaUsr, String nombreEmpresaAltaUsr, String nombrePaisAltaUsr, String tipoUsuarioAltaUsr){
+
         
-        //AGREGUÉ CLASE DE EXCEPTION PARA PODER CAPTURAR LOS ERRORES DE ESA CLASE ACÁ Y PODER MANDAR A LA VISTA LOS ERRORES ESPECÍFICOS CUANDO OCURRE UNA EXCEPCION DE ESE TIPO
-        //YA QUE LAS EXCEPCIONES DE LOS OP SON EXCEPTION (ADEMAS DE SQL EXCEPTION)
-        
-        
-        //validar los campos en el dominio -
-        //pasarle al OpPersona el objeto Persona
-            //Averiguar la identificacion tributaria en base a nombreEmpresaAltaUsr
-            //Averiguar el codigo del Pais en base a nombrePaisAltaUsr
-            String codPais="", identificacionTributaria="";    
-            Operador operador = new Operador(usuarioAltaUsr, usuarioAltaUsr,nombreCompletoAltaUsr, new Empresa(identificacionTributaria), new Pais(codPais), new TipoUsuario(tipoUsuarioAltaUsr) );
-<<<<<<< HEAD
-            opPersona.guardar(null, operador);
-=======
         try {
-            operador.validar(); //valido campos del operador (chequea en operador y en persona)
-            //ok validaciones
-        } catch (ProgramException ex) {
-            //error en las validaciones
-        }
-        try {
-            opPersona.guardar(null, operador); //inserto el operador en la base
-            //ok inserción
-        } catch (Exception ex) {
-            //error al insertar
-        }
-        
             
->>>>>>> a8ff4c9ec48e72400d4e180c1f983e10a5f25af0
+            //opPersona.buscar(filtroBuscarPersona(operador), tipoUsuarioAltaUsr); //chequea que no haya un idéntico operador en la BD
+            Empresa empresa = opEmpresa.buscar(" WHERE nombre='"+nombreEmpresaAltaUsr+"' " , "").get(0);
+            Pais pais = opPais.buscar(" WHERE nombre='"+nombrePaisAltaUsr+"' " , "").get(0);
+            
+            Operador operador = new Operador(usuarioAltaUsr, usuarioAltaUsr,nombreCompletoAltaUsr, empresa, pais, new TipoUsuario(tipoUsuarioAltaUsr) );
+            operador.validar(); //valido campos del operador (chequea en operador y en persona)
+            opPersona.guardar(null, operador); //inserto el operador en la base
+            vista.exitoAltaUsuario("Usuario dado de alta correctamente");
+            
+        } catch (ProgramException ex) { //error en las validaciones
+            
+            vista.errorAltaUsuario("se cayó en catch ProgramException");
+            
+        } catch (Exception ex) { //error al insertar    
+            
+            vista.errorAltaUsuario("se cayó en catch Exception");
+            
+        }
 
+    }
+    
+    
+    public void bajaUsuario(String usuarioBajaUsr) {
+        
+        try {
+            Persona persona = opPersona.buscar(" WHERE usuarioSistema='"+usuarioBajaUsr+"' " , "").get(0);
+            opPersona.borrar(persona);
+            vista.exitoAlBorrarUsuario("Usuario dado de baja correctamente");
+            
+        } catch (Exception ex) {//error al insertar
+            vista.errorAlBorrarUsuario("Error al dar de baja el usuario");
+        }
 
-
-        //Este método lanza excepciones (la de validaciones de campos del dominio)
-        //Este metodo tambien lanza excepciones de sql Exception
-        //ver ArcClienteAController de la barometrica como ejemplo 
+    }
+    
+    public void modificarUsuario(String usuarioModUsr, String nombreCompletoModUsr, String nombreEmpresaModUsr, String nombrePaisModUsr, String passwordModUsr) {
         
-        
-        
-        vista.mensajeAltaUsuario(usuarioAltaUsr); //solo para probar que funcione el ciclo
-        //desde acá ir al modelo, insertar en tabla BD
-        //llamar a métodos de la vista dependiendo si se pudo insertar o no
-        
-        
-//        if(se insertó ok){
-//            vista.mensajeAltaUsuario("Usuario creado exitosamente");
-//        }else{
-//            vista.mensajeAltaUsuario("Error al dar de alta el usuario");
-//        }
-        
-        
-        
+        //CONTINUAR ACÁ, EVALUAR SITUACION YA QUE ALGUNOS DE LOS PARAMETROS PUEDEN SER NULOS, VER DONDE EVALUAR DICHA CONDICION
+   
     }
 
+    
+    
+    
     @Override
     public void cargarItems(Persona c, DefaultTableModel modelo) throws Exception, SQLException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -101,5 +100,15 @@ public class ControladorManejoUsuarios implements IControlador<Persona>{
     public void borrarItems(ArrayList<Persona> items) throws Exception, SQLException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+//    private String filtroBuscarPersona(Operador operador) {
+//        
+//          Hacer filtro con los campos del operador para chequear que no exista otro igual    
+//        
+//    }
+
+    
+
+    
     
 }

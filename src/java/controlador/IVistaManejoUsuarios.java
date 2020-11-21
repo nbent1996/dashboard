@@ -10,8 +10,15 @@ package controlador;
  * @author Andres
  */
 public interface IVistaManejoUsuarios {
+    
 
-    public void mensajeAltaUsuario(String mensaje);
+    public void exitoAltaUsuario(String mensajeExitoAlta);
+
+    public void errorAltaUsuario(String mensajeErrorAlta);
+
+    public void exitoAlBorrarUsuario(String mensajeExitoBaja);
+
+    public void errorAlBorrarUsuario(String mensajeErrorBaja);
     
     
     
