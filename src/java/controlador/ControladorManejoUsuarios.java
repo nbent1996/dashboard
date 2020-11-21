@@ -38,7 +38,7 @@ public class ControladorManejoUsuarios implements IControlador<Persona>{
             //Averiguar la identificacion tributaria en base a nombreEmpresaAltaUsr
             //Averiguar el codigo del Pais en base a nombrePaisAltaUsr
             String codPais="", identificacionTributaria="";    
-            Operador operador = new Operador("CLAVEPRUEBA", usuarioAltaUsr,nombreCompletoAltaUsr, new Empresa(identificacionTributaria), new Pais(codPais), new TipoUsuario(tipoUsuarioAltaUsr) );
+            Operador operador = new Operador(usuarioAltaUsr, usuarioAltaUsr,nombreCompletoAltaUsr, new Empresa(identificacionTributaria), new Pais(codPais), new TipoUsuario(tipoUsuarioAltaUsr) );
             opPersona.guardar(null, operador);
 
 

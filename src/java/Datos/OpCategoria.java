@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class OpCategoria implements IOperaciones<Categoria>{
+public class OpCategoria implements IOperaciones<Categoria, Integer>{
 /*Estado*/
 private static Database database;
 private OpLogSistema logging;
@@ -38,7 +38,7 @@ public OpCategoria(String usuarioSistema){
         LogSistema log = null;
         listaSQL.add("INSERT INTO Categorias (nombreCategoria) values ('"+c.getNombreCategoria()+"')");
         try{
-        database.actualizarMultiple(listaSQL, "INSERT");
+        database.actualizarMultiple(listaSQL, "UPDATE");
         }catch(SQLException ex){
             registroConsola(this.usuarioSistema,listaSQL, "Alta", ex.getMessage());
             throw ex;

@@ -15,7 +15,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class OpFactura implements IOperaciones<Factura> {
+public class OpFactura implements IOperaciones<Factura, Integer> {
 
     
 /*Estado*/

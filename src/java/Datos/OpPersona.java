@@ -14,7 +14,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class OpPersona implements IOperaciones<Persona> {
+public class OpPersona implements IOperaciones<Persona, String> {
 
     
 /*Estado*/
@@ -284,7 +284,7 @@ public OpPersona(String usuarioSistema){
     }
 
     @Override
-    public LogSistema borradoMultiplePorIds(ArrayList<Integer> listaIds) throws Exception, SQLException {
+    public LogSistema borradoMultiplePorIds(ArrayList<String> listaIds) throws Exception, SQLException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

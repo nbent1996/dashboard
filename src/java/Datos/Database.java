@@ -11,15 +11,16 @@ public class Database {
     private static Statement stmt;
     
     /*TRABAJANDO CON RDS*/
-      private static String user = "root";
-      private static String pass = "alfacom48282020!";
-      private static String url = "jdbc:mysql://alfacomplatform.cx3teiukxfae.us-east-1.rds.amazonaws.com:3306/alfacomPlatform"+"?user="+user+"&password="+pass;
+//      private static String user = "root";
+//      private static String pass = "alfacom48282020!";
+//      private static String url = "jdbc:mysql://alfacomplatform.cx3teiukxfae.us-east-1.rds.amazonaws.com:3306/alfacomPlatform"+"?user="+user+"&password="+pass;
     /*TRABAJANDO CON RDS*/
     
     /*TRABAJANDO CON INSTANCIA LOCAL*/
-//     private static String url = "jdbc:mysql://localhost:3306/alfacomPlatform"+"?user="+user+"&password="+pass+"&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
-//     private static String user = "root";
-//     private static String pass = "root";
+     private static String user = "root";
+     private static String pass = "48283674";
+     private static String url = "jdbc:mysql://localhost:3306/alfacomPlatform"+"?user="+user+"&password="+pass+"&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+
     /*TRABAJANDO CON INSTANCIA LOCAL*/
     
 
@@ -42,12 +43,10 @@ public class Database {
             stmt = conexion.createStatement();
         } catch (SQLException ex) {
             int codigo = ex.getErrorCode();
-            String errorTexto = "Codigo de Error: " + codigo;
+            String errorTexto = "Codigo de Error: " + codigo + " // Mensaje: " + ex.getMessage();
             System.out.println(errorTexto);
-            System.out.println("Error en: " + this.getClass());
-
             if (codigo == 0) {
-                throw new SQLException("No hay conexión con el servidor.");
+                throw new SQLException(errorTexto);
             }
         }
     }
@@ -70,9 +69,7 @@ public class Database {
             conectar(url);
             return stmt.executeUpdate(sql);
         } catch (SQLException ex) {
-            String error = "Error de actualizacion con la consulta: " + sql + " - " + ex.getMessage();
-            System.out.println(error);
-            return -1;
+            throw ex;
         } finally {
             if (conexion != null && !conexion.isClosed()) {
                 conexion.close();
@@ -105,16 +102,12 @@ public class Database {
                     stmt.executeUpdate(sentencia);
                 }
             } catch (SQLException ex) {
-                error = "Error de actualizacion con la consulta: " + sentencia + " - " + ex.getMessage();
-                error = error.replace("'", "");
-                System.out.println(error);
                 conexion.rollback();
                 conectar(url);
-                actualizar("INSERT INTO LogErrores (textoError) values ('" + error + "')");
-                return false;
+                throw ex;
             } catch (Exception ex) {
                 System.out.println(ex.getMessage());
-                return false;
+                throw ex;
             }
         }
         conexion.commit();
@@ -147,16 +140,12 @@ public class Database {
                 }
 
             } catch (SQLException ex) {
-                error = "Error de actualizacion con la consulta: " + sentencia + " - " + ex.getMessage();
-                error = error.replace("'", "");
-                System.out.println(error);
                 conexion.rollback();
                 conectar(url);
-                actualizar("INSERT INTO LogErrores (textoError) values ('" + error + "')");
-                return false;
+                throw ex;
             } catch (Exception ex) {
                 System.out.println(ex.getMessage());
-                return false;
+                throw ex;
             }
 
         }
@@ -173,10 +162,6 @@ public class Database {
             ResultSet rs = stmt.executeQuery(sql);
             return rs;
         } catch (SQLException ex) {
-            String errorTexto = "Error de consulta: " + sql + " - " + ex.getMessage();
-            System.out.println(errorTexto);
-            errorTexto = errorTexto.replace("'", "");
-            actualizar("INSERT INTO LogErrores (textoError) values ('" + errorTexto + "')");
             throw ex;
         }
         
