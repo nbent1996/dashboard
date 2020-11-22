@@ -60,9 +60,28 @@ public Factura(DTOFechas fechaPago, DTOFechas fechaEmision, DTOFechas fechaVenci
         this.periodoServicioInicio = periodoServicioInicio;
         this.periodoServicioFin = periodoServicioFin;
         this.monto = monto;
+        this.listaSuscripciones = new ArrayList<>();
         this.tipoRecibo = tipoRecibo;
     }
-
+/*TODO MENOS FECHA EMISION (QUE ES AUTOMÁTICA EN LA BASE)*/
+        public Factura(int idFactura, DTOFechas fechaPago, DTOFechas fechaVencimiento, DTOFechas periodoServicioInicio, DTOFechas periodoServicioFin, double monto, String tipoRecibo, Cliente clienteAsociado, ArrayList<Suscripcion> listaSuscripciones, Moneda monedaAsociada, Empresa empresaAsociada) {
+        this.idFactura = idFactura;
+        this.fechaPago = fechaPago;
+        this.fechaVencimiento = fechaVencimiento;
+        this.periodoServicioInicio = periodoServicioInicio;
+        this.periodoServicioFin = periodoServicioFin;
+        this.monto = monto;
+        this.tipoRecibo = tipoRecibo;
+        this.clienteAsociado = clienteAsociado;
+        this.listaSuscripciones = listaSuscripciones;
+        this.monedaAsociada = monedaAsociada;
+        this.empresaAsociada = empresaAsociada;
+    }
+/*SOLO ID*/
+        public Factura(int idFactura){
+            this.idFactura = idFactura;
+            this.listaSuscripciones = new ArrayList<>();
+        }   
 /*Constructores*/
 /*Comportamiento*/
 /*Comportamiento*/

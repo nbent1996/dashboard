@@ -27,6 +27,10 @@ public Secundario(String usuarioSistema, String nombreCompleto, int nroCliente,S
 public Secundario(String usuarioSistema){
     this.usuarioSistema = usuarioSistema;
 }
+/*SOLO NRO CLIENTE*/
+public Secundario(int nroCliente){
+    this.nroCliente = nroCliente;
+}
 /*Constructores*/
 
 /*Comportamiento*/
