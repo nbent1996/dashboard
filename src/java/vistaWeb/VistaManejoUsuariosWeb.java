@@ -43,40 +43,10 @@ public class VistaManejoUsuariosWeb implements IVistaManejoUsuarios{
         
         if (request.getParameter("parametroOculto").equals("formModificacion")){ //me llega el name parametroOculto del input hiden del form de modificacion usuario con value formModificacion
             modificacionUsuario(request, response);
-        }
-        
-        
-        
-        
-        
-        
-//        String usuarioAltaUsr = request.getParameter("usuario");
-//        String nombreCompletoAltaUsr = request.getParameter("nombreCompleto");
-//        String nombreEmpresaAltaUsr = request.getParameter("nombreEmpresa");
-//        String nombrePaisAltaUsr = request.getParameter("nombrePais");
-//        String tipoUsuarioAltaUsr = request.getParameter("tipoUsuario");
-//        
-//        this.request = request;
-//        this.response = response;
-//        
-//        controlador.altaUsuario(usuarioAltaUsr, nombreCompletoAltaUsr, nombreEmpresaAltaUsr, nombrePaisAltaUsr, tipoUsuarioAltaUsr);
+        }        
         
     }
 
-    @Override
-    public void mensajeAltaUsuario(String mensaje){ //mensaje de si se dió de alta o no (en el controlador)
-        destino = "usuario_Alta.jsp?msg=" + mensaje; //en usuario_Alta hay una expression msg que lo aplica abajo del botón
-        try {
-            this.redireccionPrueba();//esto es para probar que aplique el mensaje
-        } catch (IOException ex) {
-            Logger.getLogger(VistaManejoUsuariosWeb.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-    }
-
-    private void redireccionPrueba() throws IOException {
-        response.sendRedirect(destino);
-    }
 
     private void altaUsuario(HttpServletRequest request, HttpServletResponse response) {
         
@@ -97,7 +67,10 @@ public class VistaManejoUsuariosWeb implements IVistaManejoUsuarios{
         
         String usuarioBajaUsr = request.getParameter("usuarioBaja");
         
-        //mandarlo al controlador y probar 
+        this.request = request;
+        this.response = response;
+        
+        controlador.bajaUsuario(usuarioBajaUsr);
         
     }
 
@@ -108,8 +81,51 @@ public class VistaManejoUsuariosWeb implements IVistaManejoUsuarios{
         String nombrePaisModUsr = request.getParameter("nombrePaisMod");
         String passwordModUsr = request.getParameter("passwordMod");
         
-        //mandarlos al controlador (pueden ser nulos ya que no es necesario llenar todos los campos (se puede modificar un campo solo))
+        controlador.modificarUsuario(usuarioModUsr, nombreCompletoModUsr, nombreEmpresaModUsr, nombrePaisModUsr, passwordModUsr);
         
+        //(pueden ser nulos ya que no es necesario llenar todos los campos (se puede modificar un campo solo))
+        
+    }
+
+    @Override
+    public void exitoAltaUsuario(String mensajeExito) {
+        destino = "usuario_Alta.jsp?msg=" + mensajeExito; //en usuario_Alta hay una expression msg que lo aplica abajo del botón
+        try {
+            response.sendRedirect(destino);
+        } catch (IOException ex) {
+            Logger.getLogger(VistaManejoUsuariosWeb.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @Override
+    public void errorAltaUsuario(String mensajeError) {
+        destino = "usuario_Alta.jsp?msg=" + mensajeError;
+        try {
+            response.sendRedirect(destino);
+        } catch (IOException ex) {
+            Logger.getLogger(VistaManejoUsuariosWeb.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @Override
+    public void exitoAlBorrarUsuario(String mensajeExitoBaja) {
+        destino = "usuario_Baja.jsp?msg=" + mensajeExitoBaja;
+        try {
+            response.sendRedirect(destino);
+        } catch (IOException ex) {
+            Logger.getLogger(VistaManejoUsuariosWeb.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+
+    @Override
+    public void errorAlBorrarUsuario(String mensajeErrorBaja) {
+        destino = "usuario_Baja.jsp?msg=" + mensajeErrorBaja;
+        try {
+            response.sendRedirect(destino);
+        } catch (IOException ex) {
+            Logger.getLogger(VistaManejoUsuariosWeb.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     

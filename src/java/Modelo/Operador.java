@@ -36,12 +36,6 @@ public class Operador extends Persona {
         if (tipoUsuario == null) {
             retorno += "El tipo de usuario es nulo.\n";
         }
-        
-        if (tipoUsuario == null) {
-            retorno += "El tipo de usuario es nulo.\n";
-        }
-        
-        
 
         if (!retorno.equals("")) {
             throw new ProgramException(retorno);
