@@ -176,7 +176,7 @@ public OpFactura(String usuarioSistema){
                 clienteAsociado = new Principal(rs.getInt("nroCliente"));
                 monedaAsociada = new Moneda(rs.getString("codigo"));
                 empresaAsociada = new Empresa(rs.getString("identificacionTributaria"));
-                lista.add(new Factura(idFactura, fechaPago, fechaEmision, fechaVencimiento, periodoServicioInicio, periodoServicioFin, monto, tipoRecibo, clienteAsociado, null, monedaAsociada, empresaAsociada));
+                lista.add(new Factura(idFactura, fechaPago, fechaEmision, fechaVencimiento, periodoServicioInicio, periodoServicioFin, monto, tipoRecibo, clienteAsociado, new ArrayList<>(), monedaAsociada, empresaAsociada));
             }
             rs.close();
         }catch(SQLException ex){

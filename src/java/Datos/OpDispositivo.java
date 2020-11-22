@@ -54,7 +54,7 @@ public OpDispositivo(String usuarioSistema){
             }
             validarConsistencia.close();
             /*Validar que el nroSerie no exista ya en la base de datos*/
-            database.actualizarMultiple(listaSQL, "INSERT");
+            database.actualizarMultiple(listaSQL, "UPDATE");
         } catch (SQLException ex) {
             registroConsola(this.usuarioSistema, listaSQL, "Alta", ex.getMessage());
             throw ex;
@@ -153,7 +153,7 @@ public OpDispositivo(String usuarioSistema){
        /*Armando listado de IDS para la Query*/
         String listaIdsStr = "";
         for(String i: listaIds){
-            listaIdsStr += i + " , ";
+            listaIdsStr +="' " + i + "' , ";
         }
         listaIdsStr = listaIdsStr.substring(0, (listaIdsStr.length()-2));
        /*Armando listado de IDS para la Query*/

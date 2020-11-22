@@ -19,7 +19,9 @@ public class Operador extends Persona {
         this.paisResidencia = paisResidencia;
         this.tipoUsuario = tipoUsuario;
     }
-
+    public Operador(String usuarioSistema){
+        this.usuarioSistema = usuarioSistema;
+    }
     /*Constructores*/
 
  /*Comportamiento*/
