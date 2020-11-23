@@ -15,6 +15,7 @@ public TipoUsuario(String nombre, ArrayList<Privilegio> listaPrivilegios){
 }
 public TipoUsuario(String nombre){
     this.nombre = nombre;
+    this.listaPrivilegios = new ArrayList<>();
 }
 /*Constructores*/
 

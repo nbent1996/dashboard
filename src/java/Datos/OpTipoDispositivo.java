@@ -40,7 +40,7 @@ public OpTipoDispositivo(String usuarioSistema){
                 + " ('"+c.getModelo()+"','"+c.getNombre()+"','"+c.getTipoComunicacion()+"','"+c.getCategoria().getNombreCategoria()+"') ");
         
         try{
-            database.actualizarMultiple(listaSQL, "INSERT");
+            database.actualizarMultiple(listaSQL, "UPDATE");
         }catch(SQLException ex){
             registroConsola(this.usuarioSistema, listaSQL, "Alta", ex.getMessage());
             throw ex;
@@ -58,6 +58,7 @@ public OpTipoDispositivo(String usuarioSistema){
         listaSQL.add("UPDATE TiposDispositivos SET modelo='" + c.getModelo() + "', nombre='" + c.getNombre() + "', tipoComunicacion='" + c.getTipoComunicacion() + "' WHERE idTipoDispositivo='" + cAnterior.getIdTipoDispositivo() + "' ");
 
         try {
+            if(!cAnterior.getModelo().equals(c.getModelo())){
             /*Validar que el modelo nuevo no existe ya en la db.*/
             validarConsistencia = database.consultar("SELECT * FROM TiposDispositivos WHERE modelo='" + c.getModelo() + "' ");
             if (validarConsistencia.next()) {
@@ -67,6 +68,7 @@ public OpTipoDispositivo(String usuarioSistema){
             }
             validarConsistencia.close();
             /*Validar que el modelo nuevo no existe ya en la db.*/
+            }
             database.actualizarMultiple(listaSQL, "UPDATE");
         } catch (SQLException ex) {
             registroConsola(this.usuarioSistema,listaSQL, "Modificación", ex.getMessage());
