@@ -3,53 +3,18 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-            <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/src/java/Modelo/Persona.java</file>
-=======
-<<<<<<< HEAD
-=======
-            <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/src/java/Datos/OpPersona.java</file>
->>>>>>> 540e47e7ebce5a0f25cacd5b4e9d1d5e30e858ca
-            <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/src/java/Modelo/Factura.java</file>
-            <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/src/java/Modelo/Cliente.java</file>
-            <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/src/java/Modelo/Secundario.java</file>
-            <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/test/TestingDatos/TestPersonas.java</file>
-            <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/src/java/Modelo/Operador.java</file>
-            <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/test/TestingDatos/TestFacturas.java</file>
-            <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/src/java/Datos/OpEmpresa.java</file>
-            <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/src/java/Datos/Database.java</file>
-            <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/src/java/Modelo/Empresa.java</file>
-            <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/test/TestingDatos/TestDispositivos.java</file>
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-            <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/src/java/Datos/OpSuscripcion.java</file>
-=======
->>>>>>> 2735e054973b905f32d99865e4e06f07a79aee3f
-            <file>file:/C:/Users/andre/Desktop/Dashboard/dashboard/src/java/Datos/Database.java</file>
->>>>>>> 4914c1ab697e8d3eedcd122409f9556f500d9087
-            <file>file:/C:/Users/andre/Desktop/Dashboard/dashboard/src/java/Modelo/Empresa.java</file>
-            <file>file:/C:/Users/andre/Desktop/Dashboard/dashboard/src/java/Datos/Database.java</file>
-            <file>file:/C:/Users/andre/Desktop/Dashboard/dashboard/src/java/Datos/OpPais.java</file>
-            <file>file:/C:/Users/andre/Desktop/Dashboard/dashboard/src/java/vistaWeb/VistaManejoUsuariosWeb.java</file>
-            <file>file:/C:/Users/andre/Desktop/Dashboard/dashboard/src/java/Modelo/Persona.java</file>
             <file>file:/C:/Users/andre/Desktop/Dashboard/dashboard/src/java/vistaWeb/ManejoUsuariosServlet.java</file>
-            <file>file:/C:/Users/andre/Desktop/Dashboard/dashboard/src/java/controlador/ControladorManejoUsuarios.java</file>
             <file>file:/C:/Users/andre/Desktop/Dashboard/dashboard/src/java/Datos/OpEmpresa.java</file>
+            <file>file:/C:/Users/andre/Desktop/Dashboard/dashboard/src/java/controlador/ControladorManejoUsuarios.java</file>
+            <file>file:/C:/Users/andre/Desktop/Dashboard/dashboard/src/java/vistaWeb/ManejoDispositivosServlet.java</file>
+            <file>file:/C:/Users/andre/Desktop/Dashboard/dashboard/src/java/vistaWeb/VistaManejoUsuariosWeb.java</file>
+            <file>file:/C:/Users/andre/Desktop/Dashboard/dashboard/src/java/Datos/Database.java</file>
+            <file>file:/C:/Users/andre/Desktop/Dashboard/dashboard/src/java/vistaWeb/EnvioNotificacionesAppServlet.java</file>
+            <file>file:/C:/Users/andre/Desktop/Dashboard/dashboard/src/java/Datos/OpPais.java</file>
             <file>file:/C:/Users/andre/Desktop/Dashboard/dashboard/web/usuario_Alta.jsp</file>
-<<<<<<< HEAD
-            <file>file:/C:/Users/andre/Desktop/Dashboard/dashboard/src/java/Datos/OpTipoUsuario.java</file>
-=======
-<<<<<<< HEAD
-=======
->>>>>>> a8ff4c9ec48e72400d4e180c1f983e10a5f25af0
->>>>>>> fcbbb0709c749537ccf9066761c6ec84697e4505
->>>>>>> 2735e054973b905f32d99865e4e06f07a79aee3f
->>>>>>> 540e47e7ebce5a0f25cacd5b4e9d1d5e30e858ca
->>>>>>> 4914c1ab697e8d3eedcd122409f9556f500d9087
+            <file>file:/C:/Users/andre/Desktop/Dashboard/dashboard/src/java/vistaWeb/AsignarCuentasSecundariasServlet.java</file>
+            <file>file:/C:/Users/andre/Desktop/Dashboard/dashboard/src/java/Modelo/Persona.java</file>
+            <file>file:/C:/Users/andre/Desktop/Dashboard/dashboard/src/java/Modelo/Empresa.java</file>
         </group>
     </open-files>
 </project-private>
