@@ -20,6 +20,37 @@
     </head>
     <body>
         
+        <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+        
+        
+        <script>
+            
+            mostrarTipos();
+            mostrarPaises();
+            
+            
+            function mostrarTipos(){
+                $.get("ManejoUsuariosServlet?accion=comboTipos", function(data){
+                    document.getElementById("combo-tipoUsuarios").innerHTML=data;
+                });
+            }
+            
+            function mostrarPaises(){
+                $.get("ManejoUsuariosServlet?accion=comboPaises", function(data){
+                    document.getElementById("combo-paises").innerHTML=data;
+                });
+            }
+            
+            
+            
+            
+            
+            
+        </script>
+        
+        
+        
+        
         <div>
             <h1 class="titulos">Alta de Usuario</h1>
         </div>
@@ -35,6 +66,14 @@
                     <input type="text" id="txtNombrePaisAlta" name="nombrePais" placeholder="pais" required="true"/>
                     <input type="text" id="txtTipoUsuarioAlta" name="tipoUsuario" placeholder="tipo usuario" required="true"/>
                     <input type="hidden" name="parametroOculto" value="formAlta">
+                    
+                    
+                    
+                    <span id="combo-paises"></span> <br><br>
+                    <span id="combo-tipoUsuarios"></span> <br><br>
+                    
+                    
+                    
                     
                     <!--
                         <select name="pais" id="pais">
