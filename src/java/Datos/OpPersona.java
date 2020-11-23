@@ -101,10 +101,10 @@ public OpPersona(String usuarioSistema){
     public LogSistema modificar(Persona cAnterior, Persona c) throws Exception, SQLException {
         ArrayList<String> listaSQL = new ArrayList<>();
         String sqlA, sqlB, sqlC, sqlD;
-        sqlA = "UPDATE Personas SET usuarioSistema='" + c.getUsuarioSistema() + "', nombreCompleto='" + c.getNombreCompleto() + "' where usuarioSistema='" + c.getUsuarioSistema() + "'";
         try {
-            /*Validar consistencia de los datos tabla Personas*/
             ResultSet validarDependencias = null;
+            /*Validar consistencia de los datos tabla Personas*/
+            if(!cAnterior.getUsuarioSistema().equals(c.getUsuarioSistema())){ //Si el usuario cambió se valida la no existencia en la base
             validarDependencias = database.consultar("SELECT * FROM Personas WHERE Personas.usuarioSistema='" + c.getUsuarioSistema() + "' ");
             if (validarDependencias.next()) {
                 validarDependencias.close();
@@ -112,14 +112,14 @@ public OpPersona(String usuarioSistema){
                 throw new Exception("El usuario que usted desea asignar ya está en uso en el sistema.");
             }
             validarDependencias.close();
+            }
             /*Validar consistencia de los datos tabla Personas*/
-            listaSQL.add(sqlA);
             switch (c.getClass().getName()) {
                 case "Modelo.Operador":
                     Operador operador = (Operador) c;
-                    sqlB = "UPDATE OperadoresDashboard SET eliminado='Y' where usuarioSistema='" + operador.getUsuarioSistema() + "'";
+                    sqlA = "UPDATE Personas, OperadoresDashboard SET Personas.usuarioSistema='" + c.getUsuarioSistema() + "', Personas.nombreCompleto='" + c.getNombreCompleto() + "' , OperadoresDashboard.usuarioSistema='" + operador.getUsuarioSistema() + "', OperadoresDashboard.clave = SHA('"+operador.getClave()+"'), OperadoresDashboard.nombre='"+operador.getTipoUsuario().getNombre()+"'  WHERE Personas.usuarioSistema = OperadoresDashboard.usuarioSistema AND Personas.usuarioSistema='" + cAnterior.getUsuarioSistema() + "'";
                     /*No se valida la no repetición del usuarioSistema porque ya fue validado desde la tabla Personas*/
-                    listaSQL.add(sqlB);
+                    listaSQL.add(sqlA);
                     break;
                 case "Modelo.Principal":
                     Principal principal = (Principal) c;
@@ -127,25 +127,26 @@ public OpPersona(String usuarioSistema){
                     if (principal.getServicioActivo()) {
                         servicioActivo = "S";
                     }
-                    sqlC = "UPDATE Principales SET nroDocumento='" + principal.getNroDocumento() + "', servicioActivo='" + servicioActivo + "' where nroDocumento='" + principal.getNroDocumento() + "' and Principales.usuarioSistema='" + principal.getUsuarioSistema() + "'";
+                    sqlA = "UPDATE Personas, Clientes, Principales SET Personas.nombreCompleto='" + c.getNombreCompleto() + "' ,Clientes.email ='"+principal.getEmail()+"', Principales.servicioActivo='" + servicioActivo + "' where Personas.usuarioSistema = Clientes.usuarioSistema AND Clientes.usuarioSistema = Principales.usuarioSistema AND Principales.nroDocumento='" + principal.getNroDocumento() + "' and Principales.usuarioSistema='" + principal.getUsuarioSistema() + "'";
                     /*Validar que el nuevo nroDocumento no exista en el sistema ahora.*/
-                    validarDependencias = database.consultar("SELECT * FROM Principales WHERE Principales.nroDocumento='" + principal.getNroDocumento() + "' and Principales.usuarioSistema='" + principal.getUsuarioSistema() + "'");
-                    if (validarDependencias.next()) {
-                        validarDependencias.close();
-                        registroConsola(this.usuarioSistema, listaSQL, "Modificación", "El número de documento que usted desea asignar ya está en uso en el sistema.");
-                        throw new Exception("El número de documento que usted desea asignar ya está en uso en el sistema.");
-                    }
-                    validarDependencias.close();
+//                    validarDependencias = database.consultar("SELECT * FROM Principales WHERE Principales.nroDocumento='" + principal.getNroDocumento() + "' and Principales.usuarioSistema='" + principal.getUsuarioSistema() + "'");
+//                    if (validarDependencias.next()) {
+//                        validarDependencias.close();
+//                        registroConsola(this.usuarioSistema, listaSQL, "Modificación", "El número de documento que usted desea asignar ya está en uso en el sistema.");
+//                        throw new Exception("El número de documento que usted desea asignar ya está en uso en el sistema.");
+//                    }VALIDACION NECESARIA POR SI EN ALGUN MOMENTO SE DESEA PODER MODFIICAR EL NRODOCUMENTO.
+//                    validarDependencias.close();
                     /*Validar que el nuevo nroDocumento no exista en el sistema ahora.*/
 
-                    listaSQL.add(sqlC);
+                    listaSQL.add(sqlA);
                     break;
 
                 case "Modelo.Secundario":
                     Secundario secundario = (Secundario) c;
-                    sqlD = "UPDATE Secundarios SET eliminado='Y' where usuarioSistema='" + secundario.getUsuarioSistema() + "'";
+                    Secundario sAnterior = (Secundario) cAnterior;
+                    sqlA = "UPDATE Personas, Clientes, Secundarios SET Personas.nombreCompleto='"+secundario.getNombreCompleto()+"', Clientes.email='"+secundario.getEmail()+"', Secundarios.nroDocumento='"+secundario.getPrincipalAsociado().getNroDocumento()+"' where Personas.usuarioSistema = Clientes.usuarioSistema AND Clientes.nroCliente = Secundarios.nroCliente AND Secundarios.nroCliente='"+sAnterior.getNroCliente()+"' ";
                     /*No se valida la no repetición del usuarioSistema porque ya fue validado desde la tabla Personas*/
-                    listaSQL.add(sqlD);
+                    listaSQL.add(sqlA);
                     break;
 
         }
@@ -164,23 +165,23 @@ public OpPersona(String usuarioSistema){
     public LogSistema borrar(Persona c) throws Exception, SQLException {
         ArrayList<String> listaSQL = new ArrayList<>();
         String sqlA, sqlB, sqlC, sqlD;
-        sqlA = "UPDATE Personas SET eliminado='Y' where usuarioSistema='"+c.getUsuarioSistema()+"'";
-        listaSQL.add(sqlA);
         switch(c.getClass().getName()){
             case "Modelo.Operador":
                 Operador operador = (Operador) c;
-                sqlB = "UPDATE OperadoresDashboard SET eliminado='Y' where usuarioSistema='"+operador.getUsuarioSistema()+"'";
+                sqlA = "UPDATE Personas SET eliminado='Y' WHERE usuarioSistema='"+c.getUsuarioSistema()+"'";
+                sqlB = "UPDATE OperadoresDashboard SET eliminado='Y' WHERE usuarioSistema='"+operador.getUsuarioSistema()+"'";
+                listaSQL.add(sqlA);
                 listaSQL.add(sqlB);
             break;
             case "Modelo.Principal":
                 Principal principal = (Principal) c;
-                sqlC = "UPDATE Principales SET eliminado='Y' where nroDocumento='"+principal.getNroDocumento()+"'";
-                listaSQL.add(sqlC);
+                sqlA = "UPDATE Personas, Clientes, Principales SET Personas.eliminado='Y', Clientes.eliminado='Y', Principales.eliminado='Y' WHERE Personas.usuarioSistema=Clientes.usuarioSistema AND Clientes.usuarioSistema = Principales.usuarioSistema AND Principales.nroDocumento ='"+principal.getNroDocumento()+"' " ;
+                listaSQL.add(sqlA);
             break;
             
             case "Modelo.Secundario":
                 Secundario secundario = (Secundario) c;  
-                sqlD = "UPDATE Secundarios SET eliminado='Y' where nroCliente='"+secundario.getNroCliente()+"'";
+                sqlD = "UPDATE Personas, Clientes, Secundarios SET Personas.eliminado='Y', Clientes.eliminado='Y', Secundarios.eliminado='Y' WHERE Personas.usuarioSistema=Clientes.usuarioSistema AND Clientes.nroCliente = Secundarios.nroCliente AND Secundarios.nroCliente='"+secundario.getNroCliente()+"'";
                 listaSQL.add(sqlD);
             break;
 

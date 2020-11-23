@@ -30,6 +30,7 @@ public Secundario(String usuarioSistema){
 /*SOLO NRO CLIENTE*/
 public Secundario(int nroCliente){
     this.nroCliente = nroCliente;
+    
 }
 /*Constructores*/
 
@@ -45,7 +46,32 @@ public Secundario(int nroCliente){
     public void setPrincipalAsociado(Principal principalAsociado) {
         this.principalAsociado = principalAsociado;
     }
+        public int getNroCliente() {
+        return nroCliente;
+    }
+
+    public void setNroCliente(int nroCliente) {
+        this.nroCliente = nroCliente;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public TipoCliente getTipoCliente() {
+        return tipoCliente;
+    }
+
+    public void setTipoCliente(TipoCliente tipoCliente) {
+        this.tipoCliente = tipoCliente;
+    }
 /*Getters y Setters*/
+
+
 
 
 }

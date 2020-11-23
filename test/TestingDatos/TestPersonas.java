@@ -95,25 +95,67 @@ public class TestPersonas {
     }
     @Test
     public void testUPDATE(){
-    
+            Operador oAnterior=new Operador("hernandez_n", "hernandez_n", "Nicolás Hernandez",new Empresa("526283747346"), new Pais("URU"), new TipoUsuario("marketing"));
+            Principal pAnterior = new Principal("NBk88tRVnL", "Mar Benitez",new Empresa("526283747346"), new Pais("URU"), -1,"benitezMAR@gmail.com", "16432500", false, new TipoDocumento("CI-UYU"));
+            Secundario sAnterior = new Secundario("dmKvRTFcZ8", "Mónica Bentancor", new Empresa("526283747346"),  new Pais("URU"), -1, "bentancorMON@hotmail.com", new Principal("16432500"));
+            
+            Operador o = oAnterior;
+            //Modificaciones planteadas a Operador
+            o.setUsuarioSistema("hernandez_na");
+            o.setNombreCompleto("Nicolás Alejandro Hernandez");
+            o.setClave("CLAVE NUEVA");
+            o.getTipoUsuario().setNombre("administrador");
+            
+            Principal p = pAnterior;
+            //Modificaciones Planteadas a Principal
+            p.setNombreCompleto("María Benitez");
+            p.setEmail("benitezMARIA@outlook.com");
+            p.setServicioActivo(true);
+
+            Secundario s = sAnterior;
+            //Modificaciones planteadas a Secundario
+            s.setNombreCompleto("Alejandra Bentancor");
+            s.setEmail("bentancorALE@ort.edu.uy");
+            s.getPrincipalAsociado().setNroDocumento("14675232"); //OTRO PRINCIPAL PROVISTO EN LA PRECARGA DE LA BASE DE DATOS
+            try{
+           /*INSERCIONES PREVIAS*/
+           /*OPERADOR*/   this.op.insertar(oAnterior);
+           /*PRINCIPAL*/  this.op.insertar(pAnterior);
+           /*SECUNDARIO*/ this.op.insertar(sAnterior);
+           Secundario sAnteriorConId = (Secundario) this.op.buscar(" WHERE Personas.usuarioSistema='dmKvRTFcZ8' ", "Modelo.Secundario").get(0);        
+
+           
+           //UPDATE A OPERADOR
+           assertEquals("NOERROR", this.op.modificar(oAnterior, o).getTextoError());
+           //UPDATE A PRINCIPAL
+           assertEquals("NOERROR", this.op.modificar(pAnterior, p).getTextoError());
+           //UPDATE A SECUNDARIO
+           assertEquals("NOERROR", this.op.modificar(sAnteriorConId, s).getTextoError());
+            } catch (SQLException ex) {
+            fail("Fallo en testUPDATE");
+        } catch (Exception ex) {
+            fail("Fallo en testUPDATE");
+        }
+            
     }
     @Test
     public void testDELETE(){
-        
+        Principal p = new Principal("NBk88tRVnV", "Verónica Benitez",new Empresa("526283747346"), new Pais("URU"), -1,"benitezVER@gmail.com", "16432549", false, new TipoDocumento("CI-UYU"));
         try{
         //INSERCIONES PREVIAS
            /*OPERADOR*/   this.op.insertar(new Operador("hernandez_a", "hernandez_a", "Alberto Hernandez",new Empresa("526283747346"), new Pais("URU"), new TipoUsuario("marketing")));
-           /*PRINCIPAL*/  this.op.insertar(new Principal("NBk88tRVnV", "Verónica Benitez",new Empresa("526283747346"), new Pais("URU"), -1,"benitezVER@gmail.com", "16432549", false, new TipoDocumento("CI-UYU")));
+           /*PRINCIPAL*/  this.op.insertar(p);
            /*SECUNDARIO*/ this.op.insertar(new Secundario("dmKvRTFcZ7", "Camila Bentancor", new Empresa("526283747346"),  new Pais("URU"), -1, "bentancorCAM@hotmail.com", new Principal("16432549")));
         
         //BORRANDO OPERADOR
         assertEquals("NOERROR", this.op.borrar(new Operador("hernandez_a")).getTextoError());
         //BORRANDO SECUNDARIO
             //AVERIGUANDO NRO CLIENTE DEL SECUNDARIO dmKvRTFcZ7
-          //  int nroCliente = (Persona) this.op.buscar(" WHERE Personas.usuarioSistema='dmKvRTFcZ7' ", "Modelo.Secundario").get(0).get;
-        //assertEquals("NOERROR", this.op.borrar(new Secundario()).getTextoError());
+            Secundario s = (Secundario) this.op.buscar(" WHERE Personas.usuarioSistema='dmKvRTFcZ7' ", "Modelo.Secundario").get(0);        
+        assertEquals("NOERROR", this.op.borrar(s).getTextoError());
         //BORRANDO PRINCIPAL
-        assertEquals("NOERROR", this.op.borrar(new Principal("16432549")).getTextoError());
+        
+        assertEquals("NOERROR", this.op.borrar(p).getTextoError());
 
         } catch (SQLException ex) {
             fail("Fallo en testDELETE");
