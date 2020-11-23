@@ -37,7 +37,7 @@ public OpIdioma(String usuarioSistema){
         ArrayList<String> listaSQL = new ArrayList<>();
         listaSQL.add("INSERT INTO Idiomas (nombreIdioma) values ('"+c.getNombre()+"')");
         try{
-            database.actualizarMultiple(listaSQL, "INSERT");
+            database.actualizarMultiple(listaSQL, "UPDATE");
         }catch(SQLException ex){
             registroConsola(this.usuarioSistema, listaSQL, "Alta", ex.getMessage());
             throw ex;

@@ -46,7 +46,7 @@ public OpTipoUsuario(String usuarioSistema){
             }
         }
         try{
-        database.actualizarMultiple(listaSQL, "INSERT");
+        database.actualizarMultiple(listaSQL, "UPDATE");
         }catch(SQLException ex){
             registroConsola(this.usuarioSistema,listaSQL, "Alta", ex.getMessage());
             throw ex;
@@ -111,7 +111,14 @@ public OpTipoUsuario(String usuarioSistema){
         ResultSet rs = database.consultar(sql);
         while(rs.next()){
             nombreTipoUsuario = rs.getString("nombre");
-            lista.add(new TipoUsuario(nombreTipoUsuario));
+            ArrayList<Privilegio> listaPrivilegios = new ArrayList<>();
+            String sqlPriv ="SELECT nombrePrivilegio from TieneTUP WHERE nombreTipoUsuario='"+nombreTipoUsuario+"' AND eliminado='N' "; 
+            listaSQL.add(sqlPriv);
+            ResultSet rsPrivilegios = database.consultar(sqlPriv);
+            while(rsPrivilegios.next()){
+                listaPrivilegios.add(new Privilegio(rsPrivilegios.getString("nombrePrivilegio")));
+            }
+            lista.add(new TipoUsuario(nombreTipoUsuario, listaPrivilegios));
         }
         rs.close();
         }catch(SQLException ex){
