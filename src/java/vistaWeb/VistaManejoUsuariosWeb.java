@@ -5,9 +5,14 @@
  */
 package vistaWeb;
 
+import Modelo.ComponentesHtml;
+import Modelo.Pais;
+import Modelo.TipoUsuario;
 import controlador.ControladorManejoUsuarios;
 import controlador.IVistaManejoUsuarios;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
@@ -23,8 +28,17 @@ public class VistaManejoUsuariosWeb implements IVistaManejoUsuarios{
     private String destino;
     private HttpServletRequest request;
     private HttpServletResponse response;
+    
+    private PrintWriter out;
+    
+    
+    private ArrayList<TipoUsuario> tiposUsu = new ArrayList();
+    private ArrayList<Pais> paises = new ArrayList();
 
-    public VistaManejoUsuariosWeb() {
+    
+    public VistaManejoUsuariosWeb(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        this.response = response;
+        this.out = response.getWriter();
         controlador = new ControladorManejoUsuarios(this);
     }
     
@@ -43,9 +57,32 @@ public class VistaManejoUsuariosWeb implements IVistaManejoUsuarios{
         
         if (request.getParameter("parametroOculto").equals("formModificacion")){ //me llega el name parametroOculto del input hiden del form de modificacion usuario con value formModificacion
             modificacionUsuario(request, response);
-        }        
+        }
+
+//        procesarCombos(request);
         
     }
+    
+//  private void procesarCombos(HttpServletRequest request) {
+//        String accion = request.getParameter("accion");
+//        switch (accion) {
+//            case "comboTipos":
+//                cargarTiposUsuario();
+//                break;
+//            case "comboPaises":
+//                cargarPaises();
+//                break;
+//                
+//        }
+//    }
+    
+//    private void cargarTiposUsuario() {
+//        controlador.cargarTiposUsuario();
+//    }
+//
+//    private void cargarPaises() {
+//        controlador.cargarPaises();
+//    }
 
 
     private void altaUsuario(HttpServletRequest request, HttpServletResponse response) {
@@ -127,6 +164,25 @@ public class VistaManejoUsuariosWeb implements IVistaManejoUsuarios{
             Logger.getLogger(VistaManejoUsuariosWeb.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+    @Override
+    public void mostrarTiposUsuario(ArrayList<TipoUsuario> tiposUsuarios) {
+        this.tiposUsu = tiposUsuarios;
+        String componente = ComponentesHtml.lista(false, "lstTipos", tiposUsuarios);
+        out.write("data: " + componente + "\n\n");
+
+    }
+
+    @Override
+    public void mostrarPaises(ArrayList<Pais> paises) {
+        this.paises = paises;
+        String componente = ComponentesHtml.lista(false, "lstPaises", paises);
+        out.write("data: " + componente + "\n\n");
+    }
+
+    
+
+    
     
     
     

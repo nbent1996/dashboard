@@ -5,6 +5,10 @@
  */
 package controlador;
 
+import Modelo.Pais;
+import Modelo.TipoUsuario;
+import java.util.ArrayList;
+
 /**
  *
  * @author Andres
@@ -19,6 +23,10 @@ public interface IVistaManejoUsuarios {
     public void exitoAlBorrarUsuario(String mensajeExitoBaja);
 
     public void errorAlBorrarUsuario(String mensajeErrorBaja);
+
+    public void mostrarTiposUsuario(ArrayList<TipoUsuario> tiposUsuarios);
+
+    public void mostrarPaises(ArrayList<Pais> paises);
     
     
     
