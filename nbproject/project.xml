@@ -7,11 +7,32 @@
             <minimum-ant-version>1.6.5</minimum-ant-version>
             <web-module-libraries>
                 <library dirs="200">
+                    <file>${file.reference.javaee-api-7.0.jar}</file>
+                    <path-in-war>WEB-INF/lib</path-in-war>
+                </library>
+                <library dirs="200">
                     <file>${file.reference.mysql-connector-java-8.0.22.jar}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
             </web-module-libraries>
-            <web-module-additional-libraries/>
+            <web-module-additional-libraries>
+                <library dirs="200">
+                    <file>${file.reference.hamcrest-all-1.3.jar}</file>
+                    <path-in-war>/</path-in-war>
+                </library>
+                <library dirs="200">
+                    <file>${file.reference.javaee-api-7.0.jar}</file>
+                    <path-in-war>/</path-in-war>
+                </library>
+                <library dirs="200">
+                    <file>${file.reference.mysql-connector-java-5.1.23-bin.jar}</file>
+                    <path-in-war>/</path-in-war>
+                </library>
+                <library dirs="200">
+                    <file>${file.reference.mysql-connector-java-8.0.22.jar}</file>
+                    <path-in-war>/</path-in-war>
+                </library>
+            </web-module-additional-libraries>
             <source-roots>
                 <root id="src.dir"/>
             </source-roots>

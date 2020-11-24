@@ -46,7 +46,16 @@ public class VistaManejoUsuariosWeb implements IVistaManejoUsuarios{
 
     public void procesarRequest(HttpServletRequest request, HttpServletResponse response) {
         
-        //ANDUVO ESTE CAMBIO, LO IMPLEMENTÉ PARA REUSAR EL MISMO SERVLET
+        
+//        if (request.getParameter("accion").equals("prueba")){ 
+//            controlador.prueba();
+//        }
+
+        if (request.getParameter("accion").equals("comboTipos")){             
+            controlador.cargarTiposUsuario();
+        }
+        
+//        ANDUVO ESTE CAMBIO, LO IMPLEMENTÉ PARA REUSAR EL MISMO SERVLET
         if (request.getParameter("parametroOculto").equals("formAlta")){ //me llega el name parametroOculto del input hiden del form de alta usuario con value formAlta
             altaUsuario(request, response);
         }
@@ -58,6 +67,11 @@ public class VistaManejoUsuariosWeb implements IVistaManejoUsuarios{
         if (request.getParameter("parametroOculto").equals("formModificacion")){ //me llega el name parametroOculto del input hiden del form de modificacion usuario con value formModificacion
             modificacionUsuario(request, response);
         }
+        
+         
+        
+        
+        
 
 //        procesarCombos(request);
         
