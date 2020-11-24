@@ -15,10 +15,12 @@ import Modelo.Pais;
 import Modelo.Persona;
 import Modelo.ProgramException;
 import Modelo.TipoUsuario;
+import com.mysql.cj.xdevapi.JsonString;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.json.JsonObject;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -38,8 +40,9 @@ public class ControladorManejoUsuarios implements IControlador<Persona>{
         this.opPersona = new OpPersona("bentancor");//usuario logueado, en el login tomarlo de la session
         this.opPais = new OpPais("bentancor");//usuario logueado, en el login tomarlo de la session
         this.opTipoUsuario = new OpTipoUsuario("bentancor");//usuario logueado, en el login tomarlo de la session
-        cargarTiposUsuario();
-        cargarPaises();
+        //cargarTiposUsuario();
+        //cargarPaises();
+        //prueba();
         //vista.cargarTipos(pasarleListaTipos); cargarTipos() y resolverlo mas abajo
         //vista.cargarPaises(pasarListaPaises);
     }
@@ -144,6 +147,11 @@ public class ControladorManejoUsuarios implements IControlador<Persona>{
             Logger.getLogger(ControladorManejoUsuarios.class.getName()).log(Level.SEVERE, null, ex);
         }
         
+    }
+
+    public String prueba() {
+        
+       return "hola";
     }
 
     

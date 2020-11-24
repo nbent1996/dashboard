@@ -19,8 +19,13 @@ public class ManejoUsuariosServlet extends HttpServlet {
         
         //String usuario = request.getParameter("usuario");
         
+       
+        
         VistaManejoUsuariosWeb vista = new VistaManejoUsuariosWeb(request, response);
         vista.procesarRequest(request, response);
+        
+        
+        
         
     }
 

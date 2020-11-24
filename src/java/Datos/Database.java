@@ -18,7 +18,11 @@ public class Database {
     
     /*TRABAJANDO CON INSTANCIA LOCAL*/
      private static String user = "root";
+<<<<<<< HEAD
      private static String pass = "48283674";
+=======
+     private static String pass = "root";
+>>>>>>> ccbf30465310b9e027f9d30dc91b0d24ff56c836
      private static String url = "jdbc:mysql://localhost:3306/alfacomPlatform"+"?user="+user+"&password="+pass+"&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
 
 //    /*TRABAJANDO CON INSTANCIA LOCAL*/
