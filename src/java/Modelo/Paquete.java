@@ -14,6 +14,7 @@ private ArrayList<TieneTP> listaTieneTP;
 /*SOLO ID*/
 public Paquete(int idPaquete){
     this.idPaquete = idPaquete;
+    listaTieneTP = new ArrayList<>();
 }
 /*CON ID Y FULL*/
 public Paquete(int idPaquete, float costoBruto, Empresa empresaAsociada, ArrayList<TieneTP> listaTieneTP){
@@ -34,12 +35,16 @@ public Paquete(int idPaquete, float costoBruto, Empresa empresaAsociada){
     this.idPaquete = idPaquete;
     this.costoBruto = costoBruto;
     this.empresaAsociada = empresaAsociada;
+    listaTieneTP = new ArrayList<>();
+
 }
 /*ID -1 sin LISTA TIENETP*/
 public Paquete(float costoBruto, Empresa empresaAsociada){
     this.idPaquete = -1;
     this.costoBruto = costoBruto;
     this.empresaAsociada = empresaAsociada;
+    listaTieneTP = new ArrayList<>();
+
 }
 /*Constructores*/
 

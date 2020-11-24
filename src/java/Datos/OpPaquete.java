@@ -44,7 +44,7 @@ public OpPaquete(String usuarioSistema){
         listaSQL.add("INSERT INTO Paquetes (costoBruto, identificacionTributaria) values ('"+c.getCostoBruto()+"','"+c.getEmpresaAsociada().getIdentificacionTributaria()+"') ");
         if(!c.getListaTieneTP().isEmpty()){
             for(TieneTP t: c.getListaTieneTP()){
-                listaSQL.add("INSERT INTO TieneTP (idPaquete, idTipoDispositivo, cantidadDispositivos) values ('"+c.getIdPaquete()+"','"+t.getTipoDispositivo().getIdTipoDispositivo()+"','"+t.getCantidadDispositivos()+"') ");
+                listaSQL.add("INSERT INTO TieneTP (idPaquete, idTipoDispositivo, cantidadDispositivos) values (?,'"+t.getTipoDispositivo().getIdTipoDispositivo()+"','"+t.getCantidadDispositivos()+"') ");
             }
         }
         try{

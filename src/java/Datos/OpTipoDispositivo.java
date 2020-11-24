@@ -160,7 +160,6 @@ public OpTipoDispositivo(String usuarioSistema){
         listaIdsStr = listaIdsStr.substring(0, (listaIdsStr.length()-2));
         /*Armando listado de IDS para la Query*/
         ResultSet validarConsistencia= null;
-        listaSQL.add("UPDATE TiposDispositivos SET eliminado='Y' WHERE idTipoDispositivo in(" +listaIdsStr+ ")");
         /*Validar que este tipo de dispositivo no exista en ningun paquete de suscripción*/
         validarConsistencia = database.consultar("SELECT * FROM TieneTP WHERE idTipoDispositivo in(" +listaIdsStr+ ") and eliminado = 'N' ");
         if(validarConsistencia.next()){

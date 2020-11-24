@@ -49,7 +49,7 @@ public OpEmpresa(String usuarioSistema){
         }
         validarConsistencia.close();
         /*Validar que la identificacionTributaria no exista ya en el sistema.*/
-        database.actualizarMultiple(listaSQL, "INSERT");
+        database.actualizarMultiple(listaSQL, "UPDATE");
         }catch(SQLException ex){
             registroConsola(this.usuarioSistema, listaSQL, "Alta", ex.getMessage());
             throw ex;
