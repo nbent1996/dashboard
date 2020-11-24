@@ -2,6 +2,7 @@ package Datos;
 
 import java.sql.*;
 import java.util.ArrayList;
+import javax.naming.NamingException;
 
 public class Database {
 
@@ -9,7 +10,7 @@ public class Database {
     private static Database instancia;
     private static Connection conexion;
     private static Statement stmt;
-    
+    private String modo = "glassfish"; /*local para testing local -- glassfish para testear desde capa de presentación*/
 //    /*TRABAJANDO CON RDS*/
 //      private static String user = "root";
 //      private static String pass = "alfacom48282020!";
@@ -18,11 +19,8 @@ public class Database {
     
     /*TRABAJANDO CON INSTANCIA LOCAL*/
      private static String user = "root";
-<<<<<<< HEAD
      private static String pass = "48283674";
-=======
-     private static String pass = "root";
->>>>>>> ccbf30465310b9e027f9d30dc91b0d24ff56c836
+     //private static String pass = "root";
      private static String url = "jdbc:mysql://localhost:3306/alfacomPlatform"+"?user="+user+"&password="+pass+"&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
 
 //    /*TRABAJANDO CON INSTANCIA LOCAL*/
@@ -40,9 +38,20 @@ public class Database {
         return instancia;
     }
 
-    public void conectar(String url) throws SQLException {
+    public void conectar(String url) throws SQLException, NamingException {
         try {
-            conexion = DriverManager.getConnection(url);
+            switch(this.modo){
+                case "local":
+                    conexion = DriverManager.getConnection(url);
+                break;
+                case "glassfish":
+                    javax.naming.InitialContext ctx = new javax.naming.InitialContext();
+                    javax.sql.DataSource ds = (javax.sql.DataSource) ctx.lookup("jdbc/alfacom");
+                    conexion = ds.getConnection();
+                    break;
+
+            }
+
             conexion.setAutoCommit(false);
             stmt = conexion.createStatement();
         } catch (SQLException ex) {
@@ -68,7 +77,7 @@ public class Database {
         }
     }
 
-    public int actualizar(String sql) throws SQLException {
+    public int actualizar(String sql) throws SQLException, NamingException {
         try {
             conectar(url);
             return stmt.executeUpdate(sql);
@@ -81,7 +90,7 @@ public class Database {
         }
     }
 
-    public boolean actualizarMultiple(ArrayList<String> sql, String modoQuery) throws SQLException {
+    public boolean actualizarMultiple(ArrayList<String> sql, String modoQuery) throws SQLException, NamingException {
         conectar(url);
         String error = "";
         int idGenerado = -1;
@@ -122,7 +131,7 @@ public class Database {
 
     }
 
-    public boolean actualizarMultiple(ArrayList<String> sql, String modoQuery, String clave) throws SQLException {
+    public boolean actualizarMultiple(ArrayList<String> sql, String modoQuery, String clave) throws SQLException, NamingException {
         conectar(url);
         String error = "";
         conexion.setAutoCommit(false);
