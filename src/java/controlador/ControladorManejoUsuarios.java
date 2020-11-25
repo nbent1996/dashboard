@@ -132,7 +132,8 @@ public class ControladorManejoUsuarios implements IControlador<Persona>{
             vista.mostrarTiposUsuario(tiposUsuarios);
         } catch (Exception ex) {
             //error en la vista
-            Logger.getLogger(ControladorManejoUsuarios.class.getName()).log(Level.SEVERE, null, ex);
+            vista.errorCargaTiposUsuarios("Error en la carga de tipos de usuario");
+            //Logger.getLogger(ControladorManejoUsuarios.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -144,15 +145,13 @@ public class ControladorManejoUsuarios implements IControlador<Persona>{
             vista.mostrarPaises(paises);
         } catch (Exception ex) {
             //error en la vista
-            Logger.getLogger(ControladorManejoUsuarios.class.getName()).log(Level.SEVERE, null, ex);
+            vista.errorCargaPaises("Error en la carga de paises");
+            //Logger.getLogger(ControladorManejoUsuarios.class.getName()).log(Level.SEVERE, null, ex);
         }
         
     }
 
-    public String prueba() {
-        
-       return "hola";
-    }
+    
 
     
 

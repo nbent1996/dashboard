@@ -15,6 +15,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.scene.control.Alert;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -46,25 +47,25 @@ public class VistaManejoUsuariosWeb implements IVistaManejoUsuarios{
 
     public void procesarRequest(HttpServletRequest request, HttpServletResponse response) {
         
-        
-//        if (request.getParameter("accion").equals("prueba")){ 
-//            controlador.prueba();
-//        }
 
         if (request.getParameter("accion").equals("comboTipos")){             
-            controlador.cargarTiposUsuario();
+            cargarTiposUsuario();
         }
         
-//        ANDUVO ESTE CAMBIO, LO IMPLEMENTÉ PARA REUSAR EL MISMO SERVLET
-        if (request.getParameter("parametroOculto").equals("formAlta")){ //me llega el name parametroOculto del input hiden del form de alta usuario con value formAlta
+        if (request.getParameter("accion").equals("comboPaises")){             
+            cargarPaises();
+        }
+        
+//        Se reusa el mismo servlet en los formularios de ABM usuarios
+        if (request.getParameter("accion").equals("formAlta")){ //me llega el name parametroOculto del input hiden del form de alta usuario con value formAlta
             altaUsuario(request, response);
         }
         
-        if (request.getParameter("parametroOculto").equals("formBaja")){ //me llega el name parametroOculto del input hiden del form de baja usuario con value formBaja
+        if (request.getParameter("accion").equals("formBaja")){ //me llega el name parametroOculto del input hiden del form de baja usuario con value formBaja
             bajaUsuario(request, response);
         }
         
-        if (request.getParameter("parametroOculto").equals("formModificacion")){ //me llega el name parametroOculto del input hiden del form de modificacion usuario con value formModificacion
+        if (request.getParameter("accion").equals("formModificacion")){ //me llega el name parametroOculto del input hiden del form de modificacion usuario con value formModificacion
             modificacionUsuario(request, response);
         }
         
@@ -90,13 +91,13 @@ public class VistaManejoUsuariosWeb implements IVistaManejoUsuarios{
 //        }
 //    }
     
-//    private void cargarTiposUsuario() {
-//        controlador.cargarTiposUsuario();
-//    }
-//
-//    private void cargarPaises() {
-//        controlador.cargarPaises();
-//    }
+    private void cargarTiposUsuario() {
+        controlador.cargarTiposUsuario();
+    }
+
+    private void cargarPaises() {
+        controlador.cargarPaises();
+    }
 
 
     private void altaUsuario(HttpServletRequest request, HttpServletResponse response) {
@@ -183,7 +184,7 @@ public class VistaManejoUsuariosWeb implements IVistaManejoUsuarios{
     public void mostrarTiposUsuario(ArrayList<TipoUsuario> tiposUsuarios) {
         this.tiposUsu = tiposUsuarios;
         String componente = ComponentesHtml.lista(false, "lstTipos", tiposUsuarios);
-        out.write("data: " + componente + "\n\n");
+        out.write("Tipo de usuario: " + componente + "\n\n");
 
     }
 
@@ -191,7 +192,29 @@ public class VistaManejoUsuariosWeb implements IVistaManejoUsuarios{
     public void mostrarPaises(ArrayList<Pais> paises) {
         this.paises = paises;
         String componente = ComponentesHtml.lista(false, "lstPaises", paises);
-        out.write("data: " + componente + "\n\n");
+        out.write("Pais: " + componente + "\n\n");
+    }
+
+    @Override
+    public void errorCargaTiposUsuarios(String mensajeError) {
+        destino = "Alta.jsp?errorCombos=" + mensajeError;
+        
+        try {
+            response.sendRedirect(destino);
+        } catch (IOException ex) {
+            Logger.getLogger(VistaManejoUsuariosWeb.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @Override
+    public void errorCargaPaises(String mensajeError) {
+        destino = "usuario_Alta.jsp?errorCombos=" + mensajeError;
+        
+        try {
+            response.sendRedirect(destino);
+        } catch (IOException ex) {
+            Logger.getLogger(VistaManejoUsuariosWeb.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     
