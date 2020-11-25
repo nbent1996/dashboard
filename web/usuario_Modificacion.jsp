@@ -40,7 +40,7 @@
                     <input type="text" id="txtNombreEmpresaMod" name="nombreEmpresaMod" placeholder="empresa"/>
                     <input type="text" id="txtNombrePaisMod" name="nombrePaisMod" placeholder="pais"/>
                     <input type="password" id="txtPasswordMod" name="passwordMod" placeholder="contraseña"/>
-                    <input type="hidden" name="parametroOculto" value="formModificacion">
+                    <input type="hidden" name="accion" value="formModificacion">
                     
                     <!--
                         <select name="pais" id="pais">

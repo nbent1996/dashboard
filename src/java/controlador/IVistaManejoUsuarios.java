@@ -27,6 +27,10 @@ public interface IVistaManejoUsuarios {
     public void mostrarTiposUsuario(ArrayList<TipoUsuario> tiposUsuarios);
 
     public void mostrarPaises(ArrayList<Pais> paises);
+
+    public void errorCargaTiposUsuarios(String mensajeError);
+
+    public void errorCargaPaises(String mensajeError);
     
     
     

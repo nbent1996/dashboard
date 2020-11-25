@@ -3,11 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/src/java/Datos/OpTipoUsuario.java</file>
-            <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/src/java/Datos/OpPaquete.java</file>
-            <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/test/TestingDatos/TestCategorias.java</file>
-            <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/test/TestingDatos/TestOpTipoDispositivo.java</file>
-            <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/src/java/Datos/Database.java</file>
+            <file>file:/C:/Users/andre/Desktop/Dashboard/dashboard/src/java/Modelo/Pais.java</file>
+            <file>file:/C:/Users/andre/Desktop/Dashboard/dashboard/src/java/vistaWeb/VistaManejoUsuariosWeb.java</file>
+            <file>file:/C:/Users/andre/Desktop/Dashboard/dashboard/src/java/Modelo/TipoUsuario.java</file>
+            <file>file:/C:/Users/andre/Desktop/Dashboard/dashboard/src/java/controlador/IVistaManejoUsuarios.java</file>
+            <file>file:/C:/Users/andre/Desktop/Dashboard/dashboard/src/java/controlador/ControladorManejoUsuarios.java</file>
+            <file>file:/C:/Users/andre/Desktop/Dashboard/dashboard/src/java/vistaWeb/ManejoUsuariosServlet.java</file>
+            <file>file:/C:/Users/andre/Desktop/Dashboard/dashboard/web/usuario_Alta.jsp</file>
         </group>
     </open-files>
 </project-private>

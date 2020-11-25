@@ -38,5 +38,15 @@ public Pais(String codigo){
     }
 /*Getters y Setters*/
 
+    
+    
+    @Override
+    public String toString() {
+        return this.nombre;
+    }
+
+    
+    
+    
 
 }

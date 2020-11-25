@@ -34,7 +34,7 @@
                 
                 <form name="formBajaUsuario" action="ManejoUsuariosServlet" method="post" onsubmit="return validarCamposBajaUsr(this)">
                     <input type="text" id="txtUsuarioBaja" name="usuarioBaja" placeholder="usuario" required="true"/>
-                    <input type="hidden" name="parametroOculto" value="formBaja">
+                    <input type="hidden" name="accion" value="formBaja">
                     
                     <!--
                         <select name="pais" id="pais">

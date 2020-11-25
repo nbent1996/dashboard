@@ -41,6 +41,13 @@ public String getNombre() {
     }
 /*Getters y Setters*/
 
+    @Override
+    public String toString() {
+        return this.nombre;
+    }
 
+
+    
+    
     
 }

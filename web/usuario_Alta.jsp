@@ -5,7 +5,10 @@
 
 <%
     String msg = request.getParameter("msg");
+   
 %>
+
+<% String alertCombos = request.getParameter("errorCombos"); %>
 
 
 <html>
@@ -93,15 +96,16 @@
                     <input type="text" id="txtNombreEmpresaAlta" name="nombreEmpresa" placeholder="empresa" required="true"/>
                     <input type="text" id="txtNombrePaisAlta" name="nombrePais" placeholder="pais" required="true"/>
                     <input type="text" id="txtTipoUsuarioAlta" name="tipoUsuario" placeholder="tipo usuario" required="true"/>
-                    <input type="hidden" name="parametroOculto" value="formAlta">
-                    
-                    
+                    <input type="hidden" name="accion" value="formAlta">
                     
                     <span id="combo-paises"></span> <br><br>
                     <span id="combo-tipoUsuarios"></span> <br><br>
                     
                     
-                    
+                    <!-- ESTO ES PARA ERROR EN LA CARGA DE COMBOS. PROBAR -->
+                    <%if (alertCombos != null) {%>
+                        alert(alertCombos);
+                    <%}%>
                     
                     <!--
                         <select name="pais" id="pais">
