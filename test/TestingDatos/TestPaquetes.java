@@ -11,6 +11,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class TestPaquetes {
@@ -60,8 +61,8 @@ public class TestPaquetes {
         this.op.insertar(p2);
         
         //obtener los id de los paquetes insertados
-        p1 = this.op.buscar(" WHERE identificacionTributaria='729.193.500-80' AND costo='350' ", null).get(0);
-        p2 = this.op.buscar(" WHERE identificacionTributaria='729.193.500-80' AND costo='351' ", null).get(0);
+        p1 = this.op.buscar(" WHERE identificacionTributaria='729.193.500-80' AND costoBruto='350' ", null).get(0);
+        p2 = this.op.buscar(" WHERE identificacionTributaria='729.193.500-80' AND costoBruto='351' ", null).get(0);
        
         /*Búsqueda de un paquete sin lista TieneTP*/
         Paquete p1b = this.op.buscar(" WHERE idPaquete='"+p1.getIdPaquete()+"' ", null).get(0);
@@ -82,14 +83,102 @@ public class TestPaquetes {
     }
     @Test
     public void testUPDATE(){
-    
+        try {
+            //INSERCIONES PREVIAS
+            ArrayList<TieneTP> listaTieneTPp2 = new ArrayList<>();
+            listaTieneTPp2.add(new TieneTP(4, new TipoDispositivo(3)));
+            listaTieneTPp2.add(new TieneTP(1, new TipoDispositivo(2)));
+            listaTieneTPp2.add(new TieneTP(2, new TipoDispositivo(1)));
+            Paquete p1Anterior = new Paquete(451, new Empresa("729.193.500-80"));
+            Paquete p2Anterior = new Paquete(452, new Empresa("729.193.500-80"), listaTieneTPp2);
+            this.op.insertar(p1Anterior);
+            this.op.insertar(p2Anterior);
+            
+            //Obtener los id autogenerados
+            p1Anterior = this.op.buscar(" WHERE costoBruto='"+p1Anterior.getCostoBruto()+"' AND identificacionTributaria='"+p1Anterior.getEmpresaAsociada().getIdentificacionTributaria()+"' ", null).get(0);
+            p2Anterior = this.op.buscar(" WHERE costoBruto='"+p2Anterior.getCostoBruto()+"' AND identificacionTributaria='"+p2Anterior.getEmpresaAsociada().getIdentificacionTributaria()+"' ", null).get(0);
+            
+            
+            //Cambios seteados
+            ArrayList<TieneTP> listaTieneTPp2b = new ArrayList<>();
+            listaTieneTPp2b.add(new TieneTP(2, new TipoDispositivo(2)));
+            listaTieneTPp2b.add(new TieneTP(2, new TipoDispositivo(2)));
+            listaTieneTPp2b.add(new TieneTP(2, new TipoDispositivo(2)));
+            Paquete p1 = p1Anterior;
+            Paquete p2 = p2Anterior;
+            p1.setCostoBruto(551);
+            p1.setEmpresaAsociada(new Empresa("76045622-5"));
+            p2.setCostoBruto(552);
+            p2.setEmpresaAsociada(new Empresa("76045622-5"));
+            p2.setListaTieneTP(listaTieneTPp2b);
+            
+           
+            //UPDATES
+            assertEquals("NOERROR", this.op.modificar(p1Anterior, p1).getTextoError());
+            assertEquals("NOERROR", this.op.modificar(p2Anterior, p2).getTextoError());
+            
+            
+        } catch (SQLException ex) {
+            fail("Fallo en testUPDATE");
+        } catch (Exception ex) {
+            fail("Fallo en testUPDATE");
+        }
     }
     @Test
     public void testDELETE(){
-    
+        try{
+            //INSERCIONES PREVIAS
+            ArrayList<TieneTP> listaTieneTPp2 = new ArrayList<>();
+            listaTieneTPp2.add(new TieneTP(4, new TipoDispositivo(3)));
+            listaTieneTPp2.add(new TieneTP(1, new TipoDispositivo(2)));
+            listaTieneTPp2.add(new TieneTP(2, new TipoDispositivo(1)));
+            Paquete p1 = new Paquete(651, new Empresa("729.193.500-80"));
+            Paquete p2 = new Paquete(652, new Empresa("729.193.500-80"), listaTieneTPp2);
+            this.op.insertar(p1);
+            this.op.insertar(p2);
+            
+             //Obtener los id autogenerados
+            p1 = this.op.buscar(" WHERE costoBruto='"+p1.getCostoBruto()+"' AND identificacionTributaria='"+p1.getEmpresaAsociada().getIdentificacionTributaria()+"' ", null).get(0);
+            p2 = this.op.buscar(" WHERE costoBruto='"+p2.getCostoBruto()+"' AND identificacionTributaria='"+p2.getEmpresaAsociada().getIdentificacionTributaria()+"' ", null).get(0);
+            
+            //PRUEBAS DELETE
+            assertEquals("NOERROR", this.op.borrar(p1).getTextoError());
+            assertEquals("NOERROR", this.op.borrar(p2).getTextoError());
+
+        
+        } catch (SQLException ex) {
+            fail("Fallo en testDELETE");
+        } catch (Exception ex) {
+            fail("Fallo en testDELETE");
+        }
     }
     @Test
     public void testDELETEMULTIPLE(){
-    
+        try {
+            //INSERCIONES PREVIAS
+            ArrayList<TieneTP> listaTieneTPp2 = new ArrayList<>();
+            listaTieneTPp2.add(new TieneTP(4, new TipoDispositivo(3)));
+            listaTieneTPp2.add(new TieneTP(1, new TipoDispositivo(2)));
+            listaTieneTPp2.add(new TieneTP(2, new TipoDispositivo(1)));
+            Paquete p1 = new Paquete(791, new Empresa("729.193.500-80"));
+            Paquete p2 = new Paquete(792, new Empresa("729.193.500-80"), listaTieneTPp2);
+            this.op.insertar(p1);
+            this.op.insertar(p2);
+
+            //Obtener los id autogenerados
+            p1 = this.op.buscar(" WHERE costoBruto='" + p1.getCostoBruto() + "' AND identificacionTributaria='" + p1.getEmpresaAsociada().getIdentificacionTributaria() + "' ", null).get(0);
+            p2 = this.op.buscar(" WHERE costoBruto='" + p2.getCostoBruto() + "' AND identificacionTributaria='" + p2.getEmpresaAsociada().getIdentificacionTributaria() + "' ", null).get(0);
+      
+            //BORRADO EN CASCADA
+            ArrayList<Integer> listaIds = new ArrayList<>();
+            listaIds.add(p1.getIdPaquete());
+            listaIds.add(p2.getIdPaquete());
+            
+            assertEquals("NOERROR", this.op.borradoMultiplePorIds(listaIds).getTextoError());
+        } catch (SQLException ex) {
+            fail("Fallo en testDELETEMULTIPLE");
+        } catch (Exception ex) {
+            fail("Fallo en testDELETEMULTIPLE");
+        }
     }
 }
