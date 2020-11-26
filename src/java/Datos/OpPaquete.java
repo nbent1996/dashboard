@@ -41,14 +41,16 @@ public OpPaquete(String usuarioSistema){
     @Override
     public LogSistema insertar(Paquete c) throws Exception, SQLException {
         ArrayList<String> listaSQL = new ArrayList<>();
+        String modo = "UPDATE"; //Para paquetes sin instancias de TieneTP
         listaSQL.add("INSERT INTO Paquetes (costoBruto, identificacionTributaria) values ('"+c.getCostoBruto()+"','"+c.getEmpresaAsociada().getIdentificacionTributaria()+"') ");
         if(!c.getListaTieneTP().isEmpty()){
+            modo="INSERT";
             for(TieneTP t: c.getListaTieneTP()){
                 listaSQL.add("INSERT INTO TieneTP (idPaquete, idTipoDispositivo, cantidadDispositivos) values (?,'"+t.getTipoDispositivo().getIdTipoDispositivo()+"','"+t.getCantidadDispositivos()+"') ");
             }
         }
         try{
-            database.actualizarMultiple(listaSQL, "INSERT");
+            database.actualizarMultiple(listaSQL, modo);
         }catch(SQLException ex){
             registroConsola(this.usuarioSistema, listaSQL, "Alta", ex.getMessage());
             throw ex;
@@ -63,7 +65,7 @@ public OpPaquete(String usuarioSistema){
     @Override
     public LogSistema modificar(Paquete cAnterior, Paquete c) throws Exception, SQLException {
         ArrayList<String> listaSQL = new ArrayList<>();
-        listaSQL.add("UPDATE Paquetes SET costoBruto='"+c.getCostoBruto()+"', identificacionTributaria='"+c.getEmpresaAsociada().getIdentificacionTributaria()+"' WHERE idPaquete = '"+c.getIdPaquete()+"' AND eliminado = 'N' ");
+        listaSQL.add("UPDATE Paquetes SET costoBruto='"+c.getCostoBruto()+"', identificacionTributaria='"+c.getEmpresaAsociada().getIdentificacionTributaria()+"' WHERE idPaquete = '"+cAnterior.getIdPaquete()+"' AND eliminado = 'N' ");
         /*Actualizando Tipos de Dispositivos asociados al Paquete solo si es necesario*/
         if(!listasSonIguales(c.getListaTieneTP(), cAnterior.getListaTieneTP())){
             listaSQL.add("DELETE FROM TieneTP WHERE idPaquete='"+cAnterior.getIdPaquete()+"' ");
@@ -171,8 +173,6 @@ public OpPaquete(String usuarioSistema){
         listaIdsStr = listaIdsStr.substring(0, (listaIdsStr.length() - 2));
         /*Armando listado de IDS para la Query*/
         ResultSet validarConsistencia = null;
-        listaSQL.add("UPDATE Paquetes SET eliminado='Y' WHERE idPaquete in (" + listaIdsStr + ") ");
-
         /*Validar lista de IDs vacia*/
         if (listaIds.isEmpty()) {
             return registroConsola(this.usuarioSistema, listaSQL, "Baja", "ERROR: Lista de IDs llegó vacia al metodo borradoMultiplePorIds");
@@ -183,13 +183,13 @@ public OpPaquete(String usuarioSistema){
         listaSQL.add("UPDATE Paquetes set eliminado='Y' WHERE idPaquete in(" + listaIdsStr + ")");
         try {
             /*Validar que este Paquete no tenga registros en la tabla TieneTP (Relación TipoDispositivo-Paquete)*/
-            validarConsistencia = database.consultar("SELECT * FROM TieneTP WHERE idPaquete in (" + listaIdsStr + ")");
-            if (validarConsistencia.next()) {
-                validarConsistencia.close();
-                registroConsola(this.usuarioSistema, listaSQL, "Baja", "Alguno de los Paquetes que usted desea borrar está relacionado con algún Tipo de Dispositivo.");
-                throw new Exception("Alguno de los Paquetes que usted desea borrar está relacionado con algún Tipo de Dispositivo.");
-            }
-            validarConsistencia.close();
+//            validarConsistencia = database.consultar("SELECT * FROM TieneTP WHERE idPaquete in (" + listaIdsStr + ")");
+//            if (validarConsistencia.next()) {
+//                validarConsistencia.close();
+//                registroConsola(this.usuarioSistema, listaSQL, "Baja", "Alguno de los Paquetes que usted desea borrar está relacionado con algún Tipo de Dispositivo.");
+//                throw new Exception("Alguno de los Paquetes que usted desea borrar está relacionado con algún Tipo de Dispositivo.");
+//            }
+//            validarConsistencia.close();
             /*Validar que este Paquete no tenga registros en la tabla TieneTP (Relación TipoDispositivo-Paquete)*/
             database.actualizarMultiple(listaSQL, "UPDATE");
         } catch (SQLException ex) {

@@ -37,10 +37,14 @@ public OpSuscripcion(String usuarioSistema){
     @Override
     public LogSistema insertar(Suscripcion c) throws Exception, SQLException {
         ArrayList<String> listaSQL = new ArrayList<>();
+        String activaStr = "S";
+        if(!c.getActiva()){
+            activaStr = "N";
+        }
         listaSQL.add("INSERT INTO Suscripciones (fechaInicio, tiempoContrato, fechaFin, activa) values "
-                + "('"+c.getFechaInicio().getFechaAStr(1)+"','"+c.getTiempoContrato()+"','"+c.getFechaFin().getFechaAStr(1)+"','"+c.getActiva()+"')");
+                + "('"+c.getFechaInicio().getFechaAStr(1)+"','"+c.getTiempoContrato()+"','"+c.getFechaFin().getFechaAStr(1)+"','"+activaStr+"')");
         try{
-            database.actualizarMultiple(listaSQL, "INSERT");
+            database.actualizarMultiple(listaSQL, "UPDATE");
         }catch(SQLException ex){
             registroConsola(this.usuarioSistema, listaSQL, "Alta", ex.getMessage());
             throw ex;
