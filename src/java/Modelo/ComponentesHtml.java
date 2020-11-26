@@ -7,12 +7,34 @@ import java.util.ArrayList;
 
 public class ComponentesHtml {
     
-    public static String lista(boolean multiple,String id,ArrayList opciones){
+//    public static String lista(boolean multiple,String id,ArrayList opciones){
+//        String lista = "<select " + (multiple?" multiple ":"") +  " id='" + id+ "'>";
+//        int x=0;
+//        for(Object obj:opciones){
+//            lista+= "<option id='" + x + "'>" + obj + "</option>";
+//            x++;
+//        }
+//        lista+="</select>";
+//        return lista;
+//    }
+    
+        public static String lista(boolean multiple,String id ,ArrayList opciones){
         String lista = "<select " + (multiple?" multiple ":"") +  " id='" + id+ "'>";
-        int x=0;
+        String optionId = "";
+        String value ="";
+        
         for(Object obj:opciones){
-            lista+= "<option id='" + x + "'>" + obj + "</option>";
-            x++;
+            
+            if(obj instanceof Pais){
+                Pais p = (Pais) obj;
+                optionId = p.getCodigo();
+                value = p.getNombre();
+            }
+            if(obj instanceof TipoUsuario){
+                TipoUsuario t = (TipoUsuario) obj;
+                optionId = value = t.getNombre();
+            }
+            lista+= "<option id='" + optionId + "'>" + value + "</option>";
         }
         lista+="</select>";
         return lista;

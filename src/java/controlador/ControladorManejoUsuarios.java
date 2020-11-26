@@ -64,11 +64,11 @@ public class ControladorManejoUsuarios implements IControlador<Persona>{
             
         } catch (ProgramException ex) { //error en las validaciones
             
-            vista.errorAltaUsuario("se cayó en catch ProgramException");
+            vista.errorAltaUsuario(ex.getMessage());
             
         } catch (Exception ex) { //error al insertar    
             
-            vista.errorAltaUsuario("se cayó en catch Exception");
+            vista.errorAltaUsuario(ex.getMessage());
             
         }
 
