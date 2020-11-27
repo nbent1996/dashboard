@@ -7,10 +7,23 @@
             <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/src/java/Modelo/Funciones.java</file>
             <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/test/TestingModelo/TestFunciones.java</file>
             <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/src/java/Modelo/IObject.java</file>
+<<<<<<< HEAD
             <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/src/java/Modelo/Secundario.java</file>
             <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/test/TestingDatos/TestPersonas.java</file>
             <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/src/java/Datos/Database.java</file>
             <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/src/java/Modelo/Principal.java</file>
+=======
+=======
+            <file>file:/C:/Users/andre/Desktop/Dashboard/dashboard/src/java/vistaWeb/VistaManejoUsuariosWeb.java</file>
+            <file>file:/C:/Users/andre/Desktop/Dashboard/dashboard/web/index.jsp</file>
+            <file>file:/C:/Users/andre/Desktop/Dashboard/dashboard/web/js/seccionesUsuarios.js</file>
+            <file>file:/C:/Users/andre/Desktop/Dashboard/dashboard/web/manejoUsuarios.jsp</file>
+            <file>file:/C:/Users/andre/Desktop/Dashboard/dashboard/src/java/Modelo/ComponentesHtml.java</file>
+            <file>file:/C:/Users/andre/Desktop/Dashboard/dashboard/src/java/controlador/ControladorManejoUsuarios.java</file>
+            <file>file:/C:/Users/andre/Desktop/Dashboard/dashboard/src/java/vistaWeb/ManejoUsuariosServlet.java</file>
+            <file>file:/C:/Users/andre/Desktop/Dashboard/dashboard/web/usuario_Alta.jsp</file>
+>>>>>>> f428ef520d3501051a4137f27d1ebf6387cd0e84
+>>>>>>> 1a2e20256c64ccd8b266e063b2c4ea30c488882a
         </group>
     </open-files>
 </project-private>
