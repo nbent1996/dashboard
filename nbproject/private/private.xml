@@ -3,18 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
-            <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/test/TestingDatos/TestSuscripciones.java</file>
-            <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/src/java/Datos/Database.java</file>
-=======
-            <file>file:/C:/Users/andre/Desktop/Dashboard/dashboard/src/java/Modelo/Pais.java</file>
-            <file>file:/C:/Users/andre/Desktop/Dashboard/dashboard/src/java/vistaWeb/VistaManejoUsuariosWeb.java</file>
-            <file>file:/C:/Users/andre/Desktop/Dashboard/dashboard/src/java/Modelo/TipoUsuario.java</file>
-            <file>file:/C:/Users/andre/Desktop/Dashboard/dashboard/src/java/controlador/IVistaManejoUsuarios.java</file>
-            <file>file:/C:/Users/andre/Desktop/Dashboard/dashboard/src/java/controlador/ControladorManejoUsuarios.java</file>
-            <file>file:/C:/Users/andre/Desktop/Dashboard/dashboard/src/java/vistaWeb/ManejoUsuariosServlet.java</file>
-            <file>file:/C:/Users/andre/Desktop/Dashboard/dashboard/web/usuario_Alta.jsp</file>
->>>>>>> 1abaa4825ddd6beb4b3f5c0ef072a01a31e96461
+            <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/src/java/Modelo/ComponentesHtml.java</file>
+            <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/src/java/Modelo/IObject.java</file>
         </group>
     </open-files>
 </project-private>

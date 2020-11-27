@@ -3,7 +3,6 @@ public abstract class Cliente extends Persona {
 /*Estado*/
 protected int nroCliente;
 protected String email;
-protected TipoCliente tipoCliente;
 /*Estado*/
 
 /*Constructores*/
@@ -31,13 +30,6 @@ protected TipoCliente tipoCliente;
         this.email = email;
     }
 
-    public TipoCliente getTipoCliente() {
-        return tipoCliente;
-    }
-
-    public void setTipoCliente(TipoCliente tipoCliente) {
-        this.tipoCliente = tipoCliente;
-    }
 /*Getters y Setters*/
 
    

@@ -62,13 +62,6 @@ public Secundario(int nroCliente){
         this.email = email;
     }
 
-    public TipoCliente getTipoCliente() {
-        return tipoCliente;
-    }
-
-    public void setTipoCliente(TipoCliente tipoCliente) {
-        this.tipoCliente = tipoCliente;
-    }
 /*Getters y Setters*/
 
 
