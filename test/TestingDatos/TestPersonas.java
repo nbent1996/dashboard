@@ -45,14 +45,14 @@ public class TestPersonas {
             assertEquals("NOERROR", this.op.insertar(new Operador("gargano", "gargano", "Ivana Gargano",new Empresa("526283747346"), new Pais("URU"), new TipoUsuario("operador"))).getTextoError());
 
             /*INSERT PRINCIPAL*/
-            assertEquals("NOERROR", this.op.insertar(new Principal("ZWeQFtdcA4", "Adrian Gambini",new Empresa("526283747346"), new Pais("URU"), -1,"gambini@gmail.com", "16432548", false, new TipoDocumento("CI-UYU"))).getTextoError());
-            assertEquals("NOERROR", this.op.insertar(new Principal("e8m7665Af9", "Arturo Rodríguez",new Empresa("526283747346"), new Pais("URU"), -1,"rodriguezART@gmail.com", "14675232", false, new TipoDocumento("CI-UYU"))).getTextoError());
-            assertEquals("NOERROR", this.op.insertar(new Principal("S6CYKAFyyR", "Gabriela Sanabria",new Empresa("526283747346"), new Pais("URU"), -1,"sanabriaGAB@gmail.com", "24563218", false, new TipoDocumento("CI-UYU"))).getTextoError());
+            assertEquals("NOERROR", this.op.insertar(new Principal("Adrian Gambini",new Empresa("526283747346"), new Pais("URU"), -1,"gambini@gmail.com", "16432548", false, new TipoDocumento("CI-UYU"))).getTextoError());
+            assertEquals("NOERROR", this.op.insertar(new Principal("Arturo Rodríguez",new Empresa("526283747346"), new Pais("URU"), -1,"rodriguezART@gmail.com", "14675232", false, new TipoDocumento("CI-UYU"))).getTextoError());
+            assertEquals("NOERROR", this.op.insertar(new Principal("Gabriela Sanabria",new Empresa("526283747346"), new Pais("URU"), -1,"sanabriaGAB@gmail.com", "24563218", false, new TipoDocumento("CI-UYU"))).getTextoError());
             
             /*INSERT SECUNDARIO*/
-            assertEquals("NOERROR", this.op.insertar(new Secundario("xTzXW5MQgu", "Guillermo Gambini", new Empresa("526283747346"),  new Pais("URU"), -1, "gambiniGUI@hotmail.com", new Principal("16432548"))).getTextoError());
-            assertEquals("NOERROR", this.op.insertar(new Secundario("ATHr3AyFUn", "Patricia Rodríguez", new Empresa("526283747346"),  new Pais("URU"), -1, "rodriguezPAT@hotmail.com", new Principal("14675232"))).getTextoError());
-            assertEquals("NOERROR", this.op.insertar(new Secundario("MZYRu5T6WX", "Claudio Ureta", new Empresa("526283747346"),  new Pais("URU"), -1, "uretaCLA@hotmail.com", new Principal("24563218"))).getTextoError());
+            assertEquals("NOERROR", this.op.insertar(new Secundario("Guillermo Gambini", new Empresa("526283747346"),  new Pais("URU"), -1, "gambiniGUI@hotmail.com", new Principal("16432548"))).getTextoError());
+            assertEquals("NOERROR", this.op.insertar(new Secundario("Patricia Rodríguez", new Empresa("526283747346"),  new Pais("URU"), -1, "rodriguezPAT@hotmail.com", new Principal("14675232"))).getTextoError());
+            assertEquals("NOERROR", this.op.insertar(new Secundario("Claudio Ureta", new Empresa("526283747346"),  new Pais("URU"), -1, "uretaCLA@hotmail.com", new Principal("24563218"))).getTextoError());
 
         } catch (SQLException ex) {
             fail("Fallo en testINSERT");
@@ -163,7 +163,7 @@ public class TestPersonas {
             fail("Fallo en testDELETE");
         }
     }
-    @Ignore
+    @Test
     public void testDELETEMULTIPLE(){
         /*NO IMPLEMENTADO EN EL OBJETO DAO*/
     }

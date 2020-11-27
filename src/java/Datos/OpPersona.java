@@ -1,6 +1,7 @@
 package Datos;
 
 import Modelo.Empresa;
+import Modelo.Funciones;
 import Modelo.LogSistema;
 import Modelo.Operador;
 import Modelo.Pais;
@@ -46,36 +47,50 @@ public OpPersona(String usuarioSistema){
         ArrayList<String> listaSQLSinAI = new ArrayList<>(); /*SIN AUTOINCREMENTAL*/
         ArrayList<String> listaSQLConAI = new ArrayList<>(); /*CON AUTOINCREMENTAL*/
         ArrayList<String> listaCompleta = new ArrayList<>(); /*LISTA CON TODAS LAS SQL PARA LOGGING*/
-        String sqlA = "INSERT INTO Personas (usuarioSistema, nombreCompleto, codigo, identificacionTributaria) values "
-                + "('"+c.getUsuarioSistema()+"','"+c.getNombreCompleto()+"','"+c.getPaisResidencia().getCodigo()+"','"+c.getEmpresaAsociada().getIdentificacionTributaria()+"')";
-        listaSQLSinAI.add(sqlA);
-        listaCompleta.add(sqlA);
-        String sqlB1, sqlB2, sqlC1, sqlC2, sqlD;
+
+        String sqlA, sqlB1, sqlB2, sqlC1, sqlC2, sqlD;
+        String usuarioSistema = "";
+        if(c.getUsuarioSistema().equals("")){
+            usuarioSistema = Funciones.generarCadenaAleatoria(10);
+            c.setUsuarioSistema(usuarioSistema);
+        }
         switch(c.getClass().getName()){
             case "Modelo.Principal":
             Principal principal = (Principal) c;
-            sqlB1= " INSERT INTO Clientes (email, usuarioSistema) values ('"+principal.getEmail()+"','"+principal.getUsuarioSistema()+"') ";
+            sqlA = " INSERT INTO Personas (usuarioSistema, nombreCompleto, codigo, identificacionTributaria) values "
+                + "('"+c.getUsuarioSistema()+"','"+c.getNombreCompleto()+"','"+c.getPaisResidencia().getCodigo()+"','"+c.getEmpresaAsociada().getIdentificacionTributaria()+"')";
+            sqlB1= " INSERT INTO Clientes (email, usuarioSistema) values ('"+principal.getEmail()+"','"+c.getUsuarioSistema()+"') ";
             sqlB2 = "INSERT INTO Principales (nroDocumento, servicioActivo, usuarioSistema, nroCliente, codDocumento) values "
                     + "('"+principal.getNroDocumento()+"','N','"+principal.getUsuarioSistema()+"',?,'"+principal.getTipoDocumento().getCodDocumento()+"')";
+            listaSQLSinAI.add(sqlA);
             listaSQLConAI.add(sqlB1);
             listaSQLConAI.add(sqlB2);
+            listaCompleta.add(sqlA);
             listaCompleta.add(sqlB1);
             listaCompleta.add(sqlB2);
             break;
             case "Modelo.Secundario":
             Secundario secundario = (Secundario) c;
-            sqlC1 = "INSERT INTO Clientes (email, usuarioSistema) values ('"+secundario.getEmail()+"','"+secundario.getUsuarioSistema()+"')";
-            sqlC2 = "INSERT INTO Secundarios (nroCliente, nroDocumento) values (?,'"+secundario.getPrincipalAsociado().getNroDocumento()+"')";
+            sqlA = " INSERT INTO Personas (usuarioSistema, nombreCompleto, codigo, identificacionTributaria) values "
+                + "('"+c.getUsuarioSistema()+"','"+c.getNombreCompleto()+"','"+c.getPaisResidencia().getCodigo()+"','"+c.getEmpresaAsociada().getIdentificacionTributaria()+"')";
+            sqlC1 = " INSERT INTO Clientes (email, usuarioSistema) values ('"+secundario.getEmail()+"','"+secundario.getUsuarioSistema()+"')";
+            sqlC2 = " INSERT INTO Secundarios (nroCliente, nroDocumento) values (?,'"+secundario.getPrincipalAsociado().getNroDocumento()+"')";
+            listaSQLSinAI.add(sqlA);
             listaSQLConAI.add(sqlC1);
             listaSQLConAI.add(sqlC2);
+            listaCompleta.add(sqlA);
             listaCompleta.add(sqlC1);
             listaCompleta.add(sqlC2);
             break;
             case "Modelo.Operador":
             Operador operador = (Operador) c;
-            sqlD = "INSERT INTO OperadoresDashboard (usuarioSistema, clave, nombre) values "
+            sqlA = " INSERT INTO Personas (usuarioSistema, nombreCompleto, codigo, identificacionTributaria) values "
+                + "('"+c.getUsuarioSistema()+"','"+c.getNombreCompleto()+"','"+c.getPaisResidencia().getCodigo()+"','"+c.getEmpresaAsociada().getIdentificacionTributaria()+"')";
+            sqlD = " INSERT INTO OperadoresDashboard (usuarioSistema, clave, nombre) values "
                     + "('"+operador.getUsuarioSistema()+"',SHA('"+operador.getClave()+"'),'"+operador.getTipoUsuario().getNombre()+"')";
+            listaSQLSinAI.add(sqlA);
             listaSQLSinAI.add(sqlD);
+            listaCompleta.add(sqlA);
             listaCompleta.add(sqlD);
             break;
         }
@@ -321,6 +336,19 @@ public OpPersona(String usuarioSistema){
         System.out.println("----------------------------------");
         /*Evidencia en consola*/
         return log;
+    }
+    public String getNuevoUsuarioSistema() throws Exception, SQLException{
+        boolean seguir = true;
+        ResultSet rs = null;
+        String usuarioSistema = "-1";
+        while (seguir) {
+            usuarioSistema = Funciones.generarCadenaAleatoria(10);
+            rs = this.database.consultar("SELECT * FROM Personas WHERE usuarioSistema='" + usuarioSistema + "' ");
+            if(!rs.next()){
+                seguir=false;
+            }
+        } 
+        return usuarioSistema; //Retornamos un usuarioSistema AUTOGENERADO que NO existe en la base.
     }
 /*Comportamiento*/
 

@@ -5,7 +5,7 @@
  */
 package vistaWeb;
 
-import Modelo.ComponentesHtml;
+import Modelo.Funciones;
 import Modelo.Pais;
 import Modelo.TipoUsuario;
 import controlador.ControladorManejoUsuarios;
@@ -185,7 +185,7 @@ public class VistaManejoUsuariosWeb implements IVistaManejoUsuarios{
     @Override
     public void mostrarTiposUsuario(ArrayList<TipoUsuario> tiposUsuarios) {
         this.tiposUsu = tiposUsuarios;
-        String componente = ComponentesHtml.lista(false, "lstTipos", tiposUsuarios);
+        String componente = Funciones.lista(false, "lstTipos", tiposUsuarios);
         out.write("Tipo de usuario: " + componente + "\n\n");
 
     }
@@ -193,7 +193,7 @@ public class VistaManejoUsuariosWeb implements IVistaManejoUsuarios{
     @Override
     public void mostrarPaises(ArrayList<Pais> paises) {
         this.paises = paises;
-        String componente = ComponentesHtml.lista(false, "lstPaises", paises);
+        String componente = Funciones.lista(false, "lstPaises", paises);
         out.write("Pais: " + componente + "\n\n");
     }
 

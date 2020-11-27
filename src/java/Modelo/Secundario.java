@@ -5,6 +5,16 @@ private Principal principalAsociado;
 /*Estado*/
 
 /*Constructores*/
+    /*FULL SIN USUARIO SISTEMA*/
+public Secundario(String nombreCompleto, Empresa empresaAsociada, Pais paisResidencia, int nroCliente, String email, Principal principalAsociado){
+    this.usuarioSistema ="";
+    this.nombreCompleto = nombreCompleto;
+    this.nroCliente = nroCliente;
+    this.email = email;
+    this.empresaAsociada = empresaAsociada;
+    this.paisResidencia = paisResidencia;
+    this.principalAsociado = principalAsociado;
+}
     /*FULL*/
 public Secundario(String usuarioSistema, String nombreCompleto, Empresa empresaAsociada, Pais paisResidencia, int nroCliente, String email, Principal principalAsociado){
     this.usuarioSistema = usuarioSistema;
@@ -29,6 +39,7 @@ public Secundario(String usuarioSistema){
 }
 /*SOLO NRO CLIENTE*/
 public Secundario(int nroCliente){
+    this.usuarioSistema ="";
     this.nroCliente = nroCliente;
     
 }

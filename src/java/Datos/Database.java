@@ -10,19 +10,13 @@ public class Database {
     private static Database instancia;
     private static Connection conexion;
     private static Statement stmt;
-    private String modo = "glassfish"; /*local para testing local -- glassfish para testear desde capa de presentación*/
-//    /*TRABAJANDO CON RDS*/
-//      private static String user = "root";
-//      private static String pass = "alfacom48282020!";
-//      private static String url = "jdbc:mysql://alfacomplatform.cx3teiukxfae.us-east-1.rds.amazonaws.com:3306/alfacomPlatform"+"?user="+user+"&password="+pass;
-//    /*TRABAJANDO CON RDS*/
+    private String modo = "local"; /*local para testing local -- glassfish para testear desde capa de presentación*/
     
     /*TRABAJANDO CON INSTANCIA LOCAL*/
      private static String user = "root";
      private static String pass = "48283674";
      private static String url = "jdbc:mysql://localhost:3306/alfacomPlatform"+"?user="+user+"&password="+pass+"&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
-
-//    /*TRABAJANDO CON INSTANCIA LOCAL*/
+    /*TRABAJANDO CON INSTANCIA LOCAL*/
     
 
     /*Atributos*/
