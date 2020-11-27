@@ -16,13 +16,14 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Alta de Usuario</title>
         
+        <script src="js/jquery-3.5.1.js" type="text/javascript"></script>
         <link href="css/seccionesUsuarios.css" rel="stylesheet" type="text/css"/>
         <script src="js/seccionesUsuarios.js" type="text/javascript"></script>
         
         
     </head>
     <body>
-        <script src="js/jquery-3.5.1.js" type="text/javascript"></script>
+        
         
         
         

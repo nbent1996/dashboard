@@ -19,9 +19,10 @@ public class ComponentesHtml {
 //    }
     
         public static String lista(boolean multiple,String id ,ArrayList opciones){
-        String lista = "<select " + (multiple?" multiple ":"") +  " id='" + id+ "'>";
+        String lista = "<select " + "onChange='seleccionado()'" + (multiple?" multiple ":"") +  " id='" + id+ "'>";
         String optionId = "";
         String value ="";
+        boolean primero = true;
         
         for(Object obj:opciones){
             
@@ -34,7 +35,13 @@ public class ComponentesHtml {
                 TipoUsuario t = (TipoUsuario) obj;
                 optionId = value = t.getNombre();
             }
-            lista+= "<option id='" + optionId + "'>" + value + "</option>";
+            
+            if(primero){
+                lista+= "<option id='" + optionId + "' name= 'itemSeleccionado' >" + value + "</option>";
+                primero = false;
+            }else{
+                lista+= "<option id='" + optionId + "'>" + value + "</option>";
+            }
         }
         lista+="</select>";
         return lista;
