@@ -93,6 +93,7 @@ public class VistaManejoUsuariosWeb implements IVistaManejoUsuarios{
     
     private void cargarTiposUsuario() {
         controlador.cargarTiposUsuario();
+        controlador.cargarPaises();
     }
 
     private void cargarPaises() {
@@ -105,9 +106,10 @@ public class VistaManejoUsuariosWeb implements IVistaManejoUsuarios{
         String usuarioAltaUsr = request.getParameter("usuario");
         String nombreCompletoAltaUsr = request.getParameter("nombreCompleto");
         String nombreEmpresaAltaUsr = request.getParameter("nombreEmpresa");
-        String nombrePaisAltaUsr = request.getParameter("nombrePais");
+        String nombrePaisAltaUsr = request.getParameter("lstPaises");
         String tipoUsuarioAltaUsr = request.getParameter("tipoUsuario");
-
+        
+        
         this.request = request;
         this.response = response;
 

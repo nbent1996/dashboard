@@ -16,13 +16,14 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Alta de Usuario</title>
         
+        <script src="js/jquery-3.5.1.js" type="text/javascript"></script>
         <link href="css/seccionesUsuarios.css" rel="stylesheet" type="text/css"/>
         <script src="js/seccionesUsuarios.js" type="text/javascript"></script>
         
         
     </head>
     <body>
-        <script src="js/jquery-3.5.1.js" type="text/javascript"></script>
+        
         
         
         
@@ -36,6 +37,7 @@
             function mostrarTipos(){
                 $.get("ManejoUsuariosServlet?accion=comboTipos", function(data){
                     document.getElementById("combo-tipoUsuarios").innerHTML=data;
+                    //document.getElementById("combo-paises").innerHTML=data;
                 });
             }
             
@@ -94,8 +96,8 @@
                     <input type="text" id="txtUsuarioAlta" name="usuario" placeholder="usuario" required="true"/>
                     <input type="text" id="txtNombreCompletoAlta" name="nombreCompleto" placeholder="nombre completo" required="true"/>
                     <input type="text" id="txtNombreEmpresaAlta" name="nombreEmpresa" placeholder="empresa" required="true"/>
-                    <input type="text" id="txtNombrePaisAlta" name="nombrePais" placeholder="pais" required="true"/>
-                    <input type="text" id="txtTipoUsuarioAlta" name="tipoUsuario" placeholder="tipo usuario" required="true"/>
+                    <!-- <input type="text" id="txtNombrePaisAlta" name="nombrePais" placeholder="pais" required="true"/> -->
+                    <!-- <input type="text" id="txtTipoUsuarioAlta" name="tipoUsuario" placeholder="tipo usuario" required="true"/> -->
                     <input type="hidden" name="accion" value="formAlta">
                     
                     <span id="combo-paises"></span> <br><br>
