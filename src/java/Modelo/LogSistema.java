@@ -87,8 +87,16 @@ public class LogSistema {
     public void setListaQuerys(ArrayList<QueryEjecutada> listaQuerys) {
         this.listaQuerys = listaQuerys;
     }
+   public String getUsuarioSistema() {
+        return usuarioSistema;
+    }
 
+    public void setUsuarioSistema(String usuarioSistema) {
+        this.usuarioSistema = usuarioSistema;
+    }
     /*Getters y Setters*/
+
+ 
 
 
    
