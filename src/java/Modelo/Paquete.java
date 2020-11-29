@@ -2,7 +2,7 @@ package Modelo;
 
 import java.util.ArrayList;
 
-public class Paquete {
+public class Paquete implements IObject<Paquete> {
 /*Estado*/
 private int idPaquete;
 private float costoBruto;
@@ -22,6 +22,7 @@ public Paquete(int idPaquete, float costoBruto, Empresa empresaAsociada, ArrayLi
     this.costoBruto = costoBruto;
     this.empresaAsociada = empresaAsociada;
     this.listaTieneTP = listaTieneTP;
+    //adaptarCampos();
 }
 /*ID -1 FULL*/
 public Paquete(float costoBruto, Empresa empresaAsociada, ArrayList<TieneTP> listaTieneTP){
@@ -29,6 +30,7 @@ public Paquete(float costoBruto, Empresa empresaAsociada, ArrayList<TieneTP> lis
     this.costoBruto = costoBruto;
     this.empresaAsociada = empresaAsociada;
     this.listaTieneTP = listaTieneTP;
+    //adaptarCampos();
 }
 /*CON ID SIN LISTA TIENETP*/
 public Paquete(int idPaquete, float costoBruto, Empresa empresaAsociada){
@@ -36,6 +38,7 @@ public Paquete(int idPaquete, float costoBruto, Empresa empresaAsociada){
     this.costoBruto = costoBruto;
     this.empresaAsociada = empresaAsociada;
     listaTieneTP = new ArrayList<>();
+    //adaptarCampos();
 
 }
 /*ID -1 sin LISTA TIENETP*/
@@ -44,12 +47,54 @@ public Paquete(float costoBruto, Empresa empresaAsociada){
     this.costoBruto = costoBruto;
     this.empresaAsociada = empresaAsociada;
     listaTieneTP = new ArrayList<>();
+    //adaptarCampos();
 
 }
 /*Constructores*/
 
 /*Comportamiento*/
+    @Override
+    public void adaptarCampos() {
+        /*Sanitizar campos*/
+        /*No hay campos String para sanitizar inyecciones SQL*/
+        /*La empresa asociada se trae del session, del usuario logueado del dashboard*/
+    }
 
+    @Override
+    public void validar() throws ProgramException {
+        String retorno = "";
+        /*Campos nulos*/
+        
+        /*Largo caracteres*/
+        
+        /*Campos expresamente numéricos*/
+        if(this.costoBruto<0){
+            retorno+="El costo del paquete debe ser mayor a 0.\n";
+        }
+        /*La empresa no se valida, se trae del usuario logueado*/
+        
+        if (!retorno.equals("")) {
+            throw new ProgramException(retorno);
+        }
+    }
+
+    @Override
+    public String toString(int modo) throws ProgramException {
+                String retorno = "ERROR ToString";
+        switch(modo){
+            case 1:
+                retorno = "ID: "+ this.idPaquete + " ("+this.empresaAsociada.getIdentificacionTributaria()+")";
+            break;
+            
+            case 2:
+                retorno = "ID: "+ this.idPaquete + " ( Costo: "+this.costoBruto+")";
+            break;
+        }
+        if(retorno.equals("ERROR ToString")){
+            throw new ProgramException(retorno);
+        }
+        return retorno;
+    }
 /*Comportamiento*/
 
 /*Getters y Setters*/
@@ -85,6 +130,8 @@ public int getIdPaquete() {
         this.listaTieneTP = listaTieneTP;
     }
 /*Getters y Setters*/
+
+
 
     
 }

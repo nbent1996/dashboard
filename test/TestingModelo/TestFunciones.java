@@ -33,4 +33,13 @@ public class TestFunciones {
         assertTrue(Funciones.isNumeric(""));
         assertTrue(Funciones.isNumeric("1156651"));
     }
+    @Test
+    public void testFirstLetterUpperCase(){
+        assertEquals("", Funciones.FirstLetterUpperCase(""));
+        assertEquals(null, Funciones.FirstLetterUpperCase(null));
+        assertEquals("Alemán", Funciones.FirstLetterUpperCase("ALEMÁN"));
+        assertEquals("Portugués", Funciones.FirstLetterUpperCase("portugués"));
+        assertEquals("Español", Funciones.FirstLetterUpperCase("eSPAÑOL"));
+
+    }
 }

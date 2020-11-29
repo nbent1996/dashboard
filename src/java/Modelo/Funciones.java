@@ -93,4 +93,10 @@ public class Funciones {
         }
         return cadena;
     }
+    public static String FirstLetterUpperCase(String campo){
+        if(campo == null || campo.equals("")){
+            return campo;
+        }
+        return campo.substring(0, 1).toUpperCase() + campo.substring(1).toLowerCase();
+    }
 }
