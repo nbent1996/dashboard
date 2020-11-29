@@ -1,12 +1,12 @@
 package Modelo;
-public class Secundario extends Cliente{
+public class Secundario extends Cliente implements IObject<Secundario>{
 /*Estado*/
 private Principal principalAsociado;
 /*Estado*/
 
 /*Constructores*/
     /*FULL SIN USUARIO SISTEMA*/
-public Secundario(String nombreCompleto, Empresa empresaAsociada, Pais paisResidencia, int nroCliente, String email, Principal principalAsociado){
+public Secundario(String nombreCompleto, Empresa empresaAsociada, Pais paisResidencia, int nroCliente, String email, Principal principalAsociado, String telefono){
     this.usuarioSistema ="";
     this.nombreCompleto = nombreCompleto;
     this.nroCliente = nroCliente;
@@ -14,9 +14,10 @@ public Secundario(String nombreCompleto, Empresa empresaAsociada, Pais paisResid
     this.empresaAsociada = empresaAsociada;
     this.paisResidencia = paisResidencia;
     this.principalAsociado = principalAsociado;
+    this.telefono = telefono;
 }
     /*FULL*/
-public Secundario(String usuarioSistema, String nombreCompleto, Empresa empresaAsociada, Pais paisResidencia, int nroCliente, String email, Principal principalAsociado){
+public Secundario(String usuarioSistema, String nombreCompleto, Empresa empresaAsociada, Pais paisResidencia, int nroCliente, String email, Principal principalAsociado, String telefono){
     this.usuarioSistema = usuarioSistema;
     this.nombreCompleto = nombreCompleto;
     this.nroCliente = nroCliente;
@@ -24,14 +25,16 @@ public Secundario(String usuarioSistema, String nombreCompleto, Empresa empresaA
     this.empresaAsociada = empresaAsociada;
     this.paisResidencia = paisResidencia;
     this.principalAsociado = principalAsociado;
+    this.telefono = telefono;
 }
 /*SIN EMPRESA, PAIS*/
-public Secundario(String usuarioSistema, String nombreCompleto, int nroCliente,String email, Principal principalAsociado){
+public Secundario(String usuarioSistema, String nombreCompleto, int nroCliente,String email, Principal principalAsociado, String telefono){
     this.usuarioSistema = usuarioSistema;
     this.nombreCompleto = nombreCompleto;
     this.nroCliente = nroCliente;
     this.email = email;
     this.principalAsociado = principalAsociado;
+    this.telefono = telefono;
 }
 /*SOLO USUARIO SISTEMA*/
 public Secundario(String usuarioSistema){
@@ -46,7 +49,35 @@ public Secundario(int nroCliente){
 /*Constructores*/
 
 /*Comportamiento*/
-
+    @Override
+    public void adaptarCampos(){
+    super.adaptarCampos();
+    }
+    @Override
+    public void validar() throws ProgramException{
+    super.adaptarCampos(); 
+    }
+    @Override
+    public String toString(int modo) throws ProgramException {
+        String retorno = "ERROR ToString";
+        switch(modo){
+            case 1:
+                retorno = this.nombreCompleto;
+            break;
+            
+            case 2:
+                retorno = this.nombreCompleto + " (" + this.email + ")";
+            break;
+            
+            case 3:
+                retorno = this.nombreCompleto + " (" + this.usuarioSistema + ")";
+            break;
+        }
+        if(retorno.equals("ERROR ToString")){
+            throw new ProgramException(retorno);
+        }
+        return retorno;   
+    }
 /*Comportamiento*/
 
 /*Getters y Setters*/
@@ -74,6 +105,8 @@ public Secundario(int nroCliente){
     }
 
 /*Getters y Setters*/
+
+
 
 
 

@@ -68,6 +68,7 @@ public class Funciones {
         if(cadena.equals("")){
            return true;
         }
+        
         try {
             for(char c: cadena.toCharArray()){
                 Integer.parseInt(c+"");

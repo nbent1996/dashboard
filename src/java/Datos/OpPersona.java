@@ -35,6 +35,57 @@ public OpPersona(String usuarioSistema){
 /*Comportamiento*/
 @Override
     public LogSistema guardar(Persona cAnterior, Persona c) throws Exception, SQLException {
+    /*Validaciones en comun para Insertar y Modificar*/
+    ResultSet rs = null;
+    Principal p = null;
+    Principal pAnterior = null;
+    Secundario s = null;
+    Secundario sAnterior = null;
+    String telefonoA = "", telefonoB="", emailA = "", emailB="";
+    if (c instanceof Principal) {
+        p = (Principal) c;
+        if(cAnterior!=null){
+            pAnterior = (Principal) cAnterior;
+            telefonoB = pAnterior.getTelefono();
+            emailB = pAnterior.getEmail();
+        }
+        telefonoA = p.getTelefono();
+        emailA = p.getEmail();
+        
+    }
+    if (c instanceof Secundario) {
+        s = (Secundario) c;
+        if(cAnterior!=null){
+            sAnterior = (Secundario) cAnterior;
+            telefonoB = sAnterior.getTelefono();
+            emailB = sAnterior.getEmail();
+        }
+        telefonoA = s.getTelefono();
+        emailA = s.getEmail();
+    }
+    /*Validando Campo Unico Telefono*/
+    if (!telefonoA.equals("")) {
+        String sqlTelefono = "SELECT * FROM Clientes WHERE Clientes.telefono='" + telefonoA + "' ";
+        if(!telefonoB.equals("")){
+            sqlTelefono+=" AND Clientes.telefono!='"+telefonoB+"' ";
+        }
+        rs = database.consultar(sqlTelefono);
+        if (rs.next()) {
+            throw new Exception("El campo teléfono ya existe en la base de datos y no se puede repetir.");
+        }
+    }
+    /*Validando Campo Unico Email*/
+    if (!emailA.equals("")) {
+        String sqlEmail = "SELECT * FROM Clientes WHERE Clientes.email='"+emailA+"' ";
+        if(!emailB.equals("")){
+            sqlEmail+=" AND Clientes.email!='"+emailB+"' ";
+        }
+        rs = database.consultar(sqlEmail);
+        if(rs.next()){
+            throw new Exception("El campo email ya existe en la base de datos y no se puede repetir.");
+        }
+    }
+        /*Validaciones en comun para Insertar y Modificar*/ 
         if(cAnterior == null){
             return insertar(c);
         }else{
@@ -59,7 +110,7 @@ public OpPersona(String usuarioSistema){
             Principal principal = (Principal) c;
             sqlA = " INSERT INTO Personas (usuarioSistema, nombreCompleto, codigo, identificacionTributaria) values "
                 + "('"+c.getUsuarioSistema()+"','"+c.getNombreCompleto()+"','"+c.getPaisResidencia().getCodigo()+"','"+c.getEmpresaAsociada().getIdentificacionTributaria()+"')";
-            sqlB1= " INSERT INTO Clientes (email, usuarioSistema) values ('"+principal.getEmail()+"','"+c.getUsuarioSistema()+"') ";
+            sqlB1= " INSERT INTO Clientes (email,usuarioSistema, telefono) values ('"+principal.getEmail()+"','"+c.getUsuarioSistema()+"', '"+principal.getTelefono()+"') ";
             sqlB2 = "INSERT INTO Principales (nroDocumento, servicioActivo, usuarioSistema, nroCliente, codDocumento) values "
                     + "('"+principal.getNroDocumento()+"','N','"+principal.getUsuarioSistema()+"',?,'"+principal.getTipoDocumento().getCodDocumento()+"')";
             listaSQLSinAI.add(sqlA);
@@ -73,7 +124,7 @@ public OpPersona(String usuarioSistema){
             Secundario secundario = (Secundario) c;
             sqlA = " INSERT INTO Personas (usuarioSistema, nombreCompleto, codigo, identificacionTributaria) values "
                 + "('"+c.getUsuarioSistema()+"','"+c.getNombreCompleto()+"','"+c.getPaisResidencia().getCodigo()+"','"+c.getEmpresaAsociada().getIdentificacionTributaria()+"')";
-            sqlC1 = " INSERT INTO Clientes (email, usuarioSistema) values ('"+secundario.getEmail()+"','"+secundario.getUsuarioSistema()+"')";
+            sqlC1 = " INSERT INTO Clientes (email, usuarioSistema, telefono) values ('"+secundario.getEmail()+"','"+secundario.getUsuarioSistema()+"', '"+secundario.getTelefono()+"' )";
             sqlC2 = " INSERT INTO Secundarios (nroCliente, nroDocumento) values (?,'"+secundario.getPrincipalAsociado().getNroDocumento()+"')";
             listaSQLSinAI.add(sqlA);
             listaSQLConAI.add(sqlC1);
@@ -142,24 +193,14 @@ public OpPersona(String usuarioSistema){
                     if (principal.getServicioActivo()) {
                         servicioActivo = "S";
                     }
-                    sqlA = "UPDATE Personas, Clientes, Principales SET Personas.nombreCompleto='" + c.getNombreCompleto() + "' ,Clientes.email ='"+principal.getEmail()+"', Principales.servicioActivo='" + servicioActivo + "' where Personas.usuarioSistema = Clientes.usuarioSistema AND Clientes.usuarioSistema = Principales.usuarioSistema AND Principales.nroDocumento='" + principal.getNroDocumento() + "' and Principales.usuarioSistema='" + principal.getUsuarioSistema() + "'";
-                    /*Validar que el nuevo nroDocumento no exista en el sistema ahora.*/
-//                    validarDependencias = database.consultar("SELECT * FROM Principales WHERE Principales.nroDocumento='" + principal.getNroDocumento() + "' and Principales.usuarioSistema='" + principal.getUsuarioSistema() + "'");
-//                    if (validarDependencias.next()) {
-//                        validarDependencias.close();
-//                        registroConsola(this.usuarioSistema, listaSQL, "Modificación", "El número de documento que usted desea asignar ya está en uso en el sistema.");
-//                        throw new Exception("El número de documento que usted desea asignar ya está en uso en el sistema.");
-//                    }VALIDACION NECESARIA POR SI EN ALGUN MOMENTO SE DESEA PODER MODFIICAR EL NRODOCUMENTO.
-//                    validarDependencias.close();
-                    /*Validar que el nuevo nroDocumento no exista en el sistema ahora.*/
-
+                    sqlA = "UPDATE Personas, Clientes, Principales SET Personas.nombreCompleto='" + c.getNombreCompleto() + "' ,Clientes.email ='"+principal.getEmail()+"', Principales.servicioActivo='" + servicioActivo + "', telefono='"+principal.getTelefono()+"' where Personas.usuarioSistema = Clientes.usuarioSistema AND Clientes.usuarioSistema = Principales.usuarioSistema AND Principales.nroDocumento='" + principal.getNroDocumento() + "' and Principales.usuarioSistema='" + principal.getUsuarioSistema() + "'";
                     listaSQL.add(sqlA);
                     break;
 
                 case "Modelo.Secundario":
                     Secundario secundario = (Secundario) c;
                     Secundario sAnterior = (Secundario) cAnterior;
-                    sqlA = "UPDATE Personas, Clientes, Secundarios SET Personas.nombreCompleto='"+secundario.getNombreCompleto()+"', Clientes.email='"+secundario.getEmail()+"', Secundarios.nroDocumento='"+secundario.getPrincipalAsociado().getNroDocumento()+"' where Personas.usuarioSistema = Clientes.usuarioSistema AND Clientes.nroCliente = Secundarios.nroCliente AND Secundarios.nroCliente='"+sAnterior.getNroCliente()+"' ";
+                    sqlA = "UPDATE Personas, Clientes, Secundarios SET Personas.nombreCompleto='"+secundario.getNombreCompleto()+"', Clientes.email='"+secundario.getEmail()+"', Secundarios.nroDocumento='"+secundario.getPrincipalAsociado().getNroDocumento()+"', telefono='"+secundario.getTelefono()+"' where Personas.usuarioSistema = Clientes.usuarioSistema AND Clientes.nroCliente = Secundarios.nroCliente AND Secundarios.nroCliente='"+sAnterior.getNroCliente()+"' ";
                     /*No se valida la no repetición del usuarioSistema porque ya fue validado desde la tabla Personas*/
                     listaSQL.add(sqlA);
                     break;
@@ -224,7 +265,7 @@ public OpPersona(String usuarioSistema){
         ArrayList<Persona> personas = new ArrayList<>();
         String usuarioSistema, nombreCompleto, codigo, identificacionTributaria; /*Tabla Persona*/
         String nombreTipoUsuario; /*Tabla OperadoresDashboard*/
-        String nroCliente, email; /*Tabla Cliente*/
+        String nroCliente, email, telefono; /*Tabla Cliente*/
         String nroDocumento, servicioActivo, codDocumento; /*Tabla Principales*/
         String nroDocumentoPrincipal; /*Tabla Secundarios*/
         String sqlA ="", sqlB="", sqlC="";
@@ -254,7 +295,7 @@ public OpPersona(String usuarioSistema){
                     listaSQL.add(sqlA);
                     break;
                 case "Modelo.Principal":
-                    sqlB = "SELECT Personas.usuarioSistema, Personas.nombreCompleto, Personas.codigo, Personas.identificacionTributaria, Principales.nroDocumento, Principales.nroCliente, Principales.servicioActivo, Principales.codDocumento, Clientes.email from Personas, Principales, Clientes ";
+                    sqlB = "SELECT Personas.usuarioSistema, Personas.nombreCompleto, Personas.codigo, Personas.identificacionTributaria, Principales.nroDocumento, Principales.nroCliente, Principales.servicioActivo, Principales.codDocumento, Clientes.email, Clientes.telefono from Personas, Principales, Clientes ";
                     if (filtro != null) {
                         sqlB += filtro;
                         sqlB += " AND Personas.usuarioSistema = Principales.usuarioSistema AND Principales.nroCliente = Clientes.nroCliente AND Personas.eliminado='N' AND Principales.eliminado='N' ";
@@ -272,17 +313,18 @@ public OpPersona(String usuarioSistema){
                         codDocumento =  rs.getString("codDocumento");
                         nroCliente = rs.getString("nroCliente");
                         email = rs.getString("email");
+                        telefono = rs.getString("Clientes.telefono");
                         int nroC = Integer.parseInt(nroCliente);
                         boolean servActivo = false;
                         if(servicioActivo.equals("S"))
                             servActivo = true;
-                        personas.add(new Principal(usuarioSistema, nombreCompleto, new Empresa(identificacionTributaria), new Pais(codigo), nroC, email, nroDocumento, servActivo, new TipoDocumento(codDocumento)));
+                        personas.add(new Principal(usuarioSistema, nombreCompleto, new Empresa(identificacionTributaria), new Pais(codigo), nroC, email, nroDocumento, servActivo, new TipoDocumento(codDocumento),telefono));
                     }
                     rs.close();
                     listaSQL.add(sqlB);
                     break;
                 case "Modelo.Secundario":
-                    sqlC = "SELECT Personas.usuarioSistema, Personas.nombreCompleto, Personas.codigo, Personas.identificacionTributaria, Secundarios.nroDocumento, Secundarios.nroCliente, Clientes.email from Personas, Clientes, Secundarios ";
+                    sqlC = "SELECT Personas.usuarioSistema, Personas.nombreCompleto, Personas.codigo, Personas.identificacionTributaria, Secundarios.nroDocumento, Secundarios.nroCliente, Clientes.email, Clientes.telefono from Personas, Clientes, Secundarios ";
                     if (filtro != null) {
                         sqlC += filtro;
                         sqlC += " AND Personas.usuarioSistema = Clientes.usuarioSistema AND Clientes.nroCliente = Secundarios.nroCliente AND Personas.eliminado='N' AND Secundarios.eliminado='N' ";
@@ -298,8 +340,9 @@ public OpPersona(String usuarioSistema){
                         nroDocumentoPrincipal = rs.getString("nroDocumento");
                         nroCliente = rs.getString("nroCliente");
                         email = rs.getString("Clientes.email");
+                        telefono = rs.getString("Clientes.telefono");
                         int nroC = Integer.parseInt(nroCliente);
-                        personas.add(new Secundario(usuarioSistema, nombreCompleto, new Empresa(identificacionTributaria), new Pais(codigo), nroC, email, new Principal(nroDocumentoPrincipal)));
+                        personas.add(new Secundario(usuarioSistema, nombreCompleto, new Empresa(identificacionTributaria), new Pais(codigo), nroC, email, new Principal(nroDocumentoPrincipal), telefono));
                     }
                     rs.close();
                     listaSQL.add(sqlC);
