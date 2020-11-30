@@ -23,9 +23,12 @@ public Categoria(String nombreCategoria){
         /*Campos nulos*/
         String retorno = "";
         if(this.nombreCategoria.equals("") || this.nombreCategoria == null){
-            retorno+= "El nombre de la categoria no puede estar vacio.";
+            retorno+= "El nombre de la categoria no puede estar vacio.\n";
         }
-        
+        /*Largo caracteres*/
+        if(this.nombreCategoria.length()>40){
+            retorno+="El nombre de la categoria no puede tener más de 40 caracteres.\n";
+        }
         if(!retorno.equals("")){
             throw new ProgramException(retorno);
         }

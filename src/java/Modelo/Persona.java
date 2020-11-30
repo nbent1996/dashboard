@@ -1,6 +1,6 @@
 package Modelo;
 
-public abstract class Persona {
+public abstract class Persona{
 
     /*Estado*/
     protected String usuarioSistema;
@@ -15,26 +15,30 @@ public abstract class Persona {
  /*Constructores*/
 
  /*Comportamiento*/
-    
+    public void adaptarCampos(){
+        /*Sanitizar campos*/
+        this.usuarioSistema = Funciones.sanitizarCampo(this.usuarioSistema);
+        this.nombreCompleto = Funciones.sanitizarCampo(this.nombreCompleto);
+    }
     
     public void validar() throws ProgramException {
         String retorno = "";
-        if (nombreCompleto.equals("")) {
-            retorno += "El nombre está vacio.\n";
+       /*Campos Nulos*/
+        if(this.nombreCompleto.equals("") || this.nombreCompleto==null){
+            retorno+="El nombre del cliente es un campo obligatorio.\n";
+        }
+        if(this.getPaisResidencia()==null || this.getPaisResidencia().getCodigo().equals("") || this.getPaisResidencia().getCodigo()==null){
+            retorno+="El pais de residencia es un campo obligatorio.\n";
+        }
+        if(this.getEmpresaAsociada()==null || this.getEmpresaAsociada().getIdentificacionTributaria().equals("") || this.getEmpresaAsociada().getIdentificacionTributaria()== null){
+            retorno+="La empresa asociada es un campo obligatorio.\n";//Esto se guarda en el session, es un atributo propio del usuario operador del dashboard que se loguea.
+        }
+        //usuarioSistema no se valida porque si es = "" se autogenera validando en la base que no se repita.
+        /*Largo de caracteres*/
+        if(this.nombreCompleto.length()>50){
+            retorno+="El nombre del cliente no puede tener más de 50 caracteres.\n";
         }
         
-        if (usuarioSistema.equals("")) {
-            retorno += "El usuario está vacio.\n";
-        }
-        
-        if (empresaAsociada == null) {
-            retorno += "La empresa está vacía.\n";
-        }
-        
-        if (paisResidencia == null) {
-            retorno += "El país está vacío.\n";
-        }
-
         if (!retorno.equals("")) {
             throw new ProgramException(retorno);
         }

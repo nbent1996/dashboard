@@ -1,8 +1,9 @@
 package Modelo;
-public abstract class Cliente extends Persona {
+public abstract class Cliente extends Persona{
 /*Estado*/
 protected int nroCliente;
 protected String email;
+protected String telefono;
 /*Estado*/
 
 /*Constructores*/
@@ -10,11 +11,38 @@ protected String email;
 /*Constructores*/
 
 /*Comportamiento*/
+@Override
+public void adaptarCampos(){
+    super.adaptarCampos();
+    /*Sanitizar campos*/
+    this.email = Funciones.sanitizarCampo(this.email);
+    this.telefono = Funciones.sanitizarCampo(this.telefono);
 
+}
+@Override
+public void validar() throws ProgramException{
+    super.validar();
+    String retorno = "";
+    /*Campos Nulos*/
+    if (this.email.equals("") || this.email == null) {
+        retorno += "El email es un campo obligatorio.\n";
+    }
+    if (this.telefono.equals("") || this.telefono == null) {
+        retorno += "El teléfono es un campo obligatorio.\n";
+    }
+    /*Largo caracteres*/
+
+    /*Campos expresamente numéricos*/
+    
+    
+    if (!retorno.equals("")) {
+        throw new ProgramException(retorno);
+    }
+}
 /*Comportamiento*/
 
 /*Getters y Setters*/
- public int getNroCliente() {
+    public int getNroCliente() {
         return nroCliente;
     }
 
@@ -30,7 +58,17 @@ protected String email;
         this.email = email;
     }
 
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
 /*Getters y Setters*/
+
+
 
    
 }

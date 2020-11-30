@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package TestingDatos;
 
 import Datos.OpPersona;
@@ -22,10 +17,6 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
-/**
- *
- * @author nicol
- */
 public class TestPersonas {
     private OpPersona op;
     public TestPersonas() {
@@ -40,19 +31,19 @@ public class TestPersonas {
     public void testINSERT(){
         try {
             /*INSERT OPERADOR*/
-            assertEquals("NOERROR", this.op.insertar(new Operador("hernandez_g", "hernandez_g", "Gabriel Hernandez",new Empresa("526283747346"), new Pais("URU"), new TipoUsuario("marketing"))).getTextoError());
-            assertEquals("NOERROR", this.op.insertar(new Operador("medina", "medina", "Gabriel Medina",new Empresa("526283747346"), new Pais("URU"), new TipoUsuario("administrador"))).getTextoError());
-            assertEquals("NOERROR", this.op.insertar(new Operador("gargano", "gargano", "Ivana Gargano",new Empresa("526283747346"), new Pais("URU"), new TipoUsuario("operador"))).getTextoError());
+            assertEquals("NOERROR", this.op.guardar(null,new Operador("hernandez_g", "hernandez_g", "Gabriel Hernandez",new Empresa("526283747346"), new Pais("URU"), new TipoUsuario("marketing"))).getTextoError());
+            assertEquals("NOERROR", this.op.guardar(null,new Operador("medina", "medina", "Gabriel Medina",new Empresa("526283747346"), new Pais("URU"), new TipoUsuario("administrador"))).getTextoError());
+            assertEquals("NOERROR", this.op.guardar(null,new Operador("gargano", "gargano", "Ivana Gargano",new Empresa("526283747346"), new Pais("URU"), new TipoUsuario("operador"))).getTextoError());
 
             /*INSERT PRINCIPAL*/
-            assertEquals("NOERROR", this.op.insertar(new Principal("Adrian Gambini",new Empresa("526283747346"), new Pais("URU"), -1,"gambini@gmail.com", "16432548", false, new TipoDocumento("CI-UYU"))).getTextoError());
-            assertEquals("NOERROR", this.op.insertar(new Principal("Arturo Rodríguez",new Empresa("526283747346"), new Pais("URU"), -1,"rodriguezART@gmail.com", "14675232", false, new TipoDocumento("CI-UYU"))).getTextoError());
-            assertEquals("NOERROR", this.op.insertar(new Principal("Gabriela Sanabria",new Empresa("526283747346"), new Pais("URU"), -1,"sanabriaGAB@gmail.com", "24563218", false, new TipoDocumento("CI-UYU"))).getTextoError());
+            assertEquals("NOERROR", this.op.insertar(new Principal("Adrian Gambini",new Empresa("526283747346"), new Pais("URU"), -1,"gambini@gmail.com", "16432548", false, new TipoDocumento("CI-UYU"), "+59897405075")).getTextoError());
+            assertEquals("NOERROR", this.op.insertar(new Principal("Arturo Rodríguez",new Empresa("526283747346"), new Pais("URU"), -1,"rodriguezART@gmail.com", "14675232", false, new TipoDocumento("CI-UYU"), "+59897240353")).getTextoError());
+            assertEquals("NOERROR", this.op.insertar(new Principal("Gabriela Sanabria",new Empresa("526283747346"), new Pais("URU"), -1,"sanabriaGAB@gmail.com", "24563218", false, new TipoDocumento("CI-UYU"), "+59897852803")).getTextoError());
             
             /*INSERT SECUNDARIO*/
-            assertEquals("NOERROR", this.op.insertar(new Secundario("Guillermo Gambini", new Empresa("526283747346"),  new Pais("URU"), -1, "gambiniGUI@hotmail.com", new Principal("16432548"))).getTextoError());
-            assertEquals("NOERROR", this.op.insertar(new Secundario("Patricia Rodríguez", new Empresa("526283747346"),  new Pais("URU"), -1, "rodriguezPAT@hotmail.com", new Principal("14675232"))).getTextoError());
-            assertEquals("NOERROR", this.op.insertar(new Secundario("Claudio Ureta", new Empresa("526283747346"),  new Pais("URU"), -1, "uretaCLA@hotmail.com", new Principal("24563218"))).getTextoError());
+            assertEquals("NOERROR", this.op.guardar(null,new Secundario("Guillermo Gambini", new Empresa("526283747346"),  new Pais("URU"), -1, "gambiniGUI@hotmail.com", new Principal("16432548"), "+59897247112")).getTextoError());
+            assertEquals("NOERROR", this.op.guardar(null,new Secundario("Patricia Rodríguez", new Empresa("526283747346"),  new Pais("URU"), -1, "rodriguezPAT@hotmail.com", new Principal("14675232"), "+59897815311")).getTextoError());
+            assertEquals("NOERROR", this.op.guardar(null,new Secundario("Claudio Ureta", new Empresa("526283747346"),  new Pais("URU"), -1, "uretaCLA@hotmail.com", new Principal("24563218"), "+59897972113")).getTextoError());
 
         } catch (SQLException ex) {
             fail("Fallo en testINSERT");
@@ -73,7 +64,7 @@ public class TestPersonas {
             assertTrue(this.op.buscar(" WHERE clave='CLAVE INEXISTENTE' ", "Modelo.Operador").isEmpty());
         //Seleccionando Principales
             //Búsqueda de un principal
-            assertTrue(this.op.buscar(" WHERE Principales.nroDocumento='14675232' ", "Modelo.Principal").size()==1);
+            assertTrue(this.op.buscar(" WHERE Principales.nroDocumento='30523215' ", "Modelo.Principal").size()==1);
             //Búsqueda de todos los principales
             assertTrue(!this.op.buscar(null, "Modelo.Principal").isEmpty());
             //Búsqueda sin resultados
@@ -96,8 +87,9 @@ public class TestPersonas {
     @Test
     public void testUPDATE(){
             Operador oAnterior=new Operador("hernandez_n", "hernandez_n", "Nicolás Hernandez",new Empresa("526283747346"), new Pais("URU"), new TipoUsuario("marketing"));
-            Principal pAnterior = new Principal("NBk88tRVnL", "Mar Benitez",new Empresa("526283747346"), new Pais("URU"), -1,"benitezMAR@gmail.com", "16432500", false, new TipoDocumento("CI-UYU"));
-            Secundario sAnterior = new Secundario("dmKvRTFcZ8", "Mónica Bentancor", new Empresa("526283747346"),  new Pais("URU"), -1, "bentancorMON@hotmail.com", new Principal("16432500"));
+            Principal pAnterior = new Principal("NBk88tRVnL", "Mar Benitez",new Empresa("526283747346"), new Pais("URU"), -1,"benitezMAR@gmail.com", "16432500", false, new TipoDocumento("CI-UYU"), "+59897321668");
+            Principal p2 = new Principal("Patricia Conde", new Empresa("526283747346"),  new Pais("URU"), -1, "patcon@adinet.com.uy", "16432501", false, new TipoDocumento("CI-UYU"), "+59897321334");
+            Secundario sAnterior = new Secundario("dmKvRTFcZ8", "Mónica Bentancor", new Empresa("526283747346"),  new Pais("URU"), -1, "bentancorMON@hotmail.com", new Principal("16432500"), "+59897803629");
             
             Operador o = oAnterior;
             //Modificaciones planteadas a Operador
@@ -116,21 +108,22 @@ public class TestPersonas {
             //Modificaciones planteadas a Secundario
             s.setNombreCompleto("Alejandra Bentancor");
             s.setEmail("bentancorALE@ort.edu.uy");
-            s.getPrincipalAsociado().setNroDocumento("14675232"); //OTRO PRINCIPAL PROVISTO EN LA PRECARGA DE LA BASE DE DATOS
+            s.getPrincipalAsociado().setNroDocumento("16432501"); //OTRO PRINCIPAL PROVISTO EN LA PRECARGA DE LA BASE DE DATOS
             try{
            /*INSERCIONES PREVIAS*/
-           /*OPERADOR*/   this.op.insertar(oAnterior);
-           /*PRINCIPAL*/  this.op.insertar(pAnterior);
-           /*SECUNDARIO*/ this.op.insertar(sAnterior);
+           /*OPERADOR*/   this.op.guardar(null,oAnterior);
+           /*PRINCIPAL*/  this.op.guardar(null,pAnterior);
+           /*PRINCIPAL2*/ this.op.guardar(null, p2);
+           /*SECUNDARIO*/ this.op.guardar(null,sAnterior);
            Secundario sAnteriorConId = (Secundario) this.op.buscar(" WHERE Personas.usuarioSistema='dmKvRTFcZ8' ", "Modelo.Secundario").get(0);        
 
            
            //UPDATE A OPERADOR
-           assertEquals("NOERROR", this.op.modificar(oAnterior, o).getTextoError());
+           assertEquals("NOERROR", this.op.guardar(oAnterior, o).getTextoError());
            //UPDATE A PRINCIPAL
-           assertEquals("NOERROR", this.op.modificar(pAnterior, p).getTextoError());
+           assertEquals("NOERROR", this.op.guardar(pAnterior, p).getTextoError());
            //UPDATE A SECUNDARIO
-           assertEquals("NOERROR", this.op.modificar(sAnteriorConId, s).getTextoError());
+           assertEquals("NOERROR", this.op.guardar(sAnteriorConId, s).getTextoError());
             } catch (SQLException ex) {
             fail("Fallo en testUPDATE");
         } catch (Exception ex) {
@@ -140,12 +133,12 @@ public class TestPersonas {
     }
     @Test
     public void testDELETE(){
-        Principal p = new Principal("NBk88tRVnV", "Verónica Benitez",new Empresa("526283747346"), new Pais("URU"), -1,"benitezVER@gmail.com", "16432549", false, new TipoDocumento("CI-UYU"));
+        Principal p = new Principal("NBk88tRVnV", "Verónica Benitez",new Empresa("526283747346"), new Pais("URU"), -1,"benitezVER@gmail.com", "16432549", false, new TipoDocumento("CI-UYU"), "+59897303276");
         try{
         //INSERCIONES PREVIAS
-           /*OPERADOR*/   this.op.insertar(new Operador("hernandez_a", "hernandez_a", "Alberto Hernandez",new Empresa("526283747346"), new Pais("URU"), new TipoUsuario("marketing")));
-           /*PRINCIPAL*/  this.op.insertar(p);
-           /*SECUNDARIO*/ this.op.insertar(new Secundario("dmKvRTFcZ7", "Camila Bentancor", new Empresa("526283747346"),  new Pais("URU"), -1, "bentancorCAM@hotmail.com", new Principal("16432549")));
+           /*OPERADOR*/   this.op.guardar(null,new Operador("hernandez_a", "hernandez_a", "Alberto Hernandez",new Empresa("526283747346"), new Pais("URU"), new TipoUsuario("marketing")));
+           /*PRINCIPAL*/  this.op.guardar(null,p);
+           /*SECUNDARIO*/ this.op.guardar(null,new Secundario("dmKvRTFcZ7", "Camila Bentancor", new Empresa("526283747346"),  new Pais("URU"), -1, "bentancorCAM@hotmail.com", new Principal("16432549"), "+59897990777"));
         
         //BORRANDO OPERADOR
         assertEquals("NOERROR", this.op.borrar(new Operador("hernandez_a")).getTextoError());
@@ -163,7 +156,7 @@ public class TestPersonas {
             fail("Fallo en testDELETE");
         }
     }
-    @Test
+    @Ignore
     public void testDELETEMULTIPLE(){
         /*NO IMPLEMENTADO EN EL OBJETO DAO*/
     }

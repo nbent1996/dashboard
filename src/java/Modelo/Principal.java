@@ -8,7 +8,8 @@ private TipoDocumento tipoDocumento;
 
 /*Constructores*/
     /*FULL*/
-public Principal(String usuarioSistema, String nombreCompleto, Empresa empresaAsociada, Pais paisResidencia, int nroCliente, String email, String nroDocumento, boolean servicioActivo, TipoDocumento tipoDocumento){
+public Principal(String usuarioSistema, String nombreCompleto, Empresa empresaAsociada, Pais paisResidencia, int nroCliente, String email, String nroDocumento, boolean servicioActivo, TipoDocumento tipoDocumento, String telefono){
+    this.telefono = telefono;
     this.usuarioSistema = usuarioSistema;
     this.nombreCompleto = nombreCompleto;
     this.nroCliente = nroCliente;
@@ -21,7 +22,8 @@ public Principal(String usuarioSistema, String nombreCompleto, Empresa empresaAs
     adaptarCampos();
 }
 /*FULL SIN USUARIOSISTEMA, QUE VA A SER AUTOGENERADO*/
-public Principal(String nombreCompleto, Empresa empresaAsociada, Pais paisResidencia, int nroCliente, String email, String nroDocumento, boolean servicioActivo, TipoDocumento tipoDocumento){
+public Principal(String nombreCompleto, Empresa empresaAsociada, Pais paisResidencia, int nroCliente, String email, String nroDocumento, boolean servicioActivo, TipoDocumento tipoDocumento, String telefono){
+    this.telefono = telefono;
     this.usuarioSistema = "";
     this.nombreCompleto = nombreCompleto;
     this.nroCliente = nroCliente;
@@ -34,7 +36,8 @@ public Principal(String nombreCompleto, Empresa empresaAsociada, Pais paisReside
     adaptarCampos();
 }
 /*SIN EMPRESA, PAIS*/
-public Principal(String usuarioSistema, String nombreCompleto, int nroCliente, String email, String nroDocumento, boolean servicioActivo, TipoDocumento tipoDocumento){
+public Principal(String usuarioSistema, String nombreCompleto, int nroCliente, String email, String nroDocumento, boolean servicioActivo, TipoDocumento tipoDocumento, String telefono){
+    this.telefono = telefono;
     this.usuarioSistema = usuarioSistema;
     this.nombreCompleto = nombreCompleto;
     this.nroCliente = nroCliente;
@@ -48,38 +51,79 @@ public Principal(String usuarioSistema, String nombreCompleto, int nroCliente, S
 public Principal(String nroDocumento){
     this.usuarioSistema = "";
     this.nroDocumento = nroDocumento;
-    adaptarCampos();
 }
 /*SOLO NROCLIENTE*/
 public Principal(int nroCliente){
     this.usuarioSistema = "";
     this.nroCliente = nroCliente;
-    adaptarCampos();
 }
 /*Constructores*/
 
 /*Comportamiento*/
     @Override
     public void adaptarCampos() {
+        super.adaptarCampos();
         /*Sanitizar campos*/
-        Funciones.sanitizarCampo(this.usuarioSistema);
-        Funciones.sanitizarCampo(this.nombreCompleto);
-        Funciones.sanitizarCampo(this.email);
-        Funciones.sanitizarCampo(this.nroDocumento);
+        this.nroDocumento = Funciones.sanitizarCampo(this.nroDocumento);
         if(this.tipoDocumento!=null){
-            Funciones.sanitizarCampo(this.tipoDocumento.getCodDocumento());
+            this.tipoDocumento.setCodDocumento(Funciones.sanitizarCampo(this.tipoDocumento.getCodDocumento()));
         }
         /*Sanitizar campos*/
-        
+        this.email = this.email.toLowerCase(); /*el email debe estar totalmente en minúsculas*/
+        if(!Funciones.isNumeric(this.nroDocumento)){ /*El Nro de documento debe ser solo numérico*/
+            this.nroDocumento = this.nroDocumento.replace(".", "");
+            this.nroDocumento = this.nroDocumento.replace(",", "");
+            this.nroDocumento = this.nroDocumento.replace("-", "");               
+        }     
     }
 
     @Override
     public String toString(int modo) throws ProgramException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String retorno = "ERROR ToString";
+        switch(modo){
+            case 1:
+                retorno = this.nombreCompleto;
+            break;
+            
+            case 2:
+                retorno = this.nombreCompleto + " (" + this.nroDocumento + ")";
+            break;
+            
+            case 3:
+                retorno = this.nombreCompleto + " (" + this.usuarioSistema + ")";
+            break;
+        }
+        if(retorno.equals("ERROR ToString")){
+            throw new ProgramException(retorno);
+        }
+        return retorno;
     }
     @Override
     public void validar() throws ProgramException{
+        super.validar();
+        String retorno = "";
+        /*Campos nulos*/
+        if(this.nroDocumento.equals("") || this.nroDocumento==null){
+            retorno+="El nro de documento es un campo obligatorio.\n";
+        }
+        if(this.tipoDocumento==null || this.tipoDocumento.getCodDocumento().equals("") || this.tipoDocumento.getCodDocumento()==null){
+            retorno+="El tipo de documento es un campo obligatorio (se debe seleccionar uno).\n";
+        }
+        //usuarioSistema no se valida porque si es = "" se autogenera validando en la base que no se repita.
         
+        /*Largo caracteres*/
+        if(this.nroDocumento!=null && this.nroDocumento.length()>15){
+            retorno+="El nro de documento no puede tener más de 15 caracteres.\n";
+        }
+        /*Campos expresamente numéricos*/
+        if(!Funciones.isNumeric(this.nroDocumento)){
+            retorno+="El nro de documento solo puede contener numeros.\n";
+        }
+        
+        
+        if (!retorno.equals("")) {
+            throw new ProgramException(retorno);
+        }
     }
 /*Comportamiento*/
 

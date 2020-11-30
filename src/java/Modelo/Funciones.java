@@ -68,6 +68,7 @@ public class Funciones {
         if(cadena.equals("")){
            return true;
         }
+        
         try {
             for(char c: cadena.toCharArray()){
                 Integer.parseInt(c+"");
@@ -91,5 +92,11 @@ public class Funciones {
             cadena += caracterAleatorio;
         }
         return cadena;
+    }
+    public static String FirstLetterUpperCase(String campo){
+        if(campo == null || campo.equals("")){
+            return campo;
+        }
+        return campo.substring(0, 1).toUpperCase() + campo.substring(1).toLowerCase();
     }
 }

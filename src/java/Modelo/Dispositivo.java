@@ -1,5 +1,5 @@
 package Modelo;
-public class Dispositivo {
+public class Dispositivo implements IObject<Dispositivo> {
 /*Estado*/
 private String nroSerie;
 private String estado;
@@ -18,6 +18,7 @@ private Cliente clienteAsociado;
         this.nroSerie = nroSerie;
         this.estado = estado;
         this.tipoDispositivo = tipoDispositivo;
+        adaptarCampos();
     }
 
     /*FULL*/
@@ -27,6 +28,7 @@ private Cliente clienteAsociado;
         this.tipoDispositivo = tipoDispositivo;
         this.empresaAsociada = empresaAsociada;
         this.clienteAsociado = clienteAsociado;
+        adaptarCampos();
     }
 
     /*SIN cliente*/
@@ -35,11 +37,58 @@ private Cliente clienteAsociado;
         this.estado = estado;
         this.tipoDispositivo = tipoDispositivo;
         this.empresaAsociada = empresaAsociada;
+        adaptarCampos();
     }
 
 /*Constructores*/
 
 /*Comportamiento*/
+    @Override
+    public void adaptarCampos() {
+        /*Sanitizar campos*/
+        this.nroSerie = Funciones.sanitizarCampo(this.nroSerie);
+        
+    }
+
+    @Override
+    public void validar() throws ProgramException {
+        String retorno = "";
+        /*Campos nulos*/
+        if(this.nroSerie.equals("") || this.nroSerie==null){
+            retorno += "El nro de serie es un campo obligatorio.\n";
+        }
+        if(this.tipoDispositivo==null){
+            retorno+="El tipo de dispositivo es un campo obligatorio (se debe seleccionar uno).\n";
+        }
+        //La empresa asociada se toma del session, del usuario logueado
+        //Puede o no tener cliente asociado.
+        /*Largo caracteres*/
+        if(this.nroSerie!=null && this.nroSerie.length()>20){
+            retorno+="El nro de serie no puede tener más de 20 caracteres.\n";
+        }
+        
+        /*Campos Expresamente numéricos*/
+        
+        if (!retorno.equals("")) {
+            throw new ProgramException(retorno);
+        }
+    }
+
+    @Override
+    public String toString(int modo) throws ProgramException {
+       String retorno = "ERROR ToString";
+       switch(modo){
+           case 1:
+               retorno = this.nroSerie;
+           break;
+           case 2:
+               retorno = this.nroSerie + " (" +this.estado +")";
+           break;
+           case 3:
+               retorno = this.nroSerie + " (Nro Cliente: "+this.getClienteAsociado().getNroCliente()+")";
+       }
+       return retorno;
+    }
 
 /*Comportamiento*/
     
@@ -84,6 +133,7 @@ private Cliente clienteAsociado;
         this.clienteAsociado = clienteAsociado;
     }
 /*Getters y Setters*/
+
 
     
 }
