@@ -35,7 +35,7 @@
         
         
         <script src="js/jquery-3.5.1.js" type="text/javascript"></script>
-        <link href="css/seccionesUsuarios.css" rel="stylesheet" type="text/css"/>
+        <link href="css/secciones.css" rel="stylesheet" type="text/css"/>
         <script src="js/seccionesUsuarios.js" type="text/javascript"></script>
         
         
@@ -118,25 +118,29 @@
             </header>
 
 
-            <div>
-                <h2 class="subtitulos">Complete los campos que desea modificar</h2>
-            </div>
+            
 
-            <div class="usuarios-page">
+            <div class="ABMpage">
                 <div class="form">
 
                     <form name="formModificacionUsuario" action="ManejoUsuariosServlet" method="post" onsubmit="return validarCamposModificacionUsr(this)">
-                        <input type="text" id="txtUsuarioMod" name="usuarioMod" placeholder="usuario"/>
-                        <input type="text" id="txtNombreCompletoMod" name="nombreCompletoMod" placeholder="nombre completo"/>
-                        <!--
-                        <input type="text" id="txtNombreEmpresaMod" name="nombreEmpresaMod" placeholder="empresa"/>
-                        <input type="text" id="txtNombrePaisMod" name="nombrePaisMod" placeholder="pais"/>
-                        -->
-                        <input type="password" id="txtPasswordMod" name="passwordMod" placeholder="contraseña"/>
-                        <input type="hidden" name="accion" value="formModificacion">
+                        
+                        <input type="text" id="txtUsuarioMod" name="usuarioMod" placeholder="usuario" required="true"/>
+                        <input type="button" id="btnBuscarUsuarioMod" value="BUSCAR" onclick="buscarUsuarioMod()">
+                        <hr> 
+                        
+                        <div id="divDatosMod">
+                            <input type="text" id="txtNombreCompletoMod" name="nombreCompletoMod" placeholder="nombre completo"/>
+                            <!--
+                            <input type="text" id="txtNombreEmpresaMod" name="nombreEmpresaMod" placeholder="empresa"/>
+                            <input type="text" id="txtNombrePaisMod" name="nombrePaisMod" placeholder="pais"/>
+                            -->
+                            <input type="password" id="txtPasswordMod" name="passwordMod" placeholder="contraseña"/>
+                            <input type="hidden" name="accion" value="formModificacion">
+                            <br>
 
-
-                        <input type="submit" class="submitModificacion" value="modificar">
+                            <input type="submit" class="submitModificacion" value="CONFIRMAR">
+                        </div>
 
                         <%if (msg != null) {%>
                         <div>
@@ -149,22 +153,23 @@
             </div>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
         </div>
         
+                        
         
-        
+                <script>
+                    ocultarDivDatos();
+                    
+                    function ocultarDivDatos(){
+                        $("#divDatosMod").hide();
+                    }
+
+                    function buscarUsuarioMod(){
+                        $("#divDatosMod").show();//en realidad acá es mostrar si encuentra al usuario
+                    }
+                    
+
+                </script>
         
         
         

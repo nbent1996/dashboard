@@ -94,24 +94,6 @@ public class ControladorManejoUsuarios implements IControlador<Persona>{
    
     }
 
-    
-    
-    
-    @Override
-    public void cargarItems(Persona c, DefaultTableModel modelo) throws Exception, SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public String getFiltroProcesado(Persona c, DefaultTableModel modelo) throws Exception, SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void borrarItems(ArrayList<Persona> items) throws Exception, SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
 //    private String filtroBuscarPersona(Operador operador) {
 //        
 //          Hacer filtro con los campos del operador para chequear que no exista otro igual    
@@ -153,6 +135,29 @@ public class ControladorManejoUsuarios implements IControlador<Persona>{
 
     
 
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    @Override
+    public void cargarItems(Persona c, DefaultTableModel modelo) throws Exception, SQLException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String getFiltroProcesado(Persona c, DefaultTableModel modelo) throws Exception, SQLException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void borrarItems(ArrayList<Persona> items) throws Exception, SQLException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 
     

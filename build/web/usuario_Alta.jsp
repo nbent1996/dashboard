@@ -35,7 +35,7 @@
         
         
         <script src="js/jquery-3.5.1.js" type="text/javascript"></script>
-        <link href="css/seccionesUsuarios.css" rel="stylesheet" type="text/css"/>
+        <link href="css/secciones.css" rel="stylesheet" type="text/css"/>
         <script src="js/seccionesUsuarios.js" type="text/javascript"></script>
         
         
@@ -150,7 +150,7 @@
             </header>
 
 
-            <div class="usuarios-page">
+            <div class="ABMpage">
 
                 <div class="form">
 
@@ -166,7 +166,7 @@
                         <span id="combo-tipoUsuarios"></span> <br><br>
 
 
-                        <input type="submit" class="submitAlta" value="crear">
+                        <input type="submit" class="submitAlta" value="confirmar">
 
                         <%if (msg != null) {%>
                         <div>
