@@ -10,7 +10,7 @@ public class Database {
     private static Database instancia;
     private static Connection conexion;
     private static Statement stmt;
-    private String modo = "local"; /*local para testing local -- glassfish para testear desde capa de presentación*/
+    private String modo = "glassfish"; /*local para testing local -- glassfish para testear desde capa de presentación*/
     
     /*TRABAJANDO CON INSTANCIA LOCAL*/
      private static String user = "root";

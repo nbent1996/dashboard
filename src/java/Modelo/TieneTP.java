@@ -1,5 +1,5 @@
 package Modelo;
-public class TieneTP implements Comparable<TieneTP> {
+public class TieneTP implements Comparable<TieneTP>, IObject<TieneTP> {
 /*Estado*/
 private int cantidadDispositivos;
 private TipoDispositivo tipoDispositivo;
@@ -27,6 +27,41 @@ private TipoDispositivo tipoDispositivo;
         }
         return resultado;
     }
+    @Override
+    public void adaptarCampos() {
+        /*Sanitizar campos*/
+        /*No hay campos string para sanitizar*/
+    }
+    
+    @Override
+    public void validar() throws ProgramException {
+        String retorno = "";
+        /*Campos nulos*/
+        
+        /*Largo caracteres*/
+        
+        /*Campos expresamente numéricos*/
+        if(!(this.cantidadDispositivos>0)){
+            retorno +="La cantidad de dispositivos debe ser mayor a 0.\n";
+        }
+        
+        if (!retorno.equals("")) {
+            throw new ProgramException(retorno);
+        }    }
+
+    @Override
+    public String toString(int modo) throws ProgramException {
+        String retorno = "ERROR ToString";
+        switch(modo){
+            case 1:
+                retorno = "Cantidad: " + this.cantidadDispositivos;
+            break;
+        }   
+        if(retorno.equals("ERROR ToString")){
+            throw new ProgramException(retorno);
+        }
+        return retorno;
+    }
 /*Comportamiento*/
 /*Getters y Setters*/
     public int getCantidadDispositivos() {
@@ -45,6 +80,8 @@ private TipoDispositivo tipoDispositivo;
         this.tipoDispositivo = tipoDispositivo;
     }
 /*Getters y Setters*/
+
+
 
 
 

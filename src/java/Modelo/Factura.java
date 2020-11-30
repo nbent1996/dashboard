@@ -3,7 +3,7 @@ package Modelo;
 import Resources.DTOs.DTOFechas;
 import java.util.ArrayList;
 
-public class Factura {
+public class Factura implements IObject<Factura>{
 /*Estado*/
 private int idFactura;
 private DTOFechas fechaPago;
@@ -34,6 +34,7 @@ public Factura(DTOFechas fechaPago, DTOFechas fechaEmision, DTOFechas fechaVenci
         this.listaSuscripciones = listaSuscripciones;
         this.monedaAsociada = monedaAsociada;
         this.empresaAsociada = empresaAsociada;
+        adaptarCampos();
     }
 
 /*FULL*/
@@ -50,6 +51,7 @@ public Factura(DTOFechas fechaPago, DTOFechas fechaEmision, DTOFechas fechaVenci
         this.listaSuscripciones = listaSuscripciones;
         this.monedaAsociada = monedaAsociada;
         this.empresaAsociada = empresaAsociada;
+        adaptarCampos();
     }
 
 /*ID -1 SIN MONEDA, EMPRESA, LISTA SUSCRIPCIONES Y CLIENTE*/
@@ -62,6 +64,7 @@ public Factura(DTOFechas fechaPago, DTOFechas fechaEmision, DTOFechas fechaVenci
         this.monto = monto;
         this.listaSuscripciones = new ArrayList<>();
         this.tipoRecibo = tipoRecibo;
+        adaptarCampos();
     }
 /*TODO MENOS FECHA EMISION (QUE ES AUTOMÁTICA EN LA BASE)*/
         public Factura(int idFactura, DTOFechas fechaPago, DTOFechas fechaVencimiento, DTOFechas periodoServicioInicio, DTOFechas periodoServicioFin, double monto, String tipoRecibo, Cliente clienteAsociado, ArrayList<Suscripcion> listaSuscripciones, Moneda monedaAsociada, Empresa empresaAsociada) {
@@ -76,6 +79,7 @@ public Factura(DTOFechas fechaPago, DTOFechas fechaEmision, DTOFechas fechaVenci
         this.listaSuscripciones = listaSuscripciones;
         this.monedaAsociada = monedaAsociada;
         this.empresaAsociada = empresaAsociada;
+        adaptarCampos();
     }
 /*SOLO ID*/
         public Factura(int idFactura){
@@ -84,6 +88,20 @@ public Factura(DTOFechas fechaPago, DTOFechas fechaEmision, DTOFechas fechaVenci
         }   
 /*Constructores*/
 /*Comportamiento*/
+    @Override
+    public void adaptarCampos() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void validar() throws ProgramException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String toString(int modo) throws ProgramException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 /*Comportamiento*/
 /*Getters y Setters*/
     public int getIdFactura() {
@@ -182,6 +200,8 @@ public Factura(DTOFechas fechaPago, DTOFechas fechaEmision, DTOFechas fechaVenci
         this.empresaAsociada = empresaAsociada;
     }
 /*Getters y Setters*/
+
+
 
     
 }

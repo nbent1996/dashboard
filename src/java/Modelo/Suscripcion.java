@@ -3,7 +3,7 @@ package Modelo;
 import Resources.DTOs.DTOFechas;
 import java.util.ArrayList;
 
-public class Suscripcion implements Comparable<Suscripcion> {
+public class Suscripcion implements Comparable<Suscripcion>, IObject<Suscripcion> {
 /*Estado*/
 private int idSuscripcion;
 private DTOFechas fechaInicio;
@@ -52,7 +52,42 @@ public Suscripcion(DTOFechas fechaInicio, float tiempoContrato, DTOFechas fechaF
     }
 /*Constructores*/
 /*Comportamiento*/
+    @Override
+    public void adaptarCampos() {
+        /*Sanitizar campos*/
+        /*No hay campos string para sanitizar*/
+    }
 
+    @Override
+    public void validar() throws ProgramException {
+        String retorno = "";
+        /*Campos nulos*/
+        
+        /*Largo caracteres*/
+        
+        /*Campos expresamente numéricos*/
+        if(!(this.tiempoContrato>0 && this.tiempoContrato<=4)){
+            retorno +="El tiempo de contrato debe tener una duración entre 0.5 y 4 años.\n";
+        }
+        
+        if (!retorno.equals("")) {
+            throw new ProgramException(retorno);
+        }
+    }
+
+    @Override
+    public String toString(int modo) throws ProgramException {
+        String retorno = "ERROR ToString";
+        switch(modo){
+            case 1:
+                retorno = "ID: " + this.idSuscripcion;
+            break;
+        }   
+        if(retorno.equals("ERROR ToString")){
+            throw new ProgramException(retorno);
+        }
+        return retorno;
+    }
     @Override
     public int compareTo(Suscripcion o) {
         int resultado = 0;
@@ -115,6 +150,8 @@ public Suscripcion(DTOFechas fechaInicio, float tiempoContrato, DTOFechas fechaF
         this.listaPaquetes = listaPaquetes;
     }
 /*Getters y Setters*/
+
+
 
 
 
