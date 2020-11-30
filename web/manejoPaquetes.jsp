@@ -30,7 +30,7 @@
         
         <link href="css/css.css" rel="stylesheet" type="text/css"/>
         <script src="js/seccionesUsuarios.js" type="text/javascript"></script>
-        <link href="css/seccionesUsuarios.css" rel="stylesheet" type="text/css"/>
+        <link href="css/secciones.css" rel="stylesheet" type="text/css"/>
     </head>
     <body class="w3-light-grey">
         

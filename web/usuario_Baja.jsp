@@ -38,7 +38,7 @@
         
         
         <script src="js/jquery-3.5.1.js" type="text/javascript"></script>
-        <link href="css/seccionesUsuarios.css" rel="stylesheet" type="text/css"/>
+        <link href="css/secciones.css" rel="stylesheet" type="text/css"/>
         <script src="js/seccionesUsuarios.js" type="text/javascript"></script>
         
         
@@ -116,7 +116,7 @@
             </header>
 
 
-            <div class="usuarios-page">
+            <div class="ABMpage">
                 <div class="form">
 
                     <form name="formBajaUsuario" action="ManejoUsuariosServlet" method="post" onsubmit="return validarCamposBajaUsr(this)">
@@ -124,7 +124,7 @@
                         <input type="hidden" name="accion" value="formBaja">
 
 
-                        <input type="submit" class="submitBaja" value="borrar" >
+                        <input type="submit" class="submitBaja" value="confirmar" >
 
                         <%if (msg != null) {%>
                         <div>

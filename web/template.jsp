@@ -1,20 +1,13 @@
+<%-- 
+    DOCUMENTO PARA COPIAR CONTENIDO GENÉRICO EN TODOS LOS JSP
+--%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-
-
-<%
-    String msg = request.getParameter("msg");
-   
-%>
-
-
-
-
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Alta de Usuario</title>
+        <title>Título TAB</title>
         
         
         <!--CSS-->  
@@ -40,6 +33,7 @@
         
         
     </head>
+    
     <body class="w3-light-grey">
         
         
@@ -47,43 +41,25 @@
         
         <script>
             
-            mostrarTipos();
-            //mostrarPaises();
-            //prueba();
-            
-            
-            function mostrarTipos(){
-                $.get("ManejoUsuariosServlet?accion=comboTipos", function(data){
-                    document.getElementById("combo-tipoUsuarios").innerHTML=data;
-                    //document.getElementById("combo-paises").innerHTML=data;
-                });
+            function w3_open() {
+                if (mySidebar.style.display === 'block') {
+                    mySidebar.style.display = 'none';
+                    overlayBg.style.display = "none";
+                } else {
+                    mySidebar.style.display = 'block';
+                    overlayBg.style.display = "block";
+                }
             }
-            
-            function mostrarPaises(){
-                $.get("ManejoUsuariosServlet?accion=comboPaises", function(data){
-                    document.getElementById("combo-paises").innerHTML=data;
-                });
-            }
-              
 
-                 /******Cargar el selet con las familias*******/
-          /*function prueba() {
-             $.ajax({
-                    type: "POST",
-                   //data: JSON.stringify(dto),
-                    url: "ManejoUsuariosServlet?accion=prueba",
-                    dataType: "json",
-                    contentType: "application/json; charset=utf-8",
-                 success: function (respuesta) {
-                   console.log(respuesta);
-                      },
-                      error: function () {
-                          alert("Error de Ajax cuando viaja a buscar familias");
-                      }
-                  });
-              }*/
+            // Close the sidebar with the close button
+            function w3_close() {
+                mySidebar.style.display = "none";
+                overlayBg.style.display = "none";
+            }
             
             
+             
+             
              
             
             
@@ -146,38 +122,11 @@
 
             <!-- Header -->
             <header class="w3-container" style="padding-top:22px">
-                <h5><b><i class="fa fa-users"></i> Alta de Usuario</b></h5>
+                <h5><b><i class="fa fa-users"></i> Título de la página </b></h5>
             </header>
 
 
-            <div class="ABMpage">
-
-                <div class="form">
-
-                    <form name="formAltaUsuario" action="ManejoUsuariosServlet" method="post" onsubmit="return validarCamposAltaUsr(this)">
-                        <input type="text" id="txtUsuarioAlta" name="usuario" placeholder="usuario" required="true"/>
-                        <input type="text" id="txtNombreCompletoAlta" name="nombreCompleto" placeholder="nombre completo" required="true"/>
-                        <input type="text" id="txtNombreEmpresaAlta" name="nombreEmpresa" placeholder="empresa" required="true"/>
-                        <!-- <input type="text" id="txtNombrePaisAlta" name="nombrePais" placeholder="pais" required="true"/> -->
-                        <!-- <input type="text" id="txtTipoUsuarioAlta" name="tipoUsuario" placeholder="tipo usuario" required="true"/> -->
-                        <input type="hidden" name="accion" value="formAlta">
-
-                        <span id="combo-paises"></span> <br><br>
-                        <span id="combo-tipoUsuarios"></span> <br><br>
-
-
-                        <input type="submit" class="submitAlta" value="confirmar">
-
-                        <%if (msg != null) {%>
-                        <div>
-                            <p class="message"><%=msg%></p>                        
-                        </div>
-                        <%}%>
-
-
-                    </form>
-                </div>
-            </div>
+            
 
 
 
@@ -199,4 +148,5 @@
         
         
     </body>
+    
 </html>

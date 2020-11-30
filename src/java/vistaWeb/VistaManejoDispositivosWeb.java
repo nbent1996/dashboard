@@ -7,6 +7,10 @@ package vistaWeb;
 
 import controlador.ControladorManejoDispositivos;
 import controlador.IVistaManejoDispositivos;
+import java.io.IOException;
+import java.io.PrintWriter;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  *
@@ -15,6 +19,27 @@ import controlador.IVistaManejoDispositivos;
 public class VistaManejoDispositivosWeb implements IVistaManejoDispositivos{
     
     private ControladorManejoDispositivos controlador;
+    private HttpServletRequest request;
+    private HttpServletResponse response;
+    
+    private PrintWriter out;
+
+    public VistaManejoDispositivosWeb(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        this.response = response;
+        this.out = response.getWriter();
+        controlador = new ControladorManejoDispositivos(this);
+    }
+    
+    
+
+    public void procesarRequest(HttpServletRequest request, HttpServletResponse response) {
+        
+        //procesar las acciones
+        
+        
+        
+        
+    }
     
     
     

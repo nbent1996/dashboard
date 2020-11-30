@@ -1,20 +1,15 @@
+<%-- 
+    Document   : dispositivo_Baja
+    Created on : 29/11/2020, 07:35:26 PM
+    Author     : Andres
+--%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-
-
-<%
-    String msg = request.getParameter("msg");
-   
-%>
-
-
-
-
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Alta de Usuario</title>
+        <title>Baja de Dispositivo</title>
         
         
         <!--CSS-->  
@@ -40,6 +35,7 @@
         
         
     </head>
+    
     <body class="w3-light-grey">
         
         
@@ -47,43 +43,25 @@
         
         <script>
             
-            mostrarTipos();
-            //mostrarPaises();
-            //prueba();
-            
-            
-            function mostrarTipos(){
-                $.get("ManejoUsuariosServlet?accion=comboTipos", function(data){
-                    document.getElementById("combo-tipoUsuarios").innerHTML=data;
-                    //document.getElementById("combo-paises").innerHTML=data;
-                });
+            function w3_open() {
+                if (mySidebar.style.display === 'block') {
+                    mySidebar.style.display = 'none';
+                    overlayBg.style.display = "none";
+                } else {
+                    mySidebar.style.display = 'block';
+                    overlayBg.style.display = "block";
+                }
             }
-            
-            function mostrarPaises(){
-                $.get("ManejoUsuariosServlet?accion=comboPaises", function(data){
-                    document.getElementById("combo-paises").innerHTML=data;
-                });
-            }
-              
 
-                 /******Cargar el selet con las familias*******/
-          /*function prueba() {
-             $.ajax({
-                    type: "POST",
-                   //data: JSON.stringify(dto),
-                    url: "ManejoUsuariosServlet?accion=prueba",
-                    dataType: "json",
-                    contentType: "application/json; charset=utf-8",
-                 success: function (respuesta) {
-                   console.log(respuesta);
-                      },
-                      error: function () {
-                          alert("Error de Ajax cuando viaja a buscar familias");
-                      }
-                  });
-              }*/
+            // Close the sidebar with the close button
+            function w3_close() {
+                mySidebar.style.display = "none";
+                overlayBg.style.display = "none";
+            }
             
             
+             
+             
              
             
             
@@ -120,11 +98,11 @@
             
             <div class="w3-bar-block">
                 <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>&nbsp; Cerrar Menu</a>
-                <a href="manejoUsuarios.jsp" class="w3-bar-item w3-button w3-padding w3-blue-grey"><i class="fa fa-users fa-fw"></i>&nbsp; Usuarios</a>
+                <a href="manejoUsuarios.jsp" class="w3-bar-item w3-button w3-padding"><i class="fa fa-users fa-fw"></i>&nbsp; Usuarios</a>
                 <a href="manejoClientes.jsp" class="w3-bar-item w3-button w3-padding"><i class="fa fa-address-card fa-fw"></i>&nbsp; Clientes</a>
                 <a href="manejoPaquetes.jsp" class="w3-bar-item w3-button w3-padding"><i class="fa fa fa-cubes fa-fw"></i>&nbsp; Paquetes</a>
                 <a href="manejoSuscripciones.jsp" class="w3-bar-item w3-button w3-padding"><i class="fa fa fa-suitcase fa-fw"></i>&nbsp; Suscripciones</a>
-                <a href="manejoDispositivos.jsp" class="w3-bar-item w3-button w3-padding"><i class="fa fa-video-camera fa-fw"></i>&nbsp; Dispositivos</a>
+                <a href="manejoDispositivos.jsp" class="w3-bar-item w3-button w3-padding w3-blue-grey"><i class="fa fa-video-camera fa-fw"></i>&nbsp; Dispositivos</a>
                 <a href="exportarPlanillas.jsp" class="w3-bar-item w3-button w3-padding"><i class="fa fa-file-text-o fa-fw"></i>&nbsp; Exportar planillas</a>
                 <a href="envioNotificacionesApp.jsp" class="w3-bar-item w3-button w3-padding"><i class="fa fa fa-bell fa-fw"></i>&nbsp; Enviar notificaciones</a>
                 <a href="asignarCuentasSecundarias.jsp" class="w3-bar-item w3-button w3-padding"><i class="fa fa fa-user-plus fa-fw"></i>&nbsp; Asignar cuentas secundarias</a>
@@ -146,7 +124,7 @@
 
             <!-- Header -->
             <header class="w3-container" style="padding-top:22px">
-                <h5><b><i class="fa fa-users"></i> Alta de Usuario</b></h5>
+                <h5><b><i class="fa fa-users"></i> Baja de Dispositivos </b></h5>
             </header>
 
 
@@ -154,46 +132,33 @@
 
                 <div class="form">
 
-                    <form name="formAltaUsuario" action="ManejoUsuariosServlet" method="post" onsubmit="return validarCamposAltaUsr(this)">
-                        <input type="text" id="txtUsuarioAlta" name="usuario" placeholder="usuario" required="true"/>
-                        <input type="text" id="txtNombreCompletoAlta" name="nombreCompleto" placeholder="nombre completo" required="true"/>
-                        <input type="text" id="txtNombreEmpresaAlta" name="nombreEmpresa" placeholder="empresa" required="true"/>
-                        <!-- <input type="text" id="txtNombrePaisAlta" name="nombrePais" placeholder="pais" required="true"/> -->
-                        <!-- <input type="text" id="txtTipoUsuarioAlta" name="tipoUsuario" placeholder="tipo usuario" required="true"/> -->
-                        <input type="hidden" name="accion" value="formAlta">
+                    
+                    <form name="formBajaDispositivo" action="ManejoDispositivosServlet" method="post" onsubmit="return validarCamposBajaDisp(this)">
+                        
+                        <input type="text" id="txtNroSerieBaja" name="nroSerieBaja" placeholder="nro serie" required="true"/>
 
-                        <span id="combo-paises"></span> <br><br>
-                        <span id="combo-tipoUsuarios"></span> <br><br>
-
-
-                        <input type="submit" class="submitAlta" value="confirmar">
-
-                        <%if (msg != null) {%>
-                        <div>
-                            <p class="message"><%=msg%></p>                        
-                        </div>
-                        <%}%>
-
-
+                        <input type="submit" class="submitBaja" value="confirmar">
+                        
+                        
+                        
+                        <input type="hidden" name="accion" value="formBajaDispositivo">
+                        
                     </form>
+
+
                 </div>
+
             </div>
-
-
-
-
-
-
-
-
-
-
-
 
         </div>
         
         
         
+        <script>
+        
+            
+            
+        </script>
         
         
         

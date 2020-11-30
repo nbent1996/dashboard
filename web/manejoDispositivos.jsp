@@ -30,7 +30,7 @@
         
         <link href="css/css.css" rel="stylesheet" type="text/css"/>
         <script src="js/seccionesUsuarios.js" type="text/javascript"></script>
-        <link href="css/seccionesUsuarios.css" rel="stylesheet" type="text/css"/>
+        <link href="css/secciones.css" rel="stylesheet" type="text/css"/>
     </head>
     <body class="w3-light-grey">
         
@@ -93,18 +93,17 @@
             </header>
             
             
-            
+            <div>
+                <h6>Indique acción deseada</h6>
+            </div>
+
+            <div> 
+                <input type="button" value="ALTA DE DISPOSITIVO" onclick="location.href='dispositivo_Alta.jsp'">
+                <input type="button" value="BAJA DE DISPOSITIVO" onclick="location.href='dispositivo_Baja.jsp'">
+                <input type="button" value="MODIFICAR DISPOSITIVO" onclick="location.href='dispositivo_Modificacion.jsp'">
+            </div>
             
 
-            
-            
-            
-            
-            
-            
-            
-            
-            
             
         </div>
         
