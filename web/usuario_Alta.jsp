@@ -118,19 +118,54 @@
                 </div>
             -->
             
-            <div class="w3-bar-block">
+                        <div class="w3-bar-block">
                 <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>&nbsp; Cerrar Menu</a>
-                <a href="manejoUsuarios.jsp" class="w3-bar-item w3-button w3-padding w3-blue-grey"><i class="fa fa-users fa-fw"></i>&nbsp; Usuarios</a>
-                <a href="manejoClientes.jsp" class="w3-bar-item w3-button w3-padding"><i class="fa fa-address-card fa-fw"></i>&nbsp; Clientes</a>
-                <a href="manejoPaquetes.jsp" class="w3-bar-item w3-button w3-padding"><i class="fa fa fa-cubes fa-fw"></i>&nbsp; Paquetes</a>
-                <a href="manejoSuscripciones.jsp" class="w3-bar-item w3-button w3-padding"><i class="fa fa fa-suitcase fa-fw"></i>&nbsp; Suscripciones</a>
-                <a href="manejoDispositivos.jsp" class="w3-bar-item w3-button w3-padding"><i class="fa fa-video-camera fa-fw"></i>&nbsp; Dispositivos</a>
+                <a href="index.jsp" class="w3-bar-item w3-button w3-padding"><i class="fa fa-home fa-fw"></i>&nbsp; Inicio</a><br><br>
+                <div class="w3-dropdown-hover w3-mobile">
+                    <button class="w3-button"><i class="fa fa-users fa-fw"></i>&nbsp; Usuarios</button>
+                    <div class="w3-dropdown-content w3-bar-block w3-dark-grey">
+                        <a href="usuario_Alta.jsp" class="w3-bar-item w3-button w3-mobile">Alta de Usuario</a>
+                        <a href="usuario_Baja.jsp" class="w3-bar-item w3-button w3-mobile">Baja de Usuario</a>
+                        <a href="usuario_Modificacion.jsp" class="w3-bar-item w3-button w3-mobile">Modificación de Usuario</a>
+                    </div>
+                </div>
+                <div class="w3-dropdown-hover w3-mobile">
+                    <button class="w3-button"><i class="fa fa-address-card fa-fw"></i>&nbsp; Clientes</button>
+                    <div class="w3-dropdown-content w3-bar-block w3-dark-grey">
+                        <a href="cliente_Alta.jsp" class="w3-bar-item w3-button w3-mobile">Alta de Cliente</a>
+                        <a href="cliente_Baja.jsp" class="w3-bar-item w3-button w3-mobile">Baja de Cliente</a>
+                        <a href="cliente_Modificacion.jsp" class="w3-bar-item w3-button w3-mobile">Modificación de Cliente</a>
+                        <a href="cliente_cuentasSecundarias.jsp" class="w3-bar-item w3-button w3-mobile">Asignar cuentas secundarias</a>
+                    </div>
+                </div>
+                <div class="w3-dropdown-hover w3-mobile">
+                    <button class="w3-button"><i class="fa fa fa-cubes fa-fw"></i>&nbsp; Paquetes</button>
+                    <div class="w3-dropdown-content w3-bar-block w3-dark-grey">
+                        <a href="paquete_Alta.jsp" class="w3-bar-item w3-button w3-mobile">Alta de Paquete</a>
+                        <a href="paquete_Baja.jsp" class="w3-bar-item w3-button w3-mobile">Baja de Paquete</a>
+                        <a href="paquete_Modificacion.jsp" class="w3-bar-item w3-button w3-mobile">Modificación de Paquete</a>
+                    </div>
+                </div>
+                <div class="w3-dropdown-hover w3-mobile">
+                    <button class="w3-button"><i class="fa fa fa-suitcase fa-fw"></i>&nbsp; Suscripciones</button>
+                    <div class="w3-dropdown-content w3-bar-block w3-dark-grey">
+                        <a href="suscripcion_Alta.jsp" class="w3-bar-item w3-button w3-mobile">Alta de Suscripci&oacute;n</a>
+                        <a href="suscripcion_Baja.jsp" class="w3-bar-item w3-button w3-mobile">Baja de Suscripci&oacute;n</a>
+                        <a href="suscripcion_Modificacion.jsp" class="w3-bar-item w3-button w3-mobile">Modificación de Suscripci&oacute;n</a>
+                    </div>
+                </div>
+                <div class="w3-dropdown-hover w3-mobile">
+                    <button class="w3-button"><i class="fa fa-video-camera fa-fw"></i>&nbsp; Dispositivos</button>
+                    <div class="w3-dropdown-content w3-bar-block w3-dark-grey">
+                        <a href="dispositivo_Alta.jsp" class="w3-bar-item w3-button w3-mobile">Alta de Dispositivo</a>
+                        <a href="dispositivo_Baja.jsp" class="w3-bar-item w3-button w3-mobile">Baja de Dispositivo</a>
+                        <a href="dispositivo_Modificacion.jsp" class="w3-bar-item w3-button w3-mobile">Modificación de Dispositivo</a>
+                    </div>
+                </div>
                 <a href="exportarPlanillas.jsp" class="w3-bar-item w3-button w3-padding"><i class="fa fa-file-text-o fa-fw"></i>&nbsp; Exportar planillas</a>
                 <a href="envioNotificacionesApp.jsp" class="w3-bar-item w3-button w3-padding"><i class="fa fa fa-bell fa-fw"></i>&nbsp; Enviar notificaciones</a>
-                <a href="asignarCuentasSecundarias.jsp" class="w3-bar-item w3-button w3-padding"><i class="fa fa fa-user-plus fa-fw"></i>&nbsp; Asignar cuentas secundarias</a>
                 <a href="reporteGraficas.jsp" class="w3-bar-item w3-button w3-padding"><i class="fa fa-line-chart fa-fw"></i>&nbsp; Tablero de gráficas</a>
                 <hr>
-                <a href="index.jsp" class="w3-bar-item w3-button w3-padding"><i class="fa fa-home fa-fw"></i>&nbsp; Home</a><br><br>
             </div>
 
         </nav>

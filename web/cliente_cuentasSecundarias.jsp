@@ -4,7 +4,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Manejo Usuarios</title>
+        <title>Asignar cuentas secundarias</title>
         
         
         
@@ -28,7 +28,7 @@
         
         
         
-        <link href="css/css.css" rel="stylesheet" type="text/css"/>
+        <link href="css/stylesCustom.css" rel="stylesheet" type="text/css"/>
         <script src="js/seccionesUsuarios.js" type="text/javascript"></script>
         <link href="css/secciones.css" rel="stylesheet" type="text/css"/>
     </head>
@@ -63,14 +63,14 @@
             
             <div class="w3-bar-block">
                 <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>&nbsp; Cerrar Menu</a>
-                <a href="manejoUsuarios.jsp" class="w3-bar-item w3-button w3-padding w3-blue-grey"><i class="fa fa-users fa-fw"></i>&nbsp; Usuarios</a>
+                <a href="manejoUsuarios.jsp" class="w3-bar-item w3-button w3-padding"><i class="fa fa-users fa-fw"></i>&nbsp; Usuarios</a>
                 <a href="manejoClientes.jsp" class="w3-bar-item w3-button w3-padding"><i class="fa fa-address-card fa-fw"></i>&nbsp; Clientes</a>
                 <a href="manejoPaquetes.jsp" class="w3-bar-item w3-button w3-padding"><i class="fa fa fa-cubes fa-fw"></i>&nbsp; Paquetes</a>
                 <a href="manejoSuscripciones.jsp" class="w3-bar-item w3-button w3-padding"><i class="fa fa fa-suitcase fa-fw"></i>&nbsp; Suscripciones</a>
                 <a href="manejoDispositivos.jsp" class="w3-bar-item w3-button w3-padding"><i class="fa fa-video-camera fa-fw"></i>&nbsp; Dispositivos</a>
                 <a href="exportarPlanillas.jsp" class="w3-bar-item w3-button w3-padding"><i class="fa fa-file-text-o fa-fw"></i>&nbsp; Exportar planillas</a>
                 <a href="envioNotificacionesApp.jsp" class="w3-bar-item w3-button w3-padding"><i class="fa fa fa-bell fa-fw"></i>&nbsp; Enviar notificaciones</a>
-                <a href="asignarCuentasSecundarias.jsp" class="w3-bar-item w3-button w3-padding"><i class="fa fa fa-user-plus fa-fw"></i>&nbsp; Asignar cuentas secundarias</a>
+                <a href="asignarCuentasSecundarias.jsp" class="w3-bar-item w3-button w3-padding w3-blue-grey"><i class="fa fa fa-user-plus fa-fw"></i>&nbsp; Asignar cuentas secundarias</a>
                 <a href="reporteGraficas.jsp" class="w3-bar-item w3-button w3-padding"><i class="fa fa-line-chart fa-fw"></i>&nbsp; Tablero de gráficas</a>
                 <hr>
                 <a href="index.jsp" class="w3-bar-item w3-button w3-padding"><i class="fa fa-home fa-fw"></i>&nbsp; Home</a><br><br>
@@ -89,22 +89,14 @@
 
             <!-- Header -->
             <header class="w3-container" style="padding-top:22px">
-                <h5><b><i class="fa fa-users"></i> Manejo de Usuarios</b></h5>
+                <h5><b><i class="fa fa-user-plus"></i> Asignar Cuentas Secundarias</b></h5>
             </header>
             
             
             
             
 
-            <div>
-                <h6>Indique acción deseada</h6>
-            </div>
-
-            <div>               
-                <input type="button" value="ALTA DE USUARIO" onclick="location.href='usuario_Alta.jsp'">
-                <input type="button" value="BAJA DE USUARIO" onclick="location.href='usuario_Baja.jsp'">
-                <input type="button" value="MODIFICAR USUARIO" onclick="location.href='usuario_Modificacion.jsp'">
-            </div>
+            
             
             
             
