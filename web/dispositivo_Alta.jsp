@@ -174,7 +174,7 @@
                         <input type="text" id="txtEstadoAlta" name="estadoAlta" placeholder="estado" required="true"/>
                         <hr>
                         <label>¿Asociar cliente?</label>
-                        <input type="text" id="txtNroDocumentoClienteAlta" name="nroDocumentoClienteAltaDisp" placeholder="nro documento"/>
+                        <input type="text" id="txtNroDocumentoClienteAltaDisp" name="nroDocumentoClienteAltaDisp" placeholder="nro documento"/>
                         <input type="button" id="btnAsociarClienteAlta" value="Buscar cliente" onclick="buscarCliente()">
                         <br>
                         <span id="clienteEncontrado"></span>
