@@ -19,11 +19,6 @@ import com.mysql.cj.xdevapi.JsonString;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
-
-/**
- *
- * @author Andres
- */
 public class ControladorManejoUsuarios implements IControlador<Persona>{
     
     private IVistaManejoUsuarios vista;

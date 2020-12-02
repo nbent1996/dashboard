@@ -57,9 +57,6 @@ public class VistaManejoUsuariosWeb implements IVistaManejoUsuarios{
         }
         
 //        Se reusa el mismo servlet en los formularios de ABM usuarios
-        if(request.getParameter("accion").equals("login")){
-            
-        }
         if (request.getParameter("accion").equals("formAlta")){ //me llega el name parametroOculto del input hiden del form de alta usuario con value formAlta
             altaUsuario(request, response);
         }

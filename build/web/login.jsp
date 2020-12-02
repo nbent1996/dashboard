@@ -16,18 +16,21 @@
         <script type="text/javascript" src="js/functions.js"></script>
     </head>
     <body class="fondoLogin" oncontextmenu='return false'>
-            PRUEBA
+            <div class="espaciador">
             <div class="loginContainer">
-                <figure>
+                <div class="logoLoginContainer">
                     <img class="logoLogin" src="resources/logoLogin.png"></img>
-                </figure>
+                </div>
                 <form id="idFormLogin" name="formLogin" action="LoginServlet" method="post" onsubmit="return login(this)">
-                    <label for="txtbxUsuario">Usuario</label>
-                    <input type="text" id="txtbxUsuario" name="txtbxUsuario">
-                    <label for="txtbxPassword">Contraseña</label>
-                    <input type="password" id="txtbxPassword" name="txtbxPassword">
-                    
+                        <div><label for="txtbxUsuario">Usuario</label></div>
+                        <div ><input type="text" id="txtbxUsuario" name="txtbxUsuario" class="nb-input" required></div>
+                        <div class="margin-top20"><label for="txtbxPassword">Contraseña</label></div>
+                        <div><input type="password" id="txtbxPassword" name="txtbxPassword" class="nb-input" required></div>
+                        <div class="margin-top20"><input type="submit" value="Ingresar" class="w3-button w3-light-blue"/></div>
+                        <input type="hidden" name="accion" value="login">
+                        <div class="margin-top20"><a href="#"> Olvide mi contraseña</a>
                 </form>
+            </div>
             </div>
     </body>
 </html>

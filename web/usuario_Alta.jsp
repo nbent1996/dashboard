@@ -28,13 +28,10 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
         <!--Javascript-->
+        <script src="js/jquery-3.5.1.js" type="text/javascript"></script>
         <script type="text/javascript" src="bootstrap-4.5.2-dist/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="js/functions.js"></script>
         
-        
-        
-        
-        <script src="js/jquery-3.5.1.js" type="text/javascript"></script>
         <link href="css/secciones.css" rel="stylesheet" type="text/css"/>
         <script src="js/seccionesUsuarios.js" type="text/javascript"></script>
         
