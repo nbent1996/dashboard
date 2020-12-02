@@ -1,6 +1,6 @@
 <%-- 
-    Document   : dispositivo_Modificacion
-    Created on : 29/11/2020, 07:35:59 PM
+    Document   : cliente_Baja
+    Created on : 01/12/2020, 11:10:29 AM
     Author     : Andres
 --%>
 
@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Modificar Dispositivo</title>
+        <title>Baja Cliente</title>
         
         
         <!--CSS-->  
@@ -43,25 +43,9 @@
         
         <script>
             
-            function w3_open() {
-                if (mySidebar.style.display === 'block') {
-                    mySidebar.style.display = 'none';
-                    overlayBg.style.display = "none";
-                } else {
-                    mySidebar.style.display = 'block';
-                    overlayBg.style.display = "block";
-                }
-            }
-
-            // Close the sidebar with the close button
-            function w3_close() {
-                mySidebar.style.display = "none";
-                overlayBg.style.display = "none";
-            }
             
             
-             
-             
+            
              
             
             
@@ -96,7 +80,7 @@
                 </div>
             -->
             
-                        <div class="w3-bar-block">
+            <div class="w3-bar-block">
                 <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>&nbsp; Cerrar Menu</a>
                 <a href="index.jsp" class="w3-bar-item w3-button w3-padding"><i class="fa fa-home fa-fw"></i>&nbsp; Inicio</a><br><br>
                 <div class="w3-dropdown-hover w3-mobile">
@@ -159,34 +143,25 @@
 
             <!-- Header -->
             <header class="w3-container" style="padding-top:22px">
-                <h5><b><i class="fa fa-users"></i> Modificar Dispositivo </b></h5>
+                <h5><b><i class="fa fa-address-card"></i> Baja de Clientes</b></h5>
             </header>
 
 
+            
             <div class="ABMpage">
 
                 <div class="form">
 
                     
-                    <form name="formModificarDispositivo" action="ManejoDispositivosServlet" method="post" onsubmit="return validarCamposModificarDisp(this)">
+                    <form name="formBajaCliente" action="ManejoClientesServlet" method="post" onsubmit="return validarCamposBajaCliente(this)">
                         
-                        <input type="text" id="txtNroSerieMod" name="nroSerieMod" placeholder="nro serie" required="true"/>
-                        <input type="button" id="btnBuscarDispositivoMod" value="BUSCAR" onclick="buscarDispositivoMod()">
+                        <input type="text" id="txtNroDocumentoClienteBaja" name="nroDocClienteBaja" placeholder="nro documento" required="true"/>                       
                         <hr>
+                        <input type="submit" class="submitBaja" value="confirmar">
                         
-                        <div id="divDatosMod">
-                            <input type="text" id="txtEstadoMod" name="estadoMod" placeholder="estado"/>
-                            
-                            
-
-                            <input type="hidden" name="accion" value="formModDispositivo">
-
-                            
-
-                            <input type="submit" class="submitModificacion" value="confirmar">
-                        </div>
+                        <span id="mensajeBaja"></span>
                         
-                        
+                        <input type="hidden" name="accion" value="formBajaCliente">
                         
                     </form>
 
@@ -195,24 +170,20 @@
 
             </div>
 
+
+
+
+
+
+
+
+
+
+
         </div>
         
         
         
-        <script>
-        
-            ocultarDivDatos();
-                    
-                    function ocultarDivDatos(){
-                        $("#divDatosMod").hide();
-                    }
-                    
-                    function buscarDispositivoMod(){
-                        $("#divDatosMod").show();//en realidad acá es mostrar si encuentra el dispositivo
-                    }
-            
-        
-        </script>
         
         
         
