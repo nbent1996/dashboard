@@ -1,8 +1,15 @@
 package Modelo;
 
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.concurrent.ThreadLocalRandom;
+import javax.imageio.ImageIO;
 
 
 
@@ -98,5 +105,13 @@ public class Funciones {
             return campo;
         }
         return campo.substring(0, 1).toUpperCase() + campo.substring(1).toLowerCase();
+    }
+    public static byte[] getArrayBytes(String ruta) throws FileNotFoundException, IOException{
+        BufferedImage img = ImageIO.read(new File(ruta));
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        int len = ruta.split("\\.").length;
+        String ext = ruta.split("\\.")[len - 1];
+        ImageIO.write(img, ext, baos);
+        return baos.toByteArray();
     }
 }

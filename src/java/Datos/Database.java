@@ -1,5 +1,6 @@
 package Datos;
 
+import Modelo.Imagen;
 import java.sql.*;
 import java.util.ArrayList;
 import javax.naming.NamingException;
@@ -10,7 +11,7 @@ public class Database {
     private static Database instancia;
     private static Connection conexion;
     private static Statement stmt;
-    private String modo = "glassfish"; /*local para testing local -- glassfish para testear desde capa de presentación*/
+    private String modo = "local"; /*local para testing local -- glassfish para testear desde capa de presentación*/
     
     /*TRABAJANDO CON INSTANCIA LOCAL*/
      private static String user = "root";
@@ -122,6 +123,22 @@ public class Database {
         }
         return true;
 
+    }
+    public int insertarImagen(String sentencia, Imagen img) throws SQLException, Exception{
+        conectar(url);
+        conexion.setAutoCommit(false);
+        PreparedStatement psConId = conexion.prepareStatement(sentencia, Statement.RETURN_GENERATED_KEYS);
+        psConId.setBytes(1, img.getImagen());
+        psConId.executeUpdate();
+        ResultSet generatedKeys = psConId.getGeneratedKeys();
+        generatedKeys.next();
+        int idGenerado = generatedKeys.getInt(1);
+        conexion.commit();
+        if (conexion != null && !conexion.isClosed()) {
+            conexion.close();
+        }
+        psConId.close();
+        return idGenerado;
     }
 
     public boolean actualizarMultiple(ArrayList<String> sql, String modoQuery, String clave) throws SQLException, NamingException {

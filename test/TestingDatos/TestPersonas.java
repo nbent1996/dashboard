@@ -31,9 +31,9 @@ public class TestPersonas {
     public void testINSERT(){
         try {
             /*INSERT OPERADOR*/
-            assertEquals("NOERROR", this.op.guardar(null,new Operador("hernandez_g", "hernandez_g", "Gabriel Hernandez",new Empresa("526283747346"), new Pais("URU"), new TipoUsuario("marketing"))).getTextoError());
-            assertEquals("NOERROR", this.op.guardar(null,new Operador("medina", "medina", "Gabriel Medina",new Empresa("526283747346"), new Pais("URU"), new TipoUsuario("administrador"))).getTextoError());
-            assertEquals("NOERROR", this.op.guardar(null,new Operador("gargano", "gargano", "Ivana Gargano",new Empresa("526283747346"), new Pais("URU"), new TipoUsuario("operador"))).getTextoError());
+            assertEquals("NOERROR", this.op.guardar(null,new Operador("hernandez_g", "hernandez_g", "Gabriel Hernandez",new Empresa("526283747346"), new Pais("URU"), new TipoUsuario("marketing"), "Masculino")).getTextoError());
+            assertEquals("NOERROR", this.op.guardar(null,new Operador("medina", "medina", "Gabriel Medina",new Empresa("526283747346"), new Pais("URU"), new TipoUsuario("administrador"), "Masculino")).getTextoError());
+            assertEquals("NOERROR", this.op.guardar(null,new Operador("gargano", "gargano", "Ivana Gargano",new Empresa("526283747346"), new Pais("URU"), new TipoUsuario("operador"), "Femenino")).getTextoError());
 
             /*INSERT PRINCIPAL*/
             assertEquals("NOERROR", this.op.insertar(new Principal("Adrian Gambini",new Empresa("526283747346"), new Pais("URU"), -1,"gambini@gmail.com", "16432548", false, new TipoDocumento("CI-UYU"), "+59897405075")).getTextoError());
@@ -86,7 +86,7 @@ public class TestPersonas {
     }
     @Test
     public void testUPDATE(){
-            Operador oAnterior=new Operador("hernandez_n", "hernandez_n", "Nicolás Hernandez",new Empresa("526283747346"), new Pais("URU"), new TipoUsuario("marketing"));
+            Operador oAnterior=new Operador("hernandez_n", "hernandez_n", "Nicolás Hernandez",new Empresa("526283747346"), new Pais("URU"), new TipoUsuario("marketing"), "Masculino");
             Principal pAnterior = new Principal("NBk88tRVnL", "Mar Benitez",new Empresa("526283747346"), new Pais("URU"), -1,"benitezMAR@gmail.com", "16432500", false, new TipoDocumento("CI-UYU"), "+59897321668");
             Principal p2 = new Principal("Patricia Conde", new Empresa("526283747346"),  new Pais("URU"), -1, "patcon@adinet.com.uy", "16432501", false, new TipoDocumento("CI-UYU"), "+59897321334");
             Secundario sAnterior = new Secundario("dmKvRTFcZ8", "Mónica Bentancor", new Empresa("526283747346"),  new Pais("URU"), -1, "bentancorMON@hotmail.com", new Principal("16432500"), "+59897803629");
@@ -136,7 +136,7 @@ public class TestPersonas {
         Principal p = new Principal("NBk88tRVnV", "Verónica Benitez",new Empresa("526283747346"), new Pais("URU"), -1,"benitezVER@gmail.com", "16432549", false, new TipoDocumento("CI-UYU"), "+59897303276");
         try{
         //INSERCIONES PREVIAS
-           /*OPERADOR*/   this.op.guardar(null,new Operador("hernandez_a", "hernandez_a", "Alberto Hernandez",new Empresa("526283747346"), new Pais("URU"), new TipoUsuario("marketing")));
+           /*OPERADOR*/   this.op.guardar(null,new Operador("hernandez_a", "hernandez_a", "Alberto Hernandez",new Empresa("526283747346"), new Pais("URU"), new TipoUsuario("marketing"), "Masculino"));
            /*PRINCIPAL*/  this.op.guardar(null,p);
            /*SECUNDARIO*/ this.op.guardar(null,new Secundario("dmKvRTFcZ7", "Camila Bentancor", new Empresa("526283747346"),  new Pais("URU"), -1, "bentancorCAM@hotmail.com", new Principal("16432549"), "+59897990777"));
         

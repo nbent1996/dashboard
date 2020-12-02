@@ -18,9 +18,6 @@ import Modelo.TipoUsuario;
 import com.mysql.cj.xdevapi.JsonString;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.json.JsonObject;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -57,7 +54,7 @@ public class ControladorManejoUsuarios implements IControlador<Persona>{
             Empresa empresa = opEmpresa.buscar(" WHERE nombre='"+nombreEmpresaAltaUsr+"' " , "").get(0);
             Pais pais = opPais.buscar(" WHERE nombre='"+nombrePaisAltaUsr+"' " , "").get(0);
             
-            Operador operador = new Operador(usuarioAltaUsr, usuarioAltaUsr,nombreCompletoAltaUsr, empresa, pais, new TipoUsuario(tipoUsuarioAltaUsr) );
+            Operador operador = new Operador(usuarioAltaUsr, usuarioAltaUsr,nombreCompletoAltaUsr, empresa, pais, new TipoUsuario(tipoUsuarioAltaUsr), "Masculino" );
             operador.validar(); //valido campos del operador (chequea en operador y en persona)
             opPersona.guardar(null, operador); //inserto el operador en la base
             vista.exitoAltaUsuario("Usuario dado de alta correctamente");

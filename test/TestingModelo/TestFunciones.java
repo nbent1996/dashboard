@@ -3,8 +3,10 @@ package TestingModelo;
 import org.junit.Before;
 import org.junit.Test;
 import Modelo.Funciones;
+import java.io.IOException;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 public class TestFunciones {
     
     public TestFunciones() {
@@ -41,5 +43,19 @@ public class TestFunciones {
         assertEquals("Portugués", Funciones.FirstLetterUpperCase("portugués"));
         assertEquals("Español", Funciones.FirstLetterUpperCase("eSPAÑOL"));
 
+    }
+
+    @Test
+    public void testGetArrayBytes(){
+        try {
+            byte[] array = Funciones.getArrayBytes("C:\\Users\\nicol\\Desktop\\Proyecto\\dashboard\\web\\resources\\alfacomLogo.png");
+            String imagen = "";
+            for(int i=0 ; i<=array.length-1;i++){
+                imagen+=array[i]+"\n";
+            }
+            System.out.println(imagen);
+        } catch (IOException ex) {
+            fail("error testGetArrayBytes");
+        }
     }
 }

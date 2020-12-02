@@ -11,6 +11,7 @@ import Modelo.QueryEjecutada;
 import Modelo.Secundario;
 import Modelo.TipoDocumento;
 import Modelo.TipoUsuario;
+import java.io.File;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -137,8 +138,8 @@ public OpPersona(String usuarioSistema){
             Operador operador = (Operador) c;
             sqlA = " INSERT INTO Personas (usuarioSistema, nombreCompleto, codigo, identificacionTributaria) values "
                 + "('"+c.getUsuarioSistema()+"','"+c.getNombreCompleto()+"','"+c.getPaisResidencia().getCodigo()+"','"+c.getEmpresaAsociada().getIdentificacionTributaria()+"')";
-            sqlD = " INSERT INTO OperadoresDashboard (usuarioSistema, clave, nombre) values "
-                    + "('"+operador.getUsuarioSistema()+"',SHA('"+operador.getClave()+"'),'"+operador.getTipoUsuario().getNombre()+"')";
+            sqlD = " INSERT INTO OperadoresDashboard (usuarioSistema, clave, nombre, genero) values "
+                    + "('"+operador.getUsuarioSistema()+"',SHA('"+operador.getClave()+"'),'"+operador.getTipoUsuario().getNombre()+"', '"+operador.getGenero()+"') ";
             listaSQLSinAI.add(sqlA);
             listaSQLSinAI.add(sqlD);
             listaCompleta.add(sqlA);
@@ -183,7 +184,7 @@ public OpPersona(String usuarioSistema){
             switch (c.getClass().getName()) {
                 case "Modelo.Operador":
                     Operador operador = (Operador) c;
-                    sqlA = "UPDATE Personas, OperadoresDashboard SET Personas.usuarioSistema='" + c.getUsuarioSistema() + "', Personas.nombreCompleto='" + c.getNombreCompleto() + "' , OperadoresDashboard.usuarioSistema='" + operador.getUsuarioSistema() + "', OperadoresDashboard.clave = SHA('"+operador.getClave()+"'), OperadoresDashboard.nombre='"+operador.getTipoUsuario().getNombre()+"'  WHERE Personas.usuarioSistema = OperadoresDashboard.usuarioSistema AND Personas.usuarioSistema='" + cAnterior.getUsuarioSistema() + "'";
+                    sqlA = "UPDATE Personas, OperadoresDashboard SET Personas.usuarioSistema='" + c.getUsuarioSistema() + "', Personas.nombreCompleto='" + c.getNombreCompleto() + "' , OperadoresDashboard.usuarioSistema='" + operador.getUsuarioSistema() + "', OperadoresDashboard.clave = SHA('"+operador.getClave()+"'), OperadoresDashboard.genero ='"+operador.getGenero()+"' ,OperadoresDashboard.nombre='"+operador.getTipoUsuario().getNombre()+"'  WHERE Personas.usuarioSistema = OperadoresDashboard.usuarioSistema AND Personas.usuarioSistema='" + cAnterior.getUsuarioSistema() + "'";
                     /*No se valida la no repetición del usuarioSistema porque ya fue validado desde la tabla Personas*/
                     listaSQL.add(sqlA);
                     break;
@@ -264,7 +265,7 @@ public OpPersona(String usuarioSistema){
         /*En el String extras se deberá almacenar el tipo de persona sobre el cual se quiere hacer búsqueda, OPCIONES POSIBLES: Modelo.Operador, Modelo.Principal, Modelo.Secundario*/
         ArrayList<Persona> personas = new ArrayList<>();
         String usuarioSistema, nombreCompleto, codigo, identificacionTributaria; /*Tabla Persona*/
-        String nombreTipoUsuario; /*Tabla OperadoresDashboard*/
+        String nombreTipoUsuario, genero; /*Tabla OperadoresDashboard*/
         String nroCliente, email, telefono; /*Tabla Cliente*/
         String nroDocumento, servicioActivo, codDocumento; /*Tabla Principales*/
         String nroDocumentoPrincipal; /*Tabla Secundarios*/
@@ -275,7 +276,7 @@ public OpPersona(String usuarioSistema){
             
             switch (extras) {
                 case "Modelo.Operador":
-                    sqlA = "SELECT Personas.usuarioSistema, Personas.nombreCompleto, Personas.codigo, Personas.identificacionTributaria, OperadoresDashboard.nombre from Personas, OperadoresDashboard ";
+                    sqlA = "SELECT Personas.usuarioSistema, Personas.nombreCompleto, Personas.codigo, Personas.identificacionTributaria, OperadoresDashboard.nombre, OperadoresDashboard.genero from Personas, OperadoresDashboard ";
                     if (filtro != null) {
                         sqlA += filtro;
                         sqlA += " AND Personas.usuarioSistema = OperadoresDashboard.usuarioSistema AND Personas.eliminado='N' AND OperadoresDashboard.eliminado='N' ";
@@ -289,7 +290,8 @@ public OpPersona(String usuarioSistema){
                         codigo = rs.getString("codigo");
                         identificacionTributaria = rs.getString("identificacionTributaria");
                         nombreTipoUsuario = rs.getString("nombre");
-                        personas.add(new Operador("", usuarioSistema, nombreCompleto, new Empresa(identificacionTributaria),new Pais(codigo),new TipoUsuario(nombreTipoUsuario)));
+                        genero = rs.getString("genero");
+                        personas.add(new Operador("", usuarioSistema, nombreCompleto, new Empresa(identificacionTributaria),new Pais(codigo),new TipoUsuario(nombreTipoUsuario), genero));
                     }
                     rs.close();
                     listaSQL.add(sqlA);
@@ -393,6 +395,8 @@ public OpPersona(String usuarioSistema){
         } 
         return usuarioSistema; //Retornamos un usuarioSistema AUTOGENERADO que NO existe en la base.
     }
+
+    
 /*Comportamiento*/
 
 /*Getters y Setters*/
