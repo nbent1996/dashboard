@@ -1,20 +1,15 @@
 <%-- 
-    Document   : usuario_Modificacion
-    Created on : 12/11/2020, 08:21:03 PM
+    Document   : suscripcion_Baja
+    Created on : 01/12/2020, 10:10:42 PM
     Author     : Andres
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-
-<%
-    String msg = request.getParameter("msg");
-%>
-
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Modificar Usuario</title>
+        <title>Baja Suscripción</title>
         
         
         <!--CSS-->  
@@ -40,7 +35,9 @@
         
         
     </head>
+    
     <body class="w3-light-grey">
+        
         
         
         
@@ -49,13 +46,10 @@
             
             
             
+             
+            
             
         </script>
-        
-        
-        
-        
-        
         
         
         
@@ -86,7 +80,7 @@
                 </div>
             -->
             
-                        <div class="w3-bar-block">
+            <div class="w3-bar-block">
                 <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>&nbsp; Cerrar Menu</a>
                 <a href="index.jsp" class="w3-bar-item w3-button w3-padding"><i class="fa fa-home fa-fw"></i>&nbsp; Inicio</a><br><br>
                 <div class="w3-dropdown-hover w3-mobile">
@@ -149,62 +143,46 @@
 
             <!-- Header -->
             <header class="w3-container" style="padding-top:22px">
-                <h5><b><i class="fa fa-users"></i> Modificar Usuario</b></h5>
+                <h5><b><i class="fa fa-suitcase"></i> Baja de Suscripciones</b></h5>
             </header>
 
 
-            
-
             <div class="ABMpage">
+
                 <div class="form">
 
-                    <form name="formModificacionUsuario" action="ManejoUsuariosServlet" method="post" onsubmit="return validarCamposModificacionUsr(this)">
+                    
+                    <form name="formBajaCliente" action="ManejoClientesServlet" method="post" onsubmit="return validarCamposBajaCliente(this)">
                         
-                        <input type="text" id="txtUsuarioMod" name="usuarioMod" placeholder="usuario" required="true"/>
-                        <input type="button" id="btnBuscarUsuarioMod" value="BUSCAR" onclick="buscarUsuarioMod()">
-                        <hr> 
+                        <input type="text" id="txtNroDocumentoClienteBaja" name="nroDocClienteBaja" placeholder="nro documento" required="true"/>                       
+                        <hr>
+                        <input type="submit" class="submitBaja" value="confirmar">
                         
-                        <div id="divDatosMod">
-                            <input type="text" id="txtNombreCompletoMod" name="nombreCompletoMod" placeholder="nombre completo"/>
-                            <!--
-                            <input type="text" id="txtNombreEmpresaMod" name="nombreEmpresaMod" placeholder="empresa"/>
-                            <input type="text" id="txtNombrePaisMod" name="nombrePaisMod" placeholder="pais"/>
-                            -->
-                            <input type="password" id="txtPasswordMod" name="passwordMod" placeholder="contraseña"/>
-                            <input type="hidden" name="accion" value="formModificacion">
-                            <br>
-
-                            <input type="submit" class="submitModificacion" value="CONFIRMAR">
-                        </div>
-
-                        <%if (msg != null) {%>
-                        <div>
-                            <p class="message"><%=msg%></p>                        
-                        </div>
-                        <%}%>
-
+                        <span id="mensajeBaja"></span>
+                        
+                        <input type="hidden" name="accion" value="formBajaCliente">
+                        
                     </form>
+
+
                 </div>
+
             </div>
+
+
+
+
+
+
+
+
+
+
 
 
         </div>
         
-                        
         
-                <script>
-                    ocultarDivDatos();
-                    
-                    function ocultarDivDatos(){
-                        $("#divDatosMod").hide();
-                    }
-
-                    function buscarUsuarioMod(){
-                        $("#divDatosMod").show();//en realidad acá es mostrar si encuentra al usuario
-                    }
-                    
-
-                </script>
         
         
         

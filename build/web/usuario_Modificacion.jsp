@@ -14,7 +14,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Modificación de Usuario</title>
+        <title>Modificar Usuario</title>
         
         
         <!--CSS-->  
