@@ -1,5 +1,11 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+
+<%
+    String msg = request.getParameter("msg");
+%>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -15,34 +21,31 @@
         <script type="text/javascript" src="bootstrap-4.5.2-dist/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="js/functions.js"></script>
     </head>
-<<<<<<< HEAD
-    <body>
-            PROBANDO
-        <form>
-        
-        </form>
-        
-=======
+
+
+
     <body class="fondoLogin" oncontextmenu='return false'>
-            <div class="espaciador">
+        <div class="espaciador">
             <div class="loginContainer">
                 <div class="logoLoginContainer">
                     <img class="logoLogin" src="resources/logoLogin.png"></img>
                 </div>
-                <form id="idFormLogin" name="formLogin" action="LoginServlet" method="post" onsubmit="return login(this)">
-                        <div><label for="txtbxUsuario">Usuario</label></div>
-                        <div ><input type="text" id="txtbxUsuario" name="txtbxUsuario" class="nb-input" required></div>
-                        <div class="margin-top20"><label for="txtbxPassword">Contraseña</label></div>
-                        <div><input type="password" id="txtbxPassword" name="txtbxPassword" class="nb-input" required></div>
-                        <div class="margin-top20"><input type="submit" value="Ingresar" class="w3-button w3-light-blue"/></div>
-                        <input type="hidden" name="accion" value="login">
-                        <div class="margin-top20"><a href="#"> Olvide mi contraseña</a>
+                <form id="idFormLogin" name="formLogin" action="LoginServlet" method="post" onsubmit="return login(this)"> 
+                    <div><label for="txtbxUsuario">Usuario</label></div>
+                    <div ><input type="text" id="txtbxUsuario" name="txtbxUsuario" class="nb-input" required="true"></div>
+                    <div class="margin-top20"><label for="txtbxPassword">Contraseña</label></div>
+                    <div><input type="password" id="txtbxPassword" name="txtbxPassword" class="nb-input" required="true"></div>
+                    <div class="margin-top20"><input type="submit" value="Ingresar" class="w3-button w3-light-blue"/></div>
+                        <%if (msg != null) {%>
+                            <div>
+                                Error: <%=msg%>
+                            </div>
+                        <%}%>                    
+                    <div class="margin-top20"><a href="#"> Olvide mi contraseña</a></div>
                 </form>
             </div>
-<<<<<<< HEAD
-            </div>
-=======
->>>>>>> 7809561610e9c0160c9956ec2b1c46aa77cf3b66
->>>>>>> 049b293280436de6242b7c9331e403763c068027
+
+        </div>
+
     </body>
 </html>
