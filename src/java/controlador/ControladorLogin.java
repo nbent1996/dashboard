@@ -23,6 +23,7 @@ public class ControladorLogin {
     /*Constructores*/
     
     /*Comportamiento*/
+<<<<<<< HEAD
     
     
     
@@ -36,6 +37,16 @@ public class ControladorLogin {
         } catch (Exception ex) { //no encontró datos en BD
             vista.denegarAcceso("Usuario y/o contraseña incorrectos.");
         }
+=======
+    public void login(String usuario, String password){
+//        try{
+//        
+//        }catch(ProgramException ex){
+//        
+//        }catch(Exception ex){
+//        
+//        }
+>>>>>>> e08c26aa95f7516e3d9bc38101ddc7ae22e8f22b
         
         
         

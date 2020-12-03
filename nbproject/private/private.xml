@@ -2,6 +2,7 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+<<<<<<< HEAD
         <group>
             <file>file:/C:/Users/andre/Desktop/Dashboard/dashboard/src/java/Datos/Database.java</file>
             <file>file:/C:/Users/andre/Desktop/Dashboard/dashboard/src/java/Datos/OpPersona.java</file>
@@ -15,5 +16,8 @@
             <file>file:/C:/Users/andre/Desktop/Dashboard/dashboard/src/java/controlador/ControladorManejoUsuarios.java</file>
             <file>file:/C:/Users/andre/Desktop/Dashboard/dashboard/web/login.jsp</file>
         </group>
+=======
+        <group/>
+>>>>>>> e08c26aa95f7516e3d9bc38101ddc7ae22e8f22b
     </open-files>
 </project-private>

@@ -21,9 +21,12 @@
         <script type="text/javascript" src="bootstrap-4.5.2-dist/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="js/functions.js"></script>
     </head>
+<<<<<<< HEAD
 
 
 
+=======
+>>>>>>> e08c26aa95f7516e3d9bc38101ddc7ae22e8f22b
     <body class="fondoLogin" oncontextmenu='return false'>
         <div class="espaciador">
             <div class="loginContainer">
@@ -44,8 +47,12 @@
                     <div class="margin-top20"><a href="#"> Olvide mi contraseña</a></div>
                 </form>
             </div>
+<<<<<<< HEAD
 
         </div>
 
+=======
+            </div>
+>>>>>>> e08c26aa95f7516e3d9bc38101ddc7ae22e8f22b
     </body>
 </html>

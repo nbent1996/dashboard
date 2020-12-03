@@ -10,30 +10,15 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Modificar Cliente</title>
-        
-        
-        <!--CSS-->  
+        <!--CSS<>-->  
         <link rel="stylesheet" href="css/styles.css">
-        <!--<link rel="stylesheet" href="css/css"> <!--es la referencia de mas abajo (fonts.googleapis)-->
-        <!--<link rel="stylesheet" href="css/font-awesome.min.css"> --> <!--es la referencia de mas abajo (cdnjs.cloudflare)  
-
-
-        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"><!--es el styles.css  -->
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway"> 
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="css/stylesCustom.css">
+        <link rel="stylesheet" href="css/font-awesome.min.css"> 
 
         <!--Javascript-->
-        <script type="text/javascript" src="bootstrap-4.5.2-dist/js/bootstrap.min.js"></script>
-        <script type="text/javascript" src="js/functions.js"></script>
-        
-        
-        
-        
         <script src="js/jquery-3.5.1.js" type="text/javascript"></script>
-        <link href="css/secciones.css" rel="stylesheet" type="text/css"/>
-        <script src="js/seccionesUsuarios.js" type="text/javascript"></script>
-        
-        
+        <script type="text/javascript" src="bootstrap-4.5.2-dist/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="js/functions.js"></script> 
     </head>
     
     <body class="w3-light-grey">

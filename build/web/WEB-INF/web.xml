@@ -4,15 +4,8 @@
         <session-timeout>
             30
         </session-timeout>
-
     </session-config>
-<<<<<<< HEAD
-    <!--<welcome-file-list> 
-       <welcome-file>login.jsp</welcome-file> 
-    </welcome-file-list>  -->
-=======
     <welcome-file-list>
        <welcome-file>./login.jsp</welcome-file>
     </welcome-file-list>
->>>>>>> 7809561610e9c0160c9956ec2b1c46aa77cf3b66
 </web-app>
