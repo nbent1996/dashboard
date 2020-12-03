@@ -20,13 +20,13 @@ public class ControladorLogin {
     
     /*Comportamiento*/
     public void login(String usuario, String password){
-        try{
-        
-        }catch(ProgramException ex){
-        
-        }catch(Exception ex){
-        
-        }
+//        try{
+//        
+//        }catch(ProgramException ex){
+//        
+//        }catch(Exception ex){
+//        
+//        }
         
     }
     /*Comportamiento*/
