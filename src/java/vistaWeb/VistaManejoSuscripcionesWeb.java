@@ -6,7 +6,7 @@
 package vistaWeb;
 
 import controlador.ControladorManejoSuscripciones;
-import controlador.IVistaManejoSuscripciones;
+import controlador.Interfaces.IVistaManejoSuscripciones;
 
 /**
  *

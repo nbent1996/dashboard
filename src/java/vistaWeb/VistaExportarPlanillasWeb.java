@@ -6,7 +6,7 @@
 package vistaWeb;
 
 import controlador.ControladorExportarPlanillas;
-import controlador.IVistaExportarPlanillas;
+import controlador.Interfaces.IVistaExportarPlanillas;
 
 /**
  *

@@ -6,7 +6,7 @@
 package vistaWeb;
 
 import controlador.ControladorEnvioNotificacionesApp;
-import controlador.IVistaEnvioNotificacionesApp;
+import controlador.Interfaces.IVistaEnvioNotificacionesApp;
 
 /**
  *

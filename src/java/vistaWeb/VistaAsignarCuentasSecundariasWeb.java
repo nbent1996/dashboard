@@ -6,7 +6,7 @@
 package vistaWeb;
 
 import controlador.ControladorAsignarCuentasSecundarias;
-import controlador.IVistaAsignarCuentasSecundarias;
+import controlador.Interfaces.IVistaAsignarCuentasSecundarias;
 
 /**
  *

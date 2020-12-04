@@ -6,7 +6,7 @@
 package vistaWeb;
 
 import controlador.ControladorReporteGraficas;
-import controlador.IVistaReporteGraficas;
+import controlador.Interfaces.IVistaReporteGraficas;
 
 /**
  *

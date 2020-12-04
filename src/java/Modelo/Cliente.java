@@ -17,7 +17,6 @@ public void adaptarCampos(){
     /*Sanitizar campos*/
     this.email = Funciones.sanitizarCampo(this.email);
     this.telefono = Funciones.sanitizarCampo(this.telefono);
-
 }
 @Override
 public void validar() throws ProgramException{

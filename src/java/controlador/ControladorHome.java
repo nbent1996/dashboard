@@ -1,5 +1,6 @@
 package controlador;
 
+import controlador.Interfaces.IVistaHome;
 import Datos.OpImagen;
 import Datos.OpPersona;
 

@@ -17,7 +17,7 @@ public class Funciones {
     
     /*HTML*/
         public static String lista(boolean multiple,String id ,ArrayList opciones){
-        String lista = "<select " + "onChange='seleccionado()'" + (multiple?" multiple ":"") +  " id='" + id+ "'>";
+        String lista = "<select " + " class='comboBox' onchange='changeItemSelected()' " + (multiple?" multiple ":"") +  " id='" + id+ "'>";
         String optionId = "";
         String value ="";
         boolean primero = true;
@@ -113,5 +113,13 @@ public class Funciones {
         String ext = ruta.split("\\.")[len - 1];
         ImageIO.write(img, ext, baos);
         return baos.toByteArray();
+    }
+    public static String formatearTelefono(String campo, String prefijo){
+        if(campo==null || campo.equals(""))
+                return campo;
+        if(campo.substring(0, 1).equals("0")){
+            campo = campo.substring(1);
+        }
+        return prefijo+campo;
     }
 }

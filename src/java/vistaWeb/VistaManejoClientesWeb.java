@@ -6,7 +6,7 @@
 package vistaWeb;
 
 import controlador.ControladorManejoClientes;
-import controlador.IVistaManejoClientes;
+import controlador.Interfaces.IVistaManejoClientes;
 
 /**
  *

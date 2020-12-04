@@ -1,5 +1,6 @@
 package controlador;
 
+import controlador.Interfaces.IVistaLogin;
 import Datos.OpPersona;
 import Datos.OpTipoUsuario;
 import Modelo.ProgramException;

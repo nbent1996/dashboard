@@ -1,44 +1,26 @@
-<%-- 
-    Document   : cliente_Alta
-    Created on : 01/12/2020, 11:10:15 AM
-    Author     : Andres
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Alta Cliente</title>
-        <!--CSS<>-->  
+        <!--CSS-->  
         <link rel="stylesheet" href="css/styles.css">
         <link rel="stylesheet" href="css/stylesCustom.css">
-        <link rel="stylesheet" href="css/font-awesome.min.css"> 
-
+        <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway"> 
         <!--Javascript-->
-        <script src="js/jquery-3.5.1.js" type="text/javascript"></script>
+        <script type="text/javascript" src="js/jquery-3.5.1.js"></script>
         <script type="text/javascript" src="bootstrap-4.5.2-dist/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="js/functions.js"></script>
         
     </head>
     
     <body class="w3-light-grey">
-        
-        
-        
-        
         <script>
-            
-            
-            
-            
-             
-            
-            
+   
         </script>
-        
-        
-        
+
         <div class="w3-bar w3-top w3-black w3-large" style="z-index:4">
             <button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey" onclick="w3_open();"><i class="fa fa-bars"></i> &nbsp;Menu</button>
             <span class="w3-bar-item w3-right">LogoEmpresa</span>
@@ -59,14 +41,9 @@
                 </div>
             </div>
 
-            <hr>
-            <!-- TÍTULO DE MENÚ LATERAL 
-                <div class="w3-container">
-                    <h5>Dashboard</h5>
-                </div>
-            -->
-            
-            <div class="w3-bar-block">
+            <hr>        
+
+<div class="w3-bar-block">
                 <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>&nbsp; Cerrar Menu</a>
                 <a href="index.jsp" class="w3-bar-item w3-button w3-padding"><i class="fa fa-home fa-fw"></i>&nbsp; Inicio</a><br><br>
                 <div class="w3-dropdown-hover w3-mobile">
@@ -115,7 +92,6 @@
                 <a href="reporteGraficas.jsp" class="w3-bar-item w3-button w3-padding"><i class="fa fa-line-chart fa-fw"></i>&nbsp; Tablero de gráficas</a>
                 <hr>
             </div>
-
         </nav>
         
         
@@ -131,51 +107,33 @@
             <header class="w3-container" style="padding-top:22px">
                 <h5><b><i class="fa fa-address-card"></i> Alta de Clientes</b></h5>
             </header>
-
-
             <div class="ABMpage">
-
                 <div class="form">
-
-                    
                     <form name="formAltaCliente" action="ManejoClientesServlet" method="post" onsubmit="return validarCamposAltaCliente(this)">
+                        <div><label for="txtbxUsuarioSistema">Usuario Sistema: /*incluir usuario*/</label></div>
                         
-                        <input type="text" id="txtNroDocumentoClienteAlta" name="nroDocClienteAlta" placeholder="nro documento" required="true"/>
-                        <input type="text" id="txtNombreCompletoClienteAlta" name="nombreCompletoClienteAlta" placeholder="nombre completo" required="true"/>
-                        <input type="text" id="txtEmailClienteAlta" name="emailClienteAlta" placeholder="email" required="true"/>
+                        <div><label for="nroDocClienteAlta">N&uacute;mero de Documento</label></div>
+                        <div><input type="text" id="txtbxNroDocumentoClienteAlta" name="txtbxNroDocumentoClienteAlta" required="true"/></div>
+                        
+                        <div><label for="txtbxNombreCompletoClienteAlta">Nombre completo</label></div>
+                        <div><input type="text" id="txtbxNombreCompletoClienteAlta" name="txtbxNombreCompletoClienteAlta" required="true"/></div>
+                        
+                        <div><label for="selPaisResidencia">Pais de nacionalidad</label></div>
+                        <div id="selPaises"></div>
+                        
+                        <div><label for="txtbxEmailClienteAlta">Email</label></div>
+                        <div><input type="email" id="txtbxEmailClienteAlta" name="txtbxEmailClienteAlta" required="true"/></div>
+                        
+                        <div><label for="txtbxTelefonoClienteAlta">Telefono</label></div>
+                        <div><input type="text" id="txtbxTelefonoClienteAlta" name="txtbxTelefonoClienteAlta" required="true"/></div>
                         <hr>        
-                        
                         <input type="submit" class="submitAlta" value="confirmar">
-                        
                         <span id="mensajeAlta"></span>
-                        
                         <input type="hidden" name="accion" value="formAltaCliente">
-                        
                     </form>
-
-
                 </div>
 
             </div>
-
-
-
-
-
-
-
-
-
-
-
-
         </div>
-        
-        
-        
-        
-        
-        
-        
     </body>
 </html>

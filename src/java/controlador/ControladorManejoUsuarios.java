@@ -5,6 +5,8 @@
  */
 package controlador;
 
+import controlador.Interfaces.IControlador;
+import controlador.Interfaces.IVistaManejoUsuarios;
 import Datos.OpEmpresa;
 import Datos.OpPais;
 import Datos.OpPersona;

@@ -6,7 +6,7 @@
 package vistaWeb;
 
 import controlador.ControladorManejoDispositivos;
-import controlador.IVistaManejoDispositivos;
+import controlador.Interfaces.IVistaManejoDispositivos;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.http.HttpServletRequest;

@@ -5,6 +5,8 @@
  */
 package controlador;
 
+import controlador.Interfaces.IVistaManejoDispositivos;
+import controlador.Interfaces.IControlador;
 import Modelo.Dispositivo;
 import java.sql.SQLException;
 import java.util.ArrayList;

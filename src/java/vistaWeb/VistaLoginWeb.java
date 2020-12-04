@@ -1,7 +1,7 @@
 package vistaWeb;
 
 import controlador.ControladorLogin;
-import controlador.IVistaLogin;
+import controlador.Interfaces.IVistaLogin;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.http.HttpServletRequest;

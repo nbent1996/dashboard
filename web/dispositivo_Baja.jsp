@@ -10,15 +10,15 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Baja de Dispositivo</title>
-         <!--CSS<>-->  
+        <!--CSS-->  
         <link rel="stylesheet" href="css/styles.css">
         <link rel="stylesheet" href="css/stylesCustom.css">
-        <link rel="stylesheet" href="css/font-awesome.min.css"> 
-
+        <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway"> 
         <!--Javascript-->
-        <script src="js/jquery-3.5.1.js" type="text/javascript"></script>
+        <script type="text/javascript" src="js/jquery-3.5.1.js"></script>
         <script type="text/javascript" src="bootstrap-4.5.2-dist/js/bootstrap.min.js"></script>
-        <script type="text/javascript" src="js/functions.js"></script> 
+        <script type="text/javascript" src="js/functions.js"></script>
     </head>
     
     <body class="w3-light-grey">
@@ -81,7 +81,7 @@
                 </div>
             -->
             
-                        <div class="w3-bar-block">
+                <div class="w3-bar-block">
                 <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>&nbsp; Cerrar Menu</a>
                 <a href="index.jsp" class="w3-bar-item w3-button w3-padding"><i class="fa fa-home fa-fw"></i>&nbsp; Inicio</a><br><br>
                 <div class="w3-dropdown-hover w3-mobile">

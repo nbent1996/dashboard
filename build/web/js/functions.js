@@ -1,31 +1,13 @@
 /*EVENTOS*/
+$(document).ready(load);
+function load(){
+}
 /*EVENTOS*/
 
-
-
-//
-//$('.message a').click(function(){
-//   $('form').animate({height: "toggle", opacity: "toggle"}, "slow");
-//});
-
-
-function seleccionado(){
-    
-    $(document).ready(function () {
-        $("#lstPaises").change(function () {
-            var x = $("#lstPaises").length;            
-//            for (var i = 0; i < x; i++) {
-//                $("#lstPaises")[i].removeProp("name");
-//            }
-            $("#lstPaises option:selected").attr("name", "itemSeleccionado"); //modifica el name de cada option, pero es necesario limpiar los demás
-            //alert($('#lstPaises option:selected').html());
-        });
-    });
-    
-    
+function changeItemSelected(){
+    $(".comboBox option").attr("name", "");
+    $(".comboBox option:selected").attr("name", "itemSeleccionado");
 }
-
-
 
 
 

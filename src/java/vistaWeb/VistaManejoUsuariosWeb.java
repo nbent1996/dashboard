@@ -1,35 +1,23 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package vistaWeb;
 
 import Modelo.Funciones;
 import Modelo.Pais;
 import Modelo.TipoUsuario;
 import controlador.ControladorManejoUsuarios;
-import controlador.IVistaManejoUsuarios;
+import controlador.Interfaces.IVistaManejoUsuarios;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.scene.control.Alert;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-/**
- *
- * @author Andres
- */
 public class VistaManejoUsuariosWeb implements IVistaManejoUsuarios{
     
     private ControladorManejoUsuarios controlador;
     private String destino;
     private HttpServletRequest request;
     private HttpServletResponse response;
-    
     private PrintWriter out;
     
     
