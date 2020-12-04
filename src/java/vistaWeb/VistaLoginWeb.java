@@ -1,18 +1,28 @@
 package vistaWeb;
 
+import Modelo.Operador;
 import controlador.ControladorLogin;
 import controlador.Interfaces.IVistaLogin;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+
+
 public class VistaLoginWeb implements IVistaLogin{
+    
+    
     /*Estado*/
     private ControladorLogin controlador;
     private HttpServletRequest request;
     private HttpServletResponse response;
     private PrintWriter out;
+    private String destino;
     /*Estado*/
+    
+    
     /*Constructores*/
     public VistaLoginWeb(HttpServletRequest request, HttpServletResponse response) throws IOException{
         this.response = response;
@@ -21,21 +31,53 @@ public class VistaLoginWeb implements IVistaLogin{
         this.controlador = new ControladorLogin(this);
     }
     /*Constructores*/
+    
+    
     /*Comportamiento*/
     public void procesarRequest(HttpServletRequest request, HttpServletResponse response){
-        if(request.getParameter("accion").equals("login")){
-            controlador.login(request.getParameter("txtbxUsuario"), request.getParameter("txtbxPassword"));
+        
+        loginUsuarios(request, response);
+            //controlador.login(request.getParameter("txtbxUsuario"), request.getParameter("txtbxPassword"));
             
-        }
+       
     }
     /*Comportamiento*/
-    /*Getters y Setters*/
     
-    /*Getters y Setters*/
+
 
     @Override
     public void mostrarError(String textoError) {
         this.out.write(textoError);
+    }
+
+    private void loginUsuarios(HttpServletRequest request, HttpServletResponse response) {
+        String nombreUsuario = request.getParameter("txtbxUsuario");
+        String password = request.getParameter("txtbxPassword");
+        
+        this.request = request;
+        this.response = response;
+        
+        controlador.login(nombreUsuario, password);
+        
+    }
+
+    @Override
+    public void permitirAcceso(Operador operadorLogin) {
+        
+        destino = "index.jsp";
+        
+        HttpSession sesion = request.getSession(true);
+        sesion.setAttribute("OperadorLogueado", operadorLogin);
+
+    }
+
+    @Override
+    public void denegarAcceso(String mensajeError) {
+        
+        
+        destino = "login.jsp?msg=" + mensajeError;
+        
+        
     }
     
 }
