@@ -5,6 +5,8 @@ import controlador.ControladorLogin;
 import controlador.Interfaces.IVistaLogin;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -68,6 +70,12 @@ public class VistaLoginWeb implements IVistaLogin{
         
         HttpSession sesion = request.getSession(true);
         sesion.setAttribute("OperadorLogueado", operadorLogin);
+        
+        try {
+            response.sendRedirect(destino);
+        } catch (IOException ex) {
+            Logger.getLogger(VistaLoginWeb.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }
 
@@ -77,6 +85,11 @@ public class VistaLoginWeb implements IVistaLogin{
         
         destino = "login.jsp?msg=" + mensajeError;
         
+        try {
+            response.sendRedirect(destino);
+        } catch (IOException ex) {
+            Logger.getLogger(VistaLoginWeb.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }
     
