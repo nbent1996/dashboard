@@ -12,6 +12,7 @@ import Datos.OpPais;
 import Datos.OpPersona;
 import Datos.OpTipoUsuario;
 import Modelo.Empresa;
+import Modelo.Funciones;
 import Modelo.Operador;
 import Modelo.Pais;
 import Modelo.Persona;
@@ -70,10 +71,14 @@ public class ControladorManejoUsuarios implements IControlador<Persona>{
     
     public void bajaUsuario(String usuarioBajaUsr) {
         
+        ArrayList<Persona> aux = new ArrayList();
+        
         try {
-            Persona persona = opPersona.buscar(" WHERE usuarioSistema='"+usuarioBajaUsr+"' " , "").get(0);
-            opPersona.borrar(persona);
-            vista.exitoAlBorrarUsuario("Usuario dado de baja correctamente");
+            //Persona persona = opPersona.buscar(" WHERE usuarioSistema='"+usuarioBajaUsr+"' " , "").get(0);
+            aux = opPersona.buscar(" WHERE OperadoresDashboard.usuarioSistema='"+usuarioBajaUsr+"' " , "Modelo.Operador");
+            vista.pruebaMostrarTablaBorrarUsuario(aux);
+            //opPersona.borrar(persona);
+            //vista.exitoAlBorrarUsuario("Usuario dado de baja correctamente");
             
         } catch (Exception ex) {//error al insertar
             vista.errorAlBorrarUsuario("Error al dar de baja el usuario");

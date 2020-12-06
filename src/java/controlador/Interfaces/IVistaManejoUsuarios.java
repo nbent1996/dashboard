@@ -1,6 +1,7 @@
 package controlador.Interfaces;
 
 import Modelo.Pais;
+import Modelo.Persona;
 import Modelo.TipoUsuario;
 import java.util.ArrayList;
 public interface IVistaManejoUsuarios {
@@ -21,6 +22,8 @@ public interface IVistaManejoUsuarios {
     public void errorCargaTiposUsuarios(String mensajeError);
 
     public void errorCargaPaises(String mensajeError);
+
+    public void pruebaMostrarTablaBorrarUsuario(ArrayList<Persona> aux);
     
     
     

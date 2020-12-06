@@ -45,6 +45,44 @@ public class Funciones {
         return lista;
     
     }
+        
+    
+        
+//        public static String tablaServicio(ArrayList<Pedido> opciones) {
+//        //falta escribir quien es el gestor
+//        String tabla = "";
+//        String nombre = "";
+//        for (Pedido obj : opciones) {
+//            if (obj.getGestor() != null) {
+//                nombre = obj.getGestor().getNombreCompleto();
+//            } else {
+//                nombre = "";
+//            }
+//            tabla += "<tr><td>" + obj.getProducto().getNombre() + "</td><td>" + obj.getCantidad() + "</td><td>"
+//                    + obj.getProducto().getPrecioUnitario() + "</td><td>"
+//                    + obj.precioTotal() + "</td><td>" + obj.getEstado() + "</td><td>" + nombre + "</td></tr>";
+//        }
+//        return tabla;
+//    }
+        
+        
+
+    public static String tablaUsuarios(ArrayList<Persona> opciones, String boton) {
+        String tabla = "";
+        int x = 0;
+        for (Persona obj : opciones) {
+            tabla += "<tr><td>" + obj.getUsuarioSistema() + "</td><td>"
+                    + "</td><td>" + obj.getNombreCompleto()+ "</td>"
+                    
+                    + "<td><input type='button' value='" + boton + "' onclick=\"" + boton + "(" + x + ")\"> </td></tr>";
+            x++;
+        }
+        return tabla;
+    }
+        
+        
+        
+        
     /*HTML*/   
         
     public static String sanitizarCampo(String campo){

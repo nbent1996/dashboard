@@ -2,6 +2,7 @@ package vistaWeb;
 
 import Modelo.Funciones;
 import Modelo.Pais;
+import Modelo.Persona;
 import Modelo.TipoUsuario;
 import controlador.ControladorManejoUsuarios;
 import controlador.Interfaces.IVistaManejoUsuarios;
@@ -12,6 +13,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+
+
 public class VistaManejoUsuariosWeb implements IVistaManejoUsuarios{
     
     private ControladorManejoUsuarios controlador;
@@ -23,6 +27,8 @@ public class VistaManejoUsuariosWeb implements IVistaManejoUsuarios{
     
     private ArrayList<TipoUsuario> tiposUsu = new ArrayList();
     private ArrayList<Pais> paises = new ArrayList();
+    
+    private ArrayList<Persona> personas = new ArrayList();
 
     
     public VistaManejoUsuariosWeb(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -205,6 +211,16 @@ public class VistaManejoUsuariosWeb implements IVistaManejoUsuarios{
         } catch (IOException ex) {
             Logger.getLogger(VistaManejoUsuariosWeb.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    @Override
+    public void pruebaMostrarTablaBorrarUsuario(ArrayList<Persona> aux) {
+        //Funciones.tablaUsuarios(aux, "btnBajaUsuario");
+        
+        this.personas = aux;
+        String componente = Funciones.tablaUsuarios(aux, "btnBajaUsuario");
+        
+        out.write("Usuarios: " + componente + "\n\n");
     }
 
     
