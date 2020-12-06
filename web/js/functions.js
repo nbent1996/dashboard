@@ -1,13 +1,47 @@
-/*EVENTOS*/
 $(document).ready(load);
 function load(){
-}
-/*EVENTOS*/
+    /*EVENTOS*/
+    $("#selTipoCliente").on("change", changeTipoCliente);
+    /*EVENTOS*/
+    modificarVisibilidad(new Array("#divPrincipal", "#divSecundario"), "ocultar");
+    modificarVisibilidad(new Array("#divPrincipal"), "mostrar");
 
+
+}
+function modificarVisibilidad(listaElementos, accion){
+    switch(accion){
+        case "mostrar":
+            for(var contador=0; contador<=listaElementos.length-1;contador++){
+                $(listaElementos[contador]).show();
+            }
+        break;
+        
+        case "ocultar":
+            for(var contador=0; contador<=listaElementos.length-1;contador++){
+                $(listaElementos[contador]).hide();
+            }
+        break;
+    }
+
+}
 function changeItemSelected(){
     $(".comboBox option").attr("name", "");
     $(".comboBox option:selected").attr("name", "itemSeleccionado");
 }
+function changeTipoCliente(){
+    modificarVisibilidad(new Array("#divPrincipal", "#divSecundario"), "ocultar");
+    var itemSeleccionado = $("#selTipoCliente").val();
+    switch(itemSeleccionado){
+        case "Principal":
+            modificarVisibilidad(new Array("#divPrincipal"), "mostrar");
+        break;
+        case "Secundario":
+            modificarVisibilidad(new Array("#divSecundario"), "mostrar");
+        break;
+    }
+}
+
+
 
 
 

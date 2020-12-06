@@ -17,7 +17,6 @@ import Modelo.Pais;
 import Modelo.Persona;
 import Modelo.ProgramException;
 import Modelo.TipoUsuario;
-import com.mysql.cj.xdevapi.JsonString;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
@@ -107,24 +106,18 @@ public class ControladorManejoUsuarios implements IControlador<Persona>{
             tiposUsuarios = opTipoUsuario.obtenerTodos();
             vista.mostrarTiposUsuario(tiposUsuarios);
         } catch (Exception ex) {
-            //error en la vista
             vista.errorCargaTiposUsuarios("Error en la carga de tipos de usuario");
-            //Logger.getLogger(ControladorManejoUsuarios.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     public void cargarPaises() {
         ArrayList <Pais> paises = new ArrayList();
-        
         try {
             paises = opPais.obtenerTodos();
             vista.mostrarPaises(paises);
         } catch (Exception ex) {
-            //error en la vista
             vista.errorCargaPaises("Error en la carga de paises");
-            //Logger.getLogger(ControladorManejoUsuarios.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
     }
 
     

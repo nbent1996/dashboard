@@ -18,7 +18,12 @@
     
     <body class="w3-light-grey">
         <script>
-   
+               mostrarPaises();
+               function mostrarPaises(){
+                $.get("ManejoClientesServlet?accion=comboPaises", function(data){
+                    document.getElementById("selPaisResidencia").innerHTML=data;
+                });
+            }
         </script>
 
         <div class="w3-bar w3-top w3-black w3-large" style="z-index:4">
@@ -101,31 +106,41 @@
         
         
         <!-- !PAGE CONTENT! -->
-        <div class="w3-main" style="margin-left:300px;margin-top:43px;">
+        <div class="ABMContainer">
 
             <!-- Header -->
             <header class="w3-container" style="padding-top:22px">
                 <h5><b><i class="fa fa-address-card"></i> Alta de Clientes</b></h5>
             </header>
-            <div class="ABMpage">
                 <div class="form">
                     <form name="formAltaCliente" action="ManejoClientesServlet" method="post" onsubmit="return validarCamposAltaCliente(this)">
                         <div><label for="txtbxUsuarioSistema">Usuario Sistema: /*incluir usuario*/</label></div>
                         
-                        <div><label for="nroDocClienteAlta">N&uacute;mero de Documento</label></div>
-                        <div><input type="text" id="txtbxNroDocumentoClienteAlta" name="txtbxNroDocumentoClienteAlta" required="true"/></div>
+                        <div><label for="nroDocClienteAlta">N&uacute;mero de Documento:</label>
+                        <input type="text" id="txtbxNroDocumentoClienteAlta" name="txtbxNroDocumentoClienteAlta" required="true"/></div>
                         
-                        <div><label for="txtbxNombreCompletoClienteAlta">Nombre completo</label></div>
-                        <div><input type="text" id="txtbxNombreCompletoClienteAlta" name="txtbxNombreCompletoClienteAlta" required="true"/></div>
+                        <div><label for="txtbxNombreCompletoClienteAlta">Nombre completo:</label>
+                        <input type="text" id="txtbxNombreCompletoClienteAlta" name="txtbxNombreCompletoClienteAlta" required="true"/></div>
                         
-                        <div><label for="selPaisResidencia">Pais de nacionalidad</label></div>
-                        <div id="selPaises"></div>
+                        <div><label for="selPaisResidencia">Pais de nacionalidad:</label>
+                        <div id="selPaises" name="comboPaises"></div></div>
                         
                         <div><label for="txtbxEmailClienteAlta">Email</label></div>
                         <div><input type="email" id="txtbxEmailClienteAlta" name="txtbxEmailClienteAlta" required="true"/></div>
                         
                         <div><label for="txtbxTelefonoClienteAlta">Telefono</label></div>
                         <div><input type="text" id="txtbxTelefonoClienteAlta" name="txtbxTelefonoClienteAlta" required="true"/></div>
+                        <div><label for="selTipoCliente">Tipo de cliente</label>
+                        <div><select id="selTipoCliente" name="selTipoCliente">
+                                <option value="Principal" selected="true">Titular</option>
+                                <option value="Secundario">Cuenta secundaria</option>
+                            </select></div>
+                                <div id="divPrincipal">
+                                    DIV PRINCIPAL
+                                </div>
+                                <div id="divSecundario">
+                                    DIV SECUNDARIO
+                                </div>
                         <hr>        
                         <input type="submit" class="submitAlta" value="confirmar">
                         <span id="mensajeAlta"></span>

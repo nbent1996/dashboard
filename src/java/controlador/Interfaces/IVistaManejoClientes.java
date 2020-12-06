@@ -1,14 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controlador.Interfaces;
 
-/**
- *
- * @author Andres
- */
+import Modelo.Pais;
+import java.util.ArrayList;
+
 public interface IVistaManejoClientes {
-    
+    public void exitoAltaCliente(String mensajeExitoAlta);
+    public void errorAltaCliente(String mensajeErrorAlta);
+    public void exitoAlBorrarCliente(String mensajeExitoBaja);
+    public void errorAlBorrarCliente(String mensajeErrorBaja);
+    public void mostrarPaises(ArrayList<Pais> paises);
+    public void errorCargaPaises(String mensajeError);   
 }
