@@ -17,7 +17,7 @@ public class Funciones {
     
     /*HTML*/
         public static String lista(boolean multiple,String id ,ArrayList opciones){
-        String lista = "<select " + " class='comboBox' onchange='changeItemSelected()' " + (multiple?" multiple ":"") +  " id='" + id+ "'>";
+        String lista = "<select " + " class='comboBox nb-input' onchange='changeItemSelected()' " + (multiple?" multiple ":"") +  " id='" + id+ "'>";
         String optionId = "";
         String value ="";
         boolean primero = true;
@@ -35,10 +35,10 @@ public class Funciones {
             }
             
             if(primero){
-                lista+= "<option id='" + optionId + "' name= 'itemSeleccionado' >" + value + "</option>";
+                lista+= "<option value='" + optionId + "' name= 'itemSeleccionado' >" + value + "</option>";
                 primero = false;
             }else{
-                lista+= "<option id='" + optionId + "'>" + value + "</option>";
+                lista+= "<option value='" + optionId + "'>" + value + "</option>";
             }
         }
         lista+="</select>";

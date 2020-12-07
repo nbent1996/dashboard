@@ -7,6 +7,8 @@ html,body,h1,h2,h3,h4,h5, label {
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
+  width:60%;
+  margin: 10px;
 }
 .margin-top20{
     margin-top:20px;
@@ -68,24 +70,57 @@ html,body,h1,h2,h3,h4,h5, label {
     border-radius:5px;
 }
 /*login.jsp*/
-/*usuario_Alta.jsp usuario_Baja.jsp usuario_Modificacion.jsp*/
-
+/*cliente_Alta.jsp*/
+#divPrincipal, #divSecundario{
+    margin-left:35px;
+}
+#txtbxNroDocumentoClienteAlta{
+    position:relative;
+    left:35px;
+}
+#txtbxNombreCompletoClienteAlta{
+    position:relative;
+    left:70px;
+}
+#txtbxEmailClienteAlta{
+    position:relative;
+    left:158px;
+}
+#txtbxTelefonoClienteAlta{
+    position:relative;
+    left:139px;
+}
+#formAltaCliente #selPaisesResidenciaClienteAlta{
+    position:relative;
+    left:54px;
+}
+/*cliente_Alta.jsp*/
+.borderDiv{
+    padding:5px;
+    border-style:solid;
+    border-color:black;
+    width:640px;
+    height:180px;
+}
+.estilosHeader{
+    padding-top:80px;
+    margin-left:310px;
+}
 .ABMcontainer{
-  padding: 8% 0 0;
-  margin-left:300px;
+  margin-left:360px;
   margin-top:43px;
 }
 .form {
   position: relative;
   z-index: 1;
   background: #FFFFFF;
-  margin: 0 auto 100px;
+  margin-left:360px;
+  margin-top:10px;
   padding: 45px;
   max-width:960px;
-  text-align: center;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
-.form input[type=text]{
+.form input[type="text"], .form input[type="email"], .form select {
   font-family: "Roboto", sans-serif;
   outline: 0;
   background: #f2f2f2;
@@ -95,28 +130,12 @@ html,body,h1,h2,h3,h4,h5, label {
   box-sizing: border-box;
   font-size: 14px;
 }
-
-
-/*.form button {
-  font-family: "Roboto", sans-serif;
-  text-transform: uppercase;
-  outline: 0;
-  background: #BCE0FF;
-  width: 100%;
-  border: 0;
-  padding: 15px;
-  color: #FFFFFF;
-  font-size: 14px;
-  -webkit-transition: all 0.3 ease;
-  transition: all 0.3 ease;
-  cursor: pointer;
+.form select option{
+    font-family: "Roboto", sans-serif;
+    background: #f2f2f2;
+    border: 0;
+    margin: 0 0 15px;
 }
-.form button:hover,.form button:active,.form button:focus {
-  background: #9CD1FE;
-}*/
-
-
-
 
 .form .submitAlta {
   font-family: "Roboto", sans-serif;
@@ -173,8 +192,6 @@ html,body,h1,h2,h3,h4,h5, label {
   background: #4DB6AC;
 }
 
-
-
 .form .message {
   margin: 15px 0 0;
   color: #000000;
@@ -228,4 +245,3 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;      
 }
-/*usuario_Alta.jsp usuario_Baja.jsp usuario_Modificacion.jsp*/
