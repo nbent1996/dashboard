@@ -55,8 +55,12 @@ public class VistaManejoUsuariosWeb implements IVistaManejoUsuarios{
             altaUsuario(request, response);
         }
         
-        if (request.getParameter("accion").equals("formBaja")){ //me llega el name parametroOculto del input hiden del form de baja usuario con value formBaja
-            bajaUsuario(request, response);
+//        if (request.getParameter("accion").equals("formBaja")){ //me llega el name parametroOculto del input hiden del form de baja usuario con value formBaja
+//            bajaUsuario(request, response);
+//        }
+
+        if(request.getParameter("accion").equals("buscarUsuariosBaja")){
+            bajaUsuarioConTabla(request, response);
         }
         
         if (request.getParameter("accion").equals("formModificacion")){ //me llega el name parametroOculto del input hiden del form de modificacion usuario con value formModificacion
@@ -111,14 +115,27 @@ public class VistaManejoUsuariosWeb implements IVistaManejoUsuarios{
         
     }
 
-    private void bajaUsuario(HttpServletRequest request, HttpServletResponse response) {
+//    private void bajaUsuario(HttpServletRequest request, HttpServletResponse response) {
+//        
+//        String nombreUsuarioBaja = request.getParameter("usuarioBaja");
+//        
+//        this.request = request;
+//        this.response = response;
+//        
+//        controlador.bajaUsuario(nombreUsuarioBaja, "");
+//        
+//    }
+    
+    private void bajaUsuarioConTabla(HttpServletRequest request, HttpServletResponse response) {
         
-        String usuarioBajaUsr = request.getParameter("usuarioBaja");
+        //uno de los dos viene vacio ya que se puede filtrar por cualquiera de los dos campos
+        String nombreUsuarioBaja = request.getParameter("nombreUsuario");
+        String nombreCompletoUsuarioBaja = request.getParameter("nombreCompleto");
         
         this.request = request;
         this.response = response;
         
-        controlador.bajaUsuario(usuarioBajaUsr);
+        controlador.bajaUsuario(nombreUsuarioBaja, nombreCompletoUsuarioBaja);
         
     }
 
@@ -174,6 +191,7 @@ public class VistaManejoUsuariosWeb implements IVistaManejoUsuarios{
         } catch (IOException ex) {
             Logger.getLogger(VistaManejoUsuariosWeb.class.getName()).log(Level.SEVERE, null, ex);
         }
+
     }
 
     @Override
@@ -220,8 +238,10 @@ public class VistaManejoUsuariosWeb implements IVistaManejoUsuarios{
         this.personas = aux;
         String componente = Funciones.tablaUsuarios(aux, "btnBajaUsuario");
         
-        out.write("Usuarios: " + componente + "\n\n");
+        out.write(componente + "\n\n");
     }
+
+    
 
     
 

@@ -71,8 +71,8 @@ public class Funciones {
         String tabla = "";
         int x = 0;
         for (Persona obj : opciones) {
-            tabla += "<tr><td>" + obj.getUsuarioSistema() + "</td><td>"
-                    + "</td><td>" + obj.getNombreCompleto()+ "</td>"
+            tabla += "<tr><td>" + obj.getUsuarioSistema() + "</td>"
+                    + "<td>" + obj.getNombreCompleto()+ "</td>"
                     
                     + "<td><input type='button' value='" + boton + "' onclick=\"" + boton + "(" + x + ")\"> </td></tr>";
             x++;

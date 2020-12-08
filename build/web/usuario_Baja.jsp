@@ -139,12 +139,17 @@
             <div class="ABMpage">
                 <div class="form">
 
-                    <form name="formBajaUsuario" action="ManejoUsuariosServlet" method="post" onsubmit="return validarCamposBajaUsr(this)">
-                        <input type="text" id="txtUsuarioBaja" name="usuarioBaja" placeholder="usuario" required="true"/>
-                        <input type="hidden" name="accion" value="formBaja">
+                    <!--<form name="formBajaUsuario" action="ManejoUsuariosServlet" method="post" onsubmit="return validarCamposBajaUsr(this)">-->
+                        <span>Ingrese los filtros deseados por los que desea buscar</span>
+                        <input type="text" id="txtUsuarioBaja" name="usuarioBaja" placeholder="Nombre de usuario"/>
+                        <input type="text" id="txtNombreCompletoBaja" name="nombreCompletoBaja" placeholder="Nombre y/o apellido"/>
+                        
+                        <!--<input type="hidden" name="accion" value="formBaja">-->
+                        
 
-
-                        <input type="submit" class="submitBaja" value="confirmar" >
+                        <!--<input type="submit" class="submitBaja" value="confirmar">-->
+                        
+                        <input type="button" onclick="buscarUsuarioBaja()" id="btnBuscarUsuarioBaja" value="Buscar"><br><br>
 
                         <%if (msg != null) {%>
                         <div>
@@ -153,26 +158,43 @@
                         <%}%>
 
 
-                    </form>
+                    <!--</form>-->
                 </div>
             </div>
-
-
-
-
-
-
-
                         
-                        
-
-
-
+                        <div id="tablaUsuarios" >
+                            <table border="1">
+                                <caption>Usuarios encontrados</caption>
+                                <thead>
+                                    <tr>
+                                        <th>Nombre de usuario</th>
+                                        <th>Nombre completo</th>      
+                                    </tr>
+                                </thead>
+                                <tbody id="tblUsuariosFiltrados">
+                                </tbody>
+                            </table><br><br>
+                        </div>
 
 
         </div>
         
-        
+                <script>
+
+                    function buscarUsuarioBaja(){
+                        var nombreUsuario = $("#txtUsuarioBaja").val();
+                        var nombreCompleto = $("#txtNombreCompletoBaja").val();
+                        
+                        $.get("ManejoUsuariosServlet?accion=buscarUsuariosBaja&nombreUsuario=" + nombreUsuario + "&nombreCompleto=" + nombreCompleto, function (data) {
+                            document.getElementById("tblUsuariosFiltrados").innerHTML = data;
+                        });
+                        
+                    }
+
+
+
+
+                </script>
         
         
     </body>
