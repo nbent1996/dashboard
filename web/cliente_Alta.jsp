@@ -130,13 +130,13 @@
                         <div class="margin-top20"><label for="txtbxNombreCompletoClienteAlta">Nombre completo:</label>
                         <input type="text" id="txtbxNombreCompletoClienteAlta" class="nb-input" name="txtbxNombreCompletoClienteAlta" required="true"/></div>
                         
-                        <label for="selPaisesResidenciaClienteAlta">Pais de nacionalidad:</label>
-                        <span class="margin-top20" id="selPaisesResidenciaClienteAlta" name="comboPaises"></span>
+                        <div class="margin-top20"><label for="selPaisesResidenciaClienteAlta">Pais de nacionalidad:</label>
+                        <span id="selPaisesResidenciaClienteAlta" name="comboPaises"></span></div>
                         
                         <div class="margin-top20"><label for="txtbxEmailClienteAlta">Email:</label>
                         <input type="email" id="txtbxEmailClienteAlta" class="nb-input" name="txtbxEmailClienteAlta" required="true"/></div>
                         
-                        <div class="margin-top20"><label for="txtbxTelefonoClienteAlta" >Telefono</label>
+                        <div class="margin-top20"><label for="txtbxTelefonoClienteAlta" >Telefono:</label>
                         <input type="text" id="txtbxTelefonoClienteAlta" class="nb-input" name="txtbxTelefonoClienteAlta" required="true"/></div>
                         <div class="borderDiv margin-top20">
                         <div><label for="selTipoCliente">Tipo de cliente</label></div>

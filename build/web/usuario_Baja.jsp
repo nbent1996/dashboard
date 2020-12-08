@@ -1,9 +1,3 @@
-<%-- 
-    Document   : bajaUsuario
-    Created on : 12/11/2020, 08:16:30 PM
-    Author     : Andres
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 
@@ -62,13 +56,8 @@
             </div>
 
             <hr>
-            <!-- TÍTULO DE MENÚ LATERAL 
-                <div class="w3-container">
-                    <h5>Dashboard</h5>
-                </div>
-            -->
-            
-                        <div class="w3-bar-block">
+          
+                <div class="w3-bar-block">
                 <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>&nbsp; Cerrar Menu</a>
                 <a href="index.jsp" class="w3-bar-item w3-button w3-padding"><i class="fa fa-home fa-fw"></i>&nbsp; Inicio</a><br><br>
                 <div class="w3-dropdown-hover w3-mobile">
