@@ -41,53 +41,31 @@ public class VistaManejoUsuariosWeb implements IVistaManejoUsuarios{
 
     public void procesarRequest(HttpServletRequest request, HttpServletResponse response) {
         
-
-        if (request.getParameter("accion").equals("comboTipos")){             
-            cargarTiposUsuario();
+        String accion = request.getParameter("accion");
+        switch(accion){
+            case "comboTipos":
+                this.cargarTiposUsuario();
+            break;
+            case "comboPaises":
+                this.cargarPaises();
+            break;
+            case "formAlta":
+                altaUsuario(request, response);
+            break;  
+            case "formBaja":
+                //bajaUsuario(request, response);
+            break;
+            case "buscarUsuariosBaja":
+                bajaUsuarioConTabla(request, response);
+            break;
+            case "formModificacion":
+                modificacionUsuario(request, response);
+            break;
         }
-        
-        if (request.getParameter("accion").equals("comboPaises")){             
-            cargarPaises();
-        }
-        
-//        Se reusa el mismo servlet en los formularios de ABM usuarios
-        if (request.getParameter("accion").equals("formAlta")){ //me llega el name parametroOculto del input hiden del form de alta usuario con value formAlta
-            altaUsuario(request, response);
-        }
-        
-        if (request.getParameter("accion").equals("formBaja")){ //me llega el name parametroOculto del input hiden del form de baja usuario con value formBaja
-            bajaUsuario(request, response);
-        }
-        
-        if (request.getParameter("accion").equals("formModificacion")){ //me llega el name parametroOculto del input hiden del form de modificacion usuario con value formModificacion
-            modificacionUsuario(request, response);
-        }
-        
-         
-        
-        
-        
-
-//        procesarCombos(request);
-        
     }
-    
-//  private void procesarCombos(HttpServletRequest request) {
-//        String accion = request.getParameter("accion");
-//        switch (accion) {
-//            case "comboTipos":
-//                cargarTiposUsuario();
-//                break;
-//            case "comboPaises":
-//                cargarPaises();
-//                break;
-//                
-//        }
-//    }
-    
+
     private void cargarTiposUsuario() {
         controlador.cargarTiposUsuario();
-        controlador.cargarPaises();
     }
 
     private void cargarPaises() {
@@ -111,14 +89,27 @@ public class VistaManejoUsuariosWeb implements IVistaManejoUsuarios{
         
     }
 
-    private void bajaUsuario(HttpServletRequest request, HttpServletResponse response) {
+//    private void bajaUsuario(HttpServletRequest request, HttpServletResponse response) {
+//        
+//        String nombreUsuarioBaja = request.getParameter("usuarioBaja");
+//        
+//        this.request = request;
+//        this.response = response;
+//        
+//        controlador.bajaUsuario(nombreUsuarioBaja, "");
+//        
+//    }
+    
+    private void bajaUsuarioConTabla(HttpServletRequest request, HttpServletResponse response) {
         
-        String usuarioBajaUsr = request.getParameter("usuarioBaja");
+        //uno de los dos viene vacio ya que se puede filtrar por cualquiera de los dos campos
+        String nombreUsuarioBaja = request.getParameter("nombreUsuario");
+        String nombreCompletoUsuarioBaja = request.getParameter("nombreCompleto");
         
         this.request = request;
         this.response = response;
         
-        controlador.bajaUsuario(usuarioBajaUsr);
+        controlador.bajaUsuario(nombreUsuarioBaja, nombreCompletoUsuarioBaja);
         
     }
 
@@ -174,6 +165,7 @@ public class VistaManejoUsuariosWeb implements IVistaManejoUsuarios{
         } catch (IOException ex) {
             Logger.getLogger(VistaManejoUsuariosWeb.class.getName()).log(Level.SEVERE, null, ex);
         }
+
     }
 
     @Override
@@ -220,8 +212,10 @@ public class VistaManejoUsuariosWeb implements IVistaManejoUsuarios{
         this.personas = aux;
         String componente = Funciones.tablaUsuarios(aux, "btnBajaUsuario");
         
-        out.write("Usuarios: " + componente + "\n\n");
+        out.write(componente + "\n\n");
     }
+
+    
 
     
 

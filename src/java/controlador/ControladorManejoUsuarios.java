@@ -20,6 +20,8 @@ import Modelo.ProgramException;
 import Modelo.TipoUsuario;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 public class ControladorManejoUsuarios implements IControlador<Persona>{
     
@@ -69,20 +71,53 @@ public class ControladorManejoUsuarios implements IControlador<Persona>{
     }
     
     
-    public void bajaUsuario(String usuarioBajaUsr) {
+    public void bajaUsuario(String nombreUsuarioBaja, String nombreCompletoUsuarioBaja) {
         
         ArrayList<Persona> aux = new ArrayList();
         
-        try {
-            //Persona persona = opPersona.buscar(" WHERE usuarioSistema='"+usuarioBajaUsr+"' " , "").get(0);
-            aux = opPersona.buscar(" WHERE OperadoresDashboard.usuarioSistema='"+usuarioBajaUsr+"' " , "Modelo.Operador");
-            vista.pruebaMostrarTablaBorrarUsuario(aux);
-            //opPersona.borrar(persona);
-            //vista.exitoAlBorrarUsuario("Usuario dado de baja correctamente");
-            
-        } catch (Exception ex) {//error al insertar
-            vista.errorAlBorrarUsuario("Error al dar de baja el usuario");
+        if(nombreUsuarioBaja.trim().equals("") && nombreCompletoUsuarioBaja.trim().equals("")){ //los dos filtros vienen vacíos 
+            vista.errorAlBorrarUsuario("No ha ingresado los datos para buscar");
         }
+        else if(nombreCompletoUsuarioBaja.trim().equals("") && nombreUsuarioBaja.trim()!=null){ 
+            try {
+            //filtro por nombre de usuario y no por nombre completo
+            aux = opPersona.buscar(" WHERE OperadoresDashboard.usuarioSistema like '%"+nombreUsuarioBaja+"%' " , "Modelo.Operador");
+            vista.pruebaMostrarTablaBorrarUsuario(aux);
+            } catch (Exception ex) {
+                vista.errorAlBorrarUsuario("Error al dar de baja el usuario");
+            }
+        }
+        else if(nombreUsuarioBaja.trim().equals("") && nombreCompletoUsuarioBaja.trim()!=null){ 
+            try {
+            //filtro por nombre completo y no por nombre de usuario
+            aux = opPersona.buscar(" WHERE OperadoresDashboard.nombreCompleto ='"+nombreCompletoUsuarioBaja+"' " , "Modelo.Operador");
+            vista.pruebaMostrarTablaBorrarUsuario(aux);
+            } catch (Exception ex) {
+                vista.errorAlBorrarUsuario("Error al dar de baja el usuario");
+            }
+        }
+        else if(nombreCompletoUsuarioBaja.trim() != null && nombreUsuarioBaja.trim() != null){ 
+            try {
+            //filtro por los dos campos
+            aux = opPersona.buscar(" WHERE OperadoresDashboard.nombreCompleto ='"+nombreCompletoUsuarioBaja+"' +OperadoresDashboard.usuarioSistema ='"+nombreUsuarioBaja+"' " , "Modelo.Operador");
+            vista.pruebaMostrarTablaBorrarUsuario(aux);
+            } catch (Exception ex) {
+                vista.errorAlBorrarUsuario("Error al dar de baja el usuario");
+            }
+        }
+        
+        
+        
+//        try {
+//            //Persona persona = opPersona.buscar(" WHERE usuarioSistema='"+usuarioBajaUsr+"' " , "").get(0);
+//            aux = opPersona.buscar(" WHERE OperadoresDashboard.usuarioSistema='"+nombreUsuarioBaja+"' " , "Modelo.Operador");
+//            vista.pruebaMostrarTablaBorrarUsuario(aux);
+//            //opPersona.borrar(persona);
+//            //vista.exitoAlBorrarUsuario("Usuario dado de baja correctamente");
+//            
+//        } catch (Exception ex) {//error al insertar
+//            vista.errorAlBorrarUsuario("Error al dar de baja el usuario");
+//        }
 
     }
     

@@ -22,43 +22,16 @@
         <script type="text/javascript" src="js/functions.js"></script>
     </head>
     <body class="w3-light-grey">
-        <script>
-            
-            mostrarTipos();
-            //mostrarPaises();
-            //prueba();
-            
-            
-            function mostrarTipos(){
+        <script>      
+            mostrarCombos();  
+            function mostrarCombos(){
                 $.get("ManejoUsuariosServlet?accion=comboTipos", function(data){
                     document.getElementById("combo-tipoUsuarios").innerHTML=data;
-                    //document.getElementById("combo-paises").innerHTML=data;
                 });
-            }
-            
-            function mostrarPaises(){
                 $.get("ManejoUsuariosServlet?accion=comboPaises", function(data){
                     document.getElementById("combo-paises").innerHTML=data;
                 });
             }
-              
-
-                 /******Cargar el selet con las familias*******/
-          /*function prueba() {
-             $.ajax({
-                    type: "POST",
-                   //data: JSON.stringify(dto),
-                    url: "ManejoUsuariosServlet?accion=prueba",
-                    dataType: "json",
-                    contentType: "application/json; charset=utf-8",
-                 success: function (respuesta) {
-                   console.log(respuesta);
-                      },
-                      error: function () {
-                          alert("Error de Ajax cuando viaja a buscar familias");
-                      }
-                  });
-              }*/
         </script>
         
         
