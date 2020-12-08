@@ -2,17 +2,15 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-<<<<<<< HEAD
         <group>
+            <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/src/java/Datos/OpPersona.java</file>
+            <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/web/js/functions.js</file>
             <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/src/java/vistaWeb/VistaManejoClientesWeb.java</file>
-            <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/src/java/controlador/ControladorManejoUsuarios.java</file>
             <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/web/cliente_Alta.jsp</file>
             <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/src/java/controlador/ControladorManejoClientes.java</file>
             <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/web/css/stylesCustom.css</file>
+            <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/src/java/vistaWeb/VistaManejoUsuariosWeb.java</file>
             <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/src/java/vistaWeb/Servlet/ManejoClientesServlet.java</file>
         </group>
-=======
-        <group/>
->>>>>>> a04272c154dbb9ed4e82c7117e1beacda38b7161
     </open-files>
 </project-private>

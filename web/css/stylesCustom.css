@@ -94,6 +94,10 @@ html,body,h1,h2,h3,h4,h5, label {
     position:relative;
     left:54px;
 }
+.spanUsuario{
+    position:relative;
+    left:91px;
+}
 /*cliente_Alta.jsp*/
 .borderDiv{
     padding:5px;
@@ -141,55 +145,58 @@ html,body,h1,h2,h3,h4,h5, label {
   font-family: "Roboto", sans-serif;
   text-transform: uppercase;
   outline: 0;
-  background: #BCE0FF;
+  background: #64B5F6;
   width: 100%;
   border: 0;
   padding: 15px;
-  color: #FFFFFF;
+  color: #EEEEEE;
   font-size: 14px;
   -webkit-transition: all 0.3 ease;
   transition: all 0.3 ease;
   cursor: pointer;
 }
-.form .submitAlta :hover,.form button:active,.form button:focus {
-  background: #9CD1FE;
+.submitAlta:hover {
+  background: #0091EA;/*#00B0FF;*/
+  color:white;
 }
 
 .form .submitBaja {
   font-family: "Roboto", sans-serif;
   text-transform: uppercase;
   outline: 0;
-  background: #EF5350;
+  background: #E57373;
   width: 100%;
   border: 0;
   padding: 15px;
-  color: #FFFFFF;
+  color: #EEEEEE;
   font-size: 14px;
   -webkit-transition: all 0.3 ease;
   transition: all 0.3 ease;
   cursor: pointer;
 }
-.form .submitBaja :hover,.form button:active,.form button:focus {
-  background: #E57373;
+.submitBaja:hover {
+  background:#EF5350 ;
+  color:white;
 }
 
 .form .submitModificacion {
   font-family: "Roboto", sans-serif;
   text-transform: uppercase;
   outline: 0;
-  background: #B2DFDB;
+  background: #4DB6AC;
   width: 100%;
   border: 0;
   padding: 15px;
-  color: #FFFFFF;
+  color: #EEEEEE;
   font-size: 14px;
   -webkit-transition: all 0.3 ease;
   transition: all 0.3 ease;
   cursor: pointer;
 }
 
-.form .submitModificacion :hover,.form button:active,.form button:focus {
-  background: #4DB6AC;
+.submitModificacion :hover{
+  background: #1DE9B6;
+  color:white;
 }
 
 .form .message {

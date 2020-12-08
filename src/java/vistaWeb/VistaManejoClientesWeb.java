@@ -53,8 +53,7 @@ public class VistaManejoClientesWeb implements IVistaManejoClientes{
         this.controlador.cargarPaises();
     }
     private void generarUsuarioSistema(){
-        String usuario = this.controlador.generarUsuarioSistema();
-        request.setAttribute(usuario, "usuarioSistema" );
+        this.controlador.generarUsuarioSistema();
     }
     private void altaCliente(HttpServletRequest request, HttpServletResponse response){
         Persona p;
@@ -103,7 +102,7 @@ public class VistaManejoClientesWeb implements IVistaManejoClientes{
     }
     @Override
     public void mostrarUsuarioSistema(String usuario) {
-        out.write(usuario + "\n\n");
+        out.write("<span name='usuarioSistema' class='spanUsuario'>"+usuario+"</span>" + "\n\n");
     }
     @Override
     public void errorCargaPaises(String mensajeError) {
