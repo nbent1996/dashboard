@@ -2,6 +2,7 @@ $(document).ready(load);
 function load(){
     /*EVENTOS*/
     $("#selTipoCliente").on("change", changeTipoCliente);
+    
     /*EVENTOS*/
     modificarVisibilidad(new Array("#divPrincipal", "#divSecundario"), "ocultar");
     modificarVisibilidad(new Array("#divPrincipal"), "mostrar");
@@ -41,75 +42,52 @@ function changeTipoCliente(){
     }
 }
 
-
-
-
-
-
-function validarCamposAltaUsr(form){
-    //var usuario = form.usuario;
-//    var nombreCompleto = form.nombreCompleto;
-//    var nombreEmpresa = form.nombreEmpresa;
-////    var nombrePais = form.nombrePais;
-////    var tipoUsuario = form.tipoUsuario;
-//    var pais = $("#lstPaises").val();
-//    var tipo = $("#lstTipos").val();
-//    
-//    var comboPais = $("#lstPaises");
-//    //var paisSeleccionado = comboPais.options[comboPais.selectedIndex].text;
-//    
-////    var comboTipo = form.document.getElementById("lstTipos");
-////    var tipoSeleccionado = comboTipo.options[comboTipo.selectedIndex].text;
-//    
-//    alert(pais, comboPais, paisSeleccionado);
-////    
-//////    
-////    if (usuario.value == ""){
-////        alert("Debe escribir un nombre de usuario");
-////        usuario.select();
-////        usuario.focus();
-////        return false;
-////    }
-////    
-////    if (nombreCompleto.value == ""){
-////        alert("Debe escribir un nombre completo");
-////        nombreCompleto.select();
-////        nombreCompleto.focus();
-////        return false;
-////    }
-////
-////    if (nombreEmpresa.value == ""){
-////        alert("Debe escribir una empresa");
-////        nombreEmpresa.select();
-////        nombreEmpresa.focus();
-////        return false;
-////    }
-////    
-////    
-////    
-////    
-////
-//////    if (nombrePais.value == ""){
-//////        alert("Debe escribir un pais");
-//////        nombrePais.select();
-//////        nombrePais.focus();
-//////        return false;
-//////    }
-//////
-//////    if (tipoUsuario.value == ""){
-//////        alert("Debe escribir un tipo de usuario");
-//////        tipoUsuario.select();
-//////        tipoUsuario.focus();
-//////        return false;
-//////    }
-////    
-////    
-//    return true;
-
-
+/*Funciones de Validación*/
+function validarAltaCliente(form){
+    var resultado="";
+    //No nulo
+    if($("#selTipoCliente").val()=="Secundario" && $("#txtbxNroDocPrincipalClienteAlta").val()==""){
+        resultado+="El número de documento de la cuenta principal es un campo obligatorio.\n";
+    }
+    //Largo Caracteres
+    if($("#txtbxNombreCompletoClienteAlta").length>50){
+        resultado+="El nombre completo no puede tener más de 50 caracteres.\n";
+    }
+    if($("#txtbxEmailClienteAlta").length>45){
+        resultado+="El email no puede tener más de 45 caracteres.";
+    }
+    if($("#txtbxTelefonoClienteAlta").length>50){
+        resultado+="El teléfono no puede tener más de 50 caracteres";
+    }
+    //Campos numéricos
+    if(isNaN($("#txtbxNroDocumentoClienteAlta").val())){
+        resultado+="El número de documento debe ser un campo numérico.\n";
+    }
+    if(isNaN($("#txtbxTelefonoClienteAlta").val())){
+        resultado+="El teléfono debe ser un campo numérico.\n";
+    }
+    if($("#selTipoCliente").val()=="Secundario" && isNaN($("#txtbxNroDocPrincipalClienteAlta").val())){
+        resultado+="El número de documento de la cuenta principal debe ser numérico.\n";
+    }
+    if(resultado!=""){
+        form.preventDefault();
+        alert(resultado);
+    }
+    return resultado;
 }
+/*Funciones de Validación*/
 
 
+
+
+
+
+
+
+
+
+
+/*ANDRES*/
 function validarCamposBajaUsr(form){
     var usuario = form.usuario;
     

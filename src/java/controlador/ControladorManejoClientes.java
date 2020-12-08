@@ -56,6 +56,15 @@ public class ControladorManejoClientes {
             vista.errorCargaPaises("Error en la carga de paises");
         }
     }
+  public void generarUsuarioSistema(){
+        try {
+            String usr = opPersona.getNuevoUsuarioSistema();
+            vista.mostrarUsuarioSistema(usr);
+        } catch (Exception ex) {
+            vista.errorAlGenerarUsuario("Error al generar usuario de sistema del cliente.");
+        }
+  }
+  
     /*Comportamiento*/
     
     /*Getters y Setters*/

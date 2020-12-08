@@ -1,5 +1,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%
+    String msg = request.getParameter("msg");
+%>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -21,7 +24,13 @@
                mostrarPaises();
                function mostrarPaises(){
                 $.get("ManejoClientesServlet?accion=comboPaises", function(data){
-                    document.getElementById("selPaisResidencia").innerHTML=data;
+                    document.getElementById("selPaisesResidenciaClienteAlta").innerHTML=data;
+                });
+            }
+                mostrarUsuarioSistema();
+                function mostrarUsuarioSistema(){
+                $.get("ManejoClientesServlet?accion=generarUsuario", function(data){
+                    document.getElementById("lblUsuarioSistema").innerHTML=data;
                 });
             }
         </script>
@@ -109,42 +118,50 @@
         <div class="ABMContainer">
 
             <!-- Header -->
-            <header class="w3-container" style="padding-top:22px">
+            <header class="w3-container estilosHeader">
                 <h5><b><i class="fa fa-address-card"></i> Alta de Clientes</b></h5>
             </header>
                 <div class="form">
-                    <form name="formAltaCliente" action="ManejoClientesServlet" method="post" onsubmit="return validarCamposAltaCliente(this)">
-                        <div><label for="txtbxUsuarioSistema">Usuario Sistema: /*incluir usuario*/</label></div>
+                    <form id="formAltaCliente" name="formAltaCliente" action="ManejoClientesServlet" method="post" onsubmit="return validarAltaCliente(this)">
+                        <div><label>Usuario Sistema: <span id="lblUsuarioSistema" name="generarUsuario"></span></div>
+                        <div class="margin-top20"><label for="txtbxNroDocumentoClienteAlta">N&uacute;mero de Documento:</label>
+                        <input type="text" id="txtbxNroDocumentoClienteAlta" class="nb-input" name="txtbxNroDocumentoClienteAlta" required="true"/></div>
                         
-                        <div><label for="nroDocClienteAlta">N&uacute;mero de Documento:</label>
-                        <input type="text" id="txtbxNroDocumentoClienteAlta" name="txtbxNroDocumentoClienteAlta" required="true"/></div>
+                        <div class="margin-top20"><label for="txtbxNombreCompletoClienteAlta">Nombre completo:</label>
+                        <input type="text" id="txtbxNombreCompletoClienteAlta" class="nb-input" name="txtbxNombreCompletoClienteAlta" required="true"/></div>
                         
-                        <div><label for="txtbxNombreCompletoClienteAlta">Nombre completo:</label>
-                        <input type="text" id="txtbxNombreCompletoClienteAlta" name="txtbxNombreCompletoClienteAlta" required="true"/></div>
+                        <label for="selPaisesResidenciaClienteAlta">Pais de nacionalidad:</label>
+                        <span class="margin-top20" id="selPaisesResidenciaClienteAlta" name="comboPaises"></span>
                         
-                        <div><label for="selPaisResidencia">Pais de nacionalidad:</label>
-                        <div id="selPaises" name="comboPaises"></div></div>
+                        <div class="margin-top20"><label for="txtbxEmailClienteAlta">Email:</label>
+                        <input type="email" id="txtbxEmailClienteAlta" class="nb-input" name="txtbxEmailClienteAlta" required="true"/></div>
                         
-                        <div><label for="txtbxEmailClienteAlta">Email</label></div>
-                        <div><input type="email" id="txtbxEmailClienteAlta" name="txtbxEmailClienteAlta" required="true"/></div>
-                        
-                        <div><label for="txtbxTelefonoClienteAlta">Telefono</label></div>
-                        <div><input type="text" id="txtbxTelefonoClienteAlta" name="txtbxTelefonoClienteAlta" required="true"/></div>
-                        <div><label for="selTipoCliente">Tipo de cliente</label>
-                        <div><select id="selTipoCliente" name="selTipoCliente">
+                        <div class="margin-top20"><label for="txtbxTelefonoClienteAlta" >Telefono</label>
+                        <input type="text" id="txtbxTelefonoClienteAlta" class="nb-input" name="txtbxTelefonoClienteAlta" required="true"/></div>
+                        <div class="borderDiv margin-top20">
+                        <div><label for="selTipoCliente">Tipo de cliente</label></div>
+                        <select id="selTipoCliente" class="" name="selTipoCliente">
                                 <option value="Principal" selected="true">Titular</option>
                                 <option value="Secundario">Cuenta secundaria</option>
-                            </select></div>
+                            </select>
                                 <div id="divPrincipal">
-                                    DIV PRINCIPAL
+                                    <input type="checkbox" class="w3-check" id="chkServicioActivoClienteAlta" name="chkServicioActivo">
+                                    <label for="chkServicioActivoClienteAlta"> Servicio activo</label>
                                 </div>
                                 <div id="divSecundario">
-                                    DIV SECUNDARIO
+                                    <label for="txtbxNroDocPrincipalClienteAlta">N&uacute;mero de Documento cuenta Titular:</label>
+                                    <input type="text" id="txtbxNroDocPrincipalClienteAlta" class="nb-input" name="txtbxNroDocPrincipalClienteAlta"/>
                                 </div>
+                        </div>
                         <hr>        
                         <input type="submit" class="submitAlta" value="confirmar">
                         <span id="mensajeAlta"></span>
                         <input type="hidden" name="accion" value="formAltaCliente">
+                        <%if (msg != null) {%>
+                        <div>
+                            <p class="message"><%=msg%></p>                        
+                        </div>
+                        <%}%>
                     </form>
                 </div>
 

@@ -1,6 +1,8 @@
 package vistaWeb;
 
+import Modelo.Funciones;
 import Modelo.Pais;
+import Modelo.Persona;
 import controlador.ControladorManejoClientes;
 import controlador.Interfaces.IVistaManejoClientes;
 import java.io.IOException;
@@ -32,8 +34,11 @@ public class VistaManejoClientesWeb implements IVistaManejoClientes{
             case "comboPaises":
                 this.cargarPaises();
             break;
+            case "generarUsuario":
+                this.generarUsuarioSistema();
+            break;
             case "formAltaCliente":
-                
+                this.altaCliente(request, response);
             break;
             case "formBajaCliente":
             
@@ -47,17 +52,37 @@ public class VistaManejoClientesWeb implements IVistaManejoClientes{
     private void cargarPaises(){
         this.controlador.cargarPaises();
     }
+    private void generarUsuarioSistema(){
+        this.controlador.generarUsuarioSistema();
+    }
     private void altaCliente(HttpServletRequest request, HttpServletResponse response){
+        Persona p;
+        String usuarioSistema = request.getParameter("usuarioSistema");
+        String nroDocumento = request.getParameter("txtbxNroDocumentoClienteAlta");
+        String nombreCompleto = request.getParameter("txtbxNombreCompletoClienteAlta");
         
+        this.request = request;
+        this.response = response;
+        //controlador.alta(p);
     } 
     @Override
     public void exitoAltaCliente(String mensajeExitoAlta) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        destino = "cliente_Alta.jsp?msg=" + mensajeExitoAlta;
+        try{
+            response.sendRedirect(destino);
+        }catch(IOException ex){
+            System.out.println("Error en la redirección");
+        }
     }
 
     @Override
     public void errorAltaCliente(String mensajeErrorAlta) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        destino = "cliente_Alta.jsp?msg=" + mensajeErrorAlta;
+        try{
+            response.sendRedirect(destino);
+        }catch(IOException ex){
+            System.out.println("Error en la redirección");
+        }    
     }
 
     @Override
@@ -72,18 +97,40 @@ public class VistaManejoClientesWeb implements IVistaManejoClientes{
 
     @Override
     public void mostrarPaises(ArrayList<Pais> paises) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String componente = Funciones.lista(false, "lstPaises", paises);
+        out.write(componente + "\n\n");
     }
-
+    @Override
+    public void mostrarUsuarioSistema(String usuario) {
+        out.write("<span name='usuarioSistema' class='spanUsuario'>"+usuario+"</span>" + "\n\n");
+    }
     @Override
     public void errorCargaPaises(String mensajeError) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        destino = "cliente_Alta.jsp?msg=" + mensajeError;
+        try{
+            response.sendRedirect(destino);
+        }catch(IOException ex){
+            System.out.println("Error en la redirección");
+        }
+    }
+    @Override
+    public void errorAlGenerarUsuario(String texto) {
+        destino = "cliente_Alta.jsp?msg=" + texto;
+        try{
+            response.sendRedirect(destino);
+        }catch(IOException ex){
+            System.out.println("Error en la redirección");
+        }    
     }
     /*Comportamiento*/
     
     /*Getters y Setters*/
     
     /*Getters y Setters*/
+
+
+
+
 
 
     
