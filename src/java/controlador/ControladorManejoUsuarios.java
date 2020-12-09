@@ -71,6 +71,15 @@ public class ControladorManejoUsuarios implements IControlador<Persona>{
     }
     
     
+    
+    public void borrarUsuariosSeleccionados(String[] listaNombresDeUsuarios) {
+        //ACÁ ME LLEGA LA LISTA DE NOMBRES DE USUARIO QUE SE SELECCIONARON EN LOS CHECKBOXES
+        //ELIMINAR TODOS LOS USUARIOS QUE TENGAN ESOS NOMBRES (EL NOMBRE DE USUARIO ES CLAVE PRIMARIA)
+        //VER QUE DEVOLVER AL USUARIO, YA QUE SE DEBERÍA REFRESCAR LA TABLA
+    }
+    
+    
+    
     public void bajaUsuario(String nombreUsuarioBaja, String nombreCompletoUsuarioBaja) {
         
         ArrayList<Persona> aux = new ArrayList();
@@ -185,6 +194,8 @@ public class ControladorManejoUsuarios implements IControlador<Persona>{
     public void borrarItems(ArrayList<Persona> items) throws Exception, SQLException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    
     
 
     

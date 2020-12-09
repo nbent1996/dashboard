@@ -174,6 +174,9 @@
                                 <tbody id="tblUsuariosFiltrados">
                                 </tbody>
                             </table><br><br>
+                            <input type="button" onclick="borrarUsuariosSeleccionados()" id="btnborrarUsuariosSeleccionados" value="Borrar"><br><br>
+                            <span id="spMensajeBorradoUsuarios"></span>
+                            
                         </div>
 
 
@@ -187,6 +190,25 @@
                         
                         $.get("ManejoUsuariosServlet?accion=buscarUsuariosBaja&nombreUsuario=" + nombreUsuario + "&nombreCompleto=" + nombreCompleto, function (data) {
                             document.getElementById("tblUsuariosFiltrados").innerHTML = data;
+                        });
+                        
+                    }
+                    
+                    function borrarUsuariosSeleccionados(){
+                        
+                        //guardo todos los value en un array. Ver como mandarlo al servlet
+                        
+                        var listaUsuariosSeleccionados = new Array();
+                        
+                        $("input:checkbox:checked").each(   
+                            function() {
+                                listaUsuariosSeleccionados.push($(this).val());
+                                //alert("El checkbox con valor " + $(this).val() + " está seleccionado");
+                            }
+                        );
+                
+                            $.get("ManejoUsuariosServlet?accion=borrarUsuarios&listaUsuarios=" + listaUsuariosSeleccionados, function (data) {
+                            document.getElementById("spMensajeBorradoUsuarios").innerHTML = data;
                         });
                         
                     }

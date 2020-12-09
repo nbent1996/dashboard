@@ -18,7 +18,7 @@ public class ManejoUsuariosServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
        
-
+        //ver este manejo si es una accion dentro de la misma vista ya que no debería de crear una nueva
         VistaManejoUsuariosWeb vista = new VistaManejoUsuariosWeb(request, response);
         vista.procesarRequest(request, response);
         

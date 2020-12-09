@@ -63,6 +63,11 @@ public class VistaManejoUsuariosWeb implements IVistaManejoUsuarios{
             bajaUsuarioConTabla(request, response);
         }
         
+        if(request.getParameter("accion").equals("borrarUsuarios")){
+            borrarUsuarios(request, response);
+        }
+        
+        
         if (request.getParameter("accion").equals("formModificacion")){ //me llega el name parametroOculto del input hiden del form de modificacion usuario con value formModificacion
             modificacionUsuario(request, response);
         }
@@ -125,6 +130,14 @@ public class VistaManejoUsuariosWeb implements IVistaManejoUsuarios{
 //        controlador.bajaUsuario(nombreUsuarioBaja, "");
 //        
 //    }
+    
+    private void borrarUsuarios(HttpServletRequest request, HttpServletResponse response) {
+        String listaNombresDeUsuarios[] = request.getParameterValues("listaUsuarios");//funciona!! 
+        this.request = request;
+        this.response = response;
+        
+        controlador.borrarUsuariosSeleccionados(listaNombresDeUsuarios);
+    }
     
     private void bajaUsuarioConTabla(HttpServletRequest request, HttpServletResponse response) {
         
@@ -240,6 +253,8 @@ public class VistaManejoUsuariosWeb implements IVistaManejoUsuarios{
         
         out.write(componente + "\n\n");
     }
+
+    
 
     
 
