@@ -41,14 +41,28 @@ public class VistaManejoUsuariosWeb implements IVistaManejoUsuarios{
 
     public void procesarRequest(HttpServletRequest request, HttpServletResponse response) {
         
-
-        if (request.getParameter("accion").equals("comboTipos")){             
-            cargarTiposUsuario();
+        String accion = request.getParameter("accion");
+        switch(accion){
+            case "comboTipos":
+                this.cargarTiposUsuario();
+            break;
+            case "comboPaises":
+                this.cargarPaises();
+            break;
+            case "formAlta":
+                altaUsuario(request, response);
+            break;  
+            case "formBaja":
+                //bajaUsuario(request, response);
+            break;
+            case "buscarUsuariosBaja":
+                bajaUsuarioConTabla(request, response);
+            break;
+            case "formModificacion":
+                modificacionUsuario(request, response);
+            break;
         }
-        
-        if (request.getParameter("accion").equals("comboPaises")){             
-            cargarPaises();
-        }
+<<<<<<< HEAD
         
 //        Se reusa el mismo servlet en los formularios de ABM usuarios
         if (request.getParameter("accion").equals("formAlta")){ //me llega el name parametroOculto del input hiden del form de alta usuario con value formAlta
@@ -79,24 +93,12 @@ public class VistaManejoUsuariosWeb implements IVistaManejoUsuarios{
 
 //        procesarCombos(request);
         
+=======
+>>>>>>> f4865cc972b1c2dbed6a2317034e8ae59aeafb07
     }
-    
-//  private void procesarCombos(HttpServletRequest request) {
-//        String accion = request.getParameter("accion");
-//        switch (accion) {
-//            case "comboTipos":
-//                cargarTiposUsuario();
-//                break;
-//            case "comboPaises":
-//                cargarPaises();
-//                break;
-//                
-//        }
-//    }
-    
+
     private void cargarTiposUsuario() {
         controlador.cargarTiposUsuario();
-        controlador.cargarPaises();
     }
 
     private void cargarPaises() {
