@@ -49,12 +49,6 @@ public class ControladorManejoUsuarios implements IControlador<Persona>{
             vista.errorAltaUsuario(ex.getMessage()); 
         }
     }
-<<<<<<< HEAD
-    public void bajaUsuario(String nombreUsuarioBaja, String nombreCompletoUsuarioBaja) {
-=======
-    
-    
-    
     public void borrarUsuariosSeleccionados(String[] listaNombresDeUsuarios) {
         //ACÁ ME LLEGA LA LISTA DE NOMBRES DE USUARIO QUE SE SELECCIONARON EN LOS CHECKBOXES
         //ELIMINAR TODOS LOS USUARIOS QUE TENGAN ESOS NOMBRES (EL NOMBRE DE USUARIO ES CLAVE PRIMARIA)
@@ -79,7 +73,6 @@ public class ControladorManejoUsuarios implements IControlador<Persona>{
         }else{
             vista.mensajeNoSeleccionasteUsuarios("Debes seleccionar un usuario para borrar");
         }
->>>>>>> 555dde3672bfd46aff6dcbd51e7d8821010b7ab6
         
     }
     

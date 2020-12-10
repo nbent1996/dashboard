@@ -3,11 +3,14 @@ package vistaWeb;
 import Modelo.Funciones;
 import Modelo.Pais;
 import Modelo.Persona;
+import Modelo.ProgramException;
 import controlador.ControladorManejoClientes;
 import controlador.Interfaces.IVistaManejoClientes;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 public class VistaManejoClientesWeb implements IVistaManejoClientes{
@@ -97,8 +100,12 @@ public class VistaManejoClientesWeb implements IVistaManejoClientes{
 
     @Override
     public void mostrarPaises(ArrayList<Pais> paises) {
-        String componente = Funciones.lista(false, "lstPaises", paises);
-        out.write(componente + "\n\n");
+        try {
+            String componente = Funciones.lista(false, "lstPaises", paises);
+            out.write(componente + "\n\n");
+        } catch (ProgramException ex) {
+            errorCargaPaises("Error al mostrar los paises.");
+        }
     }
     @Override
     public void mostrarUsuarioSistema(String usuario) {

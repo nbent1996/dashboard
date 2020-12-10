@@ -3,6 +3,7 @@ package vistaWeb;
 import Modelo.Funciones;
 import Modelo.Pais;
 import Modelo.Persona;
+import Modelo.ProgramException;
 import Modelo.TipoUsuario;
 import controlador.ControladorManejoUsuarios;
 import controlador.Interfaces.IVistaManejoUsuarios;
@@ -205,15 +206,24 @@ public class VistaManejoUsuariosWeb implements IVistaManejoUsuarios{
 
     @Override
     public void mostrarTiposUsuario(ArrayList<TipoUsuario> tiposUsuarios) {
-        String componente = Funciones.lista(false, "selTiposUsuarios", tiposUsuarios);
-        out.write(componente + "\n\n");
+        String componente;
+        try {
+            componente = Funciones.lista(false, "selTiposUsuarios", tiposUsuarios);
+            out.write(componente + "\n\n");
+        } catch (ProgramException ex) {
+            errorCargaTiposUsuarios("Error al mostrar los tipos de usuario.");
+        }
 
     }
 
     @Override
-    public void mostrarPaises(ArrayList<Pais> paises) {
-        String componente = Funciones.lista(false, "selPaises", paises);
-        out.write(componente + "\n\n");
+    public void mostrarPaises(ArrayList<Pais> paises) {  
+        try {
+           String componente = Funciones.lista(false, "selPaises", paises);
+           out.write(componente + "\n\n");
+        } catch (ProgramException ex) {
+            errorCargaPaises("Error al mostrar los paises.");
+        }
     }
 
     @Override
