@@ -15,6 +15,12 @@ public interface IVistaManejoUsuarios {
     public void errorCargaTiposUsuarios(String mensajeError);
     public void errorCargaPaises(String mensajeError);
     public void pruebaMostrarTablaBorrarUsuario(ArrayList<Persona> aux);
+
+    public void mostrarMensajeExitoPersonaBorrada(String exitoAlBorrarUsuario);
+
+    public void mensajeErrorAlBorrarPersona(String errorAlBorrarUsuario);
+
+    public void mensajeNoSeleccionasteUsuarios(String noHayUsuariosSeleccionados);
     
     
     

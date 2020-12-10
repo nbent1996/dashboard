@@ -49,8 +49,44 @@ public class ControladorManejoUsuarios implements IControlador<Persona>{
             vista.errorAltaUsuario(ex.getMessage()); 
         }
     }
+<<<<<<< HEAD
     public void bajaUsuario(String nombreUsuarioBaja, String nombreCompletoUsuarioBaja) {
+=======
+    
+    
+    
+    public void borrarUsuariosSeleccionados(String[] listaNombresDeUsuarios) {
+        //ACÁ ME LLEGA LA LISTA DE NOMBRES DE USUARIO QUE SE SELECCIONARON EN LOS CHECKBOXES
+        //ELIMINAR TODOS LOS USUARIOS QUE TENGAN ESOS NOMBRES (EL NOMBRE DE USUARIO ES CLAVE PRIMARIA)
+        //VER QUE DEVOLVER AL USUARIO, YA QUE SE DEBERÍA REFRESCAR LA TABLA
         
+        if(listaNombresDeUsuarios != null){ //se seleccionó al menos un usuario para borrar
+            
+            for (String nombreUsuario : listaNombresDeUsuarios) {
+                //recorro cada nombre de usuario, me traigo la persona que tiene ese usuario y lo borro
+                
+                try{
+                    Persona personaBuscada = opPersona.buscar(" WHERE OperadoresDashboard.usuarioSistema='" + nombreUsuario + "' ", "Modelo.Operador").get(0);
+                    opPersona.borrar(personaBuscada);
+                    vista.mostrarMensajeExitoPersonaBorrada("Se eliminó el usuario: " + personaBuscada.getUsuarioSistema());
+                    //luego de borrar se debería actualizar la lista que está viendo el usuario, ver como resolver
+                }catch(Exception ex){
+                    vista.mensajeErrorAlBorrarPersona("Ocurrió un error al borrar el usuario");
+                }
+  
+            }
+            
+        }else{
+            vista.mensajeNoSeleccionasteUsuarios("Debes seleccionar un usuario para borrar");
+        }
+>>>>>>> 555dde3672bfd46aff6dcbd51e7d8821010b7ab6
+        
+    }
+    
+    
+    
+    public void bajaUsuario(String nombreUsuarioBaja, String nombreCompletoUsuarioBaja) {
+        //ACÁ SIMPLIFICAR LOS LOS IF HACIENDO BUEN FILTRO DE SQL EN EL BUSCAR QUE INCLUYA LIKE
         ArrayList<Persona> aux = new ArrayList();
         
         if(nombreUsuarioBaja.trim().equals("") && nombreCompletoUsuarioBaja.trim().equals("")){ //los dos filtros vienen vacíos 
@@ -59,6 +95,7 @@ public class ControladorManejoUsuarios implements IControlador<Persona>{
         else if(nombreCompletoUsuarioBaja.trim().equals("") && nombreUsuarioBaja.trim()!=null){ 
             try {
             //filtro por nombre de usuario y no por nombre completo
+            //aux = opPersona.buscar(" WHERE OperadoresDashboard.usuarioSistema ='"+nombreUsuarioBaja+"' " , "Modelo.Operador");
             aux = opPersona.buscar(" WHERE OperadoresDashboard.usuarioSistema like '%"+nombreUsuarioBaja+"%' " , "Modelo.Operador");
             vista.pruebaMostrarTablaBorrarUsuario(aux);
             } catch (Exception ex) {
@@ -146,6 +183,8 @@ public class ControladorManejoUsuarios implements IControlador<Persona>{
     public void borrarItems(ArrayList<Persona> items) throws Exception, SQLException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    
     
 
     

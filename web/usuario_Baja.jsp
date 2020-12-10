@@ -8,6 +8,7 @@
 
 
 
+
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -163,6 +164,9 @@
                                 <tbody id="tblUsuariosFiltrados">
                                 </tbody>
                             </table><br><br>
+                            <input type="button" onclick="borrarUsuariosSeleccionados()" id="btnborrarUsuariosSeleccionados" value="Borrar"><br><br>
+                            <span id="spMensajeBorradoUsuarios"></span>
+                            
                         </div>
 
 
@@ -178,6 +182,25 @@
                         });
                         
                     }
+                    
+                    function borrarUsuariosSeleccionados(){
+
+                        var listaUsuariosSeleccionados = new Array();
+                        
+                        $("input:checkbox:checked").each(   
+                            function() {
+                                listaUsuariosSeleccionados.push($(this).val());
+                                //alert("El checkbox con valor " + $(this).val() + " está seleccionado");
+                            }
+                        );
+                
+                            $.get("ManejoUsuariosServlet?accion=borrarUsuarios&listaUsuarios=" + listaUsuariosSeleccionados, function (data) {
+                            document.getElementById("spMensajeBorradoUsuarios").innerHTML = data;
+                        });
+                        
+                    }
+
+
                 </script>
         
         

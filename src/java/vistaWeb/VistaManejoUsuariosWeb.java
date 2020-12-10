@@ -36,24 +36,59 @@ public class VistaManejoUsuariosWeb implements IVistaManejoUsuarios{
         String accion = request.getParameter("accion");
         switch(accion){
             case "comboTipos":
-                this.cargarTiposUsuario();
+                cargarTiposUsuario();
             break;
             case "comboPaises":
-                this.cargarPaises();
+                cargarPaises();
             break;
             case "formAlta":
                 altaUsuario(request, response);
             break;  
-            case "formBaja":
-                //bajaUsuario(request, response);
-            break;
-            case "buscarUsuariosBaja":
-                bajaUsuarioConTabla(request, response);
-            break;
+//            case "formBaja":
+//                //bajaUsuario(request, response);
+//            break;
+//            case "buscarUsuariosBaja":
+//                bajaUsuarioConTabla(request, response);
+//            break;
             case "formModificacion":
                 modificacionUsuario(request, response);
             break;
+            case "borrarUsuarios":
+                borrarUsuarios(request, response);
+            break;
         }
+
+        
+        //Se reusa el mismo servlet en los formularios de ABM usuarios
+        if (request.getParameter("accion").equals("formAlta")){ //me llega el name parametroOculto del input hiden del form de alta usuario con value formAlta
+            altaUsuario(request, response);
+        }
+        
+//        if (request.getParameter("accion").equals("formBaja")){ //me llega el name parametroOculto del input hiden del form de baja usuario con value formBaja
+//            bajaUsuario(request, response);
+//        }
+
+        if(request.getParameter("accion").equals("buscarUsuariosBaja")){
+            bajaUsuarioConTabla(request, response);
+        }
+        
+        if(request.getParameter("accion").equals("borrarUsuarios")){
+            borrarUsuarios(request, response);
+        }
+        
+        
+        if (request.getParameter("accion").equals("formModificacion")){ //me llega el name parametroOculto del input hiden del form de modificacion usuario con value formModificacion
+            modificacionUsuario(request, response);
+        }
+        
+         
+        
+        
+        
+
+//        procesarCombos(request);
+        
+
     }
 
     private void cargarTiposUsuario() {
@@ -91,6 +126,14 @@ public class VistaManejoUsuariosWeb implements IVistaManejoUsuarios{
 //        controlador.bajaUsuario(nombreUsuarioBaja, "");
 //        
 //    }
+    
+    private void borrarUsuarios(HttpServletRequest request, HttpServletResponse response) {
+        String listaNombresDeUsuarios[] = request.getParameterValues("listaUsuarios");
+        this.request = request;
+        this.response = response;
+        
+        controlador.borrarUsuariosSeleccionados(listaNombresDeUsuarios);
+    }
     
     private void bajaUsuarioConTabla(HttpServletRequest request, HttpServletResponse response) {
         
@@ -203,6 +246,23 @@ public class VistaManejoUsuariosWeb implements IVistaManejoUsuarios{
         
         out.write(componente + "\n\n");
     }
+
+    @Override
+    public void mostrarMensajeExitoPersonaBorrada(String exitoAlBorrarUsuario) {
+        out.write(exitoAlBorrarUsuario);
+    }
+
+    @Override
+    public void mensajeErrorAlBorrarPersona(String errorAlBorrarUsuario) {
+        out.write(errorAlBorrarUsuario);
+    }
+
+    @Override
+    public void mensajeNoSeleccionasteUsuarios(String noHayUsuariosSeleccionados) {
+        out.write(noHayUsuariosSeleccionados);
+    }
+
+    
 
     
 
