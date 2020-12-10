@@ -76,12 +76,33 @@ public class ControladorManejoUsuarios implements IControlador<Persona>{
         //ACÁ ME LLEGA LA LISTA DE NOMBRES DE USUARIO QUE SE SELECCIONARON EN LOS CHECKBOXES
         //ELIMINAR TODOS LOS USUARIOS QUE TENGAN ESOS NOMBRES (EL NOMBRE DE USUARIO ES CLAVE PRIMARIA)
         //VER QUE DEVOLVER AL USUARIO, YA QUE SE DEBERÍA REFRESCAR LA TABLA
+        
+        if(listaNombresDeUsuarios != null){ //se seleccionó al menos un usuario para borrar
+            
+            for (String nombreUsuario : listaNombresDeUsuarios) {
+                //recorro cada nombre de usuario, me traigo la persona que tiene ese usuario y lo borro
+                
+                try{
+                    Persona personaBuscada = opPersona.buscar(" WHERE OperadoresDashboard.usuarioSistema='" + nombreUsuario + "' ", "Modelo.Operador").get(0);
+                    opPersona.borrar(personaBuscada);
+                    vista.mostrarMensajeExitoPersonaBorrada("Se eliminó el usuario: " + personaBuscada.getUsuarioSistema());
+                    //luego de borrar se debería actualizar la lista que está viendo el usuario, ver como resolver
+                }catch(Exception ex){
+                    vista.mensajeErrorAlBorrarPersona("Ocurrió un error al borrar el usuario");
+                }
+  
+            }
+            
+        }else{
+            vista.mensajeNoSeleccionasteUsuarios("Debes seleccionar un usuario para borrar");
+        }
+        
     }
     
     
     
     public void bajaUsuario(String nombreUsuarioBaja, String nombreCompletoUsuarioBaja) {
-        
+        //ACÁ SIMPLIFICAR LOS LOS IF HACIENDO BUEN FILTRO DE SQL EN EL BUSCAR QUE INCLUYA LIKE
         ArrayList<Persona> aux = new ArrayList();
         
         if(nombreUsuarioBaja.trim().equals("") && nombreCompletoUsuarioBaja.trim().equals("")){ //los dos filtros vienen vacíos 
@@ -90,6 +111,7 @@ public class ControladorManejoUsuarios implements IControlador<Persona>{
         else if(nombreCompletoUsuarioBaja.trim().equals("") && nombreUsuarioBaja.trim()!=null){ 
             try {
             //filtro por nombre de usuario y no por nombre completo
+            //aux = opPersona.buscar(" WHERE OperadoresDashboard.usuarioSistema ='"+nombreUsuarioBaja+"' " , "Modelo.Operador");
             aux = opPersona.buscar(" WHERE OperadoresDashboard.usuarioSistema like '%"+nombreUsuarioBaja+"%' " , "Modelo.Operador");
             vista.pruebaMostrarTablaBorrarUsuario(aux);
             } catch (Exception ex) {

@@ -8,6 +8,7 @@
 
 
 
+
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -181,12 +182,9 @@
                         });
                         
                     }
-<<<<<<< HEAD
                     
                     function borrarUsuariosSeleccionados(){
-                        
-                        //guardo todos los value en un array. Ver como mandarlo al servlet
-                        
+
                         var listaUsuariosSeleccionados = new Array();
                         
                         $("input:checkbox:checked").each(   
@@ -203,10 +201,6 @@
                     }
 
 
-
-
-=======
->>>>>>> f4865cc972b1c2dbed6a2317034e8ae59aeafb07
                 </script>
         
         
