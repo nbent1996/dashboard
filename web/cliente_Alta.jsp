@@ -154,7 +154,11 @@
                                 </div>
                         </div>
                         <hr>        
+                        <div class="botoneraAlta">
                         <input type="submit" class="submitAlta" value="confirmar">
+                        <input type="reset" class="limpiarCampos" value="Limpiar campos">    
+                        </div>
+                        
                         <span id="mensajeAlta"></span>
                         <input type="hidden" name="accion" value="formAltaCliente">
                         <%if (msg != null) {%>

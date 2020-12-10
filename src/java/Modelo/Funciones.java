@@ -16,7 +16,7 @@ import javax.imageio.ImageIO;
 public class Funciones {
     
     /*HTML*/
-        public static String lista(boolean multiple,String id ,ArrayList opciones){
+        public static String lista(boolean multiple,String id ,ArrayList opciones) throws ProgramException{
         String lista = "<select " + " class='comboBox nb-input' onchange='changeItemSelected()' " + (multiple?" multiple ":"") +  " id='" + id+ "'>";
         String optionId = "";
         String value ="";
@@ -33,7 +33,11 @@ public class Funciones {
                 TipoUsuario t = (TipoUsuario) obj;
                 optionId = value = t.getNombre();
             }
-            
+            if(obj instanceof TipoDispositivo){
+                TipoDispositivo tD = (TipoDispositivo) obj;
+                optionId = tD.toString(1);
+                value = tD.toString(3);
+            }
             if(primero){
                 lista+= "<option value='" + optionId + "' name= 'itemSeleccionado' >" + value + "</option>";
                 primero = false;

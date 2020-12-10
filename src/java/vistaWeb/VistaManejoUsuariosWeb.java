@@ -23,14 +23,7 @@ public class VistaManejoUsuariosWeb implements IVistaManejoUsuarios{
     private HttpServletRequest request;
     private HttpServletResponse response;
     private PrintWriter out;
-    
-    
-    private ArrayList<TipoUsuario> tiposUsu = new ArrayList();
-    private ArrayList<Pais> paises = new ArrayList();
-    
-    private ArrayList<Persona> personas = new ArrayList();
-
-    
+   
     public VistaManejoUsuariosWeb(HttpServletRequest request, HttpServletResponse response) throws IOException {
         this.response = response;
         this.out = response.getWriter();
@@ -40,7 +33,6 @@ public class VistaManejoUsuariosWeb implements IVistaManejoUsuarios{
     
 
     public void procesarRequest(HttpServletRequest request, HttpServletResponse response) {
-        
         String accion = request.getParameter("accion");
         switch(accion){
             case "comboTipos":
@@ -170,17 +162,15 @@ public class VistaManejoUsuariosWeb implements IVistaManejoUsuarios{
 
     @Override
     public void mostrarTiposUsuario(ArrayList<TipoUsuario> tiposUsuarios) {
-        this.tiposUsu = tiposUsuarios;
-        String componente = Funciones.lista(false, "lstTipos", tiposUsuarios);
-        out.write("Tipo de usuario: " + componente + "\n\n");
+        String componente = Funciones.lista(false, "selTiposUsuarios", tiposUsuarios);
+        out.write(componente + "\n\n");
 
     }
 
     @Override
     public void mostrarPaises(ArrayList<Pais> paises) {
-        this.paises = paises;
-        String componente = Funciones.lista(false, "lstPaises", paises);
-        out.write("Pais: " + componente + "\n\n");
+        String componente = Funciones.lista(false, "selPaises", paises);
+        out.write(componente + "\n\n");
     }
 
     @Override
@@ -209,7 +199,6 @@ public class VistaManejoUsuariosWeb implements IVistaManejoUsuarios{
     public void pruebaMostrarTablaBorrarUsuario(ArrayList<Persona> aux) {
         //Funciones.tablaUsuarios(aux, "btnBajaUsuario");
         
-        this.personas = aux;
         String componente = Funciones.tablaUsuarios(aux, "btnBajaUsuario");
         
         out.write(componente + "\n\n");

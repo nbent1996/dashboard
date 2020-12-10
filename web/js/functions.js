@@ -2,11 +2,11 @@ $(document).ready(load);
 function load(){
     /*EVENTOS*/
     $("#selTipoCliente").on("change", changeTipoCliente);
-    
+    $("#chkVerPasswordAltaUsuario").click(mostrarOcultarPassword);
     /*EVENTOS*/
     modificarVisibilidad(new Array("#divPrincipal", "#divSecundario"), "ocultar");
     modificarVisibilidad(new Array("#divPrincipal"), "mostrar");
-
+    
 
 }
 function modificarVisibilidad(listaElementos, accion){
@@ -24,6 +24,10 @@ function modificarVisibilidad(listaElementos, accion){
         break;
     }
 
+}
+function mostrarOcultarPassword(){
+    $('#txtbxPasswordUsuarioAlta').attr('type', $(this).is(':checked') ? 'text' : 'password');
+    
 }
 function changeItemSelected(){
     $(".comboBox option").attr("name", "");
@@ -43,6 +47,25 @@ function changeTipoCliente(){
 }
 
 /*Funciones de Validación*/
+function validarAltaUsuario(form){
+    var resultado="";  
+    //Largo caracteres
+    if($("#txtbxUserUsuarioAlta").length>35){
+        resultado+="El usuario no puede tener más de 35 caracteres.\n";
+    }
+    if($("#txtbxNombreCompletoUsuarioAlta").length>50){
+        resultado+="El nombre completo no puede tener más de 50 caracteres.\n";
+    }
+    
+    //Campos numericos
+    
+    if(resultado!=""){
+        form.preventDefault();
+        alert(resultado);
+        return false;
+    }
+    return true;
+}
 function validarAltaCliente(form){
     var resultado="";
     //No nulo
@@ -72,11 +95,25 @@ function validarAltaCliente(form){
     if(resultado!=""){
         form.preventDefault();
         alert(resultado);
+        return false;
     }
-    return resultado;
+    return true;
+}
+function validarAltaDispositivo(form){
+    var resultado = "";
+    
+    //Largo caracteres
+    
+    //Campos numericos
+    
+    if(resultado!=""){
+        form.preventDefault();
+        alert(resultado);
+        return false;
+    }
+    return true;
 }
 /*Funciones de Validación*/
-
 
 
 

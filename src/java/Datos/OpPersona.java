@@ -43,15 +43,18 @@ public OpPersona(String usuarioSistema){
     Secundario s = null;
     Secundario sAnterior = null;
     String telefonoA = "", telefonoB="", emailA = "", emailB="";
+    String usuarioSistema = "", usuarioSistemaAnterior="";
     if (c instanceof Principal) {
         p = (Principal) c;
         if(cAnterior!=null){
             pAnterior = (Principal) cAnterior;
             telefonoB = pAnterior.getTelefono();
             emailB = pAnterior.getEmail();
+            usuarioSistemaAnterior=pAnterior.getUsuarioSistema();
         }
         telefonoA = p.getTelefono();
         emailA = p.getEmail();
+        usuarioSistema=p.getUsuarioSistema();
         
     }
     if (c instanceof Secundario) {
@@ -63,6 +66,17 @@ public OpPersona(String usuarioSistema){
         }
         telefonoA = s.getTelefono();
         emailA = s.getEmail();
+    }
+    /*Validando clave primaria usuarioSistema*/
+    if(!usuarioSistema.equals("")){
+        String sqlUsuarioSistema = "SELECT * FROM Personas WHERE Personas.usuarioSistema='"+usuarioSistema+"' ";
+        if(!usuarioSistemaAnterior.equals("")){
+            sqlUsuarioSistema+=" AND Personas.usuarioSistema!='"+usuarioSistemaAnterior+"' ";
+        }
+        rs = database.consultar(sqlUsuarioSistema);
+        if(rs.next()){
+            throw new Exception("El campo usuario ya existe en la base de datos y no se puede repetir.");
+        }
     }
     /*Validando Campo Unico Telefono*/
     if (!telefonoA.equals("")) {

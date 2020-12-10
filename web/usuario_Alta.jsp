@@ -26,16 +26,13 @@
             mostrarCombos();  
             function mostrarCombos(){
                 $.get("ManejoUsuariosServlet?accion=comboTipos", function(data){
-                    document.getElementById("combo-tipoUsuarios").innerHTML=data;
+                    document.getElementById("spanTiposUsuarios").innerHTML=data;
                 });
                 $.get("ManejoUsuariosServlet?accion=comboPaises", function(data){
-                    document.getElementById("combo-paises").innerHTML=data;
+                    document.getElementById("spanPaises").innerHTML=data;
                 });
             }
         </script>
-        
-        
-        
         <div class="w3-bar w3-top w3-black w3-large" style="z-index:4">
             <button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey" onclick="w3_open();"><i class="fa fa-bars"></i> &nbsp;Menu</button>
             <span class="w3-bar-item w3-right">LogoEmpresa</span>
@@ -120,61 +117,42 @@
         <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
         
         
-        
+        <div class="ABMContainer">
         <!-- !PAGE CONTENT! -->
-        <div class="w3-main" style="margin-left:300px;margin-top:43px;">
-
             <!-- Header -->
-            <header class="w3-container" style="padding-top:22px">
+            <header class="w3-container estilosHeader">
                 <h5><b><i class="fa fa-users"></i> Alta de Usuario</b></h5>
             </header>
-
-
-            <div class="ABMpage">
-
                 <div class="form">
-
-                    <form name="formAltaUsuario" action="ManejoUsuariosServlet" method="post" onsubmit="return validarCamposAltaUsr(this)">
-                        <input type="text" id="txtUsuarioAlta" name="usuario" placeholder="usuario" required="true"/>
-                        <input type="text" id="txtNombreCompletoAlta" name="nombreCompleto" placeholder="nombre completo" required="true"/>
-                        <input type="text" id="txtNombreEmpresaAlta" name="nombreEmpresa" placeholder="empresa" required="true"/>
+                    <form name="formAltaUsuario" action="ManejoUsuariosServlet" method="post" onsubmit="return validarAltaUsuario(this)">
+                        <div><label for="txtbxUserUsuarioAlta">Usuario Backoffice: </label><input type="text" id="txtbxUserUsuarioAlta" class="nb-input" name="txtbxUserUsuarioAlta" required="true"/></div>
+                        <div class="margin-top20">
+                            <label for="txtbxPasswordAlta">Contraseña: </label><input type="password" class="nb-input" id="txtbxPasswordUsuarioAlta" name="txtbxPasswordAlta" required="true"/>
+                            <span class="spanVerClave"><input type="checkbox" class="w3-check" id="chkVerPasswordAltaUsuario" name="chkVerPasswordAltaUsuario">
+                            <label for="chkVerPasswordAltaUsuario"> Ver clave</label></span>
+                        </div>
+                        
+                        <div class="margin-top20"><label for="txtbxNombreCompletoAlta">Nombre completo: </label><input type="text" id="txtbxNombreCompletoUsuarioAlta" class="nb-input" name="nombreCompleto" required="true"/></div>
+                        <div class="margin-top20"><label for="selGenero">Genero: </label>
+                             <select id="selGenero" class="nb-input" name="selGenero">
+                                <option value="Masculino" selected="true">Masculino</option>
+                                <option value="Femenino">Femenino</option>
+                            </select></div>
+                        <div class="margin-top20"><label for="selPaises">Pais de nacionalidad: </label><span id="spanPaises"></span></div>
+                        <div class="margin-top20"><label for="selTiposUsuarios">Tipo de usuario:</label><span id="spanTiposUsuarios"></span></div>
                         <input type="hidden" name="accion" value="formAlta">
-
-                        <span id="combo-paises"></span> <br><br>
-                        <span id="combo-tipoUsuarios"></span> <br><br>
-
-
+                        <hr>
+                        <div class="botoneraAlta">
                         <input type="submit" class="submitAlta" value="confirmar">
-
+                        <input type="reset" class="limpiarCampos" value="Limpiar campos">    
+                        </div>
                         <%if (msg != null) {%>
                         <div>
                             <p class="message"><%=msg%></p>                        
                         </div>
                         <%}%>
-
-
                     </form>
                 </div>
             </div>
-
-
-
-
-
-
-
-
-
-
-
-
-        </div>
-        
-        
-        
-        
-        
-        
-        
     </body>
 </html>

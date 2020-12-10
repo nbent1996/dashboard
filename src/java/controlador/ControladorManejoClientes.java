@@ -48,10 +48,8 @@ public class ControladorManejoClientes {
         }
     }
   public void cargarPaises() {
-        ArrayList <Pais> paises = new ArrayList();
         try {
-            paises = opPais.obtenerTodos();
-            vista.mostrarPaises(paises);
+            vista.mostrarPaises(opPais.obtenerTodos());
         } catch (Exception ex) {
             vista.errorCargaPaises("Error en la carga de paises");
         }

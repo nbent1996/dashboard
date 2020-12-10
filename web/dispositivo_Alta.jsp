@@ -1,9 +1,3 @@
-<%-- 
-    Document   : dispositivo_Alta
-    Created on : 29/11/2020, 07:34:16 PM
-    Author     : Andres
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -22,36 +16,20 @@
     </head>
     
     <body class="w3-light-grey">
-        
-        
-        
-        
         <script>
-            
-            function w3_open() {
-                if (mySidebar.style.display === 'block') {
-                    mySidebar.style.display = 'none';
-                    overlayBg.style.display = "none";
-                } else {
-                    mySidebar.style.display = 'block';
-                    overlayBg.style.display = "block";
+                cargarCombos();
+                function cargarCombos(){
+                    $.get("ManejoDispositivosServlet?accion=comboTiposDispositivo", function(data){
+                       document.getElementById("selTipoDispositivoDispositivoAlta").innerHTML=data; 
+                    });
                 }
+                 function buscarCliente(){
+                $.get("ManejoDispositivosServlet?accion=buscarCliente", function(data){
+                    document.getElementById("spClienteEncontrado").innerHTML=data;
+                });
             }
-
-            // Close the sidebar with the close button
-            function w3_close() {
-                mySidebar.style.display = "none";
-                overlayBg.style.display = "none";
-            }
-            
-            
-             
-             
-             
-            
-            
         </script>
-        
+
         
         
         <div class="w3-bar w3-top w3-black w3-large" style="z-index:4">
@@ -73,15 +51,8 @@
                     
                 </div>
             </div>
-
             <hr>
-            <!-- TÍTULO DE MENÚ LATERAL 
-                <div class="w3-container">
-                    <h5>Dashboard</h5>
-                </div>
-            -->
-            
-                        <div class="w3-bar-block">
+                <div class="w3-bar-block">
                 <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>&nbsp; Cerrar Menu</a>
                 <a href="index.jsp" class="w3-bar-item w3-button w3-padding"><i class="fa fa-home fa-fw"></i>&nbsp; Inicio</a><br><br>
                 <div class="w3-dropdown-hover w3-mobile">
@@ -140,59 +111,37 @@
         
         
         <!-- !PAGE CONTENT! -->
-        <div class="w3-main" style="margin-left:300px;margin-top:43px;">
+        <div class="ABMContainer">
 
             <!-- Header -->
-            <header class="w3-container" style="padding-top:22px">
-                <h5><b><i class="fa fa-users"></i> Alta de Dispositivos </b></h5>
+            <header class="w3-container estilosHeader">
+                <h5><b><i class="fa fa-video-camera fa-fw"></i> Alta de Dispositivos </b></h5>
             </header>
-
-
             <div class="ABMpage">
-
-                <div class="form">
-
-                    
-                    <form name="formAltaDispositivo" action="ManejoDispositivosServlet" method="post" onsubmit="return validarCamposAltaDisp(this)">
+                <div class="form">    
+                    <form name="formAltaDispositivo" action="ManejoDispositivosServlet" method="post" onsubmit="return validarAltaDispositivo(this)">  
+                        <div><label for="txtbxNroSerieDispositivoAlta">Número de Serie: </label><input type="text" class="nb-input" id="txtbxNroSerieDispositivoAlta" name="txtbxNroSerieDispositivoAlta" required="true"/></div>
+                        <div><label for="selEstadoDispositivoAlta">Estado: </label>
+                            <select id="selEstadoDispositivoAlta" class="nb-input" name="selEstadoDispositivoAlta">
+                                <option value="Nuevo" selected="true">Nuevo</option>
+                                <option value="Usado-OK">Usado-OK</option>
+                                <option value="Usado-Reparar">Usado-Reparar</option>
+                            </select>
+                        </div>
+                        <div><label for="txtbxUsuarioClienteDispositivoAlta">Cliente (Nro de cliente):</label><span id="spanContenidoClienteAsociado"><span id="spanClienteAsociado">No seleccionado</span><input type="button" class="margin-left20 submitSearch" value="Buscar Cliente"/></span></div>
+                        <div class="margin-top20"><label for="selTipoDispositivoDispositivoAlta">Tipo de dispositivo:</label>
+                        <span id="selTipoDispositivoDispositivoAlta" name="comboTipoDispositivos"></span></div>
+                      
                         
-                        <input type="text" id="txtNroSerieAlta" name="nroSerieAlta" placeholder="nro serie" required="true"/>
-                        <input type="text" id="txtEstadoAlta" name="estadoAlta" placeholder="estado" required="true"/>
-                        <hr>
-                        <label>¿Asociar cliente?</label>
-                        <input type="text" id="txtNroDocumentoClienteAltaDisp" name="nroDocumentoClienteAltaDisp" placeholder="nro documento"/>
-                        <input type="button" id="btnAsociarClienteAlta" value="Buscar cliente" onclick="buscarCliente()">
-                        <br>
-                        <span id="clienteEncontrado"></span>
-                        <br>
-                        <hr>
-                        
+                        <hr>        
+                        <div class="botoneraAlta">
                         <input type="submit" class="submitAlta" value="confirmar">
-                        
+                        <input type="reset" class="limpiarCampos" value="Limpiar campos">    
+                        </div>
                         <input type="hidden" name="accion" value="formAltaDispositivo">
-                        
                     </form>
-
-
                 </div>
-
             </div>
-
         </div>
-        
-        
-        
-        <script>
-        
-            function buscarCliente(){
-                $.get("ManejoDispositivosServlet?accion=buscarCliente", function(data){
-                    document.getElementById("spClienteEncontrado").innerHTML=data;
-                });
-            }
-        
-        </script>
-        
-        
-        
-        
     </body>
 </html>

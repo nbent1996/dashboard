@@ -13,6 +13,9 @@ html,body,h1,h2,h3,h4,h5, label {
 .margin-top20{
     margin-top:20px;
 }
+.margin-left20{
+    margin-left:20px;
+}
 .espaciador{
     position:absolute;
     top:3vw;
@@ -70,6 +73,38 @@ html,body,h1,h2,h3,h4,h5, label {
     border-radius:5px;
 }
 /*login.jsp*/
+
+/*usuario_Alta.jsp*/
+.spanVerClave{
+    position:relative;
+    left:100px;
+}
+#spanPaises{
+    position:relative;
+    left:20px;
+}
+#txtbxUserUsuarioAlta{
+    position:relative;
+    left:36px;
+}
+#txtbxPasswordUsuarioAlta{
+    position:relative;
+    left:84px;
+}
+#txtbxNombreCompletoUsuarioAlta{
+    position:relative;
+    left:36px;
+}
+#selGenero{
+    position:relative;
+    left:112px;
+}
+#spanTiposUsuarios{
+    position:relative;
+    left:60px;
+}
+/*usuario_Alta.jsp*/
+
 /*cliente_Alta.jsp*/
 #divPrincipal, #divSecundario{
     margin-left:35px;
@@ -99,6 +134,25 @@ html,body,h1,h2,h3,h4,h5, label {
     left:91px;
 }
 /*cliente_Alta.jsp*/
+/*dispositivo_Alta.jsp*/
+#spanContenidoClienteAsociado{
+    position:relative;
+    left:6px;
+}
+
+#selTipoDispositivoDispositivoAlta{
+    position: relative;
+    left:30px;
+}
+#selEstadoDispositivoAlta{
+    position:relative;
+    left:112px;
+}
+#txtbxNroSerieDispositivoAlta{
+    position:relative;
+    left:42px;
+}
+/*dispositivo_Alta.jsp*/
 .borderDiv{
     padding:5px;
     border-style:solid;
@@ -107,7 +161,7 @@ html,body,h1,h2,h3,h4,h5, label {
     height:180px;
 }
 .estilosHeader{
-    padding-top:80px;
+    padding-top:102px;
     margin-left:310px;
 }
 .ABMcontainer{
@@ -124,7 +178,7 @@ html,body,h1,h2,h3,h4,h5, label {
   max-width:960px;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
-.form input[type="text"], .form input[type="email"], .form select {
+.form input[type="text"], .form input[type="email"], .form select, .form input[type="password"] {
   font-family: "Roboto", sans-serif;
   outline: 0;
   background: #f2f2f2;
@@ -146,7 +200,6 @@ html,body,h1,h2,h3,h4,h5, label {
   text-transform: uppercase;
   outline: 0;
   background: #64B5F6;
-  width: 100%;
   border: 0;
   padding: 15px;
   color: #EEEEEE;
@@ -155,11 +208,36 @@ html,body,h1,h2,h3,h4,h5, label {
   transition: all 0.3 ease;
   cursor: pointer;
 }
-.submitAlta:hover {
-  background: #0091EA;/*#00B0FF;*/
+.form .limpiarCampos{
+  font-family: "Roboto", sans-serif;
+  text-transform: uppercase;
+  outline: 0;
+  background: #4DB6AC;
+  border: 0;
+  padding: 15px;
+  color: #EEEEEE;
+  font-size: 14px;
+  -webkit-transition: all 0.3 ease;
+  transition: all 0.3 ease;
+  cursor: pointer;
+}
+.form .limpiarCampos:hover{
+  background: #00BFA5;
   color:white;
 }
-
+.submitAlta:hover {
+  background: #0091EA;
+  color:white;
+}
+.form .botoneraAlta{
+    width:100%;
+}
+.form .botoneraAlta .submitAlta{
+    width:55%;
+}
+.form .botoneraAlta .limpiarCampos{
+    width:40%;
+}
 .form .submitBaja {
   font-family: "Roboto", sans-serif;
   text-transform: uppercase;
@@ -175,10 +253,26 @@ html,body,h1,h2,h3,h4,h5, label {
   cursor: pointer;
 }
 .submitBaja:hover {
-  background:#EF5350 ;
+  background:#DD2C00 ;
   color:white;
 }
-
+.form .submitSearch{
+  font-family: "Roboto", sans-serif;
+  text-transform: uppercase;
+  outline: 0;
+  background: #AED581 ;
+  border: 0;
+  padding: 15px;
+  color: #EEEEEE;
+  font-size: 14px;
+  -webkit-transition: all 0.3 ease;
+  transition: all 0.3 ease;
+  cursor: pointer;
+}
+.form .submitSearch:hover{
+  background:#64DD17;
+  color:white;
+}
 .form .submitModificacion {
   font-family: "Roboto", sans-serif;
   text-transform: uppercase;
@@ -195,7 +289,7 @@ html,body,h1,h2,h3,h4,h5, label {
 }
 
 .submitModificacion :hover{
-  background: #1DE9B6;
+  background: #00BFA5;
   color:white;
 }
 

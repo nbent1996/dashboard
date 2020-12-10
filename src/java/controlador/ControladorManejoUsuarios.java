@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controlador;
 
 import controlador.Interfaces.IControlador;
@@ -20,57 +15,40 @@ import Modelo.ProgramException;
 import Modelo.TipoUsuario;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 public class ControladorManejoUsuarios implements IControlador<Persona>{
-    
+    /*Estado*/
     private IVistaManejoUsuarios vista;
     private OpPersona opPersona;
     private OpEmpresa opEmpresa;
     private OpPais opPais;
     private OpTipoUsuario opTipoUsuario;
+    /*Estado*/
     
+    /*Constructores*/
     public ControladorManejoUsuarios(IVistaManejoUsuarios vista) {
         this.vista = vista;
-        this.opPersona = new OpPersona("bentancor");//usuario logueado, en el login tomarlo de la session
-        this.opPais = new OpPais("bentancor");//usuario logueado, en el login tomarlo de la session
-        this.opTipoUsuario = new OpTipoUsuario("bentancor");//usuario logueado, en el login tomarlo de la session
-        //cargarTiposUsuario();
-        //cargarPaises();
-        //prueba();
-        //vista.cargarTipos(pasarleListaTipos); cargarTipos() y resolverlo mas abajo
-        //vista.cargarPaises(pasarListaPaises);
+        this.opPersona = new OpPersona("bentancor");
+        this.opPais = new OpPais("bentancor");
+        this.opTipoUsuario = new OpTipoUsuario("bentancor");
     }
-    
+    /*Constructores*/
 
+    /*Comportamiento*/
     public void altaUsuario(String usuarioAltaUsr, String nombreCompletoAltaUsr, String nombreEmpresaAltaUsr, String nombrePaisAltaUsr, String tipoUsuarioAltaUsr){
-
-        
         try {
-            
-            //opPersona.buscar(filtroBuscarPersona(operador), tipoUsuarioAltaUsr); //chequea que no haya un idéntico operador en la BD
-            Empresa empresa = opEmpresa.buscar(" WHERE nombre='"+nombreEmpresaAltaUsr+"' " , "").get(0);
-            Pais pais = opPais.buscar(" WHERE nombre='"+nombrePaisAltaUsr+"' " , "").get(0);
-            
-            Operador operador = new Operador(usuarioAltaUsr, usuarioAltaUsr,nombreCompletoAltaUsr, empresa, pais, new TipoUsuario(tipoUsuarioAltaUsr), "Masculino" );
-            operador.validar(); //valido campos del operador (chequea en operador y en persona)
-            opPersona.guardar(null, operador); //inserto el operador en la base
+            Empresa e = new Empresa("FALTA TRAER LA IDENTIFICACION TRIBUTARIA");
+            Pais p = new Pais("FALTA TRAER EL COD PAIS DESDE EL VALUE DEL OPTION");
+            Operador operador = new Operador(usuarioAltaUsr, usuarioAltaUsr,nombreCompletoAltaUsr, e,p, new TipoUsuario(tipoUsuarioAltaUsr), "Masculino" );
+            operador.validar();
+            opPersona.guardar(null, operador);
             vista.exitoAltaUsuario("Usuario dado de alta correctamente");
-            
-        } catch (ProgramException ex) { //error en las validaciones
-            
-            vista.errorAltaUsuario(ex.getMessage());
-            
-        } catch (Exception ex) { //error al insertar    
-            
-            vista.errorAltaUsuario(ex.getMessage());
-            
+        } catch (ProgramException ex) { 
+            vista.errorAltaUsuario(ex.getMessage()); 
+        } catch (Exception ex) {        
+            vista.errorAltaUsuario(ex.getMessage()); 
         }
-
     }
-    
-    
     public void bajaUsuario(String nombreUsuarioBaja, String nombreCompletoUsuarioBaja) {
         
         ArrayList<Persona> aux = new ArrayList();
@@ -126,35 +104,18 @@ public class ControladorManejoUsuarios implements IControlador<Persona>{
         //CONTINUAR ACÁ, EVALUAR SITUACION YA QUE ALGUNOS DE LOS PARAMETROS PUEDEN SER NULOS, VER DONDE EVALUAR DICHA CONDICION
    
     }
-
-//    private String filtroBuscarPersona(Operador operador) {
-//        
-//          Hacer filtro con los campos del operador para chequear que no exista otro igual    
-//        
-//    }
-
-    
-    
-    
+   
     public void cargarTiposUsuario() {
-        //de acá traerme la lista de tipos de la base de datos
-        //pasarle a la vista la lista de tipos para que la muestre
-        //en la vista igualar parametro con atributo de lista y mostrar
-        ArrayList <TipoUsuario> tiposUsuarios = new ArrayList();
-        
         try {
-            tiposUsuarios = opTipoUsuario.obtenerTodos();
-            vista.mostrarTiposUsuario(tiposUsuarios);
+            vista.mostrarTiposUsuario(opTipoUsuario.obtenerTodos());
         } catch (Exception ex) {
             vista.errorCargaTiposUsuarios("Error en la carga de tipos de usuario");
         }
     }
 
     public void cargarPaises() {
-        ArrayList <Pais> paises = new ArrayList();
         try {
-            paises = opPais.obtenerTodos();
-            vista.mostrarPaises(paises);
+            vista.mostrarPaises(opPais.obtenerTodos());
         } catch (Exception ex) {
             vista.errorCargaPaises("Error en la carga de paises");
         }
