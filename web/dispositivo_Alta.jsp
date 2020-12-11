@@ -1,5 +1,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%
+    String msg = request.getParameter("msg");
+%>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -17,8 +20,14 @@
     
     <body class="w3-light-grey">
         <script>
-                cargarCombos();
-                function cargarCombos(){
+                /*cargarCategorias();
+                function cargarCategorias(){
+                    $.get("ManejoDispositivosServlet?accion=comboCategorias", function(data){
+                       document.getElementById("selCategoriaDispositivoAlta").innerHTML=data; 
+                    });
+                }*/
+                cargarTiposDispositivo();
+                function cargarTiposDispositivo(){
                     $.get("ManejoDispositivosServlet?accion=comboTiposDispositivo", function(data){
                        document.getElementById("selTipoDispositivoDispositivoAlta").innerHTML=data; 
                     });
@@ -27,7 +36,7 @@
                 $.get("ManejoDispositivosServlet?accion=buscarCliente", function(data){
                     document.getElementById("spClienteEncontrado").innerHTML=data;
                 });
-            }
+                }
         </script>
 
         
@@ -129,16 +138,21 @@
                             </select>
                         </div>
                         <div><label for="txtbxUsuarioClienteDispositivoAlta">Cliente (Nro de cliente):</label><span id="spanContenidoClienteAsociado"><span id="spanClienteAsociado">No seleccionado</span><input type="button" class="margin-left20 submitSearch" value="Buscar Cliente"/></span></div>
+                        <!--<div class="margin-top20"><label for="selCategoriaDispositivoAlta">Categoria:</label>
+                        <span id="selCategoriaDispositivoAlta" name="comboCategorias"></span></div>-->
                         <div class="margin-top20"><label for="selTipoDispositivoDispositivoAlta">Tipo de dispositivo:</label>
                         <span id="selTipoDispositivoDispositivoAlta" name="comboTipoDispositivos"></span></div>
-                      
-                        
                         <hr>        
                         <div class="botoneraAlta">
                         <input type="submit" class="submitAlta" value="confirmar">
                         <input type="reset" class="limpiarCampos" value="Limpiar campos">    
                         </div>
                         <input type="hidden" name="accion" value="formAltaDispositivo">
+                        <%if (msg != null) {%>
+                        <div>
+                            <p class="message"><%=msg%></p>                        
+                        </div>
+                        <%}%>
                     </form>
                 </div>
             </div>

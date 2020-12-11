@@ -1,11 +1,8 @@
-<%-- 
-    Document   : suscripcion_Alta
-    Created on : 01/12/2020, 10:10:25 PM
-    Author     : Andres
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%
+    String msg = request.getParameter("msg");
+%>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -22,22 +19,15 @@
     </head>
     
     <body class="w3-light-grey">
-        
-        
-        
-        
         <script>
-            
-            
-            
-            
-             
-            
-            
+           mostrarTablaPaquetes();
+           function mostrarTablaPaquetes(){
+               $.get("ManejoSuscripcionesServlet?accion=generarTablaPaquetes", function(data){
+                  document.getElementById("selPaquetesSuscripcionAlta").innerHTML=data; 
+               });
+               
+           }
         </script>
-        
-        
-        
         <div class="w3-bar w3-top w3-black w3-large" style="z-index:4">
             <button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey" onclick="w3_open();"><i class="fa fa-bars"></i> &nbsp;Menu</button>
             <span class="w3-bar-item w3-right">LogoEmpresa</span>
@@ -124,55 +114,35 @@
         
         
         <!-- !PAGE CONTENT! -->
-        <div class="w3-main" style="margin-left:300px;margin-top:43px;">
-
+        <div class="ABMContainer">
             <!-- Header -->
-            <header class="w3-container" style="padding-top:22px">
+            <header class="w3-container estilosHeader" >
                 <h5><b><i class="fa fa-suitcase"></i> Alta de Suscripciones</b></h5>
             </header>
-
-
-            <div class="ABMpage">
-
-                <div class="form">
-
-                    
-                    <form name="formAltaCliente" action="ManejoClientesServlet" method="post" onsubmit="return validarCamposAltaCliente(this)">
-                        
-                        <input type="text" id="txtNroDocumentoClienteAlta" name="nroDocClienteAlta" placeholder="nro documento" required="true"/>
-                        <input type="text" id="txtNombreCompletoClienteAlta" name="nombreCompletoClienteAlta" placeholder="nombre completo" required="true"/>
-                        <input type="text" id="txtEmailClienteAlta" name="emailClienteAlta" placeholder="email" required="true"/>
+                <div class="form">           
+                    <form name="formAltaSuscripcion" action="ManejoSuscripcionServlet" method="post" onsubmit="return validarAltaSuscripcion(this)">
+                        <div><label>Fecha de inicio: </label><span id="spanFechaInicio"></span></div>
+                        <div class="margin-top20"><label for="selTiempoContrato">Tiempo de contrato:</label>
+                            <select id="selTiempoContrato" class="nb-input" name="selTiempoContrato">
+                                <option value="0.5" selected="true">6 meses</option>
+                                <option value="1">1 año</option>
+                                <option value="2">2 años</option>
+                                <option value="3">3 años</option>
+                                <option value="4">4 años</option>
+                            </select>
+                        </div>
+                        <div><label for="txtbxUsuarioClienteSuscripcionAlta">Cliente titular (Nro de cliente):</label><span id="spanContenidoClienteAsociadoB"><span id="spanClienteAsociadoB">No seleccionado</span><input type="button" class="margin-left20 submitSearch" value="Buscar Cliente"/></span></div>
+                        <div class="margin-top20"><div><h5 class="nb-title">Paquetes asignados a la suscripci&oacute;n</h5></div><span id="selPaquetesSuscripcionAlta" name="generarTablaPaquetes"></div>
                         <hr>        
-                        
+                         <div class="botoneraAlta">
                         <input type="submit" class="submitAlta" value="confirmar">
-                        
+                        <input type="reset" class="limpiarCampos" value="Limpiar campos">    
+                        </div>
                         <span id="mensajeAlta"></span>
-                        
-                        <input type="hidden" name="accion" value="formAltaCliente">
-                        
+                        <input type="hidden" name="accion" value="formAltaSuscripcion">
                     </form>
-
-
                 </div>
-
             </div>
-
-
-
-
-
-
-
-
-
-
         </div>
-        
-        
-        
-        
-        
-        
-        
     </body>
 </html>

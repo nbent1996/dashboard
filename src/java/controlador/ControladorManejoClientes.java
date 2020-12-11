@@ -3,13 +3,11 @@ package controlador;
 import Datos.OpEmpresa;
 import Datos.OpPais;
 import Datos.OpPersona;
-import Modelo.Pais;
 import Modelo.Persona;
 import Modelo.Principal;
 import Modelo.ProgramException;
 import Modelo.Secundario;
 import controlador.Interfaces.IVistaManejoClientes;
-import java.util.ArrayList;
 
 public class ControladorManejoClientes {
     /*Estado*/
@@ -34,24 +32,24 @@ public class ControladorManejoClientes {
                 Principal principal = (Principal) p;
                 principal.validar();
                 opPersona.guardar(null, principal);
-                vista.exitoAltaCliente("Cliente del tipo titular dado de alta correctamente.");
+                vista.mensajeExito("Cliente del tipo titular dado de alta correctamente.");
             } else if (p instanceof Secundario) {
                 Secundario secundario = (Secundario) p;
                 secundario.validar();
                 opPersona.guardar(null, secundario);
-                vista.exitoAltaCliente("Cliente del tipo cuenta secundaria dado de alta correctamente.");
+                vista.mensajeExito("Cliente del tipo cuenta secundaria dado de alta correctamente.");
             }
         } catch (ProgramException ex) {
-            vista.errorAltaCliente(ex.getMessage());
+            vista.mensajeError(ex.getMessage());
         } catch (Exception ex) {
-            vista.errorAltaCliente(ex.getMessage());
+            vista.mensajeError(ex.getMessage());
         }
     }
   public void cargarPaises() {
         try {
             vista.mostrarPaises(opPais.obtenerTodos());
         } catch (Exception ex) {
-            vista.errorCargaPaises("Error en la carga de paises");
+            vista.mensajeError("Error en la carga de paises");
         }
     }
   public void generarUsuarioSistema(){
@@ -59,7 +57,7 @@ public class ControladorManejoClientes {
             String usr = opPersona.getNuevoUsuarioSistema();
             vista.mostrarUsuarioSistema(usr);
         } catch (Exception ex) {
-            vista.errorAlGenerarUsuario("Error al generar usuario de sistema del cliente.");
+            vista.mensajeError("Error al generar usuario de sistema del cliente.");
         }
   }
   

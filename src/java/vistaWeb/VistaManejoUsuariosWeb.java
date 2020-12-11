@@ -18,21 +18,23 @@ import javax.servlet.http.HttpServletResponse;
 
 
 public class VistaManejoUsuariosWeb implements IVistaManejoUsuarios{
-    
+    /*Estado*/
     private ControladorManejoUsuarios controlador;
     private String destino;
     private HttpServletRequest request;
     private HttpServletResponse response;
     private PrintWriter out;
-   
+    /*Estado*/
+    
+    /*Constructores*/
     public VistaManejoUsuariosWeb(HttpServletRequest request, HttpServletResponse response) throws IOException {
         this.response = response;
         this.out = response.getWriter();
         controlador = new ControladorManejoUsuarios(this);
     }
+    /*Constructores*/
     
-    
-
+    /*Comportamiento*/
     public void procesarRequest(HttpServletRequest request, HttpServletResponse response) {
         String accion = request.getParameter("accion");
         switch(accion){
@@ -45,12 +47,6 @@ public class VistaManejoUsuariosWeb implements IVistaManejoUsuarios{
             case "formAlta":
                 altaUsuario(request, response);
             break;  
-//            case "formBaja":
-//                //bajaUsuario(request, response);
-//            break;
-//            case "buscarUsuariosBaja":
-//                bajaUsuarioConTabla(request, response);
-//            break;
             case "formModificacion":
                 modificacionUsuario(request, response);
             break;
@@ -58,38 +54,6 @@ public class VistaManejoUsuariosWeb implements IVistaManejoUsuarios{
                 borrarUsuarios(request, response);
             break;
         }
-
-        
-        //Se reusa el mismo servlet en los formularios de ABM usuarios
-        if (request.getParameter("accion").equals("formAlta")){ //me llega el name parametroOculto del input hiden del form de alta usuario con value formAlta
-            altaUsuario(request, response);
-        }
-        
-//        if (request.getParameter("accion").equals("formBaja")){ //me llega el name parametroOculto del input hiden del form de baja usuario con value formBaja
-//            bajaUsuario(request, response);
-//        }
-
-        if(request.getParameter("accion").equals("buscarUsuariosBaja")){
-            bajaUsuarioConTabla(request, response);
-        }
-        
-        if(request.getParameter("accion").equals("borrarUsuarios")){
-            borrarUsuarios(request, response);
-        }
-        
-        
-        if (request.getParameter("accion").equals("formModificacion")){ //me llega el name parametroOculto del input hiden del form de modificacion usuario con value formModificacion
-            modificacionUsuario(request, response);
-        }
-        
-         
-        
-        
-        
-
-//        procesarCombos(request);
-        
-
     }
 
     private void cargarTiposUsuario() {
@@ -162,56 +126,14 @@ public class VistaManejoUsuariosWeb implements IVistaManejoUsuarios{
         
     }
 
-    @Override
-    public void exitoAltaUsuario(String mensajeExito) {
-        destino = "usuario_Alta.jsp?msg=" + mensajeExito; //en usuario_Alta hay una expression msg que lo aplica abajo del botón
-        try {
-            response.sendRedirect(destino);
-        } catch (IOException ex) {
-            Logger.getLogger(VistaManejoUsuariosWeb.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    @Override
-    public void errorAltaUsuario(String mensajeError) {
-        destino = "usuario_Alta.jsp?msg=" + mensajeError;
-        try {
-            response.sendRedirect(destino);
-        } catch (IOException ex) {
-            Logger.getLogger(VistaManejoUsuariosWeb.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    @Override
-    public void exitoAlBorrarUsuario(String mensajeExitoBaja) {
-        destino = "usuario_Baja.jsp?msg=" + mensajeExitoBaja;
-        try {
-            response.sendRedirect(destino);
-        } catch (IOException ex) {
-            Logger.getLogger(VistaManejoUsuariosWeb.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-    }
-
-    @Override
-    public void errorAlBorrarUsuario(String mensajeErrorBaja) {
-        destino = "usuario_Baja.jsp?msg=" + mensajeErrorBaja;
-        try {
-            response.sendRedirect(destino);
-        } catch (IOException ex) {
-            Logger.getLogger(VistaManejoUsuariosWeb.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-    }
-
-    @Override
+   @Override
     public void mostrarTiposUsuario(ArrayList<TipoUsuario> tiposUsuarios) {
         String componente;
         try {
-            componente = Funciones.lista(false, "selTiposUsuarios", tiposUsuarios);
+            componente = Funciones.lista(false, "selTiposUsuarios", tiposUsuarios, "changeItemSelected()");
             out.write(componente + "\n\n");
         } catch (ProgramException ex) {
-            errorCargaTiposUsuarios("Error al mostrar los tipos de usuario.");
+            mensajeError("Error al mostrar los tipos de usuario.");
         }
 
     }
@@ -219,35 +141,35 @@ public class VistaManejoUsuariosWeb implements IVistaManejoUsuarios{
     @Override
     public void mostrarPaises(ArrayList<Pais> paises) {  
         try {
-           String componente = Funciones.lista(false, "selPaises", paises);
+           String componente = Funciones.lista(false, "selPaises", paises, "changeItemSelected()");
            out.write(componente + "\n\n");
         } catch (ProgramException ex) {
-            errorCargaPaises("Error al mostrar los paises.");
+            mensajeError("Error al mostrar los paises.");
         }
     }
-
     @Override
-    public void errorCargaTiposUsuarios(String mensajeError) {
-        destino = "Alta.jsp?errorCombos=" + mensajeError;
+    public void mensajeError(String texto) {
+        destino = "usuario_Alta.jsp?msg=" + texto;
         
         try {
             response.sendRedirect(destino);
         } catch (IOException ex) {
-            Logger.getLogger(VistaManejoUsuariosWeb.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(texto);
         }
     }
 
     @Override
-    public void errorCargaPaises(String mensajeError) {
-        destino = "usuario_Alta.jsp?errorCombos=" + mensajeError;
+    public void mensajeExito(String texto) {
+        destino = "usuario_Alta.jsp?msg=" + texto;
         
         try {
             response.sendRedirect(destino);
         } catch (IOException ex) {
-            Logger.getLogger(VistaManejoUsuariosWeb.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(texto);
         }
     }
-
+    /*--*/
+    
     @Override
     public void pruebaMostrarTablaBorrarUsuario(ArrayList<Persona> aux) {
         //Funciones.tablaUsuarios(aux, "btnBajaUsuario");
@@ -271,6 +193,8 @@ public class VistaManejoUsuariosWeb implements IVistaManejoUsuarios{
     public void mensajeNoSeleccionasteUsuarios(String noHayUsuariosSeleccionados) {
         out.write(noHayUsuariosSeleccionados);
     }
+
+/*Comportamiento*/
 
     
 

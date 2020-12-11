@@ -1,5 +1,6 @@
 package vistaWeb;
 
+import Modelo.Categoria;
 import Modelo.Funciones;
 import Modelo.ProgramException;
 import Modelo.TipoDispositivo;
@@ -27,10 +28,13 @@ public class VistaManejoDispositivosWeb implements IVistaManejoDispositivos{
     }
     /*Constructores*/
     
-
+    /*Comportamiento*/
     public void procesarRequest(HttpServletRequest request, HttpServletResponse response) { 
         String accion = request.getParameter("accion");
         switch(accion){
+//            case "comboCategorias":
+//                this.cargarCategorias();
+//            break;
             case "comboTiposDispositivo":
                 this.cargarTiposDispositivos();
             break;
@@ -51,57 +55,53 @@ public class VistaManejoDispositivosWeb implements IVistaManejoDispositivos{
         }
     }
     private void cargarTiposDispositivos(){
+        //String cat = request.getParameter("categoria");
         this.controlador.cargarTiposDispositivos();
     }
-
-    @Override
-    public void exitoAltaDispositivo(String mensajeExitoAlta) {
-        destino = "dispositivo_Alta.jsp?msg=" + mensajeExitoAlta;
-        try {
-            response.sendRedirect(destino);
-        } catch (IOException ex) {
-            System.out.println("Error en la redirección");
-        }       }
-
-    @Override
-    public void errorAltaDispositivo(String mensajeErrorAlta) {
-        destino = "dispositivo_Alta.jsp?msg=" + mensajeErrorAlta;
-        try {
-            response.sendRedirect(destino);
-        } catch (IOException ex) {
-            System.out.println("Error en la redirección");
-        }       }
-
-    @Override
-    public void exitoAlBorrarDispositivo(String mensajeExitoBaja) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void errorAlBorrarDispositivo(String mensajeErrorBaja) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+//    private void cargarCategorias(){
+//        this.controlador.cargarCategorias();
+//    }
 
     @Override
     public void mostrarTiposDispositivos(ArrayList<TipoDispositivo> items) {
         try{
-        String componente = Funciones.lista(false, "selTiposDispositivo", items);
+        String componente = Funciones.lista(false, "selTiposDispositivo", items, "changeItemSelected()");
         out.write(componente+ "\n\n");
         }catch(ProgramException ex){
-            errorCargaTiposDispositivos("Error en la carga de tipos de dispositivos.");
+            mensajeError("Error en la carga de tipos de dispositivos.");
         }
     }
-
     @Override
-    public void errorCargaTiposDispositivos(String mensajeError) {
-        destino = "dispositivo_Alta.jsp?msg=" + mensajeError;
+    public void mostrarCategorias(ArrayList<Categoria> items) {
+        try{
+            String componente = Funciones.lista(false, "selCategoria", items, "changeItemSelected()");
+            out.write(componente+"\n\n");
+        }catch(ProgramException ex){
+            mensajeError("Error en la carga de categorias.");
+        }
+    }
+    @Override
+    public void mensajeError(String texto) {
+        destino = "dispositivo_Alta.jsp?msg=" + texto;
         try {
             response.sendRedirect(destino);
         } catch (IOException ex) {
-            System.out.println("Error en la redirección");
-        }   
+            System.out.println(texto);
+        }       
     }
-    
+
+    @Override
+    public void mensajeExito(String texto) {
+        destino = "dispositivo_Alta.jsp?msg=" + texto;
+        try {
+            response.sendRedirect(destino);
+        } catch (IOException ex) {
+            System.out.println(texto);
+        }
+    }
+    /*Comportamiento*/
+
+
     
     
 }

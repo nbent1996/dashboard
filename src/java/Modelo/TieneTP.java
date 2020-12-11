@@ -54,8 +54,12 @@ private TipoDispositivo tipoDispositivo;
         String retorno = "ERROR ToString";
         switch(modo){
             case 1:
+                retorno = tipoDispositivo.toString(3) + " x " + this.cantidadDispositivos;
+            break;
+            case 2:
                 retorno = "Cantidad: " + this.cantidadDispositivos;
             break;
+
         }   
         if(retorno.equals("ERROR ToString")){
             throw new ProgramException(retorno);

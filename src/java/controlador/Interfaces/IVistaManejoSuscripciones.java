@@ -1,14 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controlador.Interfaces;
 
-/**
- *
- * @author Andres
- */
+import Modelo.Moneda;
+import Modelo.Paquete;
+import java.util.ArrayList;
+
 public interface IVistaManejoSuscripciones {
-    
+    public void mensajeError(String texto);
+    public void mensajeExito(String texto);
+    public void generarTablaPaquetes(ArrayList<Paquete> items, Moneda moneda);
 }

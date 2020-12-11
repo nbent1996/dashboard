@@ -57,7 +57,7 @@
 
             <hr>        
 
-<div class="w3-bar-block">
+            <div class="w3-bar-block">
                 <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>&nbsp; Cerrar Menu</a>
                 <a href="index.jsp" class="w3-bar-item w3-button w3-padding"><i class="fa fa-home fa-fw"></i>&nbsp; Inicio</a><br><br>
                 <div class="w3-dropdown-hover w3-mobile">
@@ -140,7 +140,7 @@
                         <input type="text" id="txtbxTelefonoClienteAlta" class="nb-input" name="txtbxTelefonoClienteAlta" required="true"/></div>
                         <div class="borderDiv margin-top20">
                         <div><label for="selTipoCliente">Tipo de cliente</label></div>
-                        <select id="selTipoCliente" class="" name="selTipoCliente">
+                        <select id="selTipoCliente" class="nb-input" name="selTipoCliente">
                                 <option value="Principal" selected="true">Titular</option>
                                 <option value="Secundario">Cuenta secundaria</option>
                             </select>

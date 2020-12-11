@@ -42,11 +42,11 @@ public class ControladorManejoUsuarios implements IControlador<Persona>{
             Operador operador = new Operador(usuarioAltaUsr, usuarioAltaUsr,nombreCompletoAltaUsr, e,p, new TipoUsuario(tipoUsuarioAltaUsr), "Masculino" );
             operador.validar();
             opPersona.guardar(null, operador);
-            vista.exitoAltaUsuario("Usuario dado de alta correctamente");
+            vista.mensajeExito("Usuario dado de alta correctamente");
         } catch (ProgramException ex) { 
-            vista.errorAltaUsuario(ex.getMessage()); 
+            vista.mensajeError(ex.getMessage()); 
         } catch (Exception ex) {        
-            vista.errorAltaUsuario(ex.getMessage()); 
+            vista.mensajeError(ex.getMessage()); 
         }
     }
     public void borrarUsuariosSeleccionados(String[] listaNombresDeUsuarios) {
@@ -65,7 +65,7 @@ public class ControladorManejoUsuarios implements IControlador<Persona>{
                     vista.mostrarMensajeExitoPersonaBorrada("Se eliminó el usuario: " + personaBuscada.getUsuarioSistema());
                     //luego de borrar se debería actualizar la lista que está viendo el usuario, ver como resolver
                 }catch(Exception ex){
-                    vista.mensajeErrorAlBorrarPersona("Ocurrió un error al borrar el usuario");
+                    vista.mensajeError("Ocurrió un error al borrar el usuario");
                 }
   
             }
@@ -83,7 +83,7 @@ public class ControladorManejoUsuarios implements IControlador<Persona>{
         ArrayList<Persona> aux = new ArrayList();
         
         if(nombreUsuarioBaja.trim().equals("") && nombreCompletoUsuarioBaja.trim().equals("")){ //los dos filtros vienen vacíos 
-            vista.errorAlBorrarUsuario("No ha ingresado los datos para buscar");
+            vista.mensajeError("No ha ingresado los datos para buscar");
         }
         else if(nombreCompletoUsuarioBaja.trim().equals("") && nombreUsuarioBaja.trim()!=null){ 
             try {
@@ -92,7 +92,7 @@ public class ControladorManejoUsuarios implements IControlador<Persona>{
             aux = opPersona.buscar(" WHERE OperadoresDashboard.usuarioSistema like '%"+nombreUsuarioBaja+"%' " , "Modelo.Operador");
             vista.pruebaMostrarTablaBorrarUsuario(aux);
             } catch (Exception ex) {
-                vista.errorAlBorrarUsuario("Error al dar de baja el usuario");
+                vista.mensajeError("Error al dar de baja el usuario");
             }
         }
         else if(nombreUsuarioBaja.trim().equals("") && nombreCompletoUsuarioBaja.trim()!=null){ 
@@ -101,7 +101,7 @@ public class ControladorManejoUsuarios implements IControlador<Persona>{
             aux = opPersona.buscar(" WHERE OperadoresDashboard.nombreCompleto ='"+nombreCompletoUsuarioBaja+"' " , "Modelo.Operador");
             vista.pruebaMostrarTablaBorrarUsuario(aux);
             } catch (Exception ex) {
-                vista.errorAlBorrarUsuario("Error al dar de baja el usuario");
+                vista.mensajeError("Error al dar de baja el usuario");
             }
         }
         else if(nombreCompletoUsuarioBaja.trim() != null && nombreUsuarioBaja.trim() != null){ 
@@ -110,7 +110,7 @@ public class ControladorManejoUsuarios implements IControlador<Persona>{
             aux = opPersona.buscar(" WHERE OperadoresDashboard.nombreCompleto ='"+nombreCompletoUsuarioBaja+"' +OperadoresDashboard.usuarioSistema ='"+nombreUsuarioBaja+"' " , "Modelo.Operador");
             vista.pruebaMostrarTablaBorrarUsuario(aux);
             } catch (Exception ex) {
-                vista.errorAlBorrarUsuario("Error al dar de baja el usuario");
+                vista.mensajeError("Error al dar de baja el usuario");
             }
         }
         
@@ -139,7 +139,7 @@ public class ControladorManejoUsuarios implements IControlador<Persona>{
         try {
             vista.mostrarTiposUsuario(opTipoUsuario.obtenerTodos());
         } catch (Exception ex) {
-            vista.errorCargaTiposUsuarios("Error en la carga de tipos de usuario");
+            vista.mensajeError("Error en la carga de tipos de usuario");
         }
     }
 
@@ -147,7 +147,7 @@ public class ControladorManejoUsuarios implements IControlador<Persona>{
         try {
             vista.mostrarPaises(opPais.obtenerTodos());
         } catch (Exception ex) {
-            vista.errorCargaPaises("Error en la carga de paises");
+            vista.mensajeError("Error en la carga de paises");
         }
     }
 

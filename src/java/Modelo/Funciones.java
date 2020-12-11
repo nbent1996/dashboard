@@ -16,8 +16,8 @@ import javax.imageio.ImageIO;
 public class Funciones {
     
     /*HTML*/
-        public static String lista(boolean multiple,String id ,ArrayList opciones) throws ProgramException{
-        String lista = "<select " + " class='comboBox nb-input' onchange='changeItemSelected()' " + (multiple?" multiple ":"") +  " id='" + id+ "'>";
+        public static String lista(boolean multiple,String id ,ArrayList opciones, String onChange) throws ProgramException{
+        String lista = "<select " + " class='comboBox nb-input' onchange='"+onChange+"' " + (multiple?" multiple ":"") +  " id='" + id+ "'>";
         String optionId = "";
         String value ="";
         boolean primero = true;
@@ -38,6 +38,10 @@ public class Funciones {
                 optionId = tD.toString(1);
                 value = tD.toString(3);
             }
+            if(obj instanceof Categoria){
+                Categoria c = (Categoria) obj;
+                optionId = value = c.toString(1);
+            }
             if(primero){
                 lista+= "<option value='" + optionId + "' name= 'itemSeleccionado' >" + value + "</option>";
                 primero = false;
@@ -49,7 +53,34 @@ public class Funciones {
         return lista;
     
     }
-        
+        public static String tablaPaquetesAltaSuscripcion(ArrayList<Paquete> paquetes, Moneda moneda) throws ProgramException{
+            String retorno = "";
+            retorno+="<table id='tblPaquetesSuscripcionAlta'>\n";
+            /*Cabezales*/
+            retorno+="<tr>\n";
+                retorno+="<th>Id Paquete</th>\n";
+                retorno+="<th>Costo bruto</th>\n";
+                retorno+="<th>Dispositivos que contiene</th>\n";
+                retorno+="<th>Seleccionado</th>\n";
+            retorno+="</tr>\n";
+            /*Contenido*/
+            for(Paquete p : paquetes){
+                String listado="<ul>\n";
+                for(TieneTP tp : p.getListaTieneTP()){
+                    listado+="<li>" + tp.toString(1) + "</li>\n";
+                }
+                listado+="</ul>\n";
+                retorno+="<tr>\n";
+                    retorno+="<td>"+p.getIdPaquete()+"</td>\n";
+                    retorno+="<td>"+moneda.getSimbolo()+" "+p.getCostoBruto()+"</td>\n";
+                    retorno+="<td>" +listado+ "</td>\n";
+                    retorno+="<td><input type='checkbox' class='w3-check' value='"+p.getIdPaquete()+"' name='"+p.getIdPaquete()+"'></td>\n";
+                retorno+="</tr>\n";
+            }
+            retorno+="</table>";
+            
+            return retorno;
+        }
     
         
 //        public static String tablaServicio(ArrayList<Pedido> opciones) {

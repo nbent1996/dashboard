@@ -6,8 +6,9 @@ function load(){
     /*EVENTOS*/
     modificarVisibilidad(new Array("#divPrincipal", "#divSecundario"), "ocultar");
     modificarVisibilidad(new Array("#divPrincipal"), "mostrar");
-    
-
+    var f = new Date();
+    var fechaActual = f.getDate() + "-"+ f.getMonth()+ "-" +f.getFullYear();
+    $("#spanFechaInicio").html(fechaActual);
 }
 function modificarVisibilidad(listaElementos, accion){
     switch(accion){
@@ -103,8 +104,23 @@ function validarAltaDispositivo(form){
     var resultado = "";
     
     //Largo caracteres
-    
+        if($("#txtbxNroSerieDispositivoAlta").length>20){
+        resultado+="El número de serie no puede tener más de 20 caracteres";
+        }
     //Campos numericos
+    
+    if(resultado!=""){
+        form.preventDefault();
+        alert(resultado);
+        return false;
+    }
+    return true;
+}
+function validarAltaSuscripcion(form){
+    var resultado="";
+    //Largo caracteres
+    
+    //Campos expresamente numericos
     
     if(resultado!=""){
         form.preventDefault();

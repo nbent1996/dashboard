@@ -9,8 +9,6 @@ import controlador.Interfaces.IVistaManejoClientes;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 public class VistaManejoClientesWeb implements IVistaManejoClientes{
@@ -69,71 +67,48 @@ public class VistaManejoClientesWeb implements IVistaManejoClientes{
         //controlador.alta(p);
     } 
     @Override
-    public void exitoAltaCliente(String mensajeExitoAlta) {
-        destino = "cliente_Alta.jsp?msg=" + mensajeExitoAlta;
-        try{
-            response.sendRedirect(destino);
-        }catch(IOException ex){
-            System.out.println("Error en la redirección");
-        }
-    }
-
-    @Override
-    public void errorAltaCliente(String mensajeErrorAlta) {
-        destino = "cliente_Alta.jsp?msg=" + mensajeErrorAlta;
-        try{
-            response.sendRedirect(destino);
-        }catch(IOException ex){
-            System.out.println("Error en la redirección");
-        }    
-    }
-
-    @Override
-    public void exitoAlBorrarCliente(String mensajeExitoBaja) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void errorAlBorrarCliente(String mensajeErrorBaja) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public void mostrarPaises(ArrayList<Pais> paises) {
         try {
-            String componente = Funciones.lista(false, "lstPaises", paises);
+            String componente = Funciones.lista(false, "lstPaises", paises, "changeItemSelected()");
             out.write(componente + "\n\n");
         } catch (ProgramException ex) {
-            errorCargaPaises("Error al mostrar los paises.");
+            mensajeError("Error al mostrar los paises.");
         }
     }
     @Override
     public void mostrarUsuarioSistema(String usuario) {
-        out.write("<span name='usuarioSistema' class='spanUsuario'>"+usuario+"</span>" + "\n\n");
-    }
-    @Override
-    public void errorCargaPaises(String mensajeError) {
-        destino = "cliente_Alta.jsp?msg=" + mensajeError;
         try{
-            response.sendRedirect(destino);
-        }catch(IOException ex){
-            System.out.println("Error en la redirección");
+        out.write("<span name='usuarioSistema' class='spanUsuario'>"+usuario+"</span>" + "\n\n");
+        }catch(Exception ex){
+            mensajeError("Error al mostrar el usuario de sistema autogenerado.");
         }
     }
+
     @Override
-    public void errorAlGenerarUsuario(String texto) {
+    public void mensajeError(String texto) {
         destino = "cliente_Alta.jsp?msg=" + texto;
         try{
             response.sendRedirect(destino);
         }catch(IOException ex){
-            System.out.println("Error en la redirección");
-        }    
+            System.out.println(texto);
+        }        
     }
+
+    @Override
+    public void mensajeExito(String texto) {
+        destino = "cliente_Alta.jsp?msg=" + texto;
+        try{
+            response.sendRedirect(destino);
+        }catch(IOException ex){
+            System.out.println(texto);
+        }      }
     /*Comportamiento*/
     
     /*Getters y Setters*/
     
     /*Getters y Setters*/
+
+
 
 
 

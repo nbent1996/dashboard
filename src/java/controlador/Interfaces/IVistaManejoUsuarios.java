@@ -5,23 +5,15 @@ import Modelo.Persona;
 import Modelo.TipoUsuario;
 import java.util.ArrayList;
 public interface IVistaManejoUsuarios {
-    
-    public void exitoAltaUsuario(String mensajeExitoAlta);
-    public void errorAltaUsuario(String mensajeErrorAlta);
-    public void exitoAlBorrarUsuario(String mensajeExitoBaja);
-    public void errorAlBorrarUsuario(String mensajeErrorBaja);
+    public void mensajeError(String texto);
+    public void mensajeExito(String texto);
     public void mostrarTiposUsuario(ArrayList<TipoUsuario> tiposUsuarios);
     public void mostrarPaises(ArrayList<Pais> paises);
-    public void errorCargaTiposUsuarios(String mensajeError);
-    public void errorCargaPaises(String mensajeError);
-    public void pruebaMostrarTablaBorrarUsuario(ArrayList<Persona> aux);
-
-    public void mostrarMensajeExitoPersonaBorrada(String exitoAlBorrarUsuario);
-
+ 
+    /*--*/
     public void mensajeErrorAlBorrarPersona(String errorAlBorrarUsuario);
-
+    public void mostrarMensajeExitoPersonaBorrada(String exitoAlBorrarUsuario);
     public void mensajeNoSeleccionasteUsuarios(String noHayUsuariosSeleccionados);
-    
-    
+    public void pruebaMostrarTablaBorrarUsuario(ArrayList<Persona> aux);
     
 }
