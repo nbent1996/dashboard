@@ -53,6 +53,14 @@ public class VistaManejoUsuariosWeb implements IVistaManejoUsuarios{
             case "borrarUsuarios":
                 borrarUsuarios(request, response);
             break;
+            case "buscarUsuariosBaja":
+                mostrarUsuariosbajaConTabla(request, response);
+            break;
+            case "mostrarTablaUsuariosInicio":
+                cargarTablaUsuariosBajaInicio();
+            break;
+            
+
         }
     }
 
@@ -62,6 +70,10 @@ public class VistaManejoUsuariosWeb implements IVistaManejoUsuarios{
 
     private void cargarPaises() {
         controlador.cargarPaises();
+    }
+    
+    private void cargarTablaUsuariosBajaInicio() {
+        controlador.cargarTablaUsuariosBajaInicio();
     }
 
 
@@ -93,23 +105,23 @@ public class VistaManejoUsuariosWeb implements IVistaManejoUsuarios{
 //    }
     
     private void borrarUsuarios(HttpServletRequest request, HttpServletResponse response) {
-        String listaNombresDeUsuarios[] = request.getParameterValues("listaUsuarios");
+        String listaNombresDeUsuarios[] = request.getParameterValues("listaUsuarios"); // lista de nombres de usuarios (PK) (sacados del value de los checkboxes)
         this.request = request;
         this.response = response;
         
         controlador.borrarUsuariosSeleccionados(listaNombresDeUsuarios);
     }
     
-    private void bajaUsuarioConTabla(HttpServletRequest request, HttpServletResponse response) {
+    private void mostrarUsuariosbajaConTabla(HttpServletRequest request, HttpServletResponse response) {
         
-        //uno de los dos viene vacio ya que se puede filtrar por cualquiera de los dos campos
+        //uno de los dos puede viene vacio ya que se puede filtrar por cualquiera de los dos campos
         String nombreUsuarioBaja = request.getParameter("nombreUsuario");
         String nombreCompletoUsuarioBaja = request.getParameter("nombreCompleto");
         
         this.request = request;
         this.response = response;
         
-        controlador.bajaUsuario(nombreUsuarioBaja, nombreCompletoUsuarioBaja);
+        controlador.mostrarUsuariosBajaEnTabla(nombreUsuarioBaja, nombreCompletoUsuarioBaja);
         
     }
 
@@ -133,7 +145,7 @@ public class VistaManejoUsuariosWeb implements IVistaManejoUsuarios{
             componente = Funciones.lista(false, "selTiposUsuarios", tiposUsuarios, "changeItemSelected()");
             out.write(componente + "\n\n");
         } catch (ProgramException ex) {
-            mensajeError("Error al mostrar los tipos de usuario.");
+            mensajeErrorAltaUsuarios("Error al mostrar los tipos de usuario.");
         }
 
     }
@@ -144,11 +156,13 @@ public class VistaManejoUsuariosWeb implements IVistaManejoUsuarios{
            String componente = Funciones.lista(false, "selPaises", paises, "changeItemSelected()");
            out.write(componente + "\n\n");
         } catch (ProgramException ex) {
-            mensajeError("Error al mostrar los paises.");
+            mensajeErrorAltaUsuarios("Error al mostrar los paises.");
         }
     }
+    
+    //mensajes de error en alta de usuarios
     @Override
-    public void mensajeError(String texto) {
+    public void mensajeErrorAltaUsuarios(String texto) {
         destino = "usuario_Alta.jsp?msg=" + texto;
         
         try {
@@ -158,8 +172,9 @@ public class VistaManejoUsuariosWeb implements IVistaManejoUsuarios{
         }
     }
 
+    //mensajes de exito en alta de usuarios
     @Override
-    public void mensajeExito(String texto) {
+    public void mensajeExitoAltaUsuarios(String texto) {
         destino = "usuario_Alta.jsp?msg=" + texto;
         
         try {
@@ -170,34 +185,64 @@ public class VistaManejoUsuariosWeb implements IVistaManejoUsuarios{
     }
     /*--*/
     
+    //muestro tabla de los usuarios encontrados al filtrar, con checkbox para seleccionar y borrar
     @Override
-    public void pruebaMostrarTablaBorrarUsuario(ArrayList<Persona> aux) {
+    public void mostrarTablaConUsuariosABorrar(ArrayList<Persona> listaUsuarios) {
         //Funciones.tablaUsuarios(aux, "btnBajaUsuario");
         
-        String componente = Funciones.tablaUsuarios(aux, "btnBajaUsuario");
+        String componente = Funciones.tablaUsuarios(listaUsuarios, "chkBajaUsuario"); 
         
         out.write(componente + "\n\n");
     }
 
+    //mensaje de exito al borrar las personas seleccionadas de los checkboxes
     @Override
     public void mostrarMensajeExitoPersonaBorrada(String exitoAlBorrarUsuario) {
         out.write(exitoAlBorrarUsuario);
     }
 
-    @Override
-    public void mensajeErrorAlBorrarPersona(String errorAlBorrarUsuario) {
-        out.write(errorAlBorrarUsuario);
-    }
 
+    //mensaje de error de cuando no se seleccionó ningun usuario en los checkboxes
     @Override
     public void mensajeNoSeleccionasteUsuarios(String noHayUsuariosSeleccionados) {
         out.write(noHayUsuariosSeleccionados);
     }
 
+
+
+    //mensaje de error amigable cuando da una excepción el borrado de usuarios
+    @Override
+    public void mensajeErrorBajaUsuarios(String mensajeError) {
+        out.write(mensajeError);
+    }
+
+    
+    //mensajes de error si no encuentra usuarios al dar clic en botón buscar (también lo uso para error en la carga de tabla de inicio)
+    @Override
+    public void mensajeErrorAlBuscarUsuarios(String mensajeError) {
+        destino = "usuario_Baja.jsp?msg=" + mensajeError;
+        
+        try {
+            response.sendRedirect(destino);
+        } catch (IOException ex) {
+            System.out.println(mensajeError);
+        }
+    }
+
+    
 /*Comportamiento*/
+
+    //muestro tabla de todos los usuarios para seleccionar y dar de baja
+    @Override
+    public void mostrarTablaUsuariosBaja(ArrayList<Persona> usuarios) {
+        String componente = Funciones.tablaUsuarios(usuarios, "chkBajaUsuario"); //muestro tabla de los usuarios encontrados con checkbox para seleccionar y borrar
+        
+        out.write(componente + "\n\n");
+    }
 
     
 
+    
     
 
     

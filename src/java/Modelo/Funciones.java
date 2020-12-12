@@ -104,7 +104,7 @@ public class Funciones {
 
     public static String tablaUsuarios(ArrayList<Persona> opciones, String boton) {
         String tabla = "";
-        int x = 0;
+        
         for (Persona obj : opciones) {
             tabla += "<tr><td>" + obj.getUsuarioSistema() + "</td>"
                     + "<td>" + obj.getNombreCompleto()+ "</td>"
@@ -112,7 +112,7 @@ public class Funciones {
                     + "<td><input type='checkbox' value='" + obj.getUsuarioSistema() + "' name='" + obj.getUsuarioSistema() + "' </td></tr>";
                     
                     //+ "<td><input type='button' value='" + boton + "' onclick=\"" + boton + "(" + x + ")\"> </td></tr>";
-            x++;
+            
         }
         return tabla;
     }

@@ -154,7 +154,7 @@
                         
                         <div id="tablaUsuarios" >
                             <table border="1">
-                                <caption>Usuarios encontrados</caption>
+                                <caption>Lista de Usuarios</caption>
                                 <thead>
                                     <tr>
                                         <th>Nombre de usuario</th>
@@ -173,7 +173,20 @@
         </div>
         
                 <script>
+                    
+                    
+                    mostrarTablaUsuarios();
+                    
+                    function mostrarTablaUsuarios(){
+                        $.get("ManejoUsuariosServlet?accion=mostrarTablaUsuariosInicio", function(data){
+                            document.getElementById("tblUsuariosFiltrados").innerHTML=data;
+                        });               
+                    }
+                    
                     function buscarUsuarioBaja(){
+                        
+                        //limpiar campo de span de mensaje de usuario borrado
+                        
                         var nombreUsuario = $("#txtUsuarioBaja").val();
                         var nombreCompleto = $("#txtNombreCompletoBaja").val();
                         

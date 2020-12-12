@@ -271,7 +271,7 @@ public OpPersona(String usuarioSistema){
 
     @Override
     public ArrayList<Persona> obtenerTodos() throws Exception, SQLException {
-        throw new UnsupportedOperationException("No implementado.");
+        return buscar(null, "Modelo.Operador");
     }
 
     @Override
