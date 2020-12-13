@@ -37,11 +37,7 @@ public class VistaLoginWeb implements IVistaLogin{
     
     /*Comportamiento*/
     public void procesarRequest(HttpServletRequest request, HttpServletResponse response){
-        
-        loginUsuarios(request, response);
-            //controlador.login(request.getParameter("txtbxUsuario"), request.getParameter("txtbxPassword"));
-            
-       
+        loginUsuarios(request, response);            
     }
     /*Comportamiento*/
 

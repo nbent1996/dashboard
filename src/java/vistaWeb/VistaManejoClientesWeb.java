@@ -72,7 +72,7 @@ public class VistaManejoClientesWeb implements IVistaManejoClientes{
             String componente = Funciones.lista(false, "lstPaises", paises, "changeItemSelected()");
             out.write(componente + "\n\n");
         } catch (ProgramException ex) {
-            mensajeError("Error al mostrar los paises.");
+            mensajeError("cliente_Alta.jsp","Error al mostrar los paises.");
         }
     }
     @Override
@@ -80,13 +80,13 @@ public class VistaManejoClientesWeb implements IVistaManejoClientes{
         try{
         out.write("<span name='usuarioSistema' class='spanUsuario'>"+usuario+"</span>" + "\n\n");
         }catch(Exception ex){
-            mensajeError("Error al mostrar el usuario de sistema autogenerado.");
+            mensajeError("cliente_Alta.jsp","Error al mostrar el usuario de sistema autogenerado.");
         }
     }
 
     @Override
-    public void mensajeError(String texto) {
-        destino = "cliente_Alta.jsp?msg=" + texto;
+    public void mensajeError(String nombreJSP, String texto) {
+        destino = nombreJSP+"?msg=" + texto;
         try{
             response.sendRedirect(destino);
         }catch(IOException ex){
@@ -95,13 +95,14 @@ public class VistaManejoClientesWeb implements IVistaManejoClientes{
     }
 
     @Override
-    public void mensajeExito(String texto) {
-        destino = "cliente_Alta.jsp?msg=" + texto;
+    public void mensajeExito(String nombreJSP, String texto) {
+        destino = nombreJSP+"?msg=" + texto;
         try{
             response.sendRedirect(destino);
         }catch(IOException ex){
             System.out.println(texto);
-        }      }
+        }      
+    }
     /*Comportamiento*/
     
     /*Getters y Setters*/

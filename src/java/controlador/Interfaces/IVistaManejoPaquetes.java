@@ -1,14 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controlador.Interfaces;
 
-/**
- *
- * @author Andres
- */
+import Modelo.TipoDispositivo;
+import java.util.ArrayList;
+
 public interface IVistaManejoPaquetes {
-    
+    public void mensajeError(String nombreJSP, String texto);
+    public void mensajeExito(String nombreJSP, String texto);
+    public void generarTablaTiposDispositivos(ArrayList<TipoDispositivo> items);
 }

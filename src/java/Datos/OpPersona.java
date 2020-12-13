@@ -271,7 +271,7 @@ public OpPersona(String usuarioSistema){
 
     @Override
     public ArrayList<Persona> obtenerTodos() throws Exception, SQLException {
-        throw new UnsupportedOperationException("No implementado.");
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override

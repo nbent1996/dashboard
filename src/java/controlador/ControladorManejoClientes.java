@@ -32,24 +32,24 @@ public class ControladorManejoClientes {
                 Principal principal = (Principal) p;
                 principal.validar();
                 opPersona.guardar(null, principal);
-                vista.mensajeExito("Cliente del tipo titular dado de alta correctamente.");
+                vista.mensajeExito("cliente_Alta.jsp","Cliente del tipo titular dado de alta correctamente.");
             } else if (p instanceof Secundario) {
                 Secundario secundario = (Secundario) p;
                 secundario.validar();
                 opPersona.guardar(null, secundario);
-                vista.mensajeExito("Cliente del tipo cuenta secundaria dado de alta correctamente.");
+                vista.mensajeExito("cliente_Alta.jsp","Cliente del tipo cuenta secundaria dado de alta correctamente.");
             }
         } catch (ProgramException ex) {
-            vista.mensajeError(ex.getMessage());
+            vista.mensajeError("cliente_Alta.jsp",ex.getMessage());
         } catch (Exception ex) {
-            vista.mensajeError(ex.getMessage());
+            vista.mensajeError("cliente_Alta.jsp", ex.getMessage());
         }
     }
   public void cargarPaises() {
         try {
             vista.mostrarPaises(opPais.obtenerTodos());
         } catch (Exception ex) {
-            vista.mensajeError("Error en la carga de paises");
+            vista.mensajeError("cliente_Alta.jsp", "Error en la carga de paises");
         }
     }
   public void generarUsuarioSistema(){
@@ -57,7 +57,7 @@ public class ControladorManejoClientes {
             String usr = opPersona.getNuevoUsuarioSistema();
             vista.mostrarUsuarioSistema(usr);
         } catch (Exception ex) {
-            vista.mensajeError("Error al generar usuario de sistema del cliente.");
+            vista.mensajeError("cliente_Alta.jsp", "Error al generar usuario de sistema del cliente.");
         }
   }
   

@@ -23,7 +23,7 @@
            mostrarTablaPaquetes();
            function mostrarTablaPaquetes(){
                $.get("ManejoSuscripcionesServlet?accion=generarTablaPaquetes", function(data){
-                  document.getElementById("selPaquetesSuscripcionAlta").innerHTML=data; 
+                  document.getElementById("spanPaquetesSuscripcionAlta").innerHTML=data; 
                });
                
            }
@@ -132,7 +132,7 @@
                             </select>
                         </div>
                         <div><label for="txtbxUsuarioClienteSuscripcionAlta">Cliente titular (Nro de cliente):</label><span id="spanContenidoClienteAsociadoB"><span id="spanClienteAsociadoB">No seleccionado</span><input type="button" class="margin-left20 submitSearch" value="Buscar Cliente"/></span></div>
-                        <div class="margin-top20"><div><h5 class="nb-title">Paquetes asignados a la suscripci&oacute;n</h5></div><span id="selPaquetesSuscripcionAlta" name="generarTablaPaquetes"></div>
+                        <div class="margin-top20"><div><h5 class="nb-title">Paquetes asignados a la suscripci&oacute;n</h5></div><span id="spanPaquetesSuscripcionAlta" name="generarTablaPaquetes"></div>
                         <hr>        
                          <div class="botoneraAlta">
                         <input type="submit" class="submitAlta" value="confirmar">

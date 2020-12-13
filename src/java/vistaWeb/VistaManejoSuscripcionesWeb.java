@@ -61,27 +61,27 @@ public class VistaManejoSuscripcionesWeb implements IVistaManejoSuscripciones{
             String componente = Funciones.tablaPaquetesAltaSuscripcion(items, moneda);
             out.write(componente + "\n\n");
         }catch(ProgramException ex){
-            mensajeError("Error al generar la tabla de Paquetes de dispositivos.");
+            mensajeError("suscripcion_Alta.jsp","Error al generar la tabla de Paquetes de dispositivos.");
         }
     }
- @Override
-    public void mensajeError(String texto) {
-        destino = "suscripcion_Alta.jsp?msg=" + texto;
+    @Override
+    public void mensajeError(String nombreJSP, String texto) {
+        destino = nombreJSP+"?msg=" + texto;
         try{
             response.sendRedirect(destino);
         }catch(IOException ex){
             System.out.println(texto);
-        }     
+        }        
     }
 
     @Override
-    public void mensajeExito(String texto) {
-        destino = "suscripcion_Alta.jsp?msg=" + texto;
+    public void mensajeExito(String nombreJSP, String texto) {
+        destino = nombreJSP+"?msg=" + texto;
         try{
             response.sendRedirect(destino);
         }catch(IOException ex){
             System.out.println(texto);
-        }     
+        }      
     }
     
     /*Comportamiento*/

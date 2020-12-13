@@ -68,7 +68,7 @@ public class VistaManejoDispositivosWeb implements IVistaManejoDispositivos{
         String componente = Funciones.lista(false, "selTiposDispositivo", items, "changeItemSelected()");
         out.write(componente+ "\n\n");
         }catch(ProgramException ex){
-            mensajeError("Error en la carga de tipos de dispositivos.");
+            mensajeError("dispositivo_Alta.jsp","Error en la carga de tipos de dispositivos.");
         }
     }
     @Override
@@ -77,27 +77,27 @@ public class VistaManejoDispositivosWeb implements IVistaManejoDispositivos{
             String componente = Funciones.lista(false, "selCategoria", items, "changeItemSelected()");
             out.write(componente+"\n\n");
         }catch(ProgramException ex){
-            mensajeError("Error en la carga de categorias.");
+            mensajeError("dispositivo_Alta.jsp","Error en la carga de categorias.");
         }
     }
     @Override
-    public void mensajeError(String texto) {
-        destino = "dispositivo_Alta.jsp?msg=" + texto;
-        try {
+    public void mensajeError(String nombreJSP, String texto) {
+        destino = nombreJSP+"?msg=" + texto;
+        try{
             response.sendRedirect(destino);
-        } catch (IOException ex) {
+        }catch(IOException ex){
             System.out.println(texto);
-        }       
+        }        
     }
 
     @Override
-    public void mensajeExito(String texto) {
-        destino = "dispositivo_Alta.jsp?msg=" + texto;
-        try {
+    public void mensajeExito(String nombreJSP, String texto) {
+        destino = nombreJSP+"?msg=" + texto;
+        try{
             response.sendRedirect(destino);
-        } catch (IOException ex) {
+        }catch(IOException ex){
             System.out.println(texto);
-        }
+        }      
     }
     /*Comportamiento*/
 

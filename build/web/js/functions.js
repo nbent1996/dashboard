@@ -1,4 +1,6 @@
 $(document).ready(load);
+var modal = $("#divMensajeEmergente");
+var spanModal = $(".cerrarMensajeEmergente")[0];
 function load(){
     /*EVENTOS*/
     $("#selTipoCliente").on("change", changeTipoCliente);
@@ -9,6 +11,8 @@ function load(){
     var f = new Date();
     var fechaActual = f.getDate() + "-"+ f.getMonth()+ "-" +f.getFullYear();
     $("#spanFechaInicio").html(fechaActual);
+    //spanModal.click(ocultarModal);
+    window.click(windowClickEvent);
 }
 function modificarVisibilidad(listaElementos, accion){
     switch(accion){
@@ -46,7 +50,17 @@ function changeTipoCliente(){
         break;
     }
 }
-
+function invocarModal(texto){
+    $("#pMensaje").html("");
+    modal.style.display="block";
+    $("#pMensaje").html(texto);
+}
+function ocultarModal(){
+    modal.style.display="none";
+}
+function windowClickEvent(){
+    modal.style.display="none";
+}
 /*Funciones de Validación*/
 function validarAltaUsuario(form){
     var resultado="";  
@@ -62,7 +76,7 @@ function validarAltaUsuario(form){
     
     if(resultado!=""){
         form.preventDefault();
-        alert(resultado);
+        invocarModal(resultado);
         return false;
     }
     return true;
@@ -78,10 +92,10 @@ function validarAltaCliente(form){
         resultado+="El nombre completo no puede tener más de 50 caracteres.\n";
     }
     if($("#txtbxEmailClienteAlta").length>45){
-        resultado+="El email no puede tener más de 45 caracteres.";
+        resultado+="El email no puede tener más de 45 caracteres.\n";
     }
     if($("#txtbxTelefonoClienteAlta").length>50){
-        resultado+="El teléfono no puede tener más de 50 caracteres";
+        resultado+="El teléfono no puede tener más de 50 caracteres.\n";
     }
     //Campos numéricos
     if(isNaN($("#txtbxNroDocumentoClienteAlta").val())){
@@ -93,9 +107,9 @@ function validarAltaCliente(form){
     if($("#selTipoCliente").val()=="Secundario" && isNaN($("#txtbxNroDocPrincipalClienteAlta").val())){
         resultado+="El número de documento de la cuenta principal debe ser numérico.\n";
     }
-    if(resultado!=""){
+    if(resultado!==""){
+        invocarModal(resultado);
         form.preventDefault();
-        alert(resultado);
         return false;
     }
     return true;
@@ -111,7 +125,7 @@ function validarAltaDispositivo(form){
     
     if(resultado!=""){
         form.preventDefault();
-        alert(resultado);
+        invocarModal(resultado);
         return false;
     }
     return true;
@@ -124,7 +138,7 @@ function validarAltaSuscripcion(form){
     
     if(resultado!=""){
         form.preventDefault();
-        alert(resultado);
+        invocarModal(resultado);
         return false;
     }
     return true;

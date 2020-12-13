@@ -31,7 +31,7 @@ public class ControladorManejoSuscripciones {
         try{
             vista.generarTablaPaquetes(opPaquete.obtenerTodos(), new Moneda("UYU","Pesos Uruguayos","$")); //MONEDA HARDCODEADA, OBTENERLA DESDE LA IDENTIFICACION TRIBUTARIA DE LA SESSION
         }catch(Exception ex){
-            vista.mensajeError("Error al generar la tabla de paquetes de dispositivos.");
+            vista.mensajeError("suscripcion_Alta.jsp","Error al generar la tabla de paquetes de dispositivos.");
         }
     }
     /*Comportamiento*/

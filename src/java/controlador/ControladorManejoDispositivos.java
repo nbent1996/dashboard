@@ -33,14 +33,14 @@ public class ControladorManejoDispositivos implements IControlador<Dispositivo>{
                 //vista.mostrarTiposDispositivos(opTipoDispositivo.buscar(" WHERE nombreCategoria='"+categoria+"' ",null));
                 vista.mostrarTiposDispositivos(opTipoDispositivo.obtenerTodos());
             }catch(Exception ex){
-                vista.mensajeError("Error en la carga de tipos de dispositivos.");
+                vista.mensajeError("dispositivo_Alta.jsp","Error en la carga de tipos de dispositivos.");
             }
         }
         public void cargarCategorias(){
             try{
                 vista.mostrarCategorias(opCategoria.obtenerTodos());
             }catch(Exception ex){
-                vista.mensajeError("Error en la carga de categorias.");
+                vista.mensajeError("dispositivo_Alta.jsp","Error en la carga de categorias.");
             }
         }
     /*Comportamiento*/

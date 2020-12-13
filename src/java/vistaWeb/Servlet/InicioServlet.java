@@ -1,24 +1,18 @@
-
 package vistaWeb.Servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import vistaWeb.VistaManejoPaquetesWeb;
-
-
-@WebServlet(name = "ManejoPaquetesServlet", urlPatterns = {"/ManejoPaquetesServlet"})
-public class ManejoPaquetesServlet extends HttpServlet {
-
-    
+import vistaWeb.VistaInicioWeb;
+@WebServlet(name = "InicioServlet", urlPatterns = {"/InicioServlet"})
+public class InicioServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        VistaManejoPaquetesWeb vista = new VistaManejoPaquetesWeb(request, response);
-        vista.procesarRequest(request, response);
+        VistaInicioWeb vista = new VistaInicioWeb(request, response);
+        vista.procesarRequest(request,response);
     }
 
    
@@ -33,6 +27,5 @@ public class ManejoPaquetesServlet extends HttpServlet {
         processRequest(request, response);
     }
 
-    
 
 }

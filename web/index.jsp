@@ -1,5 +1,8 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%
+    String msg = request.getParameter("msg");
+%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -21,9 +24,12 @@
     <body class="w3-light-grey">
         
         <script>
-            
-            <!--   funciones de llamadas a los servlets   -->
-
+            invocarServlet();
+            function invocarServlet(){
+                $.get("InicioServlet?accion=inicio", function(data){
+                    alert("hola");
+                });
+            }
         </script>
         
         

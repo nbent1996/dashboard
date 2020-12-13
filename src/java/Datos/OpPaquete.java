@@ -1,5 +1,6 @@
 package Datos;
 
+import Modelo.Categoria;
 import Modelo.Empresa;
 import Modelo.LogSistema;
 import Modelo.Paquete;
@@ -118,8 +119,13 @@ public OpPaquete(String usuarioSistema){
     @Override
     public ArrayList<Paquete> buscar(String filtro, String extras) throws Exception, SQLException {
         ArrayList<Paquete> lista = new ArrayList<>();
-        int idPaquete = -1, idTipoDispositivo=-1, cantidadDispositivos;
+        int idPaquete = -1, cantidadDispositivos;
         float costoBruto =-1;
+        //TipoDispositivo
+        int idTipoDispositivo=-1;
+        String modelo = "", nombre="", tipoComunicacion="";
+        Categoria cat = null;
+        
         Empresa empresaAsociada = null;
         ArrayList<TieneTP> listaTieneTP = new ArrayList<>();
         String sql = "SELECT idPaquete, costoBruto, identificacionTributaria from Paquetes ";
@@ -138,13 +144,17 @@ public OpPaquete(String usuarioSistema){
                 idPaquete = rs.getInt("idPaquete");
                 costoBruto = rs.getFloat("costoBruto");
                 empresaAsociada = new Empresa(rs.getString("identificacionTributaria"));
-                ResultSet rsTieneTP = database.consultar("SELECT idPaquete, idTipoDispositivo, cantidadDispositivos from TieneTP WHERE idPaquete = '"+idPaquete+"' AND eliminado='N' ");
+                ResultSet rsTieneTP = database.consultar("SELECT TieneTP.idPaquete, TieneTP.idTipoDispositivo, TieneTP.cantidadDispositivos, TiposDispositivos.modelo, TiposDispositivos.nombre, TiposDispositivos.tipoComunicacion, TiposDispositivos.nombreCategoria from TieneTP, TiposDispositivos WHERE TieneTP.idTipoDispositivo = TiposDispositivos.idTipoDispositivo AND idPaquete = '"+idPaquete+"' AND TiposDispositivos.eliminado='N' AND TieneTP.eliminado='N'");
                 listaTieneTP = new ArrayList<>();
                 /*Cargando lista de tiene TP al paquete de turno en el ciclo*/
                 while(rsTieneTP.next()){
-                    cantidadDispositivos = rsTieneTP.getInt("cantidadDispositivos");
-                    idTipoDispositivo = rsTieneTP.getInt("idTipoDispositivo");
-                    listaTieneTP.add(new TieneTP(cantidadDispositivos,new TipoDispositivo(idTipoDispositivo)));
+                    cantidadDispositivos = rsTieneTP.getInt("TieneTP.cantidadDispositivos");
+                    idTipoDispositivo = rsTieneTP.getInt("TieneTP.idTipoDispositivo");
+                    modelo = rsTieneTP.getString("TiposDispositivos.modelo");
+                    nombre = rsTieneTP.getString("TiposDispositivos.nombre");
+                    tipoComunicacion = rsTieneTP.getString("TiposDispositivos.tipoComunicacion");
+                    cat = new Categoria(rsTieneTP.getString("TiposDispositivos.nombreCategoria"));
+                    listaTieneTP.add(new TieneTP(cantidadDispositivos,new TipoDispositivo(idTipoDispositivo,modelo, nombre,tipoComunicacion, cat)));
                 }
                 rsTieneTP.close();
                 /*Cargando lista de tiene TP al paquete de turno en el ciclo*/

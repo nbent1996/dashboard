@@ -1,14 +1,31 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controlador;
 
-/**
- *
- * @author Andres
- */
+import Datos.OpPaquete;
+import Datos.OpTipoDispositivo;
+import controlador.Interfaces.IVistaManejoPaquetes;
+
 public class ControladorManejoPaquetes {
+    /*Estado*/
+    private IVistaManejoPaquetes vista;
+    private OpPaquete opPaquete;
+    private OpTipoDispositivo opTipoDispositivo;
+    /*Estado*/
     
+    /*Constructores*/
+    public ControladorManejoPaquetes(IVistaManejoPaquetes vista){
+        this.vista = vista;
+        this.opPaquete = new OpPaquete("bentancor");
+        this.opTipoDispositivo = new OpTipoDispositivo("bentancor");
+    }
+    /*Constructores*/
+    
+    /*Comportamiento*/
+    public void generarTablaTiposDispositivos(){
+        try{
+            vista.generarTablaTiposDispositivos(opTipoDispositivo.obtenerTodos());
+        }catch(Exception ex){
+            vista.mensajeError("paquete_Alta.jsp", "Error al generar la tabla de tipos de dispositivos.\n");
+        }
+    }
+    /*Comportamiento*/
 }

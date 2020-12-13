@@ -22,8 +22,14 @@
         <script type="text/javascript" src="js/functions.js"></script>
     </head>
     <body class="w3-light-grey">
+        
+        
         <script>      
+            
+            
             mostrarCombos();  
+            
+            
             function mostrarCombos(){
                 $.get("ManejoUsuariosServlet?accion=comboTipos", function(data){
                     document.getElementById("spanTiposUsuarios").innerHTML=data;
@@ -32,7 +38,11 @@
                     document.getElementById("spanPaises").innerHTML=data;
                 });
             }
+            
+            
         </script>
+        
+        
         <div class="w3-bar w3-top w3-black w3-large" style="z-index:4">
             <button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey" onclick="w3_open();"><i class="fa fa-bars"></i> &nbsp;Menu</button>
             <span class="w3-bar-item w3-right">LogoEmpresa</span>

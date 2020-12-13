@@ -21,6 +21,15 @@ public class Operador extends Persona implements IObject<Operador> {
         this.genero = genero;
         adaptarCampos();
     }
+    public Operador(String usuarioSistema, String nombreCompleto, Empresa empresaAsociada, Pais paisResidencia, TipoUsuario tipoUsuario, String genero) {
+        this.usuarioSistema = usuarioSistema;
+        this.nombreCompleto = nombreCompleto;
+        this.empresaAsociada = empresaAsociada;
+        this.paisResidencia = paisResidencia;
+        this.tipoUsuario = tipoUsuario;
+        this.genero = genero;
+        adaptarCampos();
+    }
     public Operador(String usuarioSistema){
         this.usuarioSistema = usuarioSistema;
     }

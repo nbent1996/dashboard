@@ -55,7 +55,7 @@ public class Funciones {
     }
         public static String tablaPaquetesAltaSuscripcion(ArrayList<Paquete> paquetes, Moneda moneda) throws ProgramException{
             String retorno = "";
-            retorno+="<table id='tblPaquetesSuscripcionAlta'>\n";
+            retorno+="<table id='tblPaquetesSuscripcionAlta' class='w3-table-all'>\n";
             /*Cabezales*/
             retorno+="<tr>\n";
                 retorno+="<th>Id Paquete</th>\n";
@@ -81,30 +81,40 @@ public class Funciones {
             
             return retorno;
         }
-    
-        
-//        public static String tablaServicio(ArrayList<Pedido> opciones) {
-//        //falta escribir quien es el gestor
-//        String tabla = "";
-//        String nombre = "";
-//        for (Pedido obj : opciones) {
-//            if (obj.getGestor() != null) {
-//                nombre = obj.getGestor().getNombreCompleto();
-//            } else {
-//                nombre = "";
-//            }
-//            tabla += "<tr><td>" + obj.getProducto().getNombre() + "</td><td>" + obj.getCantidad() + "</td><td>"
-//                    + obj.getProducto().getPrecioUnitario() + "</td><td>"
-//                    + obj.precioTotal() + "</td><td>" + obj.getEstado() + "</td><td>" + nombre + "</td></tr>";
-//        }
-//        return tabla;
-//    }
+        public static String tablaTiposDispositivosConCantidad(ArrayList<TipoDispositivo> items) throws ProgramException{
+            String retorno = "";
+            retorno+="<table id='tblTiposDispositivosPaqueteAlta' class='w3-table-all'>\n";
+            /*Cabezales*/
+            retorno+="<tr>\n";
+                retorno+="<th>Id Tipo Dispositivo</th>\n";
+                retorno+="<th>Modelo</th>\n";
+                retorno+="<th>Nombre</th>\n";
+                retorno+="<th>Tipo de comunicaci&oacute;n</th>\n";
+                retorno+="<th>Categoria</th>\n";
+                retorno+="<th>Cantidad</th>\n";
+                retorno+="<th>Seleccionado</th>\n";
+            retorno+="</tr>\n";
+            /*Contenido*/
+            for(TipoDispositivo td : items){
+                retorno+="<tr>\n";
+                    retorno+="<td>"+td.getIdTipoDispositivo()+"</td>\n";
+                    retorno+="<td>"+td.getModelo()+"</td>\n";
+                    retorno+="<td>"+td.getNombre()+"</td>\n";
+                    retorno+="<td>"+td.getTipoComunicacion()+"</td>\n";
+                    retorno+="<td>"+td.getCategoria().getNombreCategoria()+"</td>\n";
+                    retorno+="<td><input type='number' class='nb-table-input nb-inputCantidadTabla' id='txtbxCant"+td.getIdTipoDispositivo()+"' name='txtbxCant"+td.getIdTipoDispositivo()+"'></td>\n";
+                    retorno+="<td><input type='checkbox' class='w3-check' value='"+td.getIdTipoDispositivo()+"' name='"+td.getIdTipoDispositivo()+"'></td>\n";
+                retorno+="</tr>\n";
+            }
+            retorno+="</table>";
+            return retorno;
+        }
         
         
 
     public static String tablaUsuarios(ArrayList<Persona> opciones, String boton) {
         String tabla = "";
-        int x = 0;
+        
         for (Persona obj : opciones) {
             tabla += "<tr><td>" + obj.getUsuarioSistema() + "</td>"
                     + "<td>" + obj.getNombreCompleto()+ "</td>"
@@ -112,7 +122,7 @@ public class Funciones {
                     + "<td><input type='checkbox' value='" + obj.getUsuarioSistema() + "' name='" + obj.getUsuarioSistema() + "' </td></tr>";
                     
                     //+ "<td><input type='button' value='" + boton + "' onclick=\"" + boton + "(" + x + ")\"> </td></tr>";
-            x++;
+            
         }
         return tabla;
     }
