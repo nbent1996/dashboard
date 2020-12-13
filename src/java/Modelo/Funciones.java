@@ -119,7 +119,7 @@ public class Funciones {
             tabla += "<tr><td>" + obj.getUsuarioSistema() + "</td>"
                     + "<td>" + obj.getNombreCompleto()+ "</td>"
                     
-                    + "<td><input type='checkbox' value='" + obj.getUsuarioSistema() + "' name='" + obj.getUsuarioSistema() + "' </td></tr>";
+                    + "<td><input type='checkbox' class='w3-check' value='" + obj.getUsuarioSistema() + "' name='" + obj.getUsuarioSistema() + "' </td></tr>";
                     
                     //+ "<td><input type='button' value='" + boton + "' onclick=\"" + boton + "(" + x + ")\"> </td></tr>";
             

@@ -116,27 +116,75 @@ public class ControladorManejoUsuarios implements IControlador<Persona>{
             }
         }
         else if(nombreCompletoUsuarioBaja.trim() != null && nombreUsuarioBaja.trim() != null){ 
+            vista.mensajeError("usuario_Baja.jsp", "No ha ingresado los datos para buscar"); //fijarse porque crea otra vista
+        }else{
             try {
-            //filtro por los dos campos
-            listaUsuarios = opPersona.buscar(" WHERE OperadoresDashboard.nombreCompleto ='"+nombreCompletoUsuarioBaja+"' +OperadoresDashboard.usuarioSistema ='"+nombreUsuarioBaja+"' " , "Modelo.Operador");
-            vista.mostrarTablaConUsuariosABorrar(listaUsuarios);
+
+                listaUsuarios = opPersona.buscar(" WHERE OperadoresDashboard.usuarioSistema like '%" + nombreUsuarioBaja + "%' and Personas.nombreCompleto like '%"+nombreCompletoUsuarioBaja+"%' ", "Modelo.Operador");
+                vista.mostrarTablaConUsuariosABorrar(listaUsuarios);
+                    return;
+//                if(!nombreUsuarioBaja.trim().isEmpty()){
+//                    listaUsuarios = opPersona.buscar(" WHERE OperadoresDashboard.usuarioSistema like '%" + nombreUsuarioBaja + "%' ", "Modelo.Operador");
+//                    vista.mostrarTablaConUsuariosABorrar(listaUsuarios);
+//                    return;
+//                }
+//                if(!nombreCompletoUsuarioBaja.trim().isEmpty()){
+//                    listaUsuarios = opPersona.buscar(" WHERE OperadoresDashboard.nombreCompleto like '%" + nombreCompletoUsuarioBaja + "%' ", "Modelo.Operador");
+//                    vista.mostrarTablaConUsuariosABorrar(listaUsuarios);
+//                    return;
+//                }
+                
+                
+                
+//                    if(listaUsuarios.isEmpty()){//no encontró por nombre de usuario, busca por nombre completo
+//                        listaUsuarios = opPersona.buscar(" WHERE OperadoresDashboard.nombreCompleto like '%" + nombreCompletoUsuarioBaja + "%' ", "Modelo.Operador");
+//                    }
+                //vista.mostrarTablaConUsuariosABorrar(listaUsuarios);
             } catch (Exception ex) {
-                vista.mensajeError("usuario_Alta.jsp","Error al dar de baja el usuario");
+                vista.mensajeError("usuario_Baja.jsp","Error al dar de baja el usuario");
+                System.out.println(ex.getMessage());
             }
         }
         
         
         
-//        try {
-//            //Persona persona = opPersona.buscar(" WHERE usuarioSistema='"+usuarioBajaUsr+"' " , "").get(0);
-//            aux = opPersona.buscar(" WHERE OperadoresDashboard.usuarioSistema='"+nombreUsuarioBaja+"' " , "Modelo.Operador");
-//            vista.pruebaMostrarTablaBorrarUsuario(aux);
-//            //opPersona.borrar(persona);
-//            //vista.exitoAlBorrarUsuario("Usuario dado de baja correctamente");
-//            
-//        } catch (Exception ex) {//error al insertar
-//            vista.errorAlBorrarUsuario("Error al dar de baja el usuario");
+        
+        
+        
+        
+        
+        
+        
+//        else if(nombreCompletoUsuarioBaja.trim().equals("") && nombreUsuarioBaja.trim()!=null){ 
+//            try {
+//            //filtro por nombre de usuario y no por nombre completo
+//            //aux = opPersona.buscar(" WHERE OperadoresDashboard.usuarioSistema ='"+nombreUsuarioBaja+"' " , "Modelo.Operador");
+//            listaUsuarios = opPersona.buscar(" WHERE OperadoresDashboard.usuarioSistema like '%"+nombreUsuarioBaja+"%' " , "Modelo.Operador");
+//            vista.mostrarTablaConUsuariosABorrar(listaUsuarios);
+//            } catch (Exception ex) {
+//                vista.mensajeErrorAlBuscarUsuarios("Error al dar de baja el usuario");
+//            }
 //        }
+//        else if(nombreUsuarioBaja.trim().equals("") && nombreCompletoUsuarioBaja.trim()!=null){ 
+//            try {
+//            //filtro por nombre completo y no por nombre de usuario
+//            listaUsuarios = opPersona.buscar(" WHERE OperadoresDashboard.nombreCompleto ='"+nombreCompletoUsuarioBaja+"' " , "Modelo.Operador");
+//            vista.mostrarTablaConUsuariosABorrar(listaUsuarios);
+//            } catch (Exception ex) {
+//                vista.mensajeErrorAlBuscarUsuarios("Error al dar de baja el usuario");
+//            }
+//        }
+//        else if(nombreCompletoUsuarioBaja.trim() != null && nombreUsuarioBaja.trim() != null){ 
+//            try {
+//            //filtro por los dos campos
+//            listaUsuarios = opPersona.buscar(" WHERE OperadoresDashboard.nombreCompleto ='"+nombreCompletoUsuarioBaja+"' +OperadoresDashboard.usuarioSistema ='"+nombreUsuarioBaja+"' " , "Modelo.Operador");
+//            vista.mostrarTablaConUsuariosABorrar(listaUsuarios);
+//            } catch (Exception ex) {
+//                vista.mensajeErrorAlBuscarUsuarios("Error al dar de baja el usuario");
+//            }
+//        }
+        
+
 
     }
     

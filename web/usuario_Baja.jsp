@@ -153,7 +153,7 @@
             </div>
                         
                         <div id="tablaUsuarios" >
-                            <table border="1">
+                            <table class="w3-table-all">
                                 <caption>Lista de Usuarios</caption>
                                 <thead>
                                     <tr>
