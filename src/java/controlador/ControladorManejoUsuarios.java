@@ -122,7 +122,7 @@ public class ControladorManejoUsuarios implements IControlador<Persona>{
 
     public void cargarTablaUsuariosBajaInicio() {
         try {
-            vista.mostrarTablaUsuariosBaja(opPersona.obtenerTodos());
+            vista.mostrarTablaUsuariosBaja(opPersona.buscar(null, "Modelo.Operador"));
         } catch (Exception ex) {
             vista.mensajeError("usuario_Alta.jsp","Error en la carga de usuarios"); //reuso el método de error del clic del botón buscar
         }
