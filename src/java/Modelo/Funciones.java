@@ -17,7 +17,7 @@ public class Funciones {
     
     /*HTML*/
         public static String lista(boolean multiple,String id ,ArrayList opciones, String onChange) throws ProgramException{
-        String lista = "<select " + " class='comboBox nb-input' onchange='"+onChange+"' " + (multiple?" multiple ":"") +  " id='" + id+ "'>";
+        String lista = "<select " + " class='comboBox nb-input' onchange='"+onChange+"' name='"+id+"' " + (multiple?" multiple ":"") +  " id='" + id+ "'>";
         String optionId = "";
         String value ="";
         boolean primero = true;
@@ -27,7 +27,7 @@ public class Funciones {
             if(obj instanceof Pais){
                 Pais p = (Pais) obj;
                 optionId = p.getCodigo();
-                value = p.getNombre();
+                value = p.getNombre();        
             }
             if(obj instanceof TipoUsuario){
                 TipoUsuario t = (TipoUsuario) obj;
@@ -41,6 +41,11 @@ public class Funciones {
             if(obj instanceof Categoria){
                 Categoria c = (Categoria) obj;
                 optionId = value = c.toString(1);
+            }
+            if(obj instanceof TipoDocumento){
+                TipoDocumento tipoD = (TipoDocumento) obj;
+                optionId = tipoD.toString(1); 
+                value= tipoD.toString(2);
             }
             if(primero){
                 lista+= "<option value='" + optionId + "' name= 'itemSeleccionado' >" + value + "</option>";

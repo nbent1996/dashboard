@@ -3,10 +3,14 @@ package controlador;
 import Datos.OpEmpresa;
 import Datos.OpPais;
 import Datos.OpPersona;
+import Datos.OpTipoDocumento;
+import Modelo.Empresa;
+import Modelo.Pais;
 import Modelo.Persona;
 import Modelo.Principal;
 import Modelo.ProgramException;
 import Modelo.Secundario;
+import Modelo.TipoDocumento;
 import controlador.Interfaces.IVistaManejoClientes;
 
 public class ControladorManejoClientes {
@@ -15,6 +19,7 @@ public class ControladorManejoClientes {
     private OpPersona opPersona;
     private OpEmpresa opEmpresa;
     private OpPais opPais;
+    private OpTipoDocumento opTipoDocumento;
     /*Estado*/
     /*Constructores*/
     public ControladorManejoClientes(IVistaManejoClientes vista){
@@ -22,23 +27,31 @@ public class ControladorManejoClientes {
         this.opPersona = new OpPersona("bentancor");
         this.opEmpresa = new OpEmpresa("bentancor");
         this.opPais = new OpPais("bentancor");
+        this.opTipoDocumento = new OpTipoDocumento("bentancor");
     }
     /*Constructores*/
     
     /*Comportamiento*/
-    public void alta(Persona p) {
-        try {
-            if (p instanceof Principal) {
-                Principal principal = (Principal) p;
-                principal.validar();
-                opPersona.guardar(null, principal);
-                vista.mensajeExito("cliente_Alta.jsp","Cliente del tipo titular dado de alta correctamente.");
-            } else if (p instanceof Secundario) {
-                Secundario secundario = (Secundario) p;
-                secundario.validar();
-                opPersona.guardar(null, secundario);
-                vista.mensajeExito("cliente_Alta.jsp","Cliente del tipo cuenta secundaria dado de alta correctamente.");
-            }
+    public void altaPrincipal(String nroDocumento, String nombreCompleto, String codPais, String email, String telefono, boolean servicioActivo, String tipoDocumento){
+        try{
+        Empresa e = new Empresa("526283747346"); //EMPRESA HARDCODEADA
+        Principal p = new Principal("", nombreCompleto, e, new Pais(codPais), -1,  email, nroDocumento, servicioActivo, new TipoDocumento(tipoDocumento), telefono);
+        p.validar();
+        opPersona.guardar(null, p);
+        vista.mensajeExito("cliente_Alta.jsp","Cliente del tipo titular dado de alta correctamente.");
+        } catch (ProgramException ex) {
+            vista.mensajeError("cliente_Alta.jsp",ex.getMessage());
+        } catch (Exception ex) {
+            vista.mensajeError("cliente_Alta.jsp", ex.getMessage());
+        }
+    }
+    public void altaSecundario(String nombreCompleto, String codPais, String email, String telefono, String nroDocumento, String nroDocumentoPrincipal ){
+        try{
+        Empresa e = new Empresa("526283747346"); //EMPRESA HARDCODEADA
+        Secundario s = new Secundario("", nombreCompleto, e, new Pais(codPais), -1, email, new Principal(nroDocumentoPrincipal), telefono);
+        s.validar();
+        opPersona.guardar(null, s);
+        vista.mensajeExito("cliente_Alta.jsp", "Cliente del tipo cuenta secundaria dado de alta correctamente.");
         } catch (ProgramException ex) {
             vista.mensajeError("cliente_Alta.jsp",ex.getMessage());
         } catch (Exception ex) {
@@ -52,6 +65,13 @@ public class ControladorManejoClientes {
             vista.mensajeError("cliente_Alta.jsp", "Error en la carga de paises");
         }
     }
+  public void cargarTiposDocumento(){
+        try {
+            vista.mostrarTiposDocumento(opTipoDocumento.obtenerTodos());
+        } catch (Exception ex) {
+            vista.mensajeError("cliente_Alta.jsp", "Error en la carga de tipos de documento.");
+        }
+  }
   public void generarUsuarioSistema(){
         try {
             String usr = opPersona.getNuevoUsuarioSistema();

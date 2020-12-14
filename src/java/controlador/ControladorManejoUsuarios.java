@@ -90,104 +90,14 @@ public class ControladorManejoUsuarios implements IControlador<Persona>{
     
     
     public void mostrarUsuariosBajaEnTabla(String nombreUsuarioBaja, String nombreCompletoUsuarioBaja) {
-        //ACÁ SIMPLIFICAR LOS LOS IF HACIENDO BUEN FILTRO DE SQL EN EL BUSCAR QUE INCLUYA LIKE
         ArrayList<Persona> listaUsuarios = new ArrayList();
-        
-        if(nombreUsuarioBaja.trim().equals("") && nombreCompletoUsuarioBaja.trim().equals("")){ //los dos filtros vienen vacíos 
-            vista.mensajeError("usuario_Alta.jsp","No ha ingresado los datos para buscar");
-        }
-        else if(nombreCompletoUsuarioBaja.trim().equals("") && nombreUsuarioBaja.trim()!=null){ 
-            try {
-            //filtro por nombre de usuario y no por nombre completo
-            //aux = opPersona.buscar(" WHERE OperadoresDashboard.usuarioSistema ='"+nombreUsuarioBaja+"' " , "Modelo.Operador");
-            listaUsuarios = opPersona.buscar(" WHERE OperadoresDashboard.usuarioSistema like '%"+nombreUsuarioBaja+"%' " , "Modelo.Operador");
+            try{
+            listaUsuarios = opPersona.buscar(" WHERE OperadoresDashboard.usuarioSistema like '%"+nombreUsuarioBaja+"%' AND Personas.nombreCompleto LIKE '%"+nombreCompletoUsuarioBaja+"%' " , "Modelo.Operador");
             vista.mostrarTablaConUsuariosABorrar(listaUsuarios);
-            } catch (Exception ex) {
-                vista.mensajeError("usuario_Alta.jsp","Error al dar de baja el usuario");
-            }
-        }
-        else if(nombreUsuarioBaja.trim().equals("") && nombreCompletoUsuarioBaja.trim()!=null){ 
-            try {
-            //filtro por nombre completo y no por nombre de usuario
-            listaUsuarios = opPersona.buscar(" WHERE OperadoresDashboard.nombreCompleto ='"+nombreCompletoUsuarioBaja+"' " , "Modelo.Operador");
-            vista.mostrarTablaConUsuariosABorrar(listaUsuarios);
-            } catch (Exception ex) {
-                vista.mensajeError("usuario_Alta.jsp","Error al dar de baja el usuario");
-            }
-        }
-        else if(nombreCompletoUsuarioBaja.trim() != null && nombreUsuarioBaja.trim() != null){ 
-            vista.mensajeError("usuario_Baja.jsp", "No ha ingresado los datos para buscar"); //fijarse porque crea otra vista
-        }else{
-            try {
-
-                listaUsuarios = opPersona.buscar(" WHERE OperadoresDashboard.usuarioSistema like '%" + nombreUsuarioBaja + "%' and Personas.nombreCompleto like '%"+nombreCompletoUsuarioBaja+"%' ", "Modelo.Operador");
-                vista.mostrarTablaConUsuariosABorrar(listaUsuarios);
-                    return;
-//                if(!nombreUsuarioBaja.trim().isEmpty()){
-//                    listaUsuarios = opPersona.buscar(" WHERE OperadoresDashboard.usuarioSistema like '%" + nombreUsuarioBaja + "%' ", "Modelo.Operador");
-//                    vista.mostrarTablaConUsuariosABorrar(listaUsuarios);
-//                    return;
-//                }
-//                if(!nombreCompletoUsuarioBaja.trim().isEmpty()){
-//                    listaUsuarios = opPersona.buscar(" WHERE OperadoresDashboard.nombreCompleto like '%" + nombreCompletoUsuarioBaja + "%' ", "Modelo.Operador");
-//                    vista.mostrarTablaConUsuariosABorrar(listaUsuarios);
-//                    return;
-//                }
-                
-                
-                
-//                    if(listaUsuarios.isEmpty()){//no encontró por nombre de usuario, busca por nombre completo
-//                        listaUsuarios = opPersona.buscar(" WHERE OperadoresDashboard.nombreCompleto like '%" + nombreCompletoUsuarioBaja + "%' ", "Modelo.Operador");
-//                    }
-                //vista.mostrarTablaConUsuariosABorrar(listaUsuarios);
             } catch (Exception ex) {
                 vista.mensajeError("usuario_Baja.jsp","Error al dar de baja el usuario");
-                System.out.println(ex.getMessage());
             }
         }
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-//        else if(nombreCompletoUsuarioBaja.trim().equals("") && nombreUsuarioBaja.trim()!=null){ 
-//            try {
-//            //filtro por nombre de usuario y no por nombre completo
-//            //aux = opPersona.buscar(" WHERE OperadoresDashboard.usuarioSistema ='"+nombreUsuarioBaja+"' " , "Modelo.Operador");
-//            listaUsuarios = opPersona.buscar(" WHERE OperadoresDashboard.usuarioSistema like '%"+nombreUsuarioBaja+"%' " , "Modelo.Operador");
-//            vista.mostrarTablaConUsuariosABorrar(listaUsuarios);
-//            } catch (Exception ex) {
-//                vista.mensajeErrorAlBuscarUsuarios("Error al dar de baja el usuario");
-//            }
-//        }
-//        else if(nombreUsuarioBaja.trim().equals("") && nombreCompletoUsuarioBaja.trim()!=null){ 
-//            try {
-//            //filtro por nombre completo y no por nombre de usuario
-//            listaUsuarios = opPersona.buscar(" WHERE OperadoresDashboard.nombreCompleto ='"+nombreCompletoUsuarioBaja+"' " , "Modelo.Operador");
-//            vista.mostrarTablaConUsuariosABorrar(listaUsuarios);
-//            } catch (Exception ex) {
-//                vista.mensajeErrorAlBuscarUsuarios("Error al dar de baja el usuario");
-//            }
-//        }
-//        else if(nombreCompletoUsuarioBaja.trim() != null && nombreUsuarioBaja.trim() != null){ 
-//            try {
-//            //filtro por los dos campos
-//            listaUsuarios = opPersona.buscar(" WHERE OperadoresDashboard.nombreCompleto ='"+nombreCompletoUsuarioBaja+"' +OperadoresDashboard.usuarioSistema ='"+nombreUsuarioBaja+"' " , "Modelo.Operador");
-//            vista.mostrarTablaConUsuariosABorrar(listaUsuarios);
-//            } catch (Exception ex) {
-//                vista.mensajeErrorAlBuscarUsuarios("Error al dar de baja el usuario");
-//            }
-//        }
-        
-
-
-    }
-    
     public void modificarUsuario(String usuarioModUsr, String nombreCompletoModUsr, String nombreEmpresaModUsr, String nombrePaisModUsr, String passwordModUsr) {
         
         //CONTINUAR ACÁ, EVALUAR SITUACION YA QUE ALGUNOS DE LOS PARAMETROS PUEDEN SER NULOS, VER DONDE EVALUAR DICHA CONDICION

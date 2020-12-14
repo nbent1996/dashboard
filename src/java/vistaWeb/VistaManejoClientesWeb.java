@@ -4,6 +4,7 @@ import Modelo.Funciones;
 import Modelo.Pais;
 import Modelo.Persona;
 import Modelo.ProgramException;
+import Modelo.TipoDocumento;
 import controlador.ControladorManejoClientes;
 import controlador.Interfaces.IVistaManejoClientes;
 import java.io.IOException;
@@ -35,9 +36,12 @@ public class VistaManejoClientesWeb implements IVistaManejoClientes{
             case "comboPaises":
                 this.cargarPaises();
             break;
-            case "generarUsuario":
-                this.generarUsuarioSistema();
+            case "comboTiposDocumento":
+                this.cargarTiposDocumento();
             break;
+//            case "generarUsuario":
+//                this.generarUsuarioSistema();
+//            break;
             case "formAltaCliente":
                 this.altaCliente(request, response);
             break;
@@ -53,18 +57,33 @@ public class VistaManejoClientesWeb implements IVistaManejoClientes{
     private void cargarPaises(){
         this.controlador.cargarPaises();
     }
+    private void cargarTiposDocumento(){
+        this.controlador.cargarTiposDocumento();
+    }
     private void generarUsuarioSistema(){
         this.controlador.generarUsuarioSistema();
     }
     private void altaCliente(HttpServletRequest request, HttpServletResponse response){
-        Persona p;
-        String usuarioSistema = request.getParameter("usuarioSistema");
-        String nroDocumento = request.getParameter("txtbxNroDocumentoClienteAlta");
-        String nombreCompleto = request.getParameter("txtbxNombreCompletoClienteAlta");
-        
         this.request = request;
         this.response = response;
-        //controlador.alta(p);
+        String tipoCliente = request.getParameter("selTipoCliente");
+        String nroDocumento = request.getParameter("txtbxNroDocumentoClienteAlta");
+        String nombreCompleto = request.getParameter("txtbxNombreCompletoClienteAlta");
+        String codPais = request.getParameter("lstPaises");
+        String email = request.getParameter("txtbxEmailClienteAlta");
+        String telefono = request.getParameter("txtbxTelefonoClienteAlta");
+        String tipoDocumento = request.getParameter("lstTiposDocumento");
+        if(tipoCliente.equals("Principal")){
+            String chkServActivo = request.getParameter("chkServicioActivo");
+            boolean chkActivo = false;
+            if(!chkServActivo.equals("")){
+                chkActivo = true;
+            }
+            controlador.altaPrincipal(nroDocumento, nombreCompleto, codPais, email, telefono ,chkActivo, tipoDocumento);
+        }else if (tipoCliente.equals("Secundario")){
+            String nroDocumentoPrincipal = request.getParameter("txtbxNroDocPrincipalClienteAlta");
+            controlador.altaSecundario(nombreCompleto, codPais, email, telefono, nroDocumento, nroDocumentoPrincipal);
+        }
     } 
     @Override
     public void mostrarPaises(ArrayList<Pais> paises) {
@@ -76,9 +95,19 @@ public class VistaManejoClientesWeb implements IVistaManejoClientes{
         }
     }
     @Override
+    public void mostrarTiposDocumento(ArrayList<TipoDocumento> tiposDocumento) {
+        try{
+            String componente = Funciones.lista(false, "lstTiposDocumento", tiposDocumento, "changeItemSelected()");
+            out.write(componente + "\n\n");
+        }catch(ProgramException ex){
+            mensajeError("cliente_Alta.jsp","Error al mostrar los tipos de documento.");
+        }
+    }
+    @Override
     public void mostrarUsuarioSistema(String usuario) {
         try{
-        out.write("<span name='usuarioSistema' class='spanUsuario'>"+usuario+"</span>" + "\n\n");
+        out.write("<input type='text' id='txtbxUsuarioSistemaClienteAlta' class='nb-input' disabled='true' value='"+usuario+"' name='txtbxUsuarioSistemaClienteAlta' />"+"\n\n");
+        //METODO EN DESUSO
         }catch(Exception ex){
             mensajeError("cliente_Alta.jsp","Error al mostrar el usuario de sistema autogenerado.");
         }
@@ -108,6 +137,8 @@ public class VistaManejoClientesWeb implements IVistaManejoClientes{
     /*Getters y Setters*/
     
     /*Getters y Setters*/
+
+
 
 
 

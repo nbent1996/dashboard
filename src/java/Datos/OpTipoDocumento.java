@@ -60,9 +60,9 @@ public class OpTipoDocumento implements IOperaciones<TipoDocumento, String> {
         String sql = "SELECT * FROM TiposDocumentos";
         if(filtro!=null){
             sql+=filtro;
-            sql+=" and eliminado='N' order by nombreDocumento asc ";
+            sql+=" and eliminado='N' order by indice asc";
         }else{
-            sql+=" where eliminado='N' order by nombreDocumento asc ";
+            sql+=" where eliminado='N' order by indice asc";
         }
         ArrayList<String> listaSQL = new ArrayList<>();
         listaSQL.add(sql);

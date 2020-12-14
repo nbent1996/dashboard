@@ -59,7 +59,7 @@ public TipoDocumento(String codDocumento){
                 retorno = this.codDocumento;
                 break;
             case 2:
-                retorno = this.nombreDocumento + "(" + this.codDocumento + ")";
+                retorno = this.nombreDocumento + " (" + this.codDocumento + ")";
                 break;
         }
         if (retorno.equals("ERROR ToString")) {

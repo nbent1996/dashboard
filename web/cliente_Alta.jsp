@@ -21,18 +21,24 @@
     
     <body class="w3-light-grey">
         <script>
-               mostrarPaises();
+            mostrarTiposDocumento();
+               function mostrarTiposDocumento(){
+                $.get("ManejoClientesServlet?accion=comboTiposDocumento", function(data){
+                    document.getElementById("selTiposDocumentoClienteAlta").innerHTML=data;
+                });
+            }
+            mostrarPaises();
                function mostrarPaises(){
                 $.get("ManejoClientesServlet?accion=comboPaises", function(data){
                     document.getElementById("selPaisesResidenciaClienteAlta").innerHTML=data;
                 });
             }
-                mostrarUsuarioSistema();
+            /*    mostrarUsuarioSistema();
                 function mostrarUsuarioSistema(){
                 $.get("ManejoClientesServlet?accion=generarUsuario", function(data){
                     document.getElementById("lblUsuarioSistema").innerHTML=data;
                 });
-            }
+            }*/
         </script>
 
         <div class="w3-bar w3-top w3-black w3-large" style="z-index:4">
@@ -122,10 +128,13 @@
                 <h5><b><i class="fa fa-address-card"></i> Alta de Clientes</b></h5>
             </header>
                 <div class="form">
-                    <form id="formAltaCliente" name="formAltaCliente"  action="ManejoClientesServlet" method="post">
-                        <div><label>Usuario Sistema: <span id="lblUsuarioSistema" name="generarUsuario"></span></div>
+                    <form id="formAltaCliente" name="formAltaCliente" onsubmit="return validarAltaCliente(this)"  action="ManejoClientesServlet" method="post">
+                        <!--<div><label>Usuario Sistema: <span id="lblUsuarioSistema" class='spanUsuario' name="generarUsuario"></span></div>-->
                         <div class="margin-top20"><label for="txtbxNroDocumentoClienteAlta">N&uacute;mero de Documento:</label>
                         <input type="text" id="txtbxNroDocumentoClienteAlta" class="nb-input" name="txtbxNroDocumentoClienteAlta" required="true"/></div>
+                        
+                        <div class="margin-top20"><label for="selTiposDocumentoClienteAlta">Tipo de documento:</label>
+                        <span id="selTiposDocumentoClienteAlta" name="comboTiposDocumento"></span></div>
                         
                         <div class="margin-top20"><label for="txtbxNombreCompletoClienteAlta">Nombre completo:</label>
                         <input type="text" id="txtbxNombreCompletoClienteAlta" class="nb-input" name="txtbxNombreCompletoClienteAlta" required="true"/></div>
@@ -143,7 +152,7 @@
                         <select id="selTipoCliente" class="nb-input" name="selTipoCliente">
                                 <option value="Principal" selected="true">Titular</option>
                                 <option value="Secundario">Cuenta secundaria</option>
-                            </select>
+                        </select>
                                 <div id="divPrincipal">
                                     <input type="checkbox" class="w3-check" id="chkServicioActivoClienteAlta" name="chkServicioActivo">
                                     <label for="chkServicioActivoClienteAlta"> Servicio activo</label>
@@ -155,19 +164,25 @@
                         </div>
                         <hr>        
                         <div class="botoneraAlta">
-                        <input type="submit" onsubmit="return validarAltaCliente(this)" class="submitAlta" value="confirmar">
+                        <input type="submit" class="submitAlta" value="confirmar">
                         <input type="reset" class="limpiarCampos" value="Limpiar campos">    
                         </div>
                         
                         <span id="mensajeAlta"></span>
                         <input type="hidden" name="accion" value="formAltaCliente">
-                        <%if (msg != null) {%>
                         <div id="divMensajeEmergente" class="modal">
                             <div class="modal-content">
-                            <span class="cerrarMensajeEmergente">&times;</span>
-                            <p id="pMensaje" class="message"><%=msg%></p>         
+                                <a class="cerrarMensajeEmergente" onclick="ocultarModal()">&times;</a>
+                            <p id="pMensaje" class="message"></p>         
                             </div>
                         </div>
+                        <%if (msg != null) {%>
+                        <div id="divMensajeEmergenteBackEnd" class="modal">
+                            <div class="modal-content">
+                                <a class="cerrarMensajeEmergenteBackEnd">&times;</a>
+                                <p id="pMensajeBackEnd" class="message"><%=msg%></p>         
+                            </div>
+                        </div>    
                         <%}%>
                     </form>
                 </div>

@@ -62,9 +62,9 @@ public OpPais(String usuarioSistema){
         String sql = "SELECT * FROM Paises ";
         if(filtro !=null){
             sql+=filtro;
-            sql+=" and eliminado='N' order by nombre asc";
+            sql+=" and eliminado='N' order by indice asc";
         }else{
-            sql+=" where eliminado='N' order by nombre asc";
+            sql+=" where eliminado='N' order by indice asc";
         }
         ArrayList<String>listaSQL = new ArrayList<>();
         listaSQL.add(sql);

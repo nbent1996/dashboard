@@ -144,9 +144,13 @@ select{
     position:relative;
     left:54px;
 }
-.spanUsuario{
+#selTiposDocumentoClienteAlta{
     position:relative;
-    left:91px;
+    left:62px;
+}
+#txtbxUsuarioSistemaClienteAlta{
+    position:relative;
+    left:87px;
 }
 /*cliente_Alta.jsp*/
 /*dispositivo_Alta.jsp*/
