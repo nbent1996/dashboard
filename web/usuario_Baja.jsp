@@ -25,17 +25,7 @@
     </head>
     <body class="w3-light-grey">
         
-        
-        <script>
-            
-            
-            
-            
-            
-        </script>
-        
-        
-        
+
         <div class="w3-bar w3-top w3-black w3-large" style="z-index:4">
             <button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey" onclick="w3_open();"><i class="fa fa-bars"></i> &nbsp;Menu</button>
             <span class="w3-bar-item w3-right">LogoEmpresa</span>
@@ -118,27 +108,24 @@
         
         
         <!-- !PAGE CONTENT! -->
-        <div class="w3-main" style="margin-left:300px;margin-top:43px;">
+        <div class="ABMContainer">
 
             <!-- Header -->
-            <header class="w3-container" style="padding-top:22px">
+            <header class="w3-container estilosHeader">
                 <h5><b><i class="fa fa-users"></i> Baja de Usuario</b></h5>
             </header>
 
 
-            <div class="ABMpage">
+            
                 <div class="form">
 
-                    <!--<form name="formBajaUsuario" action="ManejoUsuariosServlet" method="post" onsubmit="return validarCamposBajaUsr(this)">-->
+                    <!--LAS BÚSQUEDAS SE HACEN POR AJAX CON BUTTONS, NO SE USAN FORMS-->
                         <span>Ingrese los filtros deseados por los que desea buscar</span>
+                        <br>
                         <input type="text" id="txtUsuarioBaja" name="usuarioBaja" placeholder="Nombre de usuario"/>
-                        <input type="text" id="txtNombreCompletoBaja" name="nombreCompletoBaja" placeholder="Nombre y/o apellido"/>
-                        
-                        <!--<input type="hidden" name="accion" value="formBaja">-->
-                        
-
-                        <!--<input type="submit" class="submitBaja" value="confirmar">-->
-                        
+                        <br>
+                        <input type="text" id="txtNombreCompletoBaja" name="nombreCompletoBaja" placeholder="Nombre y/o apellido"/>                        
+                        <br>
                         <input type="button" onclick="buscarUsuarioBaja()" id="btnBuscarUsuarioBaja" value="Buscar"><br><br>
 
                         <%if (msg != null) {%>
@@ -148,32 +135,54 @@
                         <%}%>
 
 
-                    <!--</form>-->
-                </div>
-            </div>
-                        
                         <div id="tablaUsuarios" >
                             <table class="w3-table-all">
-                                <caption>Lista de Usuarios</caption>
+                                <caption><h4>Lista de Usuarios</h4></caption>
                                 <thead>
                                     <tr>
                                         <th>Nombre de usuario</th>
-                                        <th>Nombre completo</th>      
+                                        <th>Nombre completo</th>
+                                        <th>Seleccionar</th>
                                     </tr>
                                 </thead>
                                 <tbody id="tblUsuariosFiltrados">
                                 </tbody>
                             </table><br><br>
-                            <input type="button" onclick="borrarUsuariosSeleccionados()" id="btnborrarUsuariosSeleccionados" value="Borrar"><br><br>
-                            <span id="spMensajeBorradoUsuarios"></span>
+                            <input type="button" onclick="borrarUsuariosSeleccionados();abrirModal()" id="btnborrarUsuariosSeleccionados" value="Borrar"><br><br>
+                            
+                            <!--<span id="spMensajeBorradoUsuarios"></span>-->
+                            
+                            <div id="idModal" class="w3-modal">
+                                <div class="w3-modal-content w3-animate-zoom" >
+                                    <div class="w3-container">
+                                        <span onclick="document.getElementById('idModal').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+                                        <br>
+                                        <span id="spMensajeBorradoUsuarios"></span>
+                                        <br>
+                                        <br>
+                                    </div>
+                                </div>
+                            </div>
                             
                         </div>
+                        
+                        
+                        
+                        
+                    <!--</form>-->
+                </div>
+            
+                        
+                        
 
 
         </div>
         
                 <script>
                     
+                    function abrirModal(){
+                        document.getElementById('idModal').style.display='block';
+                    }
                     
                     mostrarTablaUsuarios();
                     
@@ -187,11 +196,14 @@
                         
                         //limpiar campo de span de mensaje de usuario borrado
                         
+                        
                         var nombreUsuario = $("#txtUsuarioBaja").val();
                         var nombreCompleto = $("#txtNombreCompletoBaja").val();
                         
                         $.get("ManejoUsuariosServlet?accion=buscarUsuariosBaja&nombreUsuario=" + nombreUsuario + "&nombreCompleto=" + nombreCompleto, function (data) {
                             document.getElementById("tblUsuariosFiltrados").innerHTML = data;
+                            
+                            document.getElementById("spMensajeBorradoUsuarios").innerHTML = ""; //MÉTODO PARA LIMPIAR CAMPO
                         });
                         
                     }

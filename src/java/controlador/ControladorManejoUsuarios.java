@@ -53,10 +53,7 @@ public class ControladorManejoUsuarios implements IControlador<Persona>{
             vista.mensajeError("usuario_Alta.jsp",ex.getMessage()); 
         }
     }
-    public void borrarUsuariosSeleccionados(String[] listaNombresDeUsuarios) {
-        //ACÁ ME LLEGA LA LISTA DE NOMBRES DE USUARIO QUE SE SELECCIONARON EN LOS CHECKBOXES
-        //ELIMINAR TODOS LOS USUARIOS QUE TENGAN ESOS NOMBRES (EL NOMBRE DE USUARIO ES PK)
-        //VER QUE DEVOLVER AL USUARIO, YA QUE SE DEBERÍA REFRESCAR LA TABLA
+    public void borrarUsuariosSeleccionados(String[] listaNombresDeUsuarios) { //ACÁ ME LLEGA LA LISTA DE NOMBRES DE USUARIO QUE SE SELECCIONARON EN LOS CHECKBOXES
         
         String nombresEliminados = "";
         
