@@ -293,9 +293,9 @@ public OpPersona(String usuarioSistema){
                     sqlA = "SELECT Personas.usuarioSistema, Personas.nombreCompleto, Personas.codigo, Personas.identificacionTributaria, OperadoresDashboard.nombre, OperadoresDashboard.genero from Personas, OperadoresDashboard ";
                     if (filtro != null) {
                         sqlA += filtro;
-                        sqlA += " AND Personas.usuarioSistema = OperadoresDashboard.usuarioSistema AND Personas.eliminado='N' AND OperadoresDashboard.eliminado='N' ";
+                        sqlA += " AND Personas.usuarioSistema = OperadoresDashboard.usuarioSistema AND Personas.eliminado='N' AND OperadoresDashboard.usuarioSistema!='loginUser' AND OperadoresDashboard.eliminado='N' ";
                     } else {
-                        sqlA += " WHERE Personas.usuarioSistema = OperadoresDashboard.usuarioSistema  AND Personas.eliminado='N' AND OperadoresDashboard.eliminado='N' ";
+                        sqlA += " WHERE Personas.usuarioSistema = OperadoresDashboard.usuarioSistema  AND Personas.eliminado='N' AND OperadoresDashboard.usuarioSistema!='loginUser' AND OperadoresDashboard.eliminado='N' ";
                     }
                     rs = database.consultar(sqlA);
                     while(rs.next()){

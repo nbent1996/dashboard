@@ -1,6 +1,4 @@
 $(document).ready(load);
-var modal = $("#divMensajeEmergente");
-//var enlaceModal = $(".cerrarMensajeEmergente")[0];
 function load(){
     /*EVENTOS*/
     $("#selTipoCliente").on("change", changeTipoCliente);
@@ -11,8 +9,15 @@ function load(){
     var f = new Date();
     var fechaActual = f.getDate() + "-"+ f.getMonth()+ "-" +f.getFullYear();
     $("#spanFechaInicio").html(fechaActual);
-    //enlaceModal.click(ocultarModal);
-    $(window).click(windowClickEvent);
+    $("#btnBorrarUsuariosSeleccionados").click(eventoBorrarUsuarioBaja);
+}
+function eventoBorrarUsuarioBaja(){
+    borrarUsuariosSeleccionados();
+    abrirModal();
+}
+function abrirModal(){
+    $("#divModal").css("display","block");
+    $("#mySidebar").css("z-index", "0");
 }
 function modificarVisibilidad(listaElementos, accion){
     switch(accion){
@@ -49,17 +54,6 @@ function changeTipoCliente(){
             modificarVisibilidad(new Array("#divSecundario"), "mostrar");
         break;
     }
-}
-function invocarModal(texto){
-    $("#pMensaje").html("");
-    $("#pMensaje").html(texto);
-    modal.css("display", "block");
-}
-function ocultarModal(){
-    modal.css("display", "none");
-}
-function windowClickEvent(){
-    modal.css("display", "none");
 }
 /*Funciones de Validación*/
 function validarAltaUsuario(form){

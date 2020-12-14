@@ -1,14 +1,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-
-
 <%
     String msg = request.getParameter("msg");
 %>
-
-
-
-
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -24,28 +18,46 @@
         <script type="text/javascript" src="js/functions.js"></script>
     </head>
     <body class="w3-light-grey">
-        
-        
-        <script>
-            
-            
-            
-            
-            
-        </script>
-        
-        
-        
-        <div class="w3-bar w3-top w3-black w3-large" style="z-index:4">
+            <script>
+                    mostrarTablaUsuarios();                    
+                    function mostrarTablaUsuarios(){
+                        $.get("ManejoUsuariosServlet?accion=mostrarTablaUsuariosInicio", function(data){
+                            document.getElementById("tblUsuariosFiltrados").innerHTML=data;
+                        });               
+                    }
+                    function buscarUsuarioBaja(){
+                        //limpiar campo de span de mensaje de usuario borrado    
+                        var nombreUsuario = $("#txtbxUsuarioBaja").val();
+                        var nombreCompleto = $("#txtbxNombreCompletoBaja").val();
+                        $.get("ManejoUsuariosServlet?accion=buscarUsuariosBaja&nombreUsuario=" + nombreUsuario + "&nombreCompleto=" + nombreCompleto, function (data) {
+                            document.getElementById("tblUsuariosFiltrados").innerHTML = data;
+                            document.getElementById("spanMensajeBorradoUsuarios").innerHTML = ""; //MÉTODO PARA LIMPIAR CAMPO
+                        });
+                    }
+                    function borrarUsuariosSeleccionados(){
+                        var listaUsuariosSeleccionados = new Array();
+                        $("input:checkbox:checked").each(   
+                            function() {
+                                listaUsuariosSeleccionados.push($(this).val());
+                                //alert("El checkbox con valor " + $(this).val() + " está seleccionado");
+                            }
+                        );
+                            $.get("ManejoUsuariosServlet?accion=borrarUsuarios&listaUsuarios=" + listaUsuariosSeleccionados, function (data) {
+                            document.getElementById("spanMensajeBorradoUsuarios").innerHTML = data;
+                        });                        
+                    }
+                </script>
+                
+        <div class="w3-bar w3-top w3-black w3-large" id="divBarraSuperior">
             <button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey" onclick="w3_open();"><i class="fa fa-bars"></i> &nbsp;Menu</button>
             <span class="w3-bar-item w3-right">LogoEmpresa</span>
         </div>
         
         <!-- Sidebar/menu -->
-        <nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidebar"><br>
+        <nav class="w3-sidebar w3-collapse w3-white w3-animate-left" id="mySidebar"><br>
             <div class="w3-container w3-row">
                 <div class="w3-col s4">
-                    <img src="resources/avatar3.png" class="w3-circle w3-margin-right" style="width:46px">
+                    <img src="resources/avatar3.png" class="w3-circle w3-margin-right" id="imgPerfil">
                 </div>
                 <div class="w3-col s8 w3-bar">
                     <span>Bienvenido, <strong>NombrePersonaEmpresa</strong></span><br> <!-- CAMBIAR POR NOMBRE DE PERSONA DE LA EMPRESA -->
@@ -75,7 +87,6 @@
                         <a href="cliente_Alta.jsp" class="w3-bar-item w3-button w3-mobile">Alta de Cliente</a>
                         <a href="cliente_Baja.jsp" class="w3-bar-item w3-button w3-mobile">Baja de Cliente</a>
                         <a href="cliente_Modificacion.jsp" class="w3-bar-item w3-button w3-mobile">Modificación de Cliente</a>
-                        <a href="cliente_cuentasSecundarias.jsp" class="w3-bar-item w3-button w3-mobile">Asignar cuentas secundarias</a>
                     </div>
                 </div>
                 <div class="w3-dropdown-hover w3-mobile">
@@ -112,110 +123,57 @@
         
         
         <!-- Overlay effect when opening sidebar on small screens -->
-        <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
-        
-        
-        
-        
+        <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" title="close side menu" id="myOverlay"></div>
+  
         <!-- !PAGE CONTENT! -->
-        <div class="w3-main" style="margin-left:300px;margin-top:43px;">
-
+        <div class="ABMContainer">
             <!-- Header -->
-            <header class="w3-container" style="padding-top:22px">
+            <header class="w3-container estilosHeader">
                 <h5><b><i class="fa fa-users"></i> Baja de Usuario</b></h5>
             </header>
-
-
-            <div class="ABMpage">
                 <div class="form">
-
-                    <!--<form name="formBajaUsuario" action="ManejoUsuariosServlet" method="post" onsubmit="return validarCamposBajaUsr(this)">-->
+                    <!--LAS BÚSQUEDAS SE HACEN POR AJAX CON BUTTONS, NO SE USAN FORMS-->
                         <span>Ingrese los filtros deseados por los que desea buscar</span>
-                        <input type="text" id="txtUsuarioBaja" name="usuarioBaja" placeholder="Nombre de usuario"/>
-                        <input type="text" id="txtNombreCompletoBaja" name="nombreCompletoBaja" placeholder="Nombre y/o apellido"/>
-                        
-                        <!--<input type="hidden" name="accion" value="formBaja">-->
-                        
-
-                        <!--<input type="submit" class="submitBaja" value="confirmar">-->
-                        
+                        <br>
+                        <input type="text" id="txtbxUsuarioBaja" name="usuarioBaja" placeholder="Nombre de usuario"/>
+                        <br>
+                        <input type="text" id="txtbxNombreCompletoBaja" name="nombreCompletoBaja" placeholder="Nombre y/o apellido"/>                        
+                        <br>
                         <input type="button" onclick="buscarUsuarioBaja()" id="btnBuscarUsuarioBaja" value="Buscar"><br><br>
-
                         <%if (msg != null) {%>
                         <div>
                             <p class="message"><%=msg%></p>                        
                         </div>
                         <%}%>
-
-
-                    <!--</form>-->
-                </div>
-            </div>
-                        
                         <div id="tablaUsuarios" >
                             <table class="w3-table-all">
-                                <caption>Lista de Usuarios</caption>
+                                <caption><h4>Lista de Usuarios</h4></caption>
                                 <thead>
                                     <tr>
                                         <th>Nombre de usuario</th>
-                                        <th>Nombre completo</th>      
+                                        <th>Nombre completo</th>
+                                        <th>Seleccionar</th>
                                     </tr>
                                 </thead>
                                 <tbody id="tblUsuariosFiltrados">
                                 </tbody>
                             </table><br><br>
-                            <input type="button" onclick="borrarUsuariosSeleccionados()" id="btnborrarUsuariosSeleccionados" value="Borrar"><br><br>
-                            <span id="spMensajeBorradoUsuarios"></span>
-                            
+                            <input type="button" id="btnBorrarUsuariosSeleccionados" value="Borrar"><br><br>
+                          
+                            <div id="divModal" class="w3-modal">
+                                <div class="w3-modal-content w3-animate-zoom" >
+                                    <div class="w3-container">
+                                        <span onclick="document.getElementById('divModal').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+                                        <br>
+                                        <span id="spanMensajeBorradoUsuarios"></span>
+                                        <br>
+                                        <br>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-
-
+                    <!--</form>-->
+                </div>
         </div>
-        
-                <script>
-                    
-                    
-                    mostrarTablaUsuarios();
-                    
-                    function mostrarTablaUsuarios(){
-                        $.get("ManejoUsuariosServlet?accion=mostrarTablaUsuariosInicio", function(data){
-                            document.getElementById("tblUsuariosFiltrados").innerHTML=data;
-                        });               
-                    }
-                    
-                    function buscarUsuarioBaja(){
-                        
-                        //limpiar campo de span de mensaje de usuario borrado
-                        
-                        var nombreUsuario = $("#txtUsuarioBaja").val();
-                        var nombreCompleto = $("#txtNombreCompletoBaja").val();
-                        
-                        $.get("ManejoUsuariosServlet?accion=buscarUsuariosBaja&nombreUsuario=" + nombreUsuario + "&nombreCompleto=" + nombreCompleto, function (data) {
-                            document.getElementById("tblUsuariosFiltrados").innerHTML = data;
-                        });
-                        
-                    }
-                    
-                    function borrarUsuariosSeleccionados(){
-
-                        var listaUsuariosSeleccionados = new Array();
-                        
-                        $("input:checkbox:checked").each(   
-                            function() {
-                                listaUsuariosSeleccionados.push($(this).val());
-                                //alert("El checkbox con valor " + $(this).val() + " está seleccionado");
-                            }
-                        );
-                
-                            $.get("ManejoUsuariosServlet?accion=borrarUsuarios&listaUsuarios=" + listaUsuariosSeleccionados, function (data) {
-                            document.getElementById("spMensajeBorradoUsuarios").innerHTML = data;
-                        });
-                        
-                    }
-
-
-                </script>
-        
-        
     </body>
 </html>

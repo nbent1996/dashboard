@@ -22,29 +22,19 @@
 
     </head>
     <body class="w3-light-grey">
-        
         <script>
-            invocarServlet();
-            function invocarServlet(){
-                $.get("InicioServlet?accion=inicio", function(data){
-                    alert("hola");
-                });
-            }
+            
         </script>
-        
-        
-        <!-- Top container -->
-        <div class="w3-bar w3-top w3-black w3-large" style="z-index:4">
+       <div class="w3-bar w3-top w3-black w3-large" id="divBarraSuperior">
             <button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey" onclick="w3_open();"><i class="fa fa-bars"></i> &nbsp;Menu</button>
             <span class="w3-bar-item w3-right">LogoEmpresa</span>
         </div>
         
-        
         <!-- Sidebar/menu -->
-        <nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidebar"><br>
+         <nav class="w3-sidebar w3-collapse w3-white w3-animate-left" id="mySidebar"><br>
             <div class="w3-container w3-row">
                 <div class="w3-col s4">
-                    <img src="resources/avatar3.png" class="w3-circle w3-margin-right" style="width:46px">
+                    <img src="resources/avatar3.png" class="w3-circle w3-margin-right" id="imgPerfil">
                 </div>
                 <div class="w3-col s8 w3-bar">
                     <span>Bienvenido, <strong>NombrePersonaEmpresa</strong></span><br> <!-- CAMBIAR POR NOMBRE DE PERSONA DE LA EMPRESA -->
@@ -56,12 +46,8 @@
             </div>
 
             <hr>
-            <!-- TÍTULO DE MENÚ LATERAL 
-                <div class="w3-container">
-                    <h5>Dashboard</h5>
-                </div>
-            -->
-<div class="w3-bar-block">
+          
+                <div class="w3-bar-block">
                 <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>&nbsp; Cerrar Menu</a>
                 <a href="index.jsp" class="w3-bar-item w3-button w3-padding"><i class="fa fa-home fa-fw"></i>&nbsp; Inicio</a><br><br>
                 <div class="w3-dropdown-hover w3-mobile">
@@ -78,7 +64,6 @@
                         <a href="cliente_Alta.jsp" class="w3-bar-item w3-button w3-mobile">Alta de Cliente</a>
                         <a href="cliente_Baja.jsp" class="w3-bar-item w3-button w3-mobile">Baja de Cliente</a>
                         <a href="cliente_Modificacion.jsp" class="w3-bar-item w3-button w3-mobile">Modificación de Cliente</a>
-                        <a href="cliente_cuentasSecundarias.jsp" class="w3-bar-item w3-button w3-mobile">Asignar cuentas secundarias</a>
                     </div>
                 </div>
                 <div class="w3-dropdown-hover w3-mobile">
@@ -111,22 +96,14 @@
                 <hr>
             </div>
 
-        </nav>
-        
-        
-        <!-- Overlay effect when opening sidebar on small screens -->
-        <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
-
-        
+        </nav> 
         <!-- !PAGE CONTENT! -->
-        <div class="w3-main" style="margin-left:300px;margin-top:43px;">
-
+        <div class="ABMContainer">
             <!-- Header -->
-            <header class="w3-container" style="padding-top:22px">
+            <header class="w3-container estilosHeader">
                 <h5><b><i class="fa fa-dashboard"></i> Dashboard NombreEmpresa</b></h5>
             </header>
-
-            <div class="w3-row-padding w3-margin-bottom">
+            <div class="form w3-row-padding w3-margin-bottom">
                 <div class="w3-quarter">
                     <div class="w3-container w3-light-blue w3-text-white w3-padding-16">
                         <div class="w3-left"><i class="fa fa-handshake-o w3-xxlarge"></i></div>
@@ -170,14 +147,7 @@
             </div>
 
             <div class="w3-panel">
-                <div class="w3-row-padding" style="margin:0 -16px">
-
-                    <!-- PANEL IZQUIERDO CON MAPA REGIÓN
-                        <div class="w3-third">
-                            <h5>Regions</h5>
-                            <img src="resources/region.jpg" style="width:100%" alt="Google Regional Map">
-                        </div>
-                    -->
+                <div class="w3-row-padding">
 
                     <div class="w3-twothird">
                         <h5>Últimas interacciones</h5>
@@ -222,115 +192,21 @@
                 </div>
             </div>
             <hr>
-
-            <!-- SECCIÓN BARRAS DE ESTADÍSTICAS
-
-            <div class="w3-container">
-                <h5>General Stats</h5>
-                <p>New Visitors</p>
-                <div class="w3-grey">
-                    <div class="w3-container w3-center w3-padding w3-green" style="width:25%">+25%</div>
-                </div>
-
-                <p>New Users</p>
-                <div class="w3-grey">
-                    <div class="w3-container w3-center w3-padding w3-orange" style="width:50%">50%</div>
-                </div>
-
-                <p>Bounce Rate</p>
-                <div class="w3-grey">
-                    <div class="w3-container w3-center w3-padding w3-red" style="width:75%">75%</div>
-                </div>
-            </div>
-            <hr>
-
-            -->
-
-
-
-            <!-- SECCIÓN TABLA PAÍSES
-
-            <div class="w3-container">
-                <h5>Countries</h5>
-                <table class="w3-table w3-striped w3-bordered w3-border w3-hoverable w3-white">
-                    <tbody><tr>
-                            <td>United States</td>
-                            <td>65%</td>
-                        </tr>
-                        <tr>
-                            <td>UK</td>
-                            <td>15.7%</td>
-                        </tr>
-                        <tr>
-                            <td>Russia</td>
-                            <td>5.6%</td>
-                        </tr>
-                        <tr>
-                            <td>Spain</td>
-                            <td>2.1%</td>
-                        </tr>
-                        <tr>
-                            <td>India</td>
-                            <td>1.9%</td>
-                        </tr>
-                        <tr>
-                            <td>France</td>
-                            <td>1.5%</td>
-                        </tr>
-                    </tbody></table><br>
-                <button class="w3-button w3-dark-grey">More Countries &nbsp;<i class="fa fa-arrow-right"></i></button>
-            </div>
-            <hr>
-
-            -->
-
-
             <div class="w3-container">
                 <h5>Nuevos Clientes</h5>
                 <ul class="w3-ul w3-card-4 w3-white">
                     <li class="w3-padding-16">
-                        <img src="resources/avatar2.png" class="w3-left w3-circle w3-margin-right" style="width:35px">
                         <span class="w3-xlarge">Nombre último cliente creado</span><br>
                     </li>
                     <li class="w3-padding-16">
-                        <img src="resources/avatar2.png" class="w3-left w3-circle w3-margin-right" style="width:35px">
                         <span class="w3-xlarge">Nombre penúltimo cliente creado</span><br>
                     </li>
                     <li class="w3-padding-16">
-                        <img src="resources/avatar2.png" class="w3-left w3-circle w3-margin-right" style="width:35px">
                         <span class="w3-xlarge">Nombre antepenúltimo cliente creado</span><br>
                     </li>
                 </ul>
             </div>
             <hr>
-
-            <!-- SECCIÓN COMENTARIOS RECIENTES
-
-            <div class="w3-container">
-                <h5>Recent Comments</h5>
-                <div class="w3-row">
-                    <div class="w3-col m2 text-center">
-                        <img class="w3-circle" src="resources/avatar3.png" style="width:96px;height:96px">
-                    </div>
-                    <div class="w3-col m10 w3-container">
-                        <h4>John <span class="w3-opacity w3-medium">Sep 29, 2014, 9:12 PM</span></h4>
-                        <p>Keep up the GREAT work! I am cheering for you!! Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p><br>
-                    </div>
-                </div>
-
-                <div class="w3-row">
-                    <div class="w3-col m2 text-center">
-                        <img class="w3-circle" src="resources/avatar1.png" style="width:96px;height:96px">
-                    </div>
-                    <div class="w3-col m10 w3-container">
-                        <h4>Bo <span class="w3-opacity w3-medium">Sep 28, 2014, 10:15 PM</span></h4>
-                        <p>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p><br>
-                    </div>
-                </div>
-            </div>
-
-            -->
-
             <br>
             <div class="w3-container w3-dark-grey w3-padding-32">
                 <div class="w3-row">
@@ -364,33 +240,5 @@
 
             <!-- End page content -->
         </div>
-        
-        
-        <script>
-// Get the Sidebar
-var mySidebar = document.getElementById("mySidebar");
-
-// Get the DIV with overlay effect
-var overlayBg = document.getElementById("myOverlay");
-
-// Toggle between showing and hiding the sidebar, and add overlay effect
-function w3_open() {
-  if (mySidebar.style.display === 'block') {
-    mySidebar.style.display = 'none';
-    overlayBg.style.display = "none";
-  } else {
-    mySidebar.style.display = 'block';
-    overlayBg.style.display = "block";
-  }
-}
-
-// Close the sidebar with the close button
-function w3_close() {
-  mySidebar.style.display = "none";
-  overlayBg.style.display = "none";
-}
-        </script>
-        
- 
     </body>
 </html>

@@ -41,16 +41,16 @@
             }*/
         </script>
 
-        <div class="w3-bar w3-top w3-black w3-large" style="z-index:4">
+        <div class="w3-bar w3-top w3-black w3-large" id="divBarraSuperior">
             <button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey" onclick="w3_open();"><i class="fa fa-bars"></i> &nbsp;Menu</button>
             <span class="w3-bar-item w3-right">LogoEmpresa</span>
         </div>
         
         <!-- Sidebar/menu -->
-        <nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidebar"><br>
+         <nav class="w3-sidebar w3-collapse w3-white w3-animate-left" id="mySidebar"><br>
             <div class="w3-container w3-row">
                 <div class="w3-col s4">
-                    <img src="resources/avatar3.png" class="w3-circle w3-margin-right" style="width:46px">
+                    <img src="resources/avatar3.png" class="w3-circle w3-margin-right" id="imgPerfil">
                 </div>
                 <div class="w3-col s8 w3-bar">
                     <span>Bienvenido, <strong>NombrePersonaEmpresa</strong></span><br> <!-- CAMBIAR POR NOMBRE DE PERSONA DE LA EMPRESA -->
@@ -61,9 +61,9 @@
                 </div>
             </div>
 
-            <hr>        
-
-            <div class="w3-bar-block">
+            <hr>
+          
+                <div class="w3-bar-block">
                 <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>&nbsp; Cerrar Menu</a>
                 <a href="index.jsp" class="w3-bar-item w3-button w3-padding"><i class="fa fa-home fa-fw"></i>&nbsp; Inicio</a><br><br>
                 <div class="w3-dropdown-hover w3-mobile">
@@ -80,7 +80,6 @@
                         <a href="cliente_Alta.jsp" class="w3-bar-item w3-button w3-mobile">Alta de Cliente</a>
                         <a href="cliente_Baja.jsp" class="w3-bar-item w3-button w3-mobile">Baja de Cliente</a>
                         <a href="cliente_Modificacion.jsp" class="w3-bar-item w3-button w3-mobile">Modificación de Cliente</a>
-                        <a href="cliente_cuentasSecundarias.jsp" class="w3-bar-item w3-button w3-mobile">Asignar cuentas secundarias</a>
                     </div>
                 </div>
                 <div class="w3-dropdown-hover w3-mobile">
@@ -112,13 +111,8 @@
                 <a href="reporteGraficas.jsp" class="w3-bar-item w3-button w3-padding"><i class="fa fa-line-chart fa-fw"></i>&nbsp; Tablero de gráficas</a>
                 <hr>
             </div>
+
         </nav>
-        
-        
-        <!-- Overlay effect when opening sidebar on small screens -->
-        <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
-        
-        
         
         <!-- !PAGE CONTENT! -->
         <div class="ABMContainer">
