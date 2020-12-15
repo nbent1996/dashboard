@@ -53,31 +53,25 @@ public class ControladorManejoUsuarios implements IControlador<Persona>{
             vista.mensajeError("usuario_Alta.jsp",ex.getMessage()); 
         }
     }
+    
+    //se borran los usuarios seleccionados de los checkboxes
     public void borrarUsuariosSeleccionados(String[] listaNombresDeUsuarios) { //ACÁ ME LLEGA LA LISTA DE NOMBRES DE USUARIO QUE SE SELECCIONARON EN LOS CHECKBOXES
-        
-        String nombresEliminados = "";
-        
+
         if(!listaNombresDeUsuarios[0].equals("")){ //se seleccionó al menos un usuario para borrar
-            //en el frontend tira todos los nombres de usuarios de los check en la posición [0], convierto a string y luego a array correctamente para poder recorrer
+            //en el frontend tira todos los nombres de usuarios de los check en la posición [0], por eso convierto a string y luego a array para poder recorrer
             String cadena = listaNombresDeUsuarios[0].toString();
             String[]cadenaConvertida = cadena.split(",");
-            for (String nombreUsuario : cadenaConvertida) {
-                //recorro cada nombre de usuario, me traigo la persona que tiene ese usuario y lo borro
-                
+            for (String nombreUsuario : cadenaConvertida) { //recorro cada nombre de usuario, me traigo la persona que tiene ese usuario y lo borro                               
                 try{
                     Persona personaBuscada = opPersona.buscar(" WHERE OperadoresDashboard.usuarioSistema='" + nombreUsuario + "' ", "Modelo.Operador").get(0);
                     opPersona.borrar(personaBuscada);
-                    nombresEliminados+=personaBuscada.getUsuarioSistema() + "; ";                                      
-                    //luego de borrar se debería actualizar la lista que está viendo el usuario, ver como resolver
                 }catch(Exception ex){
                     vista.mensajeErrorBajaUsuarios("Ocurrió un error al borrar el usuario");
                     System.out.println(ex.getMessage());
                 }
   
             }
-            
-            vista.mostrarMensajeExitoPersonaBorrada("Se eliminaron los usuarios: " + nombresEliminados); //ver de refrescar la lista
-            
+            vista.mostrarMensajeExitoPersonaBorrada("Se eliminaron los usuarios: " + cadena); //devuelvo cadena que es el string que tiene los nombres de usuarios a borrar
         }else{
             vista.mensajeNoSeleccionasteUsuarios("Debes seleccionar al menos un usuario para borrar");
         }
@@ -85,7 +79,7 @@ public class ControladorManejoUsuarios implements IControlador<Persona>{
     }
     
     
-    
+    //cuando filtro por nombre de usuario o nombre completo muestro tabla solamente con esos datos
     public void mostrarUsuariosBajaEnTabla(String nombreUsuarioBaja, String nombreCompletoUsuarioBaja) {
         ArrayList<Persona> listaUsuarios = new ArrayList();
             try{
@@ -95,6 +89,7 @@ public class ControladorManejoUsuarios implements IControlador<Persona>{
                 vista.mensajeError("usuario_Baja.jsp","Error al dar de baja el usuario");
             }
         }
+    
     public void modificarUsuario(String usuarioModUsr, String nombreCompletoModUsr, String nombreEmpresaModUsr, String nombrePaisModUsr, String passwordModUsr) {
         
         //CONTINUAR ACÁ, EVALUAR SITUACION YA QUE ALGUNOS DE LOS PARAMETROS PUEDEN SER NULOS, VER DONDE EVALUAR DICHA CONDICION

@@ -45,9 +45,14 @@
                         );
                             $.get("ManejoUsuariosServlet?accion=borrarUsuarios&listaUsuarios=" + listaUsuariosSeleccionados, function (data) {
                             
-                            document.getElementById("spanMensaje").innerHTML = data;
-                        });                        
+                            document.getElementById("spanMensaje").innerHTML = data; //muestro mensaje modal
+                            mostrarTablaUsuarios();//Refresco tabla
+                        });
+                                                
                     }
+                    
+                    
+                    
                 </script>
                 
         <div class="w3-bar w3-top w3-black w3-large" id="divBarraSuperior">
