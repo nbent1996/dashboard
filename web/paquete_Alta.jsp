@@ -117,7 +117,7 @@
                         <div class="margin-top20"><div><h5 class="nb-title">Dispositivos asignados al Paquete</h5></div><span id="spanTiposDispositivoPaqueteAlta" name="generarTablaTiposDispositivos"></div>
 
                         <hr>        
-                        <div class="botoneraAlta">
+                        <div class="botonera">
                         <input type="submit" class="submitAlta" value="confirmar">
                         <input type="reset" class="limpiarCampos" value="Limpiar campos">    
                         </div>

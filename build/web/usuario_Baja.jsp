@@ -31,7 +31,7 @@
                         var nombreCompleto = $("#txtbxNombreCompletoBaja").val();
                         $.get("ManejoUsuariosServlet?accion=buscarUsuariosBaja&nombreUsuario=" + nombreUsuario + "&nombreCompleto=" + nombreCompleto, function (data) {
                             document.getElementById("tblUsuariosFiltrados").innerHTML = data;
-                            document.getElementById("spanMensajeBorradoUsuarios").innerHTML = ""; //MÉTODO PARA LIMPIAR CAMPO
+                            document.getElementById("spanMensaje").innerHTML = ""; //MÉTODO PARA LIMPIAR CAMPO
                         });
                     }
                     function borrarUsuariosSeleccionados(){
@@ -43,7 +43,7 @@
                             }
                         );
                             $.get("ManejoUsuariosServlet?accion=borrarUsuarios&listaUsuarios=" + listaUsuariosSeleccionados, function (data) {
-                            document.getElementById("spanMensajeBorradoUsuarios").innerHTML = data;
+                            document.getElementById("spanMensaje").innerHTML = data;
                         });                        
                     }
                 </script>
@@ -133,13 +133,15 @@
             </header>
                 <div class="form">
                     <!--LAS BÚSQUEDAS SE HACEN POR AJAX CON BUTTONS, NO SE USAN FORMS-->
-                        <span>Ingrese los filtros deseados por los que desea buscar</span>
-                        <br>
-                        <input type="text" id="txtbxUsuarioBaja" name="usuarioBaja" placeholder="Nombre de usuario"/>
-                        <br>
-                        <input type="text" id="txtbxNombreCompletoBaja" name="nombreCompletoBaja" placeholder="Nombre y/o apellido"/>                        
-                        <br>
-                        <input type="button" onclick="buscarUsuarioBaja()" id="btnBuscarUsuarioBaja" value="Buscar"><br><br>
+                        <div><h5 class="nb-title">Ingrese los filtros deseados por los que desea buscar</h5></div>
+                        <form>
+                        <div class="margin-top20"><label for="txtbxUsuarioBaja">Usuario: </label><input type="text" class="nb-input" id="txtbxUsuarioBaja" name="usuarioBaja"/></div>
+                        <div class="margin-top20"><label for="txtbNombreCompletoBaja">Nombre y/o Apellido: </label><input type="text" class="nb-input" id="txtbxNombreCompletoBaja" name="nombreCompletoBaja"/></div>                        
+                        <div class="botonera">
+                        <input type="button" class ="submitSearch" onclick="buscarUsuarioBaja()" id="btnBuscarUsuarioBaja" value="Buscar">
+                        <input type="reset" class="limpiarCampos" value="Limpiar campos">    
+                        </form>
+                        </div>
                         <%if (msg != null) {%>
                         <div>
                             <p class="message"><%=msg%></p>                        
@@ -157,15 +159,17 @@
                                 </thead>
                                 <tbody id="tblUsuariosFiltrados">
                                 </tbody>
-                            </table><br><br>
-                            <input type="button" id="btnBorrarUsuariosSeleccionados" value="Borrar"><br><br>
-                          
+                            </table>
+                            <div class="margin-top20">
+                            <div class="botonera">
+                                <input type="button" class="submitBaja" id="btnBorrarUsuariosSeleccionados" value="Borrar">
+                            </div>
                             <div id="divModal" class="w3-modal">
                                 <div class="w3-modal-content w3-animate-zoom" >
                                     <div class="w3-container">
                                         <span onclick="document.getElementById('divModal').style.display='none'" class="w3-button w3-display-topright">&times;</span>
                                         <br>
-                                        <span id="spanMensajeBorradoUsuarios"></span>
+                                        <span id="spanMensaje"></span>
                                         <br>
                                         <br>
                                     </div>

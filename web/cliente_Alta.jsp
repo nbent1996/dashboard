@@ -157,7 +157,7 @@
                                 </div>
                         </div>
                         <hr>        
-                        <div class="botoneraAlta">
+                        <div class="botonera">
                         <input type="submit" class="submitAlta" value="confirmar">
                         <input type="reset" class="limpiarCampos" value="Limpiar campos">    
                         </div>

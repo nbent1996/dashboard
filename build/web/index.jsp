@@ -103,7 +103,8 @@
             <header class="w3-container estilosHeader">
                 <h5><b><i class="fa fa-dashboard"></i> Dashboard NombreEmpresa</b></h5>
             </header>
-            <div class="form w3-row-padding w3-margin-bottom">
+            <div class="form">
+            <div class="w3-row-padding w3-margin-bottom">
                 <div class="w3-quarter">
                     <div class="w3-container w3-light-blue w3-text-white w3-padding-16">
                         <div class="w3-left"><i class="fa fa-handshake-o w3-xxlarge"></i></div>
@@ -231,14 +232,8 @@
                     </div>
                 </div>
             </div>
-
-            <!-- Footer -->
-            <footer class="w3-container w3-padding-16 w3-light-grey">
-                <h4>FOOTER</h4>
-                <p>Powered by <a href="fi.ort.edu.uy" target="_blank">ORT</a></p>
-            </footer>
-
             <!-- End page content -->
         </div>
+            </div>
     </body>
 </html>

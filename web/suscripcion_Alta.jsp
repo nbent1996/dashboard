@@ -121,7 +121,7 @@
                         <div><label for="txtbxUsuarioClienteSuscripcionAlta">Cliente titular (Nro de cliente):</label><span id="spanContenidoClienteAsociadoB"><span id="spanClienteAsociadoB">No seleccionado</span><input type="button" class="margin-left20 submitSearch" value="Buscar Cliente"/></span></div>
                         <div class="margin-top20"><div><h5 class="nb-title">Paquetes asignados a la suscripci&oacute;n</h5></div><span id="spanPaquetesSuscripcionAlta" name="generarTablaPaquetes"></div>
                         <hr>        
-                         <div class="botoneraAlta">
+                         <div class="botonera">
                         <input type="submit" class="submitAlta" value="confirmar">
                         <input type="reset" class="limpiarCampos" value="Limpiar campos">    
                         </div>

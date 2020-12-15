@@ -133,7 +133,12 @@ select{
     left:60px;
 }
 /*usuario_Alta.jsp*/
-
+/*usuario_Baja.jsp*/
+#txtbxUsuarioBaja{
+    position:relative;
+    left:91px;
+}
+/*usuario_Baja.jsp*/
 /*cliente_Alta.jsp*/
 #divPrincipal, #divSecundario{
     margin-left:35px;
@@ -277,13 +282,14 @@ select{
   background: #0091EA;
   color:white;
 }
-.form .botoneraAlta{
+.form .botonera{
     width:100%;
+    text-align:center;
 }
-.form .botoneraAlta .submitAlta{
+.form .botonera .submitAlta, .form .botonera .submitSearch{
     width:55%;
 }
-.form .botoneraAlta .limpiarCampos{
+.form .botonera .limpiarCampos{
     width:40%;
 }
 .form .submitBaja {
@@ -396,5 +402,5 @@ body {
 }
 /*Modal box*/
 #divModal{
-    z-index:5;
+    z-index:10;
 }
