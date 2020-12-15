@@ -18,7 +18,9 @@
         <!--Javascript-->
         <script type="text/javascript" src="js/jquery-3.5.1.js"></script>
         <script type="text/javascript" src="bootstrap-4.5.2-dist/js/bootstrap.min.js"></script>
-        <script type="text/javascript" src="js/functions.js"></script>
+        <script type="text/javascript" src="js/functions.js"></script>        
+        <script type="text/javascript" src="js/events.js"></script>
+        
     </head>
     
     <body class="w3-light-grey">

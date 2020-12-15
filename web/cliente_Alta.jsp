@@ -16,6 +16,7 @@
         <script type="text/javascript" src="js/jquery-3.5.1.js"></script>
         <script type="text/javascript" src="bootstrap-4.5.2-dist/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="js/functions.js"></script>
+        <script type="text/javascript" src="js/events.js"></script>
         
     </head>
     
@@ -164,20 +165,17 @@
                         
                         <span id="mensajeAlta"></span>
                         <input type="hidden" name="accion" value="formAltaCliente">
-                        <div id="divMensajeEmergente" class="modal">
-                            <div class="modal-content">
-                                <a class="cerrarMensajeEmergente" onclick="ocultarModal()">&times;</a>
-                            <p id="pMensaje" class="message"></p>         
+                        <div id="divModal" class="w3-modal">
+                            <div class="w3-modal-content w3-animate-zoom" >
+                                <div class="w3-container">
+                                    <span id="spanBtnCerrar" class="w3-button w3-display-topright">&times;</span>
+                                    <br>
+                                    <span id="spanMensaje"></span>
+                                    <br>
+                                    <br>
+                                </div>
                             </div>
                         </div>
-                        <%if (msg != null) {%>
-                        <div id="divMensajeEmergenteBackEnd" class="modal">
-                            <div class="modal-content">
-                                <a class="cerrarMensajeEmergenteBackEnd">&times;</a>
-                                <p id="pMensajeBackEnd" class="message"><%=msg%></p>         
-                            </div>
-                        </div>    
-                        <%}%>
                     </form>
                 </div>
 
