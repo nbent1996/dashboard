@@ -1,6 +1,7 @@
 package controlador.Interfaces;
 
 import Modelo.Pais;
+import Modelo.Persona;
 import Modelo.TipoDocumento;
 import java.util.ArrayList;
 
@@ -10,4 +11,6 @@ public interface IVistaManejoClientes {
     public void mostrarPaises(ArrayList<Pais> paises);
     public void mostrarTiposDocumento(ArrayList<TipoDocumento> tiposDocumento);
     public void mostrarUsuarioSistema(String usuario);
+
+    public void mostrarTablaClientesBajaInicio(ArrayList<Persona> principalesYSecundarios);
 }

@@ -128,6 +128,21 @@ public class Operador extends Persona implements IObject<Operador> {
     }
     /*Getters y Setters*/
 
+    @Override
+    public int retornarNroCliente() {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String retornarEmail() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String retornarTipoCli() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 
 
 

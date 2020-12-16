@@ -124,14 +124,30 @@ public class Funciones {
             tabla += "<tr><td>" + obj.getUsuarioSistema() + "</td>"
                     + "<td>" + obj.getNombreCompleto()+ "</td>"
                     
-                    + "<td><input type='checkbox' class='w3-check' value='" + obj.getUsuarioSistema() + "' name='" + obj.getUsuarioSistema() + "' </td></tr>";
-                    
-                    //+ "<td><input type='button' value='" + boton + "' onclick=\"" + boton + "(" + x + ")\"> </td></tr>";
+                    + "<td><input type='checkbox' class='w3-check' value='" + obj.getUsuarioSistema() + "' name='" + obj.getUsuarioSistema() + "' </td></tr>";             
             
         }
         return tabla;
     }
+    
+    public static String tablaClientes(ArrayList<Persona> opciones, String chkBajaCliente) {
+        String tabla = "";
         
+        for (Persona obj : opciones) {
+            tabla += "<tr><td>" + obj.retornarNroCliente() + "</td>"
+                    + "<td>" + obj.getNombreCompleto()+ "</td>" +
+                      "<td>" + obj.retornarEmail()+ "</td>" +
+                      "<td>" + obj.retornarTipoCli()+ "</td>"
+                    //ver si devolver si es principal o secundario
+                    + "<td><input type='checkbox' class='w3-check' value='" + obj.getUsuarioSistema() + "' name='" + obj.getUsuarioSistema() + "' </td></tr>";//fijarse acá, porque pongo el value de la PK de persona aunque esa PK para un cliente fue autogenerado y nunca se muestra         
+            
+        }
+        return tabla;
+    }
+//                                   int retornarNroCliente <th>Nro Cliente</th>CLIENTE
+//                                                          <th>Nombre completo</th>PERSONA
+//                                              retornarEmail<th>Email</th>CLIENTE
+                                    
         
         
         
@@ -212,4 +228,8 @@ public class Funciones {
         }
         return prefijo+campo;
     }
+
+    
+    
+    
 }

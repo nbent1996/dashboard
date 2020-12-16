@@ -1,5 +1,9 @@
 package Modelo;
+
+
 public class Secundario extends Cliente implements IObject<Secundario>{
+    
+    
 /*Estado*/
 private Principal principalAsociado;
 /*Estado*/
@@ -105,6 +109,11 @@ public Secundario(int nroCliente){
     }
 
 /*Getters y Setters*/
+
+    @Override
+    public String retornarTipoCli() {
+        return "Secundario";
+    }
 
 
 

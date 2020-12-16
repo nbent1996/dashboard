@@ -6,6 +6,11 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+
+<%
+    String msg = request.getParameter("msg");
+%>
+
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -29,7 +34,13 @@
         
         <script>
             
+            mostrarTablaClientes();    
             
+                function mostrarTablaClientes(){
+                    $.get("ManejoClientesServlet?accion=mostrarTablaClientesInicio", function(data){
+                        document.getElementById("tblClientesFiltrados").innerHTML=data;
+                    });               
+                }
             
             
              
@@ -118,19 +129,57 @@
             <header class="w3-container estilosHeader">
                 <h5><b><i class="fa fa-address-card"></i> Baja de Clientes</b></h5>
             </header>
-                <div class="form">
-                    <form name="formBajaCliente" action="ManejoClientesServlet" method="post" onsubmit="return validarCamposBajaCliente(this)">
-                        
-                        <input type="text" id="txtNroDocumentoClienteBaja" name="nroDocClienteBaja" placeholder="nro documento" required="true"/>                       
-                        <hr>
-                        <input type="submit" class="submitBaja" value="confirmar">
-                        
-                        <span id="mensajeBaja"></span>
-                        
-                        <input type="hidden" name="accion" value="formBajaCliente">
-                        
-                    </form>
-                </div>
-            </div>  
+            <div class="form">
+                <!--LAS BÚSQUEDAS SE HACEN POR AJAX CON BUTTONS, NO SE USAN FORMS-->
+                <div><h5 class="nb-title">Ingrese los filtros por los que desea buscar</h5></div>
+                <!--NUMERO DE CLIENTE, EMAIL (CLIENTE), NOMBRE COMPLETO (PERSONA)-->
+                    <div class="margin-top20"><label for="txtbNroClienteBaja">Número de cliente: </label><input type="text" class="nb-input" id="txtbNroClienteBaja" name="nroClienteBaja"/></div>
+                    <div class="margin-top20"><label for="txtbEmailClienteBaja">Email: </label><input type="text" class="nb-input" id="txtbEmailClienteBaja" name="emailClienteBaja"/></div>
+                    <div class="margin-top20"><label for="txtbNombreCompletoBajaCli">Nombre y/o Apellido: </label><input type="text" class="nb-input" id="txtbNombreCompletoBajaCli" name="nombreCompletoBajaCli"/></div>                        
+                    <div class="botonera">
+                        <input type="button" class ="submitSearch" onclick="buscarClienteBaja()" id="btnBuscarClienteBaja" value="Buscar">
+                        <input type="reset" class="limpiarCampos" value="Limpiar campos">    
+                        </form>
+                    </div>
+                    <%if (msg != null) {%>
+                    <div>
+                        <p class="message"><%=msg%></p>                        
+                    </div>
+                    <%}%>
+                    <div id="tablaClientes" >
+                        <table class="w3-table-all">
+                            <caption><h4>Lista de Clientes</h4></caption>
+                            <thead>
+                                <tr>
+                                    <th>Nro Cliente</th>
+                                    <th>Nombre Completo</th>
+                                    <th>Email</th>
+                                    <th>Tipo Cliente</th>
+                                    <th>Seleccionar</th>
+                                    <!--Ver si mostrar tipo (principal o secundario)-->
+                                </tr>
+                            </thead>
+                            <tbody id="tblClientesFiltrados">
+                            </tbody>
+                        </table>
+                        <div class="margin-top20">
+                            <div class="botonera">
+                                <input type="button" class="submitBaja" id="btnBorrarClientesSeleccionados" value="Borrar">
+                            </div>
+                            <div id="divModal" class="w3-modal">
+                                <div class="w3-modal-content w3-animate-zoom" >
+                                    <div class="w3-container">
+                                        <span onclick="document.getElementById('divModal').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+                                        <br>
+                                        <span id="spanMensaje"></span>
+                                        <br>
+                                        <br>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>                   
+                    </div>
+            </div>
+        </div>  
     </body>
 </html>

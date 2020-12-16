@@ -83,4 +83,7 @@ public abstract class Persona{
     }
     /*Getters y Setters*/
 
+    public abstract int retornarNroCliente();
+    public abstract String retornarEmail();
+    public abstract String retornarTipoCli();
 }

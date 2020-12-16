@@ -12,7 +12,10 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+
 public class VistaManejoClientesWeb implements IVistaManejoClientes{
+    
     /*Estado*/
     private ControladorManejoClientes controlador;
     private String destino;
@@ -34,19 +37,19 @@ public class VistaManejoClientesWeb implements IVistaManejoClientes{
         String accion = request.getParameter("accion");
         switch(accion){
             case "comboPaises":
-                this.cargarPaises();
+                cargarPaises();
             break;
             case "comboTiposDocumento":
-                this.cargarTiposDocumento();
+                cargarTiposDocumento();
             break;
 //            case "generarUsuario":
 //                this.generarUsuarioSistema();
 //            break;
             case "formAltaCliente":
-                this.altaCliente(request, response);
+                altaCliente(request, response);
             break;
-            case "formBajaCliente":
-            
+            case "mostrarTablaClientesInicio":
+                cargarTablaClientesBajaInicio();
             break;
             
             case "formModificacionCliente":
@@ -63,6 +66,11 @@ public class VistaManejoClientesWeb implements IVistaManejoClientes{
     private void generarUsuarioSistema(){
         this.controlador.generarUsuarioSistema();
     }
+    
+    private void cargarTablaClientesBajaInicio() {
+        controlador.cargarTablaClientesBajaInicio();
+    }
+    
     private void altaCliente(HttpServletRequest request, HttpServletResponse response){
         this.request = request;
         this.response = response;
@@ -137,6 +145,14 @@ public class VistaManejoClientesWeb implements IVistaManejoClientes{
     /*Getters y Setters*/
     
     /*Getters y Setters*/
+
+    //muestro tabla de todos los clientes (principales y secundarios) para seleccionar y dar de baja
+    @Override
+    public void mostrarTablaClientesBajaInicio(ArrayList<Persona> principalesYSecundarios) {
+        String componente = Funciones.tablaClientes(principalesYSecundarios, "chkBajaCliente");
+        
+        out.write(componente + "\n\n");
+    }
 
 
 

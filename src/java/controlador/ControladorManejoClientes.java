@@ -12,6 +12,9 @@ import Modelo.ProgramException;
 import Modelo.Secundario;
 import Modelo.TipoDocumento;
 import controlador.Interfaces.IVistaManejoClientes;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ControladorManejoClientes {
     /*Estado*/
@@ -86,4 +89,18 @@ public class ControladorManejoClientes {
     /*Getters y Setters*/
     
     /*Getters y Setters*/
+
+    public void cargarTablaClientesBajaInicio() {
+        //traerme todos los principales y los secundarios y devolverlos en un array de personas
+        ArrayList<Persona> principalesYSecundarios = new ArrayList();
+        
+        try {
+            principalesYSecundarios.addAll(opPersona.buscar(null, "Modelo.Principal"));
+            principalesYSecundarios.addAll(opPersona.buscar(null, "Modelo.Secundario"));
+            vista.mostrarTablaClientesBajaInicio(principalesYSecundarios);
+        } catch (Exception ex) {
+            vista.mensajeError("cliente_Baja", "Error en la carga de clientes");
+        }
+        
+    }
 }

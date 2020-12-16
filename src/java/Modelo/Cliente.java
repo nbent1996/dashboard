@@ -64,10 +64,21 @@ public void validar() throws ProgramException{
     public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
+    
+    @Override
+    public int retornarNroCliente(){
+        return this.nroCliente;
+    }
+    
+    @Override
+    public String retornarEmail(){
+        return this.email;
+    }
+    
+    @Override
+    public abstract String retornarTipoCli(); 
+
 
 /*Getters y Setters*/
 
-
-
-   
 }

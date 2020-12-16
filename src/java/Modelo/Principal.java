@@ -1,5 +1,8 @@
 package Modelo;
+
+
 public class Principal extends Cliente implements IObject<Principal>  {
+    
 /*Estado*/
 private String nroDocumento;
 private boolean servicioActivo;
@@ -153,6 +156,11 @@ public String getNroDocumento() {
     }
     
 /*Getters y Setters*/
+
+    @Override
+    public String retornarTipoCli() {
+        return "Principal";
+    }
 
 
 
