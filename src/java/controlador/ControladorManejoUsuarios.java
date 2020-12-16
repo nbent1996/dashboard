@@ -1,13 +1,11 @@
 package controlador;
 
-import controlador.Interfaces.IControlador;
 import controlador.Interfaces.IVistaManejoUsuarios;
 import Datos.OpEmpresa;
 import Datos.OpPais;
 import Datos.OpPersona;
 import Datos.OpTipoUsuario;
 import Modelo.Empresa;
-import Modelo.Funciones;
 import Modelo.Operador;
 import Modelo.Pais;
 import Modelo.Persona;
@@ -20,7 +18,7 @@ import javax.swing.table.DefaultTableModel;
 
 
 
-public class ControladorManejoUsuarios implements IControlador<Persona>{
+public class ControladorManejoUsuarios{
     /*Estado*/
     private IVistaManejoUsuarios vista;
     private OpPersona opPersona;
@@ -39,11 +37,10 @@ public class ControladorManejoUsuarios implements IControlador<Persona>{
     /*Constructores*/
 
     /*Comportamiento*/
-    public void altaUsuario(String usuarioAltaUsr, String nombreCompletoAltaUsr, String nombreEmpresaAltaUsr, String nombrePaisAltaUsr, String tipoUsuarioAltaUsr){
+    public void altaUsuario(String usuarioAltaUsr, String nombreCompletoAltaUsr, String codPaisAltaUsr, String generoAltaUsr, String tipoUsuarioAltaUsr){
         try {
-            Empresa e = new Empresa("FALTA TRAER LA IDENTIFICACION TRIBUTARIA");
-            Pais p = new Pais("FALTA TRAER EL COD PAIS DESDE EL VALUE DEL OPTION");
-            Operador operador = new Operador(usuarioAltaUsr, usuarioAltaUsr,nombreCompletoAltaUsr, e,p, new TipoUsuario(tipoUsuarioAltaUsr), "Masculino" );
+            Empresa e = new Empresa("526283747346"); //SE DEBE TRAER LA EMPRESA DE LA SESSION
+            Operador operador = new Operador(usuarioAltaUsr, usuarioAltaUsr,nombreCompletoAltaUsr, e,new Pais(codPaisAltaUsr), new TipoUsuario(tipoUsuarioAltaUsr), generoAltaUsr );
             operador.validar();
             opPersona.guardar(null, operador);
             vista.mensajeExito("usuario_Alta.jsp","Usuario dado de alta correctamente");
@@ -80,7 +77,7 @@ public class ControladorManejoUsuarios implements IControlador<Persona>{
     
     
     //cuando filtro por nombre de usuario o nombre completo muestro tabla solamente con esos datos
-    public void mostrarUsuariosBajaEnTabla(String nombreUsuarioBaja, String nombreCompletoUsuarioBaja) {
+    public void mostrarUsuariosTabla(String nombreUsuarioBaja, String nombreCompletoUsuarioBaja) {
         ArrayList<Persona> listaUsuarios = new ArrayList();
             try{
             listaUsuarios = opPersona.buscar(" WHERE OperadoresDashboard.usuarioSistema like '%"+nombreUsuarioBaja+"%' AND Personas.nombreCompleto LIKE '%"+nombreCompletoUsuarioBaja+"%' " , "Modelo.Operador");
@@ -118,38 +115,5 @@ public class ControladorManejoUsuarios implements IControlador<Persona>{
         } catch (Exception ex) {
             vista.mensajeError("usuario_Alta.jsp","Error en la carga de usuarios"); //reuso el método de error del clic del botón buscar
         }
-    }
-    
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    @Override
-    public void cargarItems(Persona c, DefaultTableModel modelo) throws Exception, SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public String getFiltroProcesado(Persona c, DefaultTableModel modelo) throws Exception, SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void borrarItems(ArrayList<Persona> items) throws Exception, SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    
-
-    
-    
-
-    
-    
+    }    
 }

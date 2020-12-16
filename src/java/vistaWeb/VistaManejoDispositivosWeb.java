@@ -39,7 +39,7 @@ public class VistaManejoDispositivosWeb implements IVistaManejoDispositivos{
                 this.cargarTiposDispositivos();
             break;
             case "formAltaDispositivo":
-                
+                 this.altaDispositivo(request, response);
             break;
             case "formBajaDispositivo":
             
@@ -58,10 +58,17 @@ public class VistaManejoDispositivosWeb implements IVistaManejoDispositivos{
         //String cat = request.getParameter("categoria");
         this.controlador.cargarTiposDispositivos();
     }
-//    private void cargarCategorias(){
-//        this.controlador.cargarCategorias();
-//    }
-
+    private void altaDispositivo(HttpServletRequest request, HttpServletResponse response){
+        this.request = request;
+        this.response = response;
+        
+        //String nroDocumentoPrincipalAsociado = request.getParameter("spanClienteAsociado"); SE DEBE RESOLVER ESTO
+        String nroDocumentoPrincipalAsociado = "30654195"; // por ahora se hardcodea un cliente principal
+        String nroSerie = request.getParameter("txtbxNroSerieDispositivoAlta");
+        String estado = request.getParameter("selEstadoDispositivoAlta");
+        String tipoDispositivo = request.getParameter("selTiposDispositivo");
+        this.controlador.altaDispositivo(nroSerie, estado, tipoDispositivo,nroDocumentoPrincipalAsociado);
+    }
     @Override
     public void mostrarTiposDispositivos(ArrayList<TipoDispositivo> items) {
         try{
@@ -99,6 +106,9 @@ public class VistaManejoDispositivosWeb implements IVistaManejoDispositivos{
             System.out.println(texto);
         }      
     }
+    //    private void cargarCategorias(){
+//        this.controlador.cargarCategorias();
+//    }
     /*Comportamiento*/
 
 

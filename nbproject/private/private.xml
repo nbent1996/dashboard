@@ -3,6 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/C:/Users/andre/Desktop/Dashboard/dashboard/src/java/Modelo/Cliente.java</file>
             <file>file:/C:/Users/andre/Desktop/Dashboard/dashboard/src/java/Datos/OpPersona.java</file>
             <file>file:/C:/Users/andre/Desktop/Dashboard/dashboard/src/java/vistaWeb/Servlet/ManejoClientesServlet.java</file>
@@ -19,6 +20,14 @@
             <file>file:/C:/Users/andre/Desktop/Dashboard/dashboard/src/java/Modelo/Persona.java</file>
             <file>file:/C:/Users/andre/Desktop/Dashboard/dashboard/web/cliente_Baja.jsp</file>
             <file>file:/C:/Users/andre/Desktop/Dashboard/dashboard/src/java/controlador/ControladorManejoUsuarios.java</file>
+=======
+            <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/src/java/controlador/Interfaces/IVistaManejoDispositivos.java</file>
+            <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/src/java/vistaWeb/VistaManejoDispositivosWeb.java</file>
+            <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/src/java/controlador/ControladorManejoClientes.java</file>
+            <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/web/dispositivo_Alta.jsp</file>
+            <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/src/java/vistaWeb/VistaManejoPaquetesWeb.java</file>
+            <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/src/java/controlador/ControladorManejoDispositivos.java</file>
+>>>>>>> 16898b8d27079ce8215a3f782ae38bfab805e5a9
         </group>
     </open-files>
 </project-private>
