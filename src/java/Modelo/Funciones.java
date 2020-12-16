@@ -118,15 +118,9 @@ public class Funciones {
         String tabla = "";       
         for (Persona obj : opciones) {
             tabla += "<tr><td>" + obj.getUsuarioSistema() + "</td>"
-<<<<<<< HEAD
-                    + "<td>" + obj.getNombreCompleto()+ "</td>"
-                    
+                    + "<td>" + obj.getNombreCompleto()+ "</td>"                    
                     + "<td><input type='checkbox' class='w3-check' value='" + obj.getUsuarioSistema() + "' name='" + obj.getUsuarioSistema() + "' </td></tr>";             
             
-=======
-                    + "<td>" + obj.getNombreCompleto()+ "</td>"        
-                    + "<td><input type='checkbox' class='w3-check' value='" + obj.getUsuarioSistema() + "' name='" + obj.getUsuarioSistema() + "' </td></tr>";
->>>>>>> 16898b8d27079ce8215a3f782ae38bfab805e5a9
         }
         return tabla;
     }
@@ -135,19 +129,16 @@ public class Funciones {
         String tabla = "";
         
         for (Persona obj : opciones) {
-            tabla += "<tr><td>" + obj.retornarNroCliente() + "</td>"
+            tabla += "<tr><td>" + obj.retornarNroCliente() + "</td>" //poli
                     + "<td>" + obj.getNombreCompleto()+ "</td>" +
-                      "<td>" + obj.retornarEmail()+ "</td>" +
-                      "<td>" + obj.retornarTipoCli()+ "</td>"
-                    //ver si devolver si es principal o secundario
+                      "<td>" + obj.retornarEmail()+ "</td>" + //poli
+                      "<td>" + obj.retornarTipoCli()+ "</td>" //poli                  
                     + "<td><input type='checkbox' class='w3-check' value='" + obj.getUsuarioSistema() + "' name='" + obj.getUsuarioSistema() + "' </td></tr>";//fijarse acá, porque pongo el value de la PK de persona aunque esa PK para un cliente fue autogenerado y nunca se muestra         
             
         }
         return tabla;
     }
-//                                   int retornarNroCliente <th>Nro Cliente</th>CLIENTE
-//                                                          <th>Nombre completo</th>PERSONA
-//                                              retornarEmail<th>Email</th>CLIENTE
+
                                     
         
         

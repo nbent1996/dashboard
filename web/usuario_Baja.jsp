@@ -168,7 +168,7 @@
                                 </tbody>
                             </table>
                             <div class="margin-top20">
-<<<<<<< HEAD
+
                                 <div class="botonera">
                                     <input type="button" class="submitBaja" id="btnBorrarUsuariosSeleccionados" value="Borrar">
                                 </div>
@@ -181,24 +181,10 @@
                                             <br>
                                             <br>
                                         </div>
-=======
-                            <div class="botonera">
-                                <input type="button" class="submitBaja" id="btnBorrarUsuariosSeleccionados" value="Borrar">
-                            </div>
-                            <div id="divModal" class="w3-modal">
-                                <div class="w3-modal-content w3-animate-zoom" >
-                                    <div class="w3-container">
-                                        <span id="spanBtnCerrar" class="w3-button w3-display-topright">&times;</span>
-                                        <br>
-                                        <span id="spanMensaje"></span>
-                                        <br>
-                                        <br>
->>>>>>> 16898b8d27079ce8215a3f782ae38bfab805e5a9
+
+
                                     </div>
                                 </div>
-                            </div>                   
-                        </div>
-                </div>
-        </div>
+                            </div>
     </body>
 </html>
