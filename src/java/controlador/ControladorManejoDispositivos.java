@@ -2,20 +2,22 @@ package controlador;
 
 import Datos.OpCategoria;
 import Datos.OpDispositivo;
+import Datos.OpPersona;
 import Datos.OpTipoDispositivo;
-import controlador.Interfaces.IVistaManejoDispositivos;
-import controlador.Interfaces.IControlador;
 import Modelo.Dispositivo;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import javax.swing.table.DefaultTableModel;
+import Modelo.Empresa;
+import Modelo.Principal;
+import Modelo.ProgramException;
+import Modelo.TipoDispositivo;
+import controlador.Interfaces.IVistaManejoDispositivos;
 
-public class ControladorManejoDispositivos implements IControlador<Dispositivo>{
+public class ControladorManejoDispositivos{
     /*Estado*/
     private IVistaManejoDispositivos vista;
     private OpDispositivo opDispositivo;
     private OpTipoDispositivo opTipoDispositivo;
     private OpCategoria opCategoria;
+    private OpPersona opPersona;
     /*Estado*/
     
     /*Constructores*/
@@ -24,10 +26,26 @@ public class ControladorManejoDispositivos implements IControlador<Dispositivo>{
         this.opDispositivo = new OpDispositivo("bentancor");
         this.opTipoDispositivo = new OpTipoDispositivo("bentancor");
         this.opCategoria = new OpCategoria("bentancor");
+        this.opPersona = new OpPersona("bentancor");
     }
     /*Constructores*/
     
     /*Comportamiento*/
+    public void altaDispositivo(String nroSerie, String estado, String tipoDispositivo, String nroDocumentoPrincipalAsociado){
+        try{
+            Empresa e = new Empresa("526283747346"); //EMPRESA HARDCODEADA, SE DEBE TOMAR DE LA SESSION
+            Principal p = (Principal) opPersona.buscar(" WHERE Principales.nroDocumento='"+nroDocumentoPrincipalAsociado+"' ","Modelo.Principal").get(0);
+            TipoDispositivo tD = opTipoDispositivo.buscar(" WHERE TiposDispositivos.modelo='"+tipoDispositivo+"' ",null).get(0);
+            Dispositivo d = new Dispositivo(nroSerie, estado, tD, e, p);
+            d.validar();
+            opDispositivo.guardar(null,d);
+            vista.mensajeExito("dispositivo_Alta.jsp", "Dispositivo dado de alta correctamente.");
+        } catch (ProgramException ex) {
+            vista.mensajeError("dispositivo_Alta.jsp",ex.getMessage());
+        } catch (Exception ex) {
+            vista.mensajeError("dispositivo_Alta.jsp", ex.getMessage());
+        }
+    }
         public void cargarTiposDispositivos() {
             try{
                 //vista.mostrarTiposDispositivos(opTipoDispositivo.buscar(" WHERE nombreCategoria='"+categoria+"' ",null));
@@ -44,42 +62,4 @@ public class ControladorManejoDispositivos implements IControlador<Dispositivo>{
             }
         }
     /*Comportamiento*/
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    @Override
-    public void cargarItems(Dispositivo c, DefaultTableModel modelo) throws Exception, SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public String getFiltroProcesado(Dispositivo c, DefaultTableModel modelo) throws Exception, SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void borrarItems(ArrayList<Dispositivo> items) throws Exception, SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-
-    
 }

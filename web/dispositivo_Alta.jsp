@@ -121,7 +121,6 @@
             <header class="w3-container estilosHeader">
                 <h5><b><i class="fa fa-video-camera fa-fw"></i> Alta de Dispositivos </b></h5>
             </header>
-            <div class="ABMpage">
                 <div class="form">    
                     <form name="formAltaDispositivo" action="ManejoDispositivosServlet" method="post" onsubmit="return validarAltaDispositivo(this)">  
                         <div><label for="txtbxNroSerieDispositivoAlta">Número de Serie: </label><input type="text" class="nb-input" id="txtbxNroSerieDispositivoAlta" name="txtbxNroSerieDispositivoAlta" required="true"/></div>
@@ -132,7 +131,7 @@
                                 <option value="Usado-Reparar">Usado-Reparar</option>
                             </select>
                         </div>
-                        <div><label for="txtbxUsuarioClienteDispositivoAlta">Cliente (Nro de cliente):</label><span id="spanContenidoClienteAsociado"><span id="spanClienteAsociado">No seleccionado</span><input type="button" class="margin-left20 submitSearch" value="Buscar Cliente"/></span></div>
+                        <div><label for="txtbxUsuarioClienteDispositivoAlta">Cliente (Nro de cliente):</label><span id="spanContenidoClienteAsociado"><span id="spanClienteAsociado" name="spanClienteAsociado">No seleccionado</span><input type="button" class="margin-left20 submitSearch" value="Buscar Cliente"/></span></div>
                         <!--<div class="margin-top20"><label for="selCategoriaDispositivoAlta">Categoria:</label>
                         <span id="selCategoriaDispositivoAlta" name="comboCategorias"></span></div>-->
                         <div class="margin-top20"><label for="selTipoDispositivoDispositivoAlta">Tipo de dispositivo:</label>
@@ -148,6 +147,16 @@
                             <p class="message"><%=msg%></p>                        
                         </div>
                         <%}%>
+                        <div id="divModal" class="w3-modal">
+                            <div class="w3-modal-content w3-animate-zoom" >
+                                <div class="w3-container">
+                                    <span id="spanBtnCerrar" class="w3-button w3-display-topright">&times;</span>
+                                    <br>
+                                    <span id="spanMensaje"></span>
+                                    <br>
+                                    <br>
+                                </div>
+                            </div>
                     </form>
                 </div>
             </div>

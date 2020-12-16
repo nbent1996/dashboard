@@ -54,7 +54,7 @@ public class VistaManejoUsuariosWeb implements IVistaManejoUsuarios{
                 borrarUsuarios(request, response);
             break;
             case "buscarUsuariosBaja":
-                mostrarUsuariosbajaConTabla(request, response);
+                mostrarUsuariosTabla(request, response);
             break;
             case "mostrarTablaUsuariosInicio":
                 cargarTablaUsuariosBajaInicio();
@@ -78,32 +78,18 @@ public class VistaManejoUsuariosWeb implements IVistaManejoUsuarios{
 
 
     private void altaUsuario(HttpServletRequest request, HttpServletResponse response) {
-        
-        String usuarioAltaUsr = request.getParameter("usuario");
-        String nombreCompletoAltaUsr = request.getParameter("nombreCompleto");
-        String nombreEmpresaAltaUsr = request.getParameter("nombreEmpresa");
-        String nombrePaisAltaUsr = request.getParameter("lstPaises");
-        String tipoUsuarioAltaUsr = request.getParameter("tipoUsuario");
-        
+        String usuarioAltaUsr = request.getParameter("txtbxUserUsuarioAlta");
+        String nombreCompletoAltaUsr = request.getParameter("txtbxNombreCompletoAlta");
+        String codPaisAltaUsr = request.getParameter("selPaises");
+        String tipoUsuarioAltaUsr = request.getParameter("selTiposUsuarios");
+        String generoUsuarioAltaUsr = request.getParameter("selGenero");
         
         this.request = request;
         this.response = response;
 
-        controlador.altaUsuario(usuarioAltaUsr, nombreCompletoAltaUsr, nombreEmpresaAltaUsr, nombrePaisAltaUsr, tipoUsuarioAltaUsr);
+        controlador.altaUsuario(usuarioAltaUsr, nombreCompletoAltaUsr, codPaisAltaUsr , generoUsuarioAltaUsr, tipoUsuarioAltaUsr);
         
     }
-
-//    private void bajaUsuario(HttpServletRequest request, HttpServletResponse response) {
-//        
-//        String nombreUsuarioBaja = request.getParameter("usuarioBaja");
-//        
-//        this.request = request;
-//        this.response = response;
-//        
-//        controlador.bajaUsuario(nombreUsuarioBaja, "");
-//        
-//    }
-    
     private void borrarUsuarios(HttpServletRequest request, HttpServletResponse response) {
         String listaNombresDeUsuarios[] = request.getParameterValues("listaUsuarios"); // lista de nombres de usuarios (PK) (sacados del value de los checkboxes)
         this.request = request;
@@ -112,16 +98,12 @@ public class VistaManejoUsuariosWeb implements IVistaManejoUsuarios{
         controlador.borrarUsuariosSeleccionados(listaNombresDeUsuarios);
     }
     
-    private void mostrarUsuariosbajaConTabla(HttpServletRequest request, HttpServletResponse response) {
-        
-        //uno de los dos puede viene vacio ya que se puede filtrar por cualquiera de los dos campos
+    private void mostrarUsuariosTabla(HttpServletRequest request, HttpServletResponse response) {
         String nombreUsuarioBaja = request.getParameter("nombreUsuario");
         String nombreCompletoUsuarioBaja = request.getParameter("nombreCompleto");
-        
         this.request = request;
         this.response = response;
-        
-        controlador.mostrarUsuariosBajaEnTabla(nombreUsuarioBaja, nombreCompletoUsuarioBaja);
+        controlador.mostrarUsuariosTabla(nombreUsuarioBaja, nombreCompletoUsuarioBaja);
         
     }
 

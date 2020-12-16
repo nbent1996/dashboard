@@ -108,7 +108,6 @@
                 <a href="reporteGraficas.jsp" class="w3-bar-item w3-button w3-padding"><i class="fa fa-line-chart fa-fw"></i>&nbsp; Tablero de gráficas</a>
                 <hr>
             </div>
-
         </nav>
         <div class="ABMContainer">
         <!-- !PAGE CONTENT! -->
@@ -119,13 +118,13 @@
                 <div class="form">
                     <form name="formAltaUsuario" action="ManejoUsuariosServlet" method="post" onsubmit="return validarAltaUsuario(this)">
                         <div><label for="txtbxUserUsuarioAlta">Usuario Backoffice: </label><input type="text" id="txtbxUserUsuarioAlta" class="nb-input" name="txtbxUserUsuarioAlta" required="true"/></div>
-                        <div class="margin-top20">
+                        <!--<div class="margin-top20">
                             <label for="txtbxPasswordAlta">Contraseña: </label><input type="password" class="nb-input" id="txtbxPasswordUsuarioAlta" name="txtbxPasswordAlta" required="true"/>
                             <span class="spanVerClave"><input type="checkbox" class="w3-check" id="chkVerPasswordAltaUsuario" name="chkVerPasswordAltaUsuario">
                             <label for="chkVerPasswordAltaUsuario"> Ver clave</label></span>
-                        </div>
+                        </div>-->
                         
-                        <div class="margin-top20"><label for="txtbxNombreCompletoAlta">Nombre completo: </label><input type="text" id="txtbxNombreCompletoUsuarioAlta" class="nb-input" name="nombreCompleto" required="true"/></div>
+                        <div class="margin-top20"><label for="txtbxNombreCompletoAlta">Nombre completo: </label><input type="text" id="txtbxNombreCompletoUsuarioAlta" class="nb-input" name="txtbxNombreCompletoAlta" required="true"/></div>
                         <div class="margin-top20"><label for="selGenero">Genero: </label>
                              <select id="selGenero" class="nb-input" name="selGenero">
                                 <option value="Masculino" selected="true">Masculino</option>
@@ -144,6 +143,17 @@
                             <p class="message"><%=msg%></p>                        
                         </div>
                         <%}%>
+                        <div id="divModal" class="w3-modal">
+                                <div class="w3-modal-content w3-animate-zoom" >
+                                    <div class="w3-container">
+                                        <span id="spanBtnCerrar" class="w3-button w3-display-topright">&times;</span>
+                                        <br>
+                                        <span id="spanMensaje"></span>
+                                        <br>
+                                        <br>
+                                    </div>
+                                </div>
+                            </div>
                     </form>
                 </div>
             </div>

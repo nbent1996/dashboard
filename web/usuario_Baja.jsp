@@ -174,7 +174,7 @@
                             <div id="divModal" class="w3-modal">
                                 <div class="w3-modal-content w3-animate-zoom" >
                                     <div class="w3-container">
-                                        <span onclick="document.getElementById('divModal').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+                                        <span id="spanBtnCerrar" class="w3-button w3-display-topright">&times;</span>
                                         <br>
                                         <span id="spanMensaje"></span>
                                         <br>

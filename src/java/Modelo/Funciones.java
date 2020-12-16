@@ -114,20 +114,12 @@ public class Funciones {
             retorno+="</table>";
             return retorno;
         }
-        
-        
-
-    public static String tablaUsuarios(ArrayList<Persona> opciones, String boton) {
-        String tabla = "";
-        
+        public static String tablaUsuarios(ArrayList<Persona> opciones, String boton) {
+        String tabla = "";       
         for (Persona obj : opciones) {
             tabla += "<tr><td>" + obj.getUsuarioSistema() + "</td>"
-                    + "<td>" + obj.getNombreCompleto()+ "</td>"
-                    
+                    + "<td>" + obj.getNombreCompleto()+ "</td>"        
                     + "<td><input type='checkbox' class='w3-check' value='" + obj.getUsuarioSistema() + "' name='" + obj.getUsuarioSistema() + "' </td></tr>";
-                    
-                    //+ "<td><input type='button' value='" + boton + "' onclick=\"" + boton + "(" + x + ")\"> </td></tr>";
-            
         }
         return tabla;
     }
