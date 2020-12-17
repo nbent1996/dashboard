@@ -32,9 +32,9 @@ public class TestPaquetes {
             listaTieneTPp1.add(new TieneTP(2, new TipoDispositivo(2)));
             listaTieneTPp1.add(new TieneTP(1, new TipoDispositivo(1)));
 
-            Paquete p1 = new Paquete(350, new Empresa("526283747346"), listaTieneTPp1);
-            Paquete p2 = new Paquete(250, new Empresa("526283747346"));
-            Paquete p3 = new Paquete(400, new Empresa("526283747346"));
+            Paquete p1 = new Paquete(350,"Paquete 1", new Empresa("526283747346"), listaTieneTPp1);
+            Paquete p2 = new Paquete(250,"Paquete 2", new Empresa("526283747346"));
+            Paquete p3 = new Paquete(400,"Paquete 3", new Empresa("526283747346"));
             
             /*INSERCIONES DE PRUEBA*/
            assertEquals("NOERROR", this.op.insertar(p1).getTextoError());
@@ -55,14 +55,14 @@ public class TestPaquetes {
         listaTieneTPp2.add(new TieneTP(4, new TipoDispositivo(3)));
         listaTieneTPp2.add(new TieneTP(1, new TipoDispositivo(2)));
         listaTieneTPp2.add(new TieneTP(2, new TipoDispositivo(1)));
-        Paquete p1 = new Paquete(350, new Empresa("729.193.500-80"));
-        Paquete p2 = new Paquete(351, new Empresa("729.193.500-80"), listaTieneTPp2);
+        Paquete p1 = new Paquete(350,"Paquete 4", new Empresa("729.193.500-80"));
+        Paquete p2 = new Paquete(351,"Paquete 5", new Empresa("729.193.500-80"), listaTieneTPp2);
         this.op.insertar(p1);
         this.op.insertar(p2);
         
         //obtener los id de los paquetes insertados
-        p1 = this.op.buscar(" WHERE identificacionTributaria='729.193.500-80' AND costoBruto='350' ", null).get(0);
-        p2 = this.op.buscar(" WHERE identificacionTributaria='729.193.500-80' AND costoBruto='351' ", null).get(0);
+        p1 = this.op.buscar(" WHERE identificacionTributaria='729.193.500-80' AND nombrePaquete='Paquete 4' ", null).get(0);
+        p2 = this.op.buscar(" WHERE identificacionTributaria='729.193.500-80' AND nombrePaquete='Paquete 5' ", null).get(0);
        
         /*Búsqueda de un paquete sin lista TieneTP*/
         Paquete p1b = this.op.buscar(" WHERE idPaquete='"+p1.getIdPaquete()+"' ", null).get(0);
@@ -89,8 +89,8 @@ public class TestPaquetes {
             listaTieneTPp2.add(new TieneTP(4, new TipoDispositivo(3)));
             listaTieneTPp2.add(new TieneTP(1, new TipoDispositivo(2)));
             listaTieneTPp2.add(new TieneTP(2, new TipoDispositivo(1)));
-            Paquete p1Anterior = new Paquete(451, new Empresa("729.193.500-80"));
-            Paquete p2Anterior = new Paquete(452, new Empresa("729.193.500-80"), listaTieneTPp2);
+            Paquete p1Anterior = new Paquete(451,"Paquete 6", new Empresa("729.193.500-80"));
+            Paquete p2Anterior = new Paquete(452,"Paquete 7",new Empresa("729.193.500-80"), listaTieneTPp2);
             this.op.insertar(p1Anterior);
             this.op.insertar(p2Anterior);
             
@@ -132,8 +132,8 @@ public class TestPaquetes {
             listaTieneTPp2.add(new TieneTP(4, new TipoDispositivo(3)));
             listaTieneTPp2.add(new TieneTP(1, new TipoDispositivo(2)));
             listaTieneTPp2.add(new TieneTP(2, new TipoDispositivo(1)));
-            Paquete p1 = new Paquete(651, new Empresa("729.193.500-80"));
-            Paquete p2 = new Paquete(652, new Empresa("729.193.500-80"), listaTieneTPp2);
+            Paquete p1 = new Paquete(651,"Paquete 8", new Empresa("729.193.500-80"));
+            Paquete p2 = new Paquete(652,"Paquete 9", new Empresa("729.193.500-80"), listaTieneTPp2);
             this.op.insertar(p1);
             this.op.insertar(p2);
             
@@ -160,8 +160,8 @@ public class TestPaquetes {
             listaTieneTPp2.add(new TieneTP(4, new TipoDispositivo(3)));
             listaTieneTPp2.add(new TieneTP(1, new TipoDispositivo(2)));
             listaTieneTPp2.add(new TieneTP(2, new TipoDispositivo(1)));
-            Paquete p1 = new Paquete(791, new Empresa("729.193.500-80"));
-            Paquete p2 = new Paquete(792, new Empresa("729.193.500-80"), listaTieneTPp2);
+            Paquete p1 = new Paquete(791,"Paquete 10", new Empresa("729.193.500-80"));
+            Paquete p2 = new Paquete(792,"Paquete 11", new Empresa("729.193.500-80"), listaTieneTPp2);
             this.op.insertar(p1);
             this.op.insertar(p2);
 

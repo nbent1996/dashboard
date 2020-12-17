@@ -142,7 +142,7 @@
             </header>
             <div class="form">
                 <!--LAS BÚSQUEDAS SE HACEN POR AJAX CON BUTTONS, NO SE USAN FORMS-->
-                <div><h5 class="nb-title">Ingrese los filtros por los que desea buscar</h5></div>
+                <div><h5 class="nb-title-left">Ingrese los filtros por los que desea buscar</h5></div>
                 <!--NUMERO DE CLIENTE, EMAIL (CLIENTE), NOMBRE COMPLETO (PERSONA)-->
                     <div class="margin-top20"><label for="txtbNroClienteBaja">Número de cliente: </label><input type="text" class="nb-input" id="txtbNroClienteBaja" name="nroClienteBaja"/></div>
                     <div class="margin-top20"><label for="txtbEmailClienteBaja">Email: </label><input type="text" class="nb-input" id="txtbEmailClienteBaja" name="emailClienteBaja"/></div>
@@ -158,7 +158,7 @@
                     <%}%>
                     <div id="tablaClientes" >
                         <table class="w3-table-all">
-                            <caption><h4>Lista de Clientes</h4></caption>
+                            <caption><h5 class="nb-title-center">Lista de Clientes</h5></caption>
                             <thead>
                                 <tr>
                                     <th>Nro Cliente</th>

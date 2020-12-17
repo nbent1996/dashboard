@@ -58,12 +58,13 @@ public class Funciones {
         return lista;
     
     }
-        public static String tablaPaquetesAltaSuscripcion(ArrayList<Paquete> paquetes, Moneda moneda) throws ProgramException{
+        public static String tablaPaquetes(String idTabla, ArrayList<Paquete> paquetes, Moneda moneda) throws ProgramException{
             String retorno = "";
-            retorno+="<table id='tblPaquetesSuscripcionAlta' class='w3-table-all'>\n";
+            retorno+="<table id='"+idTabla+"' class='w3-table-all'>\n";
             /*Cabezales*/
             retorno+="<tr>\n";
                 retorno+="<th>Id Paquete</th>\n";
+                retorno+="<th>Nombre</th>\n";
                 retorno+="<th>Costo bruto</th>\n";
                 retorno+="<th>Dispositivos que contiene</th>\n";
                 retorno+="<th>Seleccionado</th>\n";
@@ -77,6 +78,7 @@ public class Funciones {
                 listado+="</ul>\n";
                 retorno+="<tr>\n";
                     retorno+="<td>"+p.getIdPaquete()+"</td>\n";
+                    retorno+="<td>"+p.getNombre()+"</td>\n";
                     retorno+="<td>"+moneda.getSimbolo()+" "+p.getCostoBruto()+"</td>\n";
                     retorno+="<td>" +listado+ "</td>\n";
                     retorno+="<td><input type='checkbox' class='w3-check' value='"+p.getIdPaquete()+"' name='"+p.getIdPaquete()+"'></td>\n";
@@ -86,9 +88,9 @@ public class Funciones {
             
             return retorno;
         }
-        public static String tablaTiposDispositivosConCantidad(ArrayList<TipoDispositivo> items) throws ProgramException{
+        public static String tablaTiposDispositivosConCantidad(String idTabla, ArrayList<TipoDispositivo> items) throws ProgramException{
             String retorno = "";
-            retorno+="<table id='tblTiposDispositivosPaqueteAlta' class='w3-table-all'>\n";
+            retorno+="<table id='"+idTabla+"' class='w3-table-all'>\n";
             /*Cabezales*/
             retorno+="<tr>\n";
                 retorno+="<th>Id Tipo Dispositivo</th>\n";

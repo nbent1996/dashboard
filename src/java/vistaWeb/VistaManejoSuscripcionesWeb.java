@@ -56,9 +56,9 @@ public class VistaManejoSuscripcionesWeb implements IVistaManejoSuscripciones{
         this.response = response;
     }
     @Override
-    public void generarTablaPaquetes(ArrayList<Paquete> items, Moneda moneda){
+    public void generarTablaPaquetes(String idTabla , ArrayList<Paquete> items, Moneda moneda){
         try{
-            String componente = Funciones.tablaPaquetesAltaSuscripcion(items, moneda);
+            String componente = Funciones.tablaPaquetes(idTabla, items, moneda);
             out.write(componente + "\n\n");
         }catch(ProgramException ex){
             mensajeError("suscripcion_Alta.jsp","Error al generar la tabla de Paquetes de dispositivos.");

@@ -13,6 +13,12 @@ select{
   width:60%;
   margin: 10px;
 }
+.nb-input-sinSize{
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin: 10px;
+}
 .nb-table-input{
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -22,8 +28,13 @@ select{
 .nb-inputCantidadTabla{
     width:55px;
 }
-.nb-title{
+.nb-title-center{
     font-weight:bold;
+    text-align:center;
+}
+.nb-title-left{
+    font-weight:bold;
+    text-align:left;
 }
 .margin-top20{
     margin-top:20px;
@@ -205,7 +216,25 @@ select{
     left:112px;
 }
 /*suscripcion_Alta.jsp*/
-
+/*paquete_Baja.jsp*/
+#txtbxCostoBrutoAPaqueteBaja, #txtbxCostoBrutoBPaqueteBaja{
+    position:relative;
+    left:15px;
+    width:150px;
+}
+#lblAndPaqueteBaja{
+    position:relative;
+    left:15px;
+    margin-right:15px;
+}
+#txtbxCostoBrutoAPaqueteBaja{
+    margin-right:15px;
+}
+#txtbxIdPaqueteBaja{
+    position:relative;
+    left:66px;
+}
+/*paquete_Baja.jsp*/
 .borderDiv{
     padding:5px;
     border-style:solid;

@@ -22,7 +22,13 @@
     
     <body class="w3-light-grey">
         <script>
-            
+           mostrarTablaPaquetesPaqueteBaja();
+           function mostrarTablaPaquetesPaqueteBaja(){
+               $.get("ManejoPaquetesServlet?accion=generarTablaPaquetesBaja", function(data){
+                  document.getElementById("spanPaquetesPaqueteBaja").innerHTML=data; 
+               });
+               
+           }   
         </script>
 
         <div class="w3-bar w3-top w3-black w3-large" id="divBarraSuperior">
@@ -96,22 +102,31 @@
                 <hr>
             </div>
 
-        </nav>
-        
+        </nav>      
         <!-- !PAGE CONTENT! -->
         <div class="ABMContainer">
-
             <!-- Header -->
             <header class="w3-container estilosHeader">
                 <h5><b><i class="fa fa fa-cubes fa-fw"></i> Baja de Paquetes</b></h5>
             </header>
                 <div class="form">
-                    <form id="formAltaPaquete" name="formAltaPaquete" action="ManejoPaquetesServlet" method="post" onsubmit="return validarAltaPaquete(this)">
-                        
+                    <form>
+                        <div><h5 class="nb-title-left">Ingrese los filtros por los que desea buscar</h5></div>
+                        <div class="margin-top20"><label for="txtbxIdPaqueteBaja">Id Paquete: </label><input type="text" class="nb-input" id="txtbxIdPaqueteBaja" name="txtbxIdPaqueteBaja" required="true"/></div>
+                        <div class="margin-top20"><label for="txtbxNombrePaqueteBaja">Nombre: </label><input type="text" class="nb-input" id="txtbxNombrePaqueteBaja" name="txtbxNombrePaqueteBaja" required="true"/></div>
+                        <div class="margin-top20">
+                            <label for="txtbxCostoBrutoAPaqueteBaja">Costo bruto entre : </label><input type="text" class="nb-input-sinSize" id="txtbxCostoBrutoAPaqueteBaja" name="txtbxCostoBrutoAPaqueteBaja" required="true"/><label id="lblAndPaqueteBaja"> y </label><input type="text" class="nb-input-sinSize margin-left20" id="txtbxCostoBrutoBPaqueteBaja" name="txtbxCostoBrutoBPaqueteBaja" required="true"/></div>     
                         <hr>        
                         <div class="botonera">
-                        <input type="submit" class="submitAlta" value="confirmar">
-                        <input type="reset" class="limpiarCampos" value="Limpiar campos">    
+                            <input type="submit" class="submitSearch" value="Buscar">
+                            <input type="reset" class="limpiarCampos" value="Limpiar campos">    
+                        </div>
+                        <div class="margin-top20"><div><h5 class="nb-title-center">Lista de Paquetes</h5></div><span id="spanPaquetesPaqueteBaja" name="generarTablaPaquetesBaja"></div>  
+                        
+                        <div class="margin-top20">
+                        <div class="botonera">
+                            <input type="button" class="submitBaja" id="btnBorrarPaquetesSeleccionados" value="Borrar">
+                        </div>
                         </div>
                         
                         <span id="mensajeAlta"></span>
@@ -121,9 +136,19 @@
                             <p class="message"><%=msg%></p>                        
                         </div>
                         <%}%>
+                        <div id="divModal" class="w3-modal">
+                            <div class="w3-modal-content w3-animate-zoom" >
+                                <div class="w3-container">
+                                    <span id="spanBtnCerrar" class="w3-button w3-display-topright">&times;</span>
+                                    <br>
+                                    <span id="spanMensaje"></span>
+                                    <br>
+                                    <br>
+                                </div>
+                            </div>
+                        </div>
                     </form>
                 </div>
-
             </div>
         </div>
     </body>

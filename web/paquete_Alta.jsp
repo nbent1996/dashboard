@@ -114,8 +114,9 @@
             </header>
                 <div class="form">
                     <form id="formAltaPaquete" name="formAltaPaquete" action="ManejoPaquetesServlet" method="post" onsubmit="return validarAltaPaquete(this)">
-                        <div><label for="txtbxCostoBruto">Costo bruto: </label><span id="spanMonedaCosto"></span><input type="text" class="nb-input" id="txtbxCostoBrutoPaqueteAlta" name="txtbxCostoBrutoPaqueteAlta" required="true"/></div>
-                        <div class="margin-top20"><div><h5 class="nb-title">Dispositivos asignados al Paquete</h5></div><span id="spanTiposDispositivoPaqueteAlta" name="generarTablaTiposDispositivos"></div>
+                        <div><label for="txtbxNombrePaqueteAlta">Nombre: </label><input type="text" class="nb-input" id="txtbxNombrePaqueteAlta" name="txtbxNombrePaqueteAlta" required="true"/></div>
+                        <div class="margin-top20"><label for="txtbxCostoBruto">Costo bruto: </label><span id="spanMonedaCosto"></span><input type="text" class="nb-input" id="txtbxCostoBrutoPaqueteAlta" name="txtbxCostoBrutoPaqueteAlta" required="true"/></div>
+                        <div class="margin-top20"><div><h5 class="nb-title-center">Dispositivos asignados al Paquete</h5></div><span id="spanTiposDispositivoPaqueteAlta" name="generarTablaTiposDispositivos"></div>
 
                         <hr>        
                         <div class="botonera">
