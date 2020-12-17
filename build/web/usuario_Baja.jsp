@@ -140,7 +140,7 @@
             </header>
                 <div class="form">
                     <!--LAS BÚSQUEDAS SE HACEN POR AJAX CON BUTTONS, NO SE USAN FORMS-->
-                        <div><h5 class="nb-title">Ingrese los filtros por los que desea buscar</h5></div>
+                        <div><h5 class="nb-title-left">Ingrese los filtros por los que desea buscar</h5></div>
                         
                         <div class="margin-top20"><label for="txtbxUsuarioBaja">Usuario: </label><input type="text" class="nb-input" id="txtbxUsuarioBaja" name="usuarioBaja"/></div>
                         <div class="margin-top20"><label for="txtbNombreCompletoBaja">Nombre y/o Apellido: </label><input type="text" class="nb-input" id="txtbxNombreCompletoBaja" name="nombreCompletoBaja"/></div>                        
@@ -156,7 +156,7 @@
                         <%}%>
                         <div id="tablaUsuarios" >
                             <table class="w3-table-all">
-                                <caption><h4>Lista de Usuarios</h4></caption>
+                                <caption><h5 class="nb-title-center">Lista de Usuarios</h5></caption>
                                 <thead>
                                     <tr>
                                         <th>Nombre de usuario</th>

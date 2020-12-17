@@ -43,7 +43,7 @@ public OpPaquete(String usuarioSistema){
     public LogSistema insertar(Paquete c) throws Exception, SQLException {
         ArrayList<String> listaSQL = new ArrayList<>();
         String modo = "UPDATE"; //Para paquetes sin instancias de TieneTP
-        listaSQL.add("INSERT INTO Paquetes (costoBruto, identificacionTributaria) values ('"+c.getCostoBruto()+"','"+c.getEmpresaAsociada().getIdentificacionTributaria()+"') ");
+        listaSQL.add("INSERT INTO Paquetes (nombrePaquete, costoBruto, identificacionTributaria) values ('"+c.getNombre()+"', '"+c.getCostoBruto()+"','"+c.getEmpresaAsociada().getIdentificacionTributaria()+"') ");
         if(!c.getListaTieneTP().isEmpty()){
             modo="INSERT";
             for(TieneTP t: c.getListaTieneTP()){
@@ -66,7 +66,7 @@ public OpPaquete(String usuarioSistema){
     @Override
     public LogSistema modificar(Paquete cAnterior, Paquete c) throws Exception, SQLException {
         ArrayList<String> listaSQL = new ArrayList<>();
-        listaSQL.add("UPDATE Paquetes SET costoBruto='"+c.getCostoBruto()+"', identificacionTributaria='"+c.getEmpresaAsociada().getIdentificacionTributaria()+"' WHERE idPaquete = '"+cAnterior.getIdPaquete()+"' AND eliminado = 'N' ");
+        listaSQL.add("UPDATE Paquetes SET nombrePaquete='"+c.getNombre()+"', costoBruto='"+c.getCostoBruto()+"', identificacionTributaria='"+c.getEmpresaAsociada().getIdentificacionTributaria()+"' WHERE idPaquete = '"+cAnterior.getIdPaquete()+"' AND eliminado = 'N' ");
         /*Actualizando Tipos de Dispositivos asociados al Paquete solo si es necesario*/
         if(!listasSonIguales(c.getListaTieneTP(), cAnterior.getListaTieneTP())){
             listaSQL.add("DELETE FROM TieneTP WHERE idPaquete='"+cAnterior.getIdPaquete()+"' ");
@@ -121,6 +121,7 @@ public OpPaquete(String usuarioSistema){
         ArrayList<Paquete> lista = new ArrayList<>();
         int idPaquete = -1, cantidadDispositivos;
         float costoBruto =-1;
+        String nombrePaquete="";
         //TipoDispositivo
         int idTipoDispositivo=-1;
         String modelo = "", nombre="", tipoComunicacion="";
@@ -128,7 +129,7 @@ public OpPaquete(String usuarioSistema){
         
         Empresa empresaAsociada = null;
         ArrayList<TieneTP> listaTieneTP = new ArrayList<>();
-        String sql = "SELECT idPaquete, costoBruto, identificacionTributaria from Paquetes ";
+        String sql = "SELECT idPaquete,nombrePaquete, costoBruto, identificacionTributaria from Paquetes ";
         ArrayList<String> listaSQL = new ArrayList<>();
         if(filtro!=null){
             sql+=filtro;
@@ -142,6 +143,7 @@ public OpPaquete(String usuarioSistema){
             ResultSet rs = database.consultar(sql);
             while(rs.next()){
                 idPaquete = rs.getInt("idPaquete");
+                nombrePaquete = rs.getString("nombrePaquete");
                 costoBruto = rs.getFloat("costoBruto");
                 empresaAsociada = new Empresa(rs.getString("identificacionTributaria"));
                 ResultSet rsTieneTP = database.consultar("SELECT TieneTP.idPaquete, TieneTP.idTipoDispositivo, TieneTP.cantidadDispositivos, TiposDispositivos.modelo, TiposDispositivos.nombre, TiposDispositivos.tipoComunicacion, TiposDispositivos.nombreCategoria from TieneTP, TiposDispositivos WHERE TieneTP.idTipoDispositivo = TiposDispositivos.idTipoDispositivo AND idPaquete = '"+idPaquete+"' AND TiposDispositivos.eliminado='N' AND TieneTP.eliminado='N'");
@@ -158,7 +160,7 @@ public OpPaquete(String usuarioSistema){
                 }
                 rsTieneTP.close();
                 /*Cargando lista de tiene TP al paquete de turno en el ciclo*/
-                lista.add(new Paquete(idPaquete, costoBruto,empresaAsociada, listaTieneTP));
+                lista.add(new Paquete(idPaquete,nombrePaquete, costoBruto,empresaAsociada, listaTieneTP));
             }
             rs.close();
         }catch(SQLException ex){

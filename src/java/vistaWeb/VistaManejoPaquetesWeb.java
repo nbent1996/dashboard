@@ -1,5 +1,7 @@
 package vistaWeb;
 import Modelo.Funciones;
+import Modelo.Moneda;
+import Modelo.Paquete;
 import Modelo.ProgramException;
 import Modelo.TipoDispositivo;
 import controlador.ControladorManejoPaquetes;
@@ -33,12 +35,15 @@ public class VistaManejoPaquetesWeb implements IVistaManejoPaquetes{
             case "generarTablaTiposDispositivos":
                 this.generarTablaTiposDispositivos();
             break;
+            case "generarTablaPaquetesBaja":
+                this.generarTablaPaquetes();
+            break;
             case "formAltaPaquete":
                 this.altaPaquete(request, response);
-                break;
+            break;
             case "formBajaPaquete":
 
-                break;
+            break;
 
             case "formModificacionPaquete":
 
@@ -47,6 +52,9 @@ public class VistaManejoPaquetesWeb implements IVistaManejoPaquetes{
     }
     private void generarTablaTiposDispositivos(){
         this.controlador.generarTablaTiposDispositivos();
+    }
+    private void generarTablaPaquetes(){
+        this.controlador.generarTablaPaquetes();
     }
     private void altaPaquete(HttpServletRequest request, HttpServletResponse response){
         this.request = request;
@@ -73,12 +81,21 @@ public class VistaManejoPaquetesWeb implements IVistaManejoPaquetes{
     }
 
     @Override
-    public void generarTablaTiposDispositivos(ArrayList<TipoDispositivo> items) {
+    public void generarTablaTiposDispositivos(String idTabla, ArrayList<TipoDispositivo> items) {
         try{
-            String componente = Funciones.tablaTiposDispositivosConCantidad(items);
+            String componente = Funciones.tablaTiposDispositivosConCantidad(idTabla, items);
             out.write(componente + "\n\n");
         }catch(ProgramException ex){
             mensajeError("paquete_Alta.jsp","Error al generar la tabla de Paquetes de dispositivos.");
+        }
+    }
+    @Override
+    public void generarTablaPaquetes(String idTabla, ArrayList<Paquete> items, Moneda moneda){
+        try{
+            String componente = Funciones.tablaPaquetes(idTabla, items, moneda);
+            out.write(componente + "\n\n");
+        }catch(ProgramException ex){
+            mensajeError("paquete_Baja.jsp","Error al generar la tabla de Paquetes de dispositivos.");
         }
     }
     /*Comportamiento*/
