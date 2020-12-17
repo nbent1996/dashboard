@@ -41,6 +41,17 @@
                         document.getElementById("tblClientesFiltrados").innerHTML=data;
                     });               
                 }
+                
+                function buscarClienteBaja(){
+                          
+                        var nroCliente = $("#txtbNroClienteBaja").val();
+                        var emailCliente = $("#txtbEmailClienteBaja").val();
+                        var nombreCompletoCliente = $("#txtbNombreCompletoBajaCli").val();
+                        $.get("ManejoClientesServlet?accion=buscarClientesBaja&nroCliente=" + nroCliente + "&emailCliente=" + emailCliente + "&nombreCompletoCliente=" + nombreCompletoCliente, function (data) {
+                            document.getElementById("tblClientesFiltrados").innerHTML = data;
+                            document.getElementById("spanMensaje").innerHTML = ""; //MÉTODO PARA LIMPIAR CAMPO
+                        });
+                    }
             
             
              
@@ -138,8 +149,7 @@
                     <div class="margin-top20"><label for="txtbNombreCompletoBajaCli">Nombre y/o Apellido: </label><input type="text" class="nb-input" id="txtbNombreCompletoBajaCli" name="nombreCompletoBajaCli"/></div>                        
                     <div class="botonera">
                         <input type="button" class ="submitSearch" onclick="buscarClienteBaja()" id="btnBuscarClienteBaja" value="Buscar">
-                        <input type="reset" class="limpiarCampos" value="Limpiar campos">    
-                        </form>
+                        <input type="reset" class="limpiarCampos" value="Limpiar campos">                            
                     </div>
                     <%if (msg != null) {%>
                     <div>

@@ -27,11 +27,12 @@
                         });               
                     }
                     function buscarUsuarioBaja(){
-                        //limpiar campo de span de mensaje de usuario borrado    
+                            
                         var nombreUsuario = $("#txtbxUsuarioBaja").val();
                         var nombreCompleto = $("#txtbxNombreCompletoBaja").val();
                         $.get("ManejoUsuariosServlet?accion=buscarUsuariosBaja&nombreUsuario=" + nombreUsuario + "&nombreCompleto=" + nombreCompleto, function (data) {
                             document.getElementById("tblUsuariosFiltrados").innerHTML = data;
+                            //limpio campo de span de mensaje de usuario borrado
                             document.getElementById("spanMensaje").innerHTML = ""; //MÉTODO PARA LIMPIAR CAMPO
                         });
                     }
@@ -145,9 +146,8 @@
                         <div class="margin-top20"><label for="txtbxUsuarioBaja">Usuario: </label><input type="text" class="nb-input" id="txtbxUsuarioBaja" name="usuarioBaja"/></div>
                         <div class="margin-top20"><label for="txtbNombreCompletoBaja">Nombre y/o Apellido: </label><input type="text" class="nb-input" id="txtbxNombreCompletoBaja" name="nombreCompletoBaja"/></div>                        
                         <div class="botonera">
-                        <input type="button" class ="submitSearch" onclick="buscarUsuarioBaja()" id="btnBuscarUsuarioBaja" value="Buscar">
-                        <input type="reset" class="limpiarCampos" value="Limpiar campos">    
-                        </form>
+                            <input type="button" class ="submitSearch" onclick="buscarUsuarioBaja()" id="btnBuscarUsuarioBaja" value="Buscar">
+                            <input type="reset" class="limpiarCampos" value="Limpiar campos">    
                         </div>
                         <%if (msg != null) {%>
                         <div>
@@ -181,10 +181,11 @@
                                             <br>
                                             <br>
                                         </div>
-
-
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                </div>
+        </div>
     </body>
 </html>

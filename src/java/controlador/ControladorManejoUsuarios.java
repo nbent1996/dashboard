@@ -77,7 +77,7 @@ public class ControladorManejoUsuarios{
     
     
     //cuando filtro por nombre de usuario o nombre completo muestro tabla solamente con esos datos
-    public void mostrarUsuariosTabla(String nombreUsuarioBaja, String nombreCompletoUsuarioBaja) {
+    public void mostrarUsuariosFiltradosTabla(String nombreUsuarioBaja, String nombreCompletoUsuarioBaja) {
         ArrayList<Persona> listaUsuarios = new ArrayList();
             try{
             listaUsuarios = opPersona.buscar(" WHERE OperadoresDashboard.usuarioSistema like '%"+nombreUsuarioBaja+"%' AND Personas.nombreCompleto LIKE '%"+nombreCompletoUsuarioBaja+"%' " , "Modelo.Operador");

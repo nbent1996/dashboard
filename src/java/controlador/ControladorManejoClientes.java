@@ -103,4 +103,29 @@ public class ControladorManejoClientes {
         }
         
     }
+
+    //muestro tabla solamente con los clientes segun filtros ingresados
+    public void mostrarClientesFiltradosTabla(int nroClienteBaja, String emailClienteBaja, String nombreCompletoClienteBaja) {        
+
+        ArrayList<Persona> listaClientes = new ArrayList();
+        
+        try {
+            
+            if(nroClienteBaja == -1){//quiere decir que no se ingresó un nro cliente en el filtro
+                listaClientes = opPersona.buscar(" WHERE Personas.nombreCompleto LIKE '%"+nombreCompletoClienteBaja+"%' AND Clientes.email LIKE '%"+emailClienteBaja+"%' " , "Modelo.Principal");
+                listaClientes.addAll(opPersona.buscar(" WHERE Personas.nombreCompleto LIKE '%"+nombreCompletoClienteBaja+"%' AND Clientes.email LIKE '%"+emailClienteBaja+"%' " , "Modelo.Secundario"));
+                vista.mostrarTablaClientesBajaInicio(listaClientes);//ver de reusar siempre el mismo metodo cuando se quiere mostrar tabla
+            }else{
+                listaClientes = opPersona.buscar(" WHERE Clientes.nroCliente like '%"+nroClienteBaja+"%' AND Personas.nombreCompleto LIKE '%"+nombreCompletoClienteBaja+"%' AND Clientes.email LIKE '%"+emailClienteBaja+"%' " , "Modelo.Principal");
+                listaClientes.addAll(opPersona.buscar(" WHERE Clientes.nroCliente like '%"+nroClienteBaja+"%' AND Personas.nombreCompleto LIKE '%"+nombreCompletoClienteBaja+"%' AND Clientes.email LIKE '%"+emailClienteBaja+"%' " , "Modelo.Secundario"));
+                vista.mostrarTablaClientesBajaInicio(listaClientes);//ver de reusar siempre el mismo metodo cuando se quiere mostrar tabla
+                //ver acá que si el array de clientes es vacio devolver mensaje de que no se encontraron en vez de mostrar tabla vacia
+            }
+            
+        } catch (Exception ex) {
+            vista.mensajeError("cliente_Baja", "Error al dar de baja el cliente");
+        }
+        
+        
+    }
 }

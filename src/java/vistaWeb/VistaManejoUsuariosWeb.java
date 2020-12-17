@@ -54,7 +54,7 @@ public class VistaManejoUsuariosWeb implements IVistaManejoUsuarios{
                 borrarUsuarios(request, response);
             break;
             case "buscarUsuariosBaja":
-                mostrarUsuariosTabla(request, response);
+                mostrarUsuariosFiltradosTabla(request, response);
             break;
             case "mostrarTablaUsuariosInicio":
                 cargarTablaUsuariosBajaInicio();
@@ -98,12 +98,12 @@ public class VistaManejoUsuariosWeb implements IVistaManejoUsuarios{
         controlador.borrarUsuariosSeleccionados(listaNombresDeUsuarios);
     }
     
-    private void mostrarUsuariosTabla(HttpServletRequest request, HttpServletResponse response) {
+    private void mostrarUsuariosFiltradosTabla(HttpServletRequest request, HttpServletResponse response) {
         String nombreUsuarioBaja = request.getParameter("nombreUsuario");
         String nombreCompletoUsuarioBaja = request.getParameter("nombreCompleto");
         this.request = request;
         this.response = response;
-        controlador.mostrarUsuariosTabla(nombreUsuarioBaja, nombreCompletoUsuarioBaja);
+        controlador.mostrarUsuariosFiltradosTabla(nombreUsuarioBaja, nombreCompletoUsuarioBaja);
         
     }
 

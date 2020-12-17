@@ -51,6 +51,10 @@ public class VistaManejoClientesWeb implements IVistaManejoClientes{
             case "mostrarTablaClientesInicio":
                 cargarTablaClientesBajaInicio();
             break;
+            case "buscarClientesBaja":
+                mostrarClientesFiltradosTabla(request, response);
+            break;
+            
             
             case "formModificacionCliente":
             
@@ -149,10 +153,36 @@ public class VistaManejoClientesWeb implements IVistaManejoClientes{
     //muestro tabla de todos los clientes (principales y secundarios) para seleccionar y dar de baja
     @Override
     public void mostrarTablaClientesBajaInicio(ArrayList<Persona> principalesYSecundarios) {
-        String componente = Funciones.tablaClientes(principalesYSecundarios, "chkBajaCliente");
+        String componente = Funciones.tablaClientes(principalesYSecundarios);
         
         out.write(componente + "\n\n");
     }
+
+    private void mostrarClientesFiltradosTabla(HttpServletRequest request, HttpServletResponse response) {
+        
+        this.request = request;
+        this.response = response;
+        
+        int nroClienteBaja = -1;
+        String emailClienteBaja = request.getParameter("emailCliente");
+        String nombreCompletoClienteBaja = request.getParameter("nombreCompletoCliente");
+        
+        if(!request.getParameter("nroCliente").equals("")){//si se ingresó un nro cliente
+            nroClienteBaja = Integer.parseInt(request.getParameter("nroCliente"));
+            controlador.mostrarClientesFiltradosTabla(nroClienteBaja, emailClienteBaja, nombreCompletoClienteBaja);
+        }else{//si no se ingresó un nro de cliente            
+            controlador.mostrarClientesFiltradosTabla(nroClienteBaja, emailClienteBaja, nombreCompletoClienteBaja);
+        }
+        
+        
+        
+        
+        
+        
+        
+    }
+
+    
 
 
 

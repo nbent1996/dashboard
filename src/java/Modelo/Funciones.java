@@ -125,7 +125,7 @@ public class Funciones {
         return tabla;
     }
     
-    public static String tablaClientes(ArrayList<Persona> opciones, String chkBajaCliente) {
+    public static String tablaClientes(ArrayList<Persona> opciones) {
         String tabla = "";
         
         for (Persona obj : opciones) {
