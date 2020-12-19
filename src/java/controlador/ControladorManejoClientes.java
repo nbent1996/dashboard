@@ -128,4 +128,61 @@ public class ControladorManejoClientes {
         
         
     }
+
+    //Borro los clientes seleccionados de los checkboxes
+    public void borrarClientesSeleccionados(String[] listaNombresDeUsuariosDeClientes) {
+        
+        if(!listaNombresDeUsuariosDeClientes[0].equals("")){ //se seleccionó al menos un cliente para borrar
+            //en el frontend tira todos los nombres de usuarios de los check en la posición [0], por eso convierto a string y luego a array para poder recorrer
+            String cadena = listaNombresDeUsuariosDeClientes[0].toString();
+            String[]cadenaConvertida = cadena.split(",");
+            for (String nombreUsuarioCli : cadenaConvertida) { 
+                //recorro cada nombre de usuario, me traigo la persona que tiene ese usuario y lo borro
+                
+                
+                try {
+                Persona clientePrincipal = opPersona.buscar(" WHERE Clientes.usuarioSistema='" + nombreUsuarioCli + "' ", "Modelo.Principal").get(0);
+                opPersona.borrar(clientePrincipal);
+                } catch (Exception ex) {
+                    vista.mensajeErrorBajaClientes("Ocurrió un error al borrar el cliente");
+                }
+                
+                try {
+                    Persona clienteSecundario = opPersona.buscar(" WHERE Clientes.usuarioSistema='" + nombreUsuarioCli + "' ", "Modelo.Secundario").get(0);
+                    opPersona.borrar(clienteSecundario);
+                } catch (Exception ex) {
+                    vista.mensajeErrorBajaClientes("Ocurrió un error al borrar el cliente");
+                }
+                
+  
+            }
+            vista.mostrarMensajeExitoClienteBorrado("Se eliminaron los clientes: " + cadena); //devuelvo cadena que es el string que tiene los nombres de usuarios a borrar
+        }else{
+            vista.mensajeNoSeleccionasteClientes("Debes seleccionar al menos un cliente para borrar");
+        }
+        
+        
+        
+    }
+    
+    
+//                try{
+//                    //acá se cae si selecciono un secundario
+//                    Persona clientePrincipal = opPersona.buscar(" WHERE Clientes.usuarioSistema='" + nombreUsuarioCli + "' ", "Modelo.Principal").get(0);
+//                    if(clientePrincipal!=null){
+//                        opPersona.borrar(clientePrincipal);
+//                    }else{
+//                        Persona clienteSecundario = opPersona.buscar(" WHERE Clientes.usuarioSistema='" + nombreUsuarioCli + "' ", "Modelo.Secundario").get(0);
+//                        opPersona.borrar(clienteSecundario);
+//                    }
+//                    
+//                }catch(Exception ex){
+//                    vista.mensajeErrorBajaClientes("Ocurrió un error al borrar el cliente");
+//                    System.out.println(ex.getMessage());
+//                }
+    
+    
+    
+    
+    
 }

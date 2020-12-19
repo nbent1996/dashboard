@@ -13,4 +13,10 @@ public interface IVistaManejoClientes {
     public void mostrarUsuarioSistema(String usuario);
 
     public void mostrarTablaClientesBajaInicio(ArrayList<Persona> principalesYSecundarios);
+
+    public void mensajeErrorBajaClientes(String mensajeErrorAlBorrar);
+
+    public void mostrarMensajeExitoClienteBorrado(String mensajeExitoAlBorrar);
+
+    public void mensajeNoSeleccionasteClientes(String mensajeNoSeleccion);
 }

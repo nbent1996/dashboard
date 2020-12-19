@@ -52,6 +52,23 @@
                             document.getElementById("spanMensaje").innerHTML = ""; //MÉTODO PARA LIMPIAR CAMPO
                         });
                     }
+                    
+                    
+                function borrarClientesSeleccionados(){
+                    var listaClientesSeleccionados = new Array();
+                    $("input:checkbox:checked").each(   
+                        function() {
+                            listaClientesSeleccionados.push($(this).val());
+                            //alert("El checkbox con valor " + $(this).val() + " está seleccionado");
+                        }
+                    );
+                        $.get("ManejoClientesServlet?accion=borrarClientes&listaClientes=" + listaClientesSeleccionados, function (data) {
+
+                        document.getElementById("spanMensaje").innerHTML = data; //muestro mensaje modal
+                        mostrarTablaClientes();//Refresco tabla
+                    });
+
+                }
             
             
              
@@ -174,7 +191,7 @@
                         </table>
                         <div class="margin-top20">
                             <div class="botonera">
-                                <input type="button" class="submitBaja" id="btnBorrarClientesSeleccionados" value="Borrar">
+                                <input type="button" onclick="borrarClientesSeleccionados()" class="submitBaja" id="btnBorrarClientesSeleccionados" value="Borrar">
                             </div>
                             <div id="divModal" class="w3-modal">
                                 <div class="w3-modal-content w3-animate-zoom" >

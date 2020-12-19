@@ -38,7 +38,7 @@ function load(){
     $("#btnBorrarUsuariosSeleccionados").click(eventoBorrarUsuarioBaja);
     /*usuario_Baja.jsp*/
     /*cliente_Baja.jsp*/
-    
+    $("#btnBorrarClientesSeleccionados").click(eventoBorrarClienteBaja);
     /*cliente_Baja.jsp*/
     
     /*paquete_Baja.jsp*/
@@ -101,7 +101,12 @@ function eventoCerrarModal(){
     
 }
 function eventoBorrarUsuarioBaja(){
-    borrarUsuariosSeleccionados();
+    borrarUsuariosSeleccionados();   
+    abrirModal();
+}
+
+function eventoBorrarClienteBaja(){
+    borrarClientesSeleccionados();
     abrirModal();
 }
 

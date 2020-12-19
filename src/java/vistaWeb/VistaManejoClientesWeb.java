@@ -54,7 +54,9 @@ public class VistaManejoClientesWeb implements IVistaManejoClientes{
             case "buscarClientesBaja":
                 mostrarClientesFiltradosTabla(request, response);
             break;
-            
+            case "borrarClientes":
+                borrarClientes(request, response);
+            break;
             
             case "formModificacionCliente":
             
@@ -180,6 +182,30 @@ public class VistaManejoClientesWeb implements IVistaManejoClientes{
         
         
         
+    }
+
+    private void borrarClientes(HttpServletRequest request, HttpServletResponse response) {
+        String listaNombresDeUsuariosDeClientes[] = request.getParameterValues("listaClientes"); //(en un principio tomo el nombre de usuario ya que es pk de persona, ver si funciona así o tomar otro atributo) lista de nombres de usuarios (PK) (sacados del value de los checkboxes)
+        this.request = request;
+        this.response = response;
+        
+        controlador.borrarClientesSeleccionados(listaNombresDeUsuariosDeClientes);
+        
+    }
+
+    @Override
+    public void mensajeErrorBajaClientes(String mensajeErrorAlBorrar) {
+        out.write(mensajeErrorAlBorrar);
+    }
+
+    @Override
+    public void mostrarMensajeExitoClienteBorrado(String mensajeExitoAlBorrar) {
+        out.write(mensajeExitoAlBorrar);
+    }
+
+    @Override
+    public void mensajeNoSeleccionasteClientes(String mensajeNoSeleccion) {
+        out.write(mensajeNoSeleccion);
     }
 
     
