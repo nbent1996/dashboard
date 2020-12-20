@@ -29,6 +29,32 @@
                });
                
            }   
+           
+            function buscarPaquetesBaja(){
+                        var idPaquete = $("#txtbxIdPaqueteBaja").val();
+                        var nombre = $("#txtbxNombrePaqueteBaja").val();
+                        var costoA = $("#txtbxCostoBrutoAPaqueteBaja").val();
+                        var costoB = $("#txtbxCostoBrutoBPaqueteBaja").val();
+                        
+                        $.get("ManejoUsuariosServlet?accion=buscarPaquetes&idPaquete=" + idPaquete + "&nombrePaquete=" + nombre + "&costoA=" + costoA + "&costoB=" + costoB, function (data) {
+                       document.getElementById("tblPaquetesPaqueteBaja").innerHTML = data;
+                       document.getElementById("spanMensaje").innerHTML = "";
+                   });
+               }
+
+               function borrarPaquetesSeleccionados() {
+                   var listaSeleccionados = new Array();
+                   $("input:checkbox:checked").each(
+                           function () {
+                               listaSeleccionados.push($(this).val());
+                           }
+                   );
+                   $.get("ManejoPaquetesServlet?accion=borrarPaquetes&listaPaquetes=" + listaSeleccionados, function (data) {
+                       document.getElementById("spanMensaje").innerHTML = data; //muestro mensaje modal
+                       mostrarTablaUsuarios();//Refresco tabla
+                   });
+
+               }
         </script>
 
         <div class="w3-bar w3-top w3-black w3-large" id="divBarraSuperior">
@@ -112,13 +138,13 @@
                 <div class="form">
                     <form>
                         <div><h5 class="nb-title-left">Ingrese los filtros por los que desea buscar</h5></div>
-                        <div class="margin-top20"><label for="txtbxIdPaqueteBaja">Id Paquete: </label><input type="text" class="nb-input" id="txtbxIdPaqueteBaja" name="txtbxIdPaqueteBaja" required="true"/></div>
-                        <div class="margin-top20"><label for="txtbxNombrePaqueteBaja">Nombre: </label><input type="text" class="nb-input" id="txtbxNombrePaqueteBaja" name="txtbxNombrePaqueteBaja" required="true"/></div>
+                        <div class="margin-top20"><label for="txtbxIdPaqueteBaja">Id Paquete: </label><input type="number" class="nb-input nb-input-number-sinFlechas" id="txtbxIdPaqueteBaja" name="txtbxIdPaqueteBaja"/></div>
+                        <div class="margin-top20"><label for="txtbxNombrePaqueteBaja">Nombre: </label><input type="text" class="nb-input" id="txtbxNombrePaqueteBaja" name="txtbxNombrePaqueteBaja"/></div>
                         <div class="margin-top20">
-                            <label for="txtbxCostoBrutoAPaqueteBaja">Costo bruto entre : </label><input type="text" class="nb-input-sinSize" id="txtbxCostoBrutoAPaqueteBaja" name="txtbxCostoBrutoAPaqueteBaja" required="true"/><label id="lblAndPaqueteBaja"> y </label><input type="text" class="nb-input-sinSize margin-left20" id="txtbxCostoBrutoBPaqueteBaja" name="txtbxCostoBrutoBPaqueteBaja" required="true"/></div>     
+                            <label for="txtbxCostoBrutoAPaqueteBaja">Costo bruto entre : </label><input type="number" class="nb-input-sinSize nb-input-number-sinFlechas" id="txtbxCostoBrutoAPaqueteBaja" name="txtbxCostoBrutoAPaqueteBaja"/><label id="lblAndPaqueteBaja"> y </label><input type="number" class="nb-input-sinSize nb-input-number-sinFlechas margin-left20" id="txtbxCostoBrutoBPaqueteBaja" name="txtbxCostoBrutoBPaqueteBaja"/></div>     
                         <hr>        
                         <div class="botonera">
-                            <input type="submit" class="submitSearch" value="Buscar">
+                            <input type="button" id="btnBuscarPaquetesBaja" class="submitSearch" value="Buscar">
                             <input type="reset" class="limpiarCampos" value="Limpiar campos">    
                         </div>
                         <div class="margin-top20"><div><h5 class="nb-title-center">Lista de Paquetes</h5></div><span id="spanPaquetesPaqueteBaja" name="generarTablaPaquetesBaja"></div>  

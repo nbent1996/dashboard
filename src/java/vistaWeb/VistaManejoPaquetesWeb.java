@@ -36,25 +36,47 @@ public class VistaManejoPaquetesWeb implements IVistaManejoPaquetes{
                 this.generarTablaTiposDispositivos();
             break;
             case "generarTablaPaquetesBaja":
-                this.generarTablaPaquetes();
+                this.generarTablaPaquetes(request, response);
             break;
             case "formAltaPaquete":
                 this.altaPaquete(request, response);
             break;
-            case "formBajaPaquete":
+            case "modificarPaquete":
 
             break;
-
-            case "formModificacionPaquete":
-
+            case "borrarPaquetes":
+                 //borrarPaquetes(request, response);
+            break;
+            case "buscarPaquetes":
+                 generarTablaPaquetes(request, response);
             break;
         }
     }
     private void generarTablaTiposDispositivos(){
         this.controlador.generarTablaTiposDispositivos();
     }
-    private void generarTablaPaquetes(){
-        this.controlador.generarTablaPaquetes();
+    private void generarTablaPaquetes(HttpServletRequest request, HttpServletResponse response){
+        this.request = request;
+        this.response = response;
+        String idPaqueteStr = request.getParameter("idPaquete");
+        int idPaquete = -1;
+        if(idPaqueteStr != null && !idPaqueteStr.equals("")){
+           idPaquete = Integer.parseInt(idPaqueteStr);
+        }
+        String nombre = request.getParameter("nombrePaquete");
+        String costoA = request.getParameter("costoA");
+        String costoB = request.getParameter("costoB");
+        if(nombre==null){
+            nombre = "";
+        }
+        if(costoA==null){
+            costoA="";
+        }
+        if(costoB==null){
+            costoB="";
+        }
+        String filtro = this.controlador.getFiltroProcesado(idPaquete, nombre, costoA, costoB);
+        this.controlador.generarTablaPaquetes(filtro);
     }
     private void altaPaquete(HttpServletRequest request, HttpServletResponse response){
         this.request = request;

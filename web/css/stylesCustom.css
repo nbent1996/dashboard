@@ -13,6 +13,15 @@ select{
   width:60%;
   margin: 10px;
 }
+.nb-input-number-sinFlechas::-webkit-inner-spin-button, 
+.nb-input-number-sinFlechas::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
+.input-number-sinFlechas { 
+    -moz-appearance:textfield; 
+}
 .nb-input-sinSize{
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -227,6 +236,10 @@ select{
     left:15px;
     margin-right:15px;
 }
+#txtbxNombrePaqueteBaja{
+    position:relative;
+    left:82px;
+}
 #txtbxCostoBrutoAPaqueteBaja{
     margin-right:15px;
 }
@@ -260,7 +273,7 @@ select{
   max-width:960px;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
-.form input[type="text"], .form input[type="email"], .form select, .form input[type="password"] {
+.form input[type="text"], .form input[type="email"], .form select, .form input[type="password"], .form input[type="number"] {
   font-family: "Roboto", sans-serif;
   outline: 0;
   background: #f2f2f2;

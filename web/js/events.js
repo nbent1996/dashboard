@@ -42,6 +42,8 @@ function load(){
     /*cliente_Baja.jsp*/
     
     /*paquete_Baja.jsp*/
+    $("#btnBuscarPaquetesBaja").click(eventoBuscarPaquetesBaja);
+    $("#btnBorrarPaquetesSeleccionados").click(eventoBorrarPaqueteBaja);
     
     /*paquete_Baja.jsp*/
     /*suscripcion_Baja.jsp*/
@@ -100,6 +102,9 @@ function eventoCerrarModal(){
     $("#divModal").css("display","none");
     
 }
+function eventoBuscarPaquetesBaja(){
+    buscarPaquetesBaja();
+}
 function eventoBorrarUsuarioBaja(){
     borrarUsuariosSeleccionados();   
     abrirModal();
@@ -109,7 +114,10 @@ function eventoBorrarClienteBaja(){
     borrarClientesSeleccionados();
     abrirModal();
 }
-
+function eventoBorrarPaqueteBaja(){
+    borrarPaquetesSeleccionados();
+    abrirModal();
+}
 function modificarVisibilidad(listaElementos, accion){
     switch(accion){
         case "mostrar":

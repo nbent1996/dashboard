@@ -11,9 +11,7 @@ import Modelo.Pais;
 import Modelo.Persona;
 import Modelo.ProgramException;
 import Modelo.TipoUsuario;
-import java.sql.SQLException;
 import java.util.ArrayList;
-import javax.swing.table.DefaultTableModel;
 
 
 
@@ -74,8 +72,6 @@ public class ControladorManejoUsuarios{
         }
         
     }
-    
-    
     //cuando filtro por nombre de usuario o nombre completo muestro tabla solamente con esos datos
     public void mostrarUsuariosFiltradosTabla(String nombreUsuarioBaja, String nombreCompletoUsuarioBaja) {
         ArrayList<Persona> listaUsuarios = new ArrayList();
