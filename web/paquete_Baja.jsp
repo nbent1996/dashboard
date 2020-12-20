@@ -36,7 +36,7 @@
                         var costoA = $("#txtbxCostoBrutoAPaqueteBaja").val();
                         var costoB = $("#txtbxCostoBrutoBPaqueteBaja").val();
                         
-                        $.get("ManejoUsuariosServlet?accion=buscarPaquetes&idPaquete=" + idPaquete + "&nombrePaquete=" + nombre + "&costoA=" + costoA + "&costoB=" + costoB, function (data) {
+                       $.get("ManejoUsuariosServlet?accion=buscarPaquetes&idPaquete=" + idPaquete + "&nombrePaquete=" + nombre + "&costoA=" + costoA + "&costoB=" + costoB, function (data) {
                        document.getElementById("tblPaquetesPaqueteBaja").innerHTML = data;
                        document.getElementById("spanMensaje").innerHTML = "";
                    });
@@ -51,7 +51,7 @@
                    );
                    $.get("ManejoPaquetesServlet?accion=borrarPaquetes&listaPaquetes=" + listaSeleccionados, function (data) {
                        document.getElementById("spanMensaje").innerHTML = data; //muestro mensaje modal
-                       mostrarTablaUsuarios();//Refresco tabla
+                       mostrarTablaPaquetesPaqueteBaja();//Refresco tabla
                    });
 
                }

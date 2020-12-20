@@ -148,8 +148,10 @@ public class ControladorManejoClientes {
                 }
                 
                 try {
+                    //Secundario s = new Secundario(nombreUsuarioCli);
                     Persona clienteSecundario = opPersona.buscar(" WHERE Clientes.usuarioSistema='" + nombreUsuarioCli + "' ", "Modelo.Secundario").get(0);
                     opPersona.borrar(clienteSecundario);
+                    //opPersona.borrar(s);
                 } catch (Exception ex) {
                     vista.mensajeErrorBajaClientes("Ocurrió un error al borrar el cliente");
                 }
