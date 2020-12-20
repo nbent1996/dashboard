@@ -52,4 +52,33 @@ public class ControladorManejoPaquetes {
         }
     }
     /*Comportamiento*/
+
+    public void borrarPaquetesSeleccionados(String[] listaIdPaquetes) {
+        
+        if(!listaIdPaquetes[0].equals("")){ //se seleccionó al menos un paquete para borrar
+            //en el frontend tira todos los id de paquetes de los check en la posición [0], por eso convierto a string y luego a array para poder recorrer
+            String cadena = listaIdPaquetes[0].toString();
+            String[]cadenaConvertida = cadena.split(",");
+            for (String idP : cadenaConvertida) { //recorro cada nombre de usuario, me traigo la persona que tiene ese usuario y lo borro                               
+                try{
+//                    Persona personaBuscada = opPersona.buscar(" WHERE OperadoresDashboard.usuarioSistema='" + nombreUsuario + "' ", "Modelo.Operador").get(0);
+//                    opPersona.borrar(personaBuscada);
+                }catch(Exception ex){
+//                    vista.mensajeErrorBajaUsuarios("Ocurrió un error al borrar el usuario");
+//                    System.out.println(ex.getMessage());
+                }
+  
+            }
+            //vista.mostrarMensajeExitoPersonaBorrada("Se eliminaron los usuarios: " + cadena); //devuelvo cadena que es el string que tiene los nombres de usuarios a borrar
+        }else{
+            //vista.mensajeNoSeleccionasteUsuarios("Debes seleccionar al menos un usuario para borrar");
+        }
+        
+        
+        
+    }
+    
+    
+    
+    
 }
