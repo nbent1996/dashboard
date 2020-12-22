@@ -45,7 +45,7 @@ public class VistaManejoPaquetesWeb implements IVistaManejoPaquetes{
 
             break;
             case "borrarPaquetes":
-                 //borrarPaquetes(request, response);
+                 borrarPaquetes(request, response);
             break;
             case "buscarPaquetes":
                  generarTablaPaquetes(request, response);
@@ -121,6 +121,14 @@ public class VistaManejoPaquetesWeb implements IVistaManejoPaquetes{
         }
     }
     /*Comportamiento*/
+
+    private void borrarPaquetes(HttpServletRequest request, HttpServletResponse response) {
+        String listaIdPaquetes[] = request.getParameterValues("listaIdPaquetes"); // lista de nombres de usuarios (PK) (sacados del value de los checkboxes)
+        this.request = request;
+        this.response = response;
+        
+        controlador.borrarPaquetesSeleccionados(listaIdPaquetes);
+    }
 
 
     

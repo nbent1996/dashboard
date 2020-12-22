@@ -129,36 +129,46 @@ public class ControladorManejoClientes {
         
     }
 
+    //SE CAE SI BORRO UN PRINCIPAL Y UN SECUNDARIO A LA VEZ
     //Borro los clientes seleccionados de los checkboxes
     public void borrarClientesSeleccionados(String[] listaNombresDeUsuariosDeClientes) {
+
+        String borrados = "";
         
         if(!listaNombresDeUsuariosDeClientes[0].equals("")){ //se seleccionó al menos un cliente para borrar
             //en el frontend tira todos los nombres de usuarios de los check en la posición [0], por eso convierto a string y luego a array para poder recorrer
             String cadena = listaNombresDeUsuariosDeClientes[0].toString();
             String[]cadenaConvertida = cadena.split(",");
+
+            
             for (String nombreUsuarioCli : cadenaConvertida) { 
                 //recorro cada nombre de usuario, me traigo la persona que tiene ese usuario y lo borro
                 
-                
                 try {
-                Persona clientePrincipal = opPersona.buscar(" WHERE Clientes.usuarioSistema='" + nombreUsuarioCli + "' ", "Modelo.Principal").get(0);
-                opPersona.borrar(clientePrincipal);
+                    Persona clientePrincipal = opPersona.buscar(" WHERE Clientes.usuarioSistema='" + nombreUsuarioCli + "' ", "Modelo.Principal").get(0);
+                    borrados+=clientePrincipal.getNombreCompleto() + " - ";
+                    opPersona.borrar(clientePrincipal);
+                    
                 } catch (Exception ex) {
-                    vista.mensajeErrorBajaClientes("Ocurrió un error al borrar el cliente");
+                    //vista.mensajeErrorBajaClientes("Ocurrió un error al borrar el cliente");
+                    System.out.println("No es principal");
                 }
                 
                 try {
                     //Secundario s = new Secundario(nombreUsuarioCli);
                     Persona clienteSecundario = opPersona.buscar(" WHERE Clientes.usuarioSistema='" + nombreUsuarioCli + "' ", "Modelo.Secundario").get(0);
+                    borrados+=clienteSecundario.getNombreCompleto() + " - ";
                     opPersona.borrar(clienteSecundario);
                     //opPersona.borrar(s);
+                    
                 } catch (Exception ex) {
-                    vista.mensajeErrorBajaClientes("Ocurrió un error al borrar el cliente");
+                    //vista.mensajeErrorBajaClientes("Ocurrió un error al borrar el cliente");
+                    System.out.println("No es secundario");
                 }
                 
   
             }
-            vista.mostrarMensajeExitoClienteBorrado("Se eliminaron los clientes: " + cadena); //devuelvo cadena que es el string que tiene los nombres de usuarios a borrar
+            vista.mostrarMensajeExitoClienteBorrado("Se eliminaron los clientes: " + borrados); //devuelvo cadena que es el string que tiene los nombres de usuarios a borrar
         }else{
             vista.mensajeNoSeleccionasteClientes("Debes seleccionar al menos un cliente para borrar");
         }
