@@ -101,17 +101,23 @@ public class Funciones {
                 retorno+="<th>Cantidad</th>\n";
                 retorno+="<th>Seleccionado</th>\n";
             retorno+="</tr>\n";
+            boolean esImpar = true;
             /*Contenido*/
             for(TipoDispositivo td : items){
-                retorno+="<tr>\n";
-                    retorno+="<td>"+td.getIdTipoDispositivo()+"</td>\n";
-                    retorno+="<td>"+td.getModelo()+"</td>\n";
-                    retorno+="<td>"+td.getNombre()+"</td>\n";
-                    retorno+="<td>"+td.getTipoComunicacion()+"</td>\n";
-                    retorno+="<td>"+td.getCategoria().getNombreCategoria()+"</td>\n";
-                    retorno+="<td><input type='number' class='nb-table-input nb-inputCantidadTabla' id='txtbxCant"+td.getIdTipoDispositivo()+"' name='txtbxCant"+td.getIdTipoDispositivo()+"'></td>\n";
-                    retorno+="<td><input type='checkbox' class='w3-check' value='"+td.getIdTipoDispositivo()+"' name='"+td.getIdTipoDispositivo()+"'></td>\n";
-                retorno+="</tr>\n";
+                retorno += "<tr>\n";
+                retorno += "<td>" + td.getIdTipoDispositivo() + "</td>\n";
+                retorno += "<td>" + td.getModelo() + "</td>\n";
+                retorno += "<td>" + td.getNombre() + "</td>\n";
+                retorno += "<td>" + td.getTipoComunicacion() + "</td>\n";
+                retorno += "<td>" + td.getCategoria().getNombreCategoria() + "</td>\n";
+                if (esImpar) {
+                    retorno += "<td><input type='number' class='nb-table-input nb-inputCantidadTabla nb-input-white' id='txtbxCant" + td.getIdTipoDispositivo() + "' name='txtbxCant" + td.getIdTipoDispositivo() + "'></td>\n";
+                } else {
+                    retorno += "<td><input type='number' class='nb-table-input nb-inputCantidadTabla' id='txtbxCant" + td.getIdTipoDispositivo() + "' name='txtbxCant" + td.getIdTipoDispositivo() + "'></td>\n";
+                }
+                retorno += "<td><input type='checkbox' class='w3-check' value='" + td.getIdTipoDispositivo() + "' name='" + td.getIdTipoDispositivo() + "'></td>\n";
+                retorno += "</tr>\n";
+                esImpar = !esImpar;
             }
             retorno+="</table>";
             return retorno;

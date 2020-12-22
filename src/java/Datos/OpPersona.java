@@ -140,7 +140,7 @@ public OpPersona(String usuarioSistema){
             sqlA = " INSERT INTO Personas (usuarioSistema, nombreCompleto, codigo, identificacionTributaria) values "
                 + "('"+c.getUsuarioSistema()+"','"+c.getNombreCompleto()+"','"+c.getPaisResidencia().getCodigo()+"','"+c.getEmpresaAsociada().getIdentificacionTributaria()+"')";
             sqlC1 = " INSERT INTO Clientes (email, usuarioSistema, telefono) values ('"+secundario.getEmail()+"','"+secundario.getUsuarioSistema()+"', '"+secundario.getTelefono()+"' )";
-            sqlC2 = " INSERT INTO Secundarios (nroCliente, nroDocumento) values (?,'"+secundario.getPrincipalAsociado().getNroDocumento()+"')";
+            sqlC2 = " INSERT INTO Secundarios (usuarioSistema, nroCliente, nroDocumento) values ('"+secundario.getUsuarioSistema()+"',?,'"+secundario.getPrincipalAsociado().getNroDocumento()+"')";
             listaSQLSinAI.add(sqlA);
             listaSQLConAI.add(sqlC1);
             listaSQLConAI.add(sqlC2);
@@ -215,7 +215,7 @@ public OpPersona(String usuarioSistema){
                 case "Modelo.Secundario":
                     Secundario secundario = (Secundario) c;
                     Secundario sAnterior = (Secundario) cAnterior;
-                    sqlA = "UPDATE Personas, Clientes, Secundarios SET Personas.nombreCompleto='"+secundario.getNombreCompleto()+"', Clientes.email='"+secundario.getEmail()+"', Secundarios.nroDocumento='"+secundario.getPrincipalAsociado().getNroDocumento()+"', telefono='"+secundario.getTelefono()+"' where Personas.usuarioSistema = Clientes.usuarioSistema AND Clientes.nroCliente = Secundarios.nroCliente AND Secundarios.nroCliente='"+sAnterior.getNroCliente()+"' ";
+                    sqlA = "UPDATE Personas, Clientes, Secundarios SET Personas.nombreCompleto='"+secundario.getNombreCompleto()+"', Clientes.email='"+secundario.getEmail()+"', Secundarios.nroDocumento='"+secundario.getPrincipalAsociado().getNroDocumento()+"', telefono='"+secundario.getTelefono()+"' where Personas.usuarioSistema = Clientes.usuarioSistema AND Clientes.nroCliente = Secundarios.nroCliente AND Secundarios.usuarioSistema='"+secundario.getUsuarioSistema()+"' ";
                     /*No se valida la no repetición del usuarioSistema porque ya fue validado desde la tabla Personas*/
                     listaSQL.add(sqlA);
                     break;
@@ -246,13 +246,13 @@ public OpPersona(String usuarioSistema){
             break;
             case "Modelo.Principal":
                 Principal principal = (Principal) c;
-                sqlA = "UPDATE Personas, Clientes, Principales SET Personas.eliminado='Y', Clientes.eliminado='Y', Principales.eliminado='Y' WHERE Personas.usuarioSistema=Clientes.usuarioSistema AND Clientes.usuarioSistema = Principales.usuarioSistema AND Principales.nroDocumento ='"+principal.getNroDocumento()+"' " ;
+                sqlA = "UPDATE Personas, Clientes, Principales, Secundarios SET Personas.eliminado='Y', Clientes.eliminado='Y', Principales.eliminado='Y', Secundarios.eliminado='Y' WHERE Personas.usuarioSistema=Clientes.usuarioSistema AND Clientes.usuarioSistema=Principales.usuarioSistema AND Principales.usuarioSistema = Secundarios.usuarioSistema " ;
                 listaSQL.add(sqlA);
             break;
             
             case "Modelo.Secundario":
                 Secundario secundario = (Secundario) c;  
-                sqlD = "UPDATE Personas, Clientes, Secundarios SET Personas.eliminado='Y', Clientes.eliminado='Y', Secundarios.eliminado='Y' WHERE Personas.usuarioSistema=Clientes.usuarioSistema AND Clientes.nroCliente = Secundarios.nroCliente AND Secundarios.nroCliente='"+secundario.getNroCliente()+"'";
+                sqlD = "UPDATE Personas, Clientes, Principales, Secundarios SET Personas.eliminado='Y', Clientes.eliminado='Y', Principales.eliminado='Y', Secundarios.eliminado='Y' WHERE Personas.usuarioSistema=Clientes.usuarioSistema AND Clientes.usuarioSistema=Principales.usuarioSistema AND Principales.usuarioSistema = Secundarios.usuarioSistema ";
                 listaSQL.add(sqlD);
             break;
 

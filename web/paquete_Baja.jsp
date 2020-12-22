@@ -166,10 +166,7 @@
                             <div class="w3-modal-content w3-animate-zoom" >
                                 <div class="w3-container">
                                     <span id="spanBtnCerrar" class="w3-button w3-display-topright">&times;</span>
-                                    <br>
                                     <span id="spanMensaje"></span>
-                                    <br>
-                                    <br>
                                 </div>
                             </div>
                         </div>

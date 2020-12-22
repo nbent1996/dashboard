@@ -1,9 +1,3 @@
-<%-- 
-    Document   : cliente_Baja
-    Created on : 01/12/2020, 11:10:29 AM
-    Author     : Andres
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 
@@ -27,21 +21,14 @@
         <script type="text/javascript" src="js/events.js"></script>
     </head>
     
-    <body class="w3-light-grey">
-        
-        
-        
-        
-        <script>
-            
+    <body class="w3-light-grey">   
+        <script> 
             mostrarTablaClientes();    
-            
                 function mostrarTablaClientes(){
                     $.get("ManejoClientesServlet?accion=mostrarTablaClientesInicio", function(data){
                         document.getElementById("tblClientesFiltrados").innerHTML=data;
                     });               
                 }
-                
                 function buscarClienteBaja(){
                           
                         var nroCliente = $("#txtbNroClienteBaja").val();
@@ -51,9 +38,7 @@
                             document.getElementById("tblClientesFiltrados").innerHTML = data;
                             document.getElementById("spanMensaje").innerHTML = ""; //MÉTODO PARA LIMPIAR CAMPO
                         });
-                    }
-                    
-                    
+                    }  
                 function borrarClientesSeleccionados(){
                     var listaClientesSeleccionados = new Array();
                     $("input:checkbox:checked").each(   
@@ -68,12 +53,7 @@
                         mostrarTablaClientes();//Refresco tabla
                     });
 
-                }
-            
-            
-             
-            
-            
+                } 
         </script>
         
         

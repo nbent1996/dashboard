@@ -13,6 +13,9 @@ select{
   width:60%;
   margin: 10px;
 }
+.nb-input-white{
+      background: white !important;
+}
 .nb-input-number-sinFlechas::-webkit-inner-spin-button, 
 .nb-input-number-sinFlechas::-webkit-outer-spin-button { 
   -webkit-appearance: none; 
@@ -192,6 +195,18 @@ select{
     left:87px;
 }
 /*cliente_Alta.jsp*/
+
+/*paquete_Alta.jsp*/
+#txtbxNombrePaqueteAlta{
+    position:relative;
+    left:40px;
+}
+#txtbxCostoBrutoPaqueteAlta{
+    position:relative;
+    left:15px;
+}
+/*paquete_Alta.jsp*/
+
 /*dispositivo_Alta.jsp*/
 #spanContenidoClienteAsociado{
     position:relative;
@@ -248,6 +263,29 @@ select{
     left:66px;
 }
 /*paquete_Baja.jsp*/
+/*suscripcion_Baja.jsp*/
+#txtbxIdSuscripcionBaja{
+    position:relative;
+    left:62px;
+}
+#spanFechasInicio{
+    position:relative;
+    left:15px;
+}
+#selTiempoContratoSuscripcionBaja{
+    position:relative;
+    left:22px;
+}
+#spanFechasFin{
+    position:relative;
+    left:36px;
+}
+#selActivaSuscripcionBaja{
+    position:relative;
+    left:107px;
+}
+/*suscripcion_Baja.jsp*/
+
 .borderDiv{
     padding:5px;
     border-style:solid;
@@ -273,7 +311,7 @@ select{
   max-width:960px;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
-.form input[type="text"], .form input[type="email"], .form select, .form input[type="password"], .form input[type="number"] {
+.form input[type="text"], .form input[type="email"], .form select, .form input[type="password"], .form input[type="number"], .form input[type="date"] {
   font-family: "Roboto", sans-serif;
   outline: 0;
   background: #f2f2f2;

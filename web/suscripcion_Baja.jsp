@@ -1,11 +1,8 @@
-<%-- 
-    Document   : suscripcion_Baja
-    Created on : 01/12/2020, 10:10:42 PM
-    Author     : Andres
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%
+    String msg = request.getParameter("msg");
+%>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -106,15 +103,55 @@
             <header class="w3-container estilosHeader">
                 <h5><b><i class="fa fa-suitcase"></i> Baja de Suscripciones</b></h5>
             </header>
-                <div class="form">
-                    <form name="formBajaCliente" action="ManejoClientesServlet" method="post" onsubmit="return validarCamposBajaCliente(this)">
-                        <input type="text" id="txtNroDocumentoClienteBaja" name="nroDocClienteBaja" placeholder="nro documento" required="true"/>                       
-                        <hr>
-                        <input type="submit" class="submitBaja" value="confirmar">
-                        <span id="mensajeBaja"></span>
-                        <input type="hidden" name="accion" value="formBajaCliente">      
+            <div class="form">
+                <div><h5 class="nb-title-left">Ingrese los filtros por los que desea buscar</h5></div>
+                <form>
+                    <div><label for="txtbxIdSuscripcionBaja">Id Suscripcion: </label><input type="number"  class="nb-input nb-input-number-sinFlechas" id="txtbxIdSuscripcionBaja" name="txtbxIdSuscripcionBaja"></div>
+                    <div class="margin-top20"><label>Fecha de inicio entre: </label>
+                        <span id="spanFechasInicio"><input type="date" class="nb-input-sinSize" id="calFechaInicioA" name="calFechaInicioA"><label>&nbsp;&nbsp; y &nbsp;&nbsp;</label>
+                        <input type="date" class="nb-input-sinSize" id="calFechaInicioB" name="calFechaInicioB"></span></div>
+                    <div class="margin-top20">
+                        <label for="selTiempoContratoSuscripcionBaja">Tiempo de contrato:</label>
+                            <select id="selTiempoContratoSuscripcionBaja" class="nb-input" name="selTiempoContratoSuscripcionBaja">
+                                <option value="0.5" selected="true">6 meses</option>
+                                <option value="1">1 año</option>
+                                <option value="2">2 años</option>
+                                <option value="3">3 años</option>
+                                <option value="4">4 años</option>
+                            </select>
+                    </div>
+                    <div class="margin-top20"><label>Fecha de fin entre: </label>
+                        <span id="spanFechasFin"><input type="date" class="nb-input-sinSize" id="calFechaFinA" name="calFechaFinA"><label>&nbsp;&nbsp; y &nbsp;&nbsp;</label>
+                        <input type="date" class="nb-input-sinSize" id="calFechaFinB" name="calFechaFinB"></span></div>
+                    <div class="margin-top20"><label for="selActivaSuscripcionBaja">Activa? :</label>
+                    <select id="selActivaSuscripcionBaja" class="nb-input" name="selActivaSuscripcionBaja">
+                                <option value="true" selected="true">Si</option>
+                                <option value="false">No</option>
+                            </select>
+                    </div>
+                    <div class="botonera">
+                        <input type="button" class ="submitSearch" onclick="buscarSuscripcion();" id="btnBuscarSuscripcion" value="Buscar">
+                        <input type="reset" class="limpiarCampos" value="Limpiar campos">                            
+                    </div>
+                    <div id="divModal" class="w3-modal">
+                        <div class="w3-modal-content w3-animate-zoom" >
+                            <div class="w3-container">
+                                <span id="spanBtnCerrar" class="w3-button w3-display-topright">&times;</span>
+                                <br>
+                                <span id="spanMensaje"></span>
+                                <br>
+                                <br>
+                            </div>
+                        </div>
+                    </div>
                     </form>
-                </div>
+                     <%if (msg != null) {%>
+                    <div>
+                        <p class="message"><%=msg%></p>                        
+                    </div>
+                    <%}%>
+                </form>
+            </div>
         </div>
     </body>
 </html>
