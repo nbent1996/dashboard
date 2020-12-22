@@ -235,7 +235,7 @@ public OpPersona(String usuarioSistema){
     @Override
     public LogSistema borrar(Persona c) throws Exception, SQLException {
         ArrayList<String> listaSQL = new ArrayList<>();
-        String sqlA, sqlB, sqlC, sqlD;
+        String sqlA, sqlB, sqlC, sqlD, sqlE;
         switch(c.getClass().getName()){
             case "Modelo.Operador":
                 Operador operador = (Operador) c;
@@ -245,15 +245,17 @@ public OpPersona(String usuarioSistema){
                 listaSQL.add(sqlB);
             break;
             case "Modelo.Principal":
-                Principal principal = (Principal) c;
-                sqlA = "UPDATE Personas, Clientes, Principales, Secundarios SET Personas.eliminado='Y', Clientes.eliminado='Y', Principales.eliminado='Y', Secundarios.eliminado='Y' WHERE Personas.usuarioSistema=Clientes.usuarioSistema AND Clientes.usuarioSistema=Principales.usuarioSistema AND Principales.usuarioSistema = Secundarios.usuarioSistema " ;
-                listaSQL.add(sqlA);
+                sqlD = "UPDATE Personas, Clientes, Principales SET Personas.eliminado='Y', Clientes.eliminado='Y', Principales.eliminado='Y' WHERE Personas.usuarioSistema=Clientes.usuarioSistema AND Clientes.usuarioSistema=Principales.usuarioSistema AND Personas.usuarioSistema='"+c.getUsuarioSistema()+"' ";
+                sqlE = "UPDATE Personas, Clientes, Secundarios SET Personas.eliminado='Y', Clientes.eliminado='Y', Secundarios.eliminado='Y' WHERE Personas.usuarioSistema=Clientes.usuarioSistema AND Clientes.usuarioSistema=Secundarios.usuarioSistema AND Personas.usuarioSistema='"+c.getUsuarioSistema()+"' ";
+                listaSQL.add(sqlD);
+                listaSQL.add(sqlE);
             break;
             
             case "Modelo.Secundario":
-                Secundario secundario = (Secundario) c;  
-                sqlD = "UPDATE Personas, Clientes, Principales, Secundarios SET Personas.eliminado='Y', Clientes.eliminado='Y', Principales.eliminado='Y', Secundarios.eliminado='Y' WHERE Personas.usuarioSistema=Clientes.usuarioSistema AND Clientes.usuarioSistema=Principales.usuarioSistema AND Principales.usuarioSistema = Secundarios.usuarioSistema ";
+                sqlD = "UPDATE Personas, Clientes, Principales SET Personas.eliminado='Y', Clientes.eliminado='Y', Principales.eliminado='Y' WHERE Personas.usuarioSistema=Clientes.usuarioSistema AND Clientes.usuarioSistema=Principales.usuarioSistema AND Personas.usuarioSistema='"+c.getUsuarioSistema()+"' ";
+                sqlE = "UPDATE Personas, Clientes, Secundarios SET Personas.eliminado='Y', Clientes.eliminado='Y', Secundarios.eliminado='Y' WHERE Personas.usuarioSistema=Clientes.usuarioSistema AND Clientes.usuarioSistema=Secundarios.usuarioSistema AND Personas.usuarioSistema='"+c.getUsuarioSistema()+"' ";
                 listaSQL.add(sqlD);
+                listaSQL.add(sqlE);
             break;
 
         }

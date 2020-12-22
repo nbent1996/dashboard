@@ -145,26 +145,14 @@ public class ControladorManejoClientes {
                 //recorro cada nombre de usuario, me traigo la persona que tiene ese usuario y lo borro
                 
                 try {
-                    Persona clientePrincipal = opPersona.buscar(" WHERE Clientes.usuarioSistema='" + nombreUsuarioCli + "' ", "Modelo.Principal").get(0);
-                    borrados+=clientePrincipal.getNombreCompleto() + " - ";
-                    opPersona.borrar(clientePrincipal);
+                    borrados+=nombreUsuarioCli + " - ";
+                    opPersona.borrar(new Secundario(nombreUsuarioCli));
                     
                 } catch (Exception ex) {
                     //vista.mensajeErrorBajaClientes("Ocurrió un error al borrar el cliente");
                     System.out.println("No es principal");
                 }
                 
-                try {
-                    //Secundario s = new Secundario(nombreUsuarioCli);
-                    Persona clienteSecundario = opPersona.buscar(" WHERE Clientes.usuarioSistema='" + nombreUsuarioCli + "' ", "Modelo.Secundario").get(0);
-                    borrados+=clienteSecundario.getNombreCompleto() + " - ";
-                    opPersona.borrar(clienteSecundario);
-                    //opPersona.borrar(s);
-                    
-                } catch (Exception ex) {
-                    //vista.mensajeErrorBajaClientes("Ocurrió un error al borrar el cliente");
-                    System.out.println("No es secundario");
-                }
                 
   
             }
@@ -176,22 +164,6 @@ public class ControladorManejoClientes {
         
         
     }
-    
-    
-//                try{
-//                    //acá se cae si selecciono un secundario
-//                    Persona clientePrincipal = opPersona.buscar(" WHERE Clientes.usuarioSistema='" + nombreUsuarioCli + "' ", "Modelo.Principal").get(0);
-//                    if(clientePrincipal!=null){
-//                        opPersona.borrar(clientePrincipal);
-//                    }else{
-//                        Persona clienteSecundario = opPersona.buscar(" WHERE Clientes.usuarioSistema='" + nombreUsuarioCli + "' ", "Modelo.Secundario").get(0);
-//                        opPersona.borrar(clienteSecundario);
-//                    }
-//                    
-//                }catch(Exception ex){
-//                    vista.mensajeErrorBajaClientes("Ocurrió un error al borrar el cliente");
-//                    System.out.println(ex.getMessage());
-//                }
     
     
     
