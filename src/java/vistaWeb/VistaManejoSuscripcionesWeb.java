@@ -4,6 +4,9 @@ import Modelo.Funciones;
 import Modelo.Moneda;
 import Modelo.Paquete;
 import Modelo.ProgramException;
+import Modelo.Suscripcion;
+import Resources.DTOs.DTOFechas;
+import Resources.DTOs.Fecha;
 import controlador.ControladorManejoSuscripciones;
 import controlador.Interfaces.IVistaManejoSuscripciones;
 import java.io.IOException;
@@ -34,6 +37,9 @@ public class VistaManejoSuscripcionesWeb implements IVistaManejoSuscripciones{
             case "generarTablaPaquetes":
                 this.generarTablaPaquetes();
                 break;
+            case "generarTablaSuscripcionesBaja":
+                this.generarTablaSuscripciones(request, response);
+            break;
             case "formAltaSuscripcion":
                 this.altaSuscripcion(request, response);
                 break;
@@ -49,7 +55,47 @@ public class VistaManejoSuscripcionesWeb implements IVistaManejoSuscripciones{
     private void generarTablaPaquetes(){
         this.controlador.generarTablaPaquetes();
     }
- 
+    private void generarTablaSuscripciones(HttpServletRequest request, HttpServletResponse response){
+        this.request = request;
+        this.response = response;
+        String idSuscripcionStr = request.getParameter("idSuscripcion");
+        int idSuscripcion = -1;
+        if(idSuscripcionStr !=null && !idSuscripcionStr.equals("")){
+            idSuscripcion = Integer.parseInt(idSuscripcionStr);
+        }
+        String fechaInicioAStr = request.getParameter("fechaInicioA");
+        String fechaFinAStr = request.getParameter("fechaFinA");
+        String fechaInicioBStr = request.getParameter("fechaInicioB");
+        String fechaFinBStr = request.getParameter("fechaFinB"); 
+        String activa = request.getParameter("activa");
+        String tiempoContrato = request.getParameter("tiempoContrato");
+        if(fechaInicioAStr==null){
+            fechaInicioAStr = "";
+        }
+        if(fechaFinAStr==null){
+            fechaFinAStr = "";
+        }
+        if(fechaInicioBStr==null){
+            fechaInicioBStr = "";
+        }
+        if(fechaFinBStr==null){
+            fechaFinBStr = "";
+        }
+        if(activa==null){
+            activa = "";
+        }else{
+            if(!activa.equals("")){
+                activa = "Y";
+            }else{
+                activa = "N";
+            }
+        }
+        if(tiempoContrato==null){
+            tiempoContrato = "";
+        }
+        String filtro = this.controlador.getFiltroProcesado(idSuscripcion, fechaInicioAStr, fechaFinAStr,fechaInicioBStr, fechaFinBStr, activa, tiempoContrato);  
+        this.controlador.generarTablaSuscripciones(filtro);
+    }
     private void altaSuscripcion(HttpServletRequest request, HttpServletResponse response) {
 
         this.request = request;
@@ -62,6 +108,15 @@ public class VistaManejoSuscripcionesWeb implements IVistaManejoSuscripciones{
             out.write(componente + "\n\n");
         }catch(ProgramException ex){
             mensajeError("suscripcion_Alta.jsp","Error al generar la tabla de Paquetes de dispositivos.");
+        }
+    }
+    @Override
+    public void generarTablaSuscripciones(String idTabla, ArrayList<Suscripcion> items) {
+        try{
+            String componente = Funciones.tablaSuscripciones(idTabla, items);
+            out.write(componente + "\n\n");
+        }catch(ProgramException ex){
+            mensajeError("suscripcion_Baja.jsp","Error al generar la tabla de suscripciones.");
         }
     }
     @Override
@@ -85,6 +140,8 @@ public class VistaManejoSuscripcionesWeb implements IVistaManejoSuscripciones{
     }
     
     /*Comportamiento*/
+
+
 
 
 }

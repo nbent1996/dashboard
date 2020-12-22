@@ -11,6 +11,12 @@ public class Fecha {
     /*Atributos*/
     
     /*Constructores*/
+    public Fecha(String fechaDMY){
+        String Datos[] = fechaDMY.split("/");
+        this.day = Integer.parseInt(Datos[0]);
+        this.month = Integer.parseInt(Datos[1]);
+        this.year = Integer.parseInt(Datos[2]);
+    }
     public Fecha(int day, int month, int year){
         this.day = day;
         this.month = month;

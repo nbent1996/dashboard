@@ -1,6 +1,7 @@
 package Datos;
 
 import Modelo.LogSistema;
+import Modelo.Paquete;
 import Modelo.QueryEjecutada;
 import Modelo.Suscripcion;
 import Resources.DTOs.DTOFechas;
@@ -134,7 +135,19 @@ public OpSuscripcion(String usuarioSistema){
                 }
                 fechaInicio = new DTOFechas(new Fecha(diaInicio, mesInicio, anioInicio));
                 fechaFin = new DTOFechas(new Fecha(diaFin, mesFin, anioFin));
-                Suscripcion s = new Suscripcion(idSuscripcion, fechaInicio, tiempoContrato,fechaFin, activa);
+                /*Lista de paquetes*/
+                ArrayList<Paquete> listaPaquetes = new ArrayList<>();
+                ResultSet rsListaPaquetes = database.consultar("SELECT Paquetes.idPaquete, Paquetes.nombrePaquete FROM Paquetes, PoseeSP WHERE Paquetes.idPaquete = PoseeSP.idPaquete AND PoseeSP.idSuscripcion='"+idSuscripcion+"' AND PoseeSP.eliminado='N' ");      
+                int idPaquete = -1;
+                String nombre = "";
+                while(rsListaPaquetes.next()){
+                    idPaquete = rsListaPaquetes.getInt("Paquetes.idPaquete");
+                    nombre = rsListaPaquetes.getString("Paquetes.nombrePaquete");
+                    listaPaquetes.add(new Paquete(idPaquete, nombre));
+                }
+                rsListaPaquetes.close();
+                /*Lista de paquetes*/
+                Suscripcion s = new Suscripcion(idSuscripcion, fechaInicio, tiempoContrato,fechaFin, activa, listaPaquetes);
                 lista.add(s);
             }
             rs.close();

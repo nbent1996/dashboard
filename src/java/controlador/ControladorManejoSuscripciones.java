@@ -5,6 +5,8 @@ import Datos.OpPaquete;
 import Datos.OpSuscripcion;
 import Datos.OpTipoDispositivo;
 import Modelo.Moneda;
+import Resources.DTOs.DTOFechas;
+import Resources.DTOs.Fecha;
 import controlador.Interfaces.IVistaManejoSuscripciones;
 
 public class ControladorManejoSuscripciones {
@@ -27,6 +29,43 @@ public class ControladorManejoSuscripciones {
     /*Constructores*/
     
     /*Comportamiento*/
+    public String getFiltroProcesado(int idSuscripcion, String fechaInicioAStr, String fechaFinAStr, String fechaInicioBStr, String fechaFinBStr, String activaStr, String tiempoContratoStr){
+        String retorno = " WHERE ";
+        DTOFechas fechasInicio, fechasFin;
+        if(!fechaInicioAStr.equals("") && !fechaInicioBStr.equals("")){
+            fechasInicio = new DTOFechas(new Fecha(fechaInicioAStr), new Fecha(fechaInicioBStr));
+            retorno += " Suscripciones.fechaInicio BETWEEN '"+fechasInicio.getFechaAStr(1)+"' AND '"+fechasInicio.getFechaBStr(1)+"' AND ";
+        }
+        if(!fechaFinAStr.equals("") && !fechaFinBStr.equals("")){
+            fechasFin = new DTOFechas(new Fecha(fechaFinAStr), new Fecha(fechaFinBStr));
+            retorno+=" Suscripciones.fechaFin BETWEEN '"+fechasFin.getFechaAStr(1)+"' AND '"+fechasFin.getFechaBStr(1)+"' AND ";
+        }
+        if(idSuscripcion!=-1){
+            retorno+= " Suscripciones.idSuscripcion='"+idSuscripcion+"' AND ";
+        }
+        if(!tiempoContratoStr.equals("")){
+            retorno+= " Suscripciones.tiempoContrato = '"+tiempoContratoStr+"' AND ";
+        }
+        if(!activaStr.equals("")){
+            retorno+= " Suscripciones.activa = '"+activaStr+"' "; 
+        }
+        
+        if(retorno.endsWith("AND ")){
+            retorno = retorno.substring(0, retorno.length()-5);
+        }
+        if(retorno.equals(" WHERE ")){
+            retorno = null;
+        }
+        
+        return retorno;
+    }
+    public void generarTablaSuscripciones(String filtro){
+        try{
+            vista.generarTablaSuscripciones("tblSuscripcionesSuscripcionBaja", opSuscripcion.buscar(filtro, null));
+        }catch(Exception ex){
+            vista.mensajeError("suscripcion_Baja.jsp","Error al generar la tabla de suscripciones.");
+        }
+    }
     public void generarTablaPaquetes(){
         try{
             vista.generarTablaPaquetes("tblPaquetesSuscripcionAlta", opPaquete.obtenerTodos(), new Moneda("UYU","Pesos Uruguayos","$")); //MONEDA HARDCODEADA, OBTENERLA DESDE LA IDENTIFICACION TRIBUTARIA DE LA SESSION

@@ -33,7 +33,7 @@ public class ControladorManejoPaquetes {
             filtro+=" Paquetes.costoBruto BETWEEN '"+costoA+"' AND '"+costoB+"' ";
         }
         if(filtro.equals(" WHERE ")){
-            filtro="";
+            filtro=null;
         }
         return filtro;
     }
