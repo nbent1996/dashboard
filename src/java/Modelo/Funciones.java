@@ -71,11 +71,14 @@ public class Funciones {
             retorno+="</tr>\n";
             /*Contenido*/
             for(Paquete p : paquetes){
-                String listado="<ul>\n";
+                String listado = "";
+                if(p.getListaTieneTP()!=null){
+                listado="<ul>\n";
                 for(TieneTP tp : p.getListaTieneTP()){
                     listado+="<li>" + tp.toString(1) + "</li>\n";
                 }
                 listado+="</ul>\n";
+                }
                 retorno+="<tr>\n";
                     retorno+="<td>"+p.getIdPaquete()+"</td>\n";
                     retorno+="<td>"+p.getNombre()+"</td>\n";
@@ -122,6 +125,46 @@ public class Funciones {
             retorno+="</table>";
             return retorno;
         }
+        public static String tablaSuscripciones(String idTabla, ArrayList<Suscripcion> items) throws ProgramException{
+            String retorno = "";
+            retorno+="<table id='"+idTabla+"' class='w3-table-all'>\n";
+            /*Cabezales*/
+            retorno+="<tr>\n";
+                retorno+="<th>Id Suscripci&oacute;n</th>\n";
+                retorno+="<th>Fecha de inicio</th>\n";
+                retorno+="<th>Tiempo de contrato</th>\n";
+                retorno+="<th>Fecha de Fin</th>\n";
+                retorno+="<th>Activa</th>\n";
+                retorno+="<th>Paquetes que contiene</th>\n";
+                retorno+="<th>Seleccionado</th>\n";
+            retorno+="</tr>\n";
+            /*Contenido*/
+            for(Suscripcion s: items){
+                String listado="";
+                if(s.getListaPaquetes()!=null){
+                listado = "<ul>\n";
+                for(Paquete p : s.getListaPaquetes()){
+                    listado+="<li>"+ p.toString(1)+"</li>";
+                }
+                listado+="</ul>\n";
+                }
+                String fechaFin = s.getFechaFin().getFechaAStr(2);
+                if(fechaFin.equals("1/1/1970")){
+                    fechaFin = "No definida";
+                }
+                retorno+="<tr>\n";
+                    retorno+="<td>"+s.getIdSuscripcion()+"</td>\n";
+                    retorno+="<td>"+s.getFechaInicio().getFechaAStr(2)+"</td>\n";
+                    retorno+="<td>"+s.getTiempoContratoStr()+"</td>\n";
+                    retorno+="<td>"+fechaFin+"</td>\n";
+                    retorno+="<td>"+s.getActivaStr()+"</td>\n";
+                    retorno+="<td>"+listado+"</td>\n";
+                    retorno+="<td><input type='checkbox' class='w3-check' value='"+s.getIdSuscripcion()+"' name='"+s.getIdSuscripcion()+"'></td>\n";
+                    retorno+="</tr>\n";
+                }
+                retorno+="</table>";    
+            return retorno;
+        }
         public static String tablaUsuarios(ArrayList<Persona> opciones, String boton) {
         String tabla = "";       
         for (Persona obj : opciones) {
@@ -132,8 +175,7 @@ public class Funciones {
         }
         return tabla;
     }
-    
-    public static String tablaClientes(ArrayList<Persona> opciones) {
+        public static String tablaClientes(ArrayList<Persona> opciones) {
         String tabla = "";
         
         for (Persona obj : opciones) {

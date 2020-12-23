@@ -20,9 +20,13 @@
     </head>
     
     <body class="w3-light-grey">
-
         <script>
-  
+           mostrarTablaSuscripcionesSuscripcionBaja();
+           function mostrarTablaSuscripcionesSuscripcionBaja(){
+               $.get("ManejoSuscripcionesServlet?accion=generarTablaSuscripcionesBaja", function(data){
+                  document.getElementById("spanSuscripcionesSuscripcionBaja").innerHTML=data; 
+               });
+           }   
         </script>
         <div class="w3-bar w3-top w3-black w3-large" id="divBarraSuperior">
             <button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey" onclick="w3_open();"><i class="fa fa-bars"></i> &nbsp;Menu</button>
@@ -129,9 +133,13 @@
                                 <option value="false">No</option>
                             </select>
                     </div>
+                    <hr>
+                    <div class="margin-top20"><div><h5 class="nb-title-center">Lista de Suscripciones</h5></div><span id="spanSuscripcionesSuscripcionBaja" name="generarTablaSuscripcionesBaja"></div>  
+                    <div class="margin-top20">
                     <div class="botonera">
                         <input type="button" class ="submitSearch" onclick="buscarSuscripcion();" id="btnBuscarSuscripcion" value="Buscar">
                         <input type="reset" class="limpiarCampos" value="Limpiar campos">                            
+                    </div>
                     </div>
                     <div id="divModal" class="w3-modal">
                         <div class="w3-modal-content w3-animate-zoom" >

@@ -55,6 +55,12 @@ public Paquete(float costoBruto,String nombre, Empresa empresaAsociada){
     adaptarCampos();
 
 }
+/*SOLO ID PAQUETE + NOMBRE*/
+public Paquete(int idPaquete, String nombre){
+    this.idPaquete = idPaquete;
+    this.nombre = nombre;
+    adaptarCampos();
+}
 /*Constructores*/
 
 /*Comportamiento*/

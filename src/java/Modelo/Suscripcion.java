@@ -99,8 +99,37 @@ public Suscripcion(DTOFechas fechaInicio, float tiempoContrato, DTOFechas fechaF
         }
         return resultado;
     }
-
-/*Comportamiento*/
+    public String getTiempoContratoStr(){
+        String retorno="6 meses ";
+        switch((int)this.tiempoContrato){
+            case 1:
+                retorno= "1 año ";
+            break;
+            
+            case 2:
+                retorno= "2 años ";
+            break;
+            
+            case 3:
+                retorno= "3 años ";
+            break;
+            
+            case 4:
+                retorno= "4 años ";
+            break;
+        }
+        return retorno;
+    }
+    public String getActivaStr(){
+        String retorno = "Si ";
+        if(!this.activa){
+            retorno="No ";
+        }
+        return retorno;
+                
+    }
+            
+    /*Comportamiento*/
 /*Getters y Setters*/
     public int getIdSuscripcion() {
         return idSuscripcion;
