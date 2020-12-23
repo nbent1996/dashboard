@@ -11,6 +11,8 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+
 public class VistaManejoPaquetesWeb implements IVistaManejoPaquetes{
     /*Estado*/
     private ControladorManejoPaquetes controlador;
@@ -33,13 +35,14 @@ public class VistaManejoPaquetesWeb implements IVistaManejoPaquetes{
         String accion = request.getParameter("accion");
         switch(accion){
             case "generarTablaTiposDispositivos":
-                this.generarTablaTiposDispositivos();
+                generarTablaTiposDispositivos();
             break;
             case "generarTablaPaquetesBaja":
-                this.generarTablaPaquetes(request, response);
+                cargarTablaPaquetesBajaInicio();
+                //generarTablaPaquetes(request, response);
             break;
             case "formAltaPaquete":
-                this.altaPaquete(request, response);
+                altaPaquete(request, response);
             break;
             case "modificarPaquete":
 
@@ -48,36 +51,48 @@ public class VistaManejoPaquetesWeb implements IVistaManejoPaquetes{
                  borrarPaquetes(request, response);
             break;
             case "buscarPaquetes":
-                 generarTablaPaquetes(request, response);
+                 generarTablaPaquetesFiltrados(request, response);
             break;
         }
     }
     private void generarTablaTiposDispositivos(){
         this.controlador.generarTablaTiposDispositivos();
     }
-    private void generarTablaPaquetes(HttpServletRequest request, HttpServletResponse response){
+    
+    
+    private void cargarTablaPaquetesBajaInicio(){
+        controlador.cargarTablaPaquetesBajaInicio();
+    }
+    
+    
+    private void generarTablaPaquetesFiltrados(HttpServletRequest request, HttpServletResponse response) {
+        
         this.request = request;
         this.response = response;
+
         String idPaqueteStr = request.getParameter("idPaquete");
         int idPaquete = -1;
-        if(idPaqueteStr != null && !idPaqueteStr.equals("")){
-           idPaquete = Integer.parseInt(idPaqueteStr);
+        if (idPaqueteStr != null && !idPaqueteStr.equals("")) {//controla que se haya ingresado un idPaquete en el filtro para parsearlo
+            idPaquete = Integer.parseInt(idPaqueteStr);
         }
         String nombre = request.getParameter("nombrePaquete");
         String costoA = request.getParameter("costoA");
         String costoB = request.getParameter("costoB");
-        if(nombre==null){
+        if (nombre == null) {
             nombre = "";
         }
-        if(costoA==null){
-            costoA="";
+        if (costoA == null) {
+            costoA = "";
         }
-        if(costoB==null){
-            costoB="";
+        if (costoB == null) {
+            costoB = "";
         }
         String filtro = this.controlador.getFiltroProcesado(idPaquete, nombre, costoA, costoB);
         this.controlador.generarTablaPaquetes(filtro);
     }
+    
+    
+    
     private void altaPaquete(HttpServletRequest request, HttpServletResponse response){
         this.request = request;
         this.response = response;
@@ -123,11 +138,26 @@ public class VistaManejoPaquetesWeb implements IVistaManejoPaquetes{
     /*Comportamiento*/
 
     private void borrarPaquetes(HttpServletRequest request, HttpServletResponse response) {
-        String listaIdPaquetes[] = request.getParameterValues("listaIdPaquetes"); // lista de nombres de usuarios (PK) (sacados del value de los checkboxes)
+        String listaIdPaquetes[] = request.getParameterValues("listaPaquetes"); // lista de id de paquetes seleccionados
         this.request = request;
         this.response = response;
         
         controlador.borrarPaquetesSeleccionados(listaIdPaquetes);
+    }
+
+    @Override
+    public void mensajeErrorBajaPaquetes(String mensajeErrorBaja) {
+        out.write(mensajeErrorBaja);
+    }
+
+    @Override
+    public void mostrarMensajeExitoPaqueteBorrado(String mensajeExitoBaja) {
+        out.write(mensajeExitoBaja);
+    }
+
+    @Override
+    public void mensajeNoSeleccionastePaquetes(String mensajeNoSelecPaquetes) {
+        out.write(mensajeNoSelecPaquetes);
     }
 
 

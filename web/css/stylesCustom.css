@@ -332,7 +332,7 @@ select{
   font-family: "Roboto", sans-serif;
   text-transform: uppercase;
   outline: 0;
-  background: #64B5F6;
+  background: #42A5F5;
   border: 0;
   padding: 15px;
   color: #EEEEEE;
@@ -341,11 +341,15 @@ select{
   transition: all 0.3 ease;
   cursor: pointer;
 }
+.submitAlta:hover {
+  background: #64B5F6;
+  color:white;
+}
 .form .limpiarCampos{
   font-family: "Roboto", sans-serif;
   text-transform: uppercase;
   outline: 0;
-  background: #4DB6AC;
+  background: #26A69A;
   border: 0;
   padding: 15px;
   color: #EEEEEE;
@@ -355,13 +359,10 @@ select{
   cursor: pointer;
 }
 .form .limpiarCampos:hover{
-  background: #00BFA5;
+  background: #4DB6AC;
   color:white;
 }
-.submitAlta:hover {
-  background: #0091EA;
-  color:white;
-}
+
 .form .botonera{
     width:100%;
     text-align:center;
@@ -376,7 +377,7 @@ select{
   font-family: "Roboto", sans-serif;
   text-transform: uppercase;
   outline: 0;
-  background: #E57373;
+  background: #EF5350;
   width: 100%;
   border: 0;
   padding: 15px;
@@ -387,14 +388,14 @@ select{
   cursor: pointer;
 }
 .submitBaja:hover {
-  background:#DD2C00 ;
+  background:#E57373 ;
   color:white;
 }
 .form .submitSearch{
   font-family: "Roboto", sans-serif;
   text-transform: uppercase;
   outline: 0;
-  background: #AED581 ;
+  background: #8D6E63 ;
   border: 0;
   padding: 15px;
   color: #EEEEEE;
@@ -404,14 +405,14 @@ select{
   cursor: pointer;
 }
 .form .submitSearch:hover{
-  background:#64DD17;
+  background:#A1887F;
   color:white;
 }
 .form .submitModificacion {
   font-family: "Roboto", sans-serif;
   text-transform: uppercase;
   outline: 0;
-  background: #4DB6AC;
+  background: #78909C;
   width: 100%;
   border: 0;
   padding: 15px;
@@ -422,8 +423,8 @@ select{
   cursor: pointer;
 }
 
-.submitModificacion :hover{
-  background: #00BFA5;
+.form .submitModificacion:hover{
+  background: #90A4AE;
   color:white;
 }
 

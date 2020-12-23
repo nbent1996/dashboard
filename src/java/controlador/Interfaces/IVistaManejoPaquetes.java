@@ -10,4 +10,10 @@ public interface IVistaManejoPaquetes {
     public void mensajeExito(String nombreJSP, String texto);
     public void generarTablaTiposDispositivos(String idTabla, ArrayList<TipoDispositivo> items);
     public void generarTablaPaquetes(String idTabla, ArrayList<Paquete> items, Moneda moneda);
+
+    public void mensajeErrorBajaPaquetes(String mensajeErrorBaja);
+
+    public void mostrarMensajeExitoPaqueteBorrado(String mensajeExitoBaja);
+
+    public void mensajeNoSeleccionastePaquetes(String mensajeNoSelecPaquetes);
 }
