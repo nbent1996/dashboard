@@ -68,6 +68,7 @@
             <span class="w3-bar-item w3-right">LogoEmpresa</span>
         </div>
         
+        
         <!-- Sidebar/menu -->
          <nav class="w3-sidebar w3-collapse w3-white w3-animate-left" id="mySidebar"><br>
             <div class="w3-container w3-row">
@@ -146,6 +147,7 @@
                 <%}%> 
             </header>
             <div class="form">
+                <form>
                 <!--LAS BÚSQUEDAS SE HACEN POR AJAX CON BUTTONS, NO SE USAN FORMS-->
                 <div><h5 class="nb-title-left">Ingrese los filtros por los que desea buscar</h5></div>
                 <!--NUMERO DE CLIENTE, EMAIL (CLIENTE), NOMBRE COMPLETO (PERSONA)-->
@@ -161,6 +163,7 @@
                         <p class="message"><%=msg%></p>                        
                     </div>
                     <%}%>
+                </form>
                     <div id="tablaClientes" >
                         <table class="w3-table-all">
                             <caption><h5 class="nb-title-center">Lista de Clientes</h5></caption>

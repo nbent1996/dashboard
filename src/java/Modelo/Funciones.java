@@ -174,6 +174,7 @@ public class Funciones {
                 retorno+="<th>Estado</th>\n";
                 retorno+="<th>Tipo de Dispositivo</th>\n";
                 retorno+="<th>Cliente asociado</th>\n";
+                retorno+="<th>Seleccionar</th>\n";
             retorno+="</tr>\n";
             /*Contenido*/
             for(Dispositivo d: items){

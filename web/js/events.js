@@ -50,7 +50,7 @@ function load(){
     
     /*suscripcion_Baja.jsp*/
     /*dispositivo_Baja.jsp*/
-    
+    $("#btnBorrarDispositivosSeleccionados").click(eventoBorrarDispositivoBaja);
     /*dispositivo_Baja.jsp*/
     /*BAJAS*/
     /*MODIFICACIONES*/
@@ -118,6 +118,14 @@ function eventoBorrarPaqueteBaja(){
     borrarPaquetesSeleccionados();
     abrirModal();
 }
+
+function eventoBorrarDispositivoBaja(){
+    borrarDispositivosSeleccionados();
+    abrirModal();
+}
+
+
+
 function modificarVisibilidad(listaElementos, accion){
     switch(accion){
         case "mostrar":

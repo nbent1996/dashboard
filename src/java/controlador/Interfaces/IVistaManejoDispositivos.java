@@ -11,4 +11,10 @@ public interface IVistaManejoDispositivos {
     public void mostrarTiposDispositivos(ArrayList<TipoDispositivo> items);
     public void mostrarCategorias(ArrayList<Categoria> items);
     public void generarTablaDispositivos(String idTabla, ArrayList<Dispositivo> items);
+
+    public void mensajeErrorBajaDispositivos(String errorBorradoDisp);
+
+    public void mostrarMensajeExitoDispositivoBorrado(String exitoAlBorrarDisp);
+
+    public void mensajeNoSeleccionasteDispositivos(String noSelecDisp);
 }

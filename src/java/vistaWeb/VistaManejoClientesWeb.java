@@ -185,7 +185,7 @@ public class VistaManejoClientesWeb implements IVistaManejoClientes{
     }
 
     private void borrarClientes(HttpServletRequest request, HttpServletResponse response) {
-        String listaNombresDeUsuariosDeClientes[] = request.getParameterValues("listaClientes"); //(en un principio tomo el nombre de usuario ya que es pk de persona, ver si funciona así o tomar otro atributo) lista de nombres de usuarios (PK) (sacados del value de los checkboxes)
+        String listaNombresDeUsuariosDeClientes[] = request.getParameterValues("listaClientes");
         this.request = request;
         this.response = response;
         

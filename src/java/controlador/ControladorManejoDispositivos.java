@@ -84,4 +84,33 @@ public class ControladorManejoDispositivos{
             }
         }
     /*Comportamiento*/
+
+    public void borrarDispositivosSeleccionados(String[] listaNroSerieDispositivos) {
+        
+        String nrosSerieBorrados = "";
+        
+        if (!listaNroSerieDispositivos[0].equals("")) { //se seleccionó al menos un dispositivo para borrar
+            //en el frontend tira todos los nro de serie de los check en la posición [0], por eso convierto a string y luego a array para poder recorrer
+            String cadena = listaNroSerieDispositivos[0].toString();
+            String[] cadenaConvertida = cadena.split(",");
+
+            for (String nroSerieDisp : cadenaConvertida) {                
+                try {          
+                    opDispositivo.borrar(new Dispositivo(nroSerieDisp));
+                    nrosSerieBorrados+= nroSerieDisp + "- ";
+                } catch (Exception ex) {
+                    vista.mensajeErrorBajaDispositivos("Ocurrió un error al borrar el dispositivo");                    
+                }
+
+            }
+            vista.mostrarMensajeExitoDispositivoBorrado("Se eliminaron los dispositivos: " + " " + nrosSerieBorrados); 
+        } else {
+            vista.mensajeNoSeleccionasteDispositivos("Debes seleccionar al menos un dispositivo para borrar");
+        }
+        
+    }
+    
+    
+    
+    
 }
