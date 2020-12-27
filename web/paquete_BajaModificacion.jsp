@@ -27,7 +27,9 @@
     
     <body class="w3-light-grey">
         <script>
+            
            mostrarTablaPaquetesPaqueteBaja();
+           
            function mostrarTablaPaquetesPaqueteBaja(){
                $.get("ManejoPaquetesServlet?accion=generarTablaPaquetesBaja", function(data){
                   document.getElementById("spanPaquetesPaqueteBaja").innerHTML=data; 
@@ -42,7 +44,11 @@
                         var costoB = $("#txtbxCostoBrutoBPaqueteBaja").val();
                         
                        $.get("ManejoPaquetesServlet?accion=buscarPaquetes&idPaquete=" + idPaquete + "&nombrePaquete=" + nombre + "&costoA=" + costoA + "&costoB=" + costoB, function (data) {
+<<<<<<< HEAD:web/paquete_BajaModificacion.jsp
                        document.getElementById("tblPaquetesPaqueteBaja").innerHTML = data;
+=======
+                       document.getElementById("tblPaquetesPaqueteBaja").innerHTML = data;//ver si corresponde ponerlo en el span
+>>>>>>> 0bf2b5bb3c840412050a305d332be0176762239e:web/paquete_Baja.jsp
                        document.getElementById("spanMensaje").innerHTML = "";
                    });
                }
@@ -150,15 +156,18 @@
                         <div class="margin-top20"><label for="txtbxIdPaqueteBaja">Id Paquete: </label><input type="number" class="nb-input nb-input-number-sinFlechas" id="txtbxIdPaqueteBaja" name="txtbxIdPaqueteBaja"/></div>
                         <div class="margin-top20"><label for="txtbxNombrePaqueteBaja">Nombre: </label><input type="text" class="nb-input" id="txtbxNombrePaqueteBaja" name="txtbxNombrePaqueteBaja"/></div>
                         <div class="margin-top20">
-                            <label for="txtbxCostoBrutoAPaqueteBaja">Costo bruto entre : </label><input type="number" class="nb-input-sinSize nb-input-number-sinFlechas" id="txtbxCostoBrutoAPaqueteBaja" name="txtbxCostoBrutoAPaqueteBaja"/><label id="lblAndPaqueteBaja"> y </label><input type="number" class="nb-input-sinSize nb-input-number-sinFlechas margin-left20" id="txtbxCostoBrutoBPaqueteBaja" name="txtbxCostoBrutoBPaqueteBaja"/></div>     
+                            <label for="txtbxCostoBrutoAPaqueteBaja">Costo bruto entre : </label>
+                            <input type="number" class="nb-input-sinSize nb-input-number-sinFlechas" id="txtbxCostoBrutoAPaqueteBaja" name="txtbxCostoBrutoAPaqueteBaja"/>
+                            <label id="lblAndPaqueteBaja"> y </label>
+                            <input type="number" class="nb-input-sinSize nb-input-number-sinFlechas margin-left20" id="txtbxCostoBrutoBPaqueteBaja" name="txtbxCostoBrutoBPaqueteBaja"/>
+                        </div>     
                         <hr>        
                         <div class="botonera">
                             <input type="button" id="btnBuscarPaquetesBaja" class="submitSearch" value="Buscar">
                             <input type="reset" class="limpiarCampos" value="Limpiar campos">    
                         </div>
-                        <div class="margin-top20"><div><h5 class="nb-title-center">Lista de Paquetes</h5></div><span id="spanPaquetesPaqueteBaja" name="generarTablaPaquetesBaja"></div>  
-                        
                         <div class="margin-top20">
+<<<<<<< HEAD:web/paquete_BajaModificacion.jsp
                         <div class="botonera">
                             <%if (tipoJSP.equals("baja")) {%>
                             <input type="button" class="submitBaja" id="btnBorrarPaquetesSeleccionados" value="Borrar">                                      
@@ -167,19 +176,32 @@
                             <%}%> 
                         </div>
                         </div>
+=======
+                            <div>
+                                <h5 class="nb-title-center">Lista de Paquetes</h5>
+                            </div>
+                            <span id="spanPaquetesPaqueteBaja" name="generarTablaPaquetesBaja"></span>
+                        </div>  
+>>>>>>> 0bf2b5bb3c840412050a305d332be0176762239e:web/paquete_Baja.jsp
                         
-                        <span id="mensajeAlta"></span>
-                        <input type="hidden" name="accion" value="formAltaCliente">
-                        <%if (msg != null) {%>
-                        <div>
-                            <p class="message"><%=msg%></p>                        
-                        </div>
-                        <%}%>
-                        <div id="divModal" class="w3-modal">
-                            <div class="w3-modal-content w3-animate-zoom" >
-                                <div class="w3-container">
-                                    <span id="spanBtnCerrar" class="w3-button w3-display-topright">&times;</span>
-                                    <span id="spanMensaje"></span>
+                        <div class="margin-top20">
+                            <div class="botonera">
+                                <input type="button" class="submitBaja" id="btnBorrarPaquetesSeleccionados" value="Borrar">
+                            </div>
+                            <%if (msg != null) {%>
+                            <div>
+                                <p class="message"><%=msg%></p>                        
+                            </div>
+                            <%}%>
+                            <div id="divModal" class="w3-modal">
+                                <div class="w3-modal-content w3-animate-zoom" >
+                                    <div class="w3-container">
+                                        <span id="spanBtnCerrar" class="w3-button w3-display-topright">&times;</span>
+                                        <br>
+                                        <span id="spanMensaje"></span>
+                                        <br>
+                                        <br>
+                                    </div>
                                 </div>
                             </div>
                         </div>

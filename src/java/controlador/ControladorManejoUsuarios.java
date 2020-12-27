@@ -45,7 +45,7 @@ public class ControladorManejoUsuarios{
         } catch (ProgramException ex) { 
             vista.mensajeError("usuario_Alta.jsp",ex.getMessage()); 
         } catch (Exception ex) {        
-            vista.mensajeError("usuario_Alta.jsp",ex.getMessage()); 
+            vista.mensajeError("usuario_Alta.jsp","Error al dar de alta el usuario"); 
         }
     }
     
@@ -93,7 +93,7 @@ public class ControladorManejoUsuarios{
         try {
             vista.mostrarTiposUsuario(opTipoUsuario.obtenerTodos());
         } catch (Exception ex) {
-            vista.mensajeError("usuario_Alta.jsp","Error en la carga de tipos de usuario");
+            vista.mensajeError("usuario_Alta.jsp","Se ha producido un error");
         }
     }
 
@@ -101,7 +101,7 @@ public class ControladorManejoUsuarios{
         try {
             vista.mostrarPaises(opPais.obtenerTodos());
         } catch (Exception ex) {
-            vista.mensajeError("usuario_Alta.jsp","Error en la carga de paises");
+            //vista.mensajeError("usuario_Alta.jsp","Error en la carga de paises");// si devuelvo un mensaje en el mismo span que si hay error en la carga de tipos de usuario se duplica vista
         }
     }
 
@@ -109,7 +109,7 @@ public class ControladorManejoUsuarios{
         try {
             vista.mostrarTablaUsuariosBaja(opPersona.buscar(null, "Modelo.Operador"));
         } catch (Exception ex) {
-            vista.mensajeError("usuario_Alta.jsp","Error en la carga de usuarios"); //reuso el método de error del clic del botón buscar
+            vista.mensajeError("usuario_Baja.jsp","Error en la carga de usuarios"); //reuso el método de error del clic del botón buscar
         }
     }    
 }

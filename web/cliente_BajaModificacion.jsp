@@ -171,7 +171,6 @@
                                     <th>Email</th>
                                     <th>Tipo Cliente</th>
                                     <th>Seleccionar</th>
-                                    <!--Ver si mostrar tipo (principal o secundario)-->
                                 </tr>
                             </thead>
                             <tbody id="tblClientesFiltrados">

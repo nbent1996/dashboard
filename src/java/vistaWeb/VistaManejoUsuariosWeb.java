@@ -38,12 +38,13 @@ public class VistaManejoUsuariosWeb implements IVistaManejoUsuarios{
     public void procesarRequest(HttpServletRequest request, HttpServletResponse response) {
         String accion = request.getParameter("accion");
         switch(accion){
-            case "comboTipos":
-                cargarTiposUsuario();
-            break;
+            
             case "comboPaises":
                 cargarPaises();
             break;
+            case "comboTipos":
+                cargarTiposUsuario();
+            break;            
             case "formAlta":
                 altaUsuario(request, response);
             break;  
@@ -64,14 +65,15 @@ public class VistaManejoUsuariosWeb implements IVistaManejoUsuarios{
         }
     }
 
-    private void cargarTiposUsuario() {
-        controlador.cargarTiposUsuario();
-    }
-
+    
     private void cargarPaises() {
         controlador.cargarPaises();
     }
     
+    private void cargarTiposUsuario() {
+        controlador.cargarTiposUsuario();
+    }
+
     private void cargarTablaUsuariosBajaInicio() {
         controlador.cargarTablaUsuariosBajaInicio();
     }
@@ -153,7 +155,7 @@ public class VistaManejoUsuariosWeb implements IVistaManejoUsuarios{
     }
 
     @Override
-    public void mensajeExito(String nombreJSP, String texto) {
+    public void mensajeExito(String nombreJSP, String texto) {//aca tiene que ir al mensaje modal en vez de desplegar el mensaje en la variable msg, para eso hay que hacer todo por ajax y no por form
         destino = nombreJSP+"?msg=" + texto;
         try{
             response.sendRedirect(destino);

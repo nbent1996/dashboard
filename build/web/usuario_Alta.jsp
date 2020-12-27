@@ -25,16 +25,20 @@
     <body class="w3-light-grey">
         
         
-        <script>      
+        <script>    
+            
             mostrarCombos();  
+            
             function mostrarCombos(){
-                $.get("ManejoUsuariosServlet?accion=comboTipos", function(data){
-                    document.getElementById("spanTiposUsuarios").innerHTML=data;
-                });
                 $.get("ManejoUsuariosServlet?accion=comboPaises", function(data){
                     document.getElementById("spanPaises").innerHTML=data;
                 });
+                
+                $.get("ManejoUsuariosServlet?accion=comboTipos", function(data){
+                    document.getElementById("spanTiposUsuarios").innerHTML=data;
+                });              
             }
+            
         </script>
         
         
@@ -135,8 +139,8 @@
                         <input type="hidden" name="accion" value="formAlta">
                         <hr>
                         <div class="botonera">
-                        <input type="submit" class="submitAlta" value="confirmar">
-                        <input type="reset" class="limpiarCampos" value="Limpiar campos">    
+                            <input type="submit" class="submitAlta" value="confirmar">
+                            <input type="reset" class="limpiarCampos" value="Limpiar campos">    
                         </div>
                         <%if (msg != null) {%>
                         <div>
@@ -144,16 +148,16 @@
                         </div>
                         <%}%>
                         <div id="divModal" class="w3-modal">
-                                <div class="w3-modal-content w3-animate-zoom" >
-                                    <div class="w3-container">
-                                        <span id="spanBtnCerrar" class="w3-button w3-display-topright">&times;</span>
-                                        <br>
-                                        <span id="spanMensaje"></span>
-                                        <br>
-                                        <br>
-                                    </div>
+                            <div class="w3-modal-content w3-animate-zoom" >
+                                <div class="w3-container">
+                                    <span id="spanBtnCerrar" class="w3-button w3-display-topright">&times;</span>
+                                    <br>
+                                    <span id="spanMensaje"></span>
+                                    <br>
+                                    <br>
                                 </div>
                             </div>
+                        </div>
                     </form>
                 </div>
             </div>

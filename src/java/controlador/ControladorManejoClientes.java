@@ -35,28 +35,28 @@ public class ControladorManejoClientes {
     /*Constructores*/
     
     /*Comportamiento*/
-    public void altaPrincipal(String nroDocumento, String nombreCompleto, String codPais, String email, String telefono, boolean servicioActivo, String tipoDocumento){
-        try{
-        Empresa e = new Empresa("526283747346"); //EMPRESA HARDCODEADA
-        Principal p = new Principal("", nombreCompleto, e, new Pais(codPais), -1,  email, nroDocumento, servicioActivo, new TipoDocumento(tipoDocumento), telefono);
-        p.validar();
-        opPersona.guardar(null, p);
-        vista.mensajeExito("cliente_Alta.jsp","Cliente del tipo titular dado de alta correctamente.");
+    public void altaPrincipal(String nroDocumento, String nombreCompleto, String codPais, String email, String telefono, boolean servicioActivo, String tipoDocumento) {
+        try {
+            Empresa e = new Empresa("526283747346"); //EMPRESA HARDCODEADA
+            Principal p = new Principal("", nombreCompleto, e, new Pais(codPais), -1, email, nroDocumento, servicioActivo, new TipoDocumento(tipoDocumento), telefono);
+            p.validar();
+            opPersona.guardar(null, p);
+            vista.mensajeExito("cliente_Alta.jsp", "Cliente del tipo titular dado de alta correctamente.");
         } catch (ProgramException ex) {
-            vista.mensajeError("cliente_Alta.jsp",ex.getMessage());
+            vista.mensajeError("cliente_Alta.jsp", ex.getMessage());
         } catch (Exception ex) {
             vista.mensajeError("cliente_Alta.jsp", ex.getMessage());
         }
     }
-    public void altaSecundario(String nombreCompleto, String codPais, String email, String telefono, String nroDocumento, String nroDocumentoPrincipal ){
-        try{
-        Empresa e = new Empresa("526283747346"); //EMPRESA HARDCODEADA
-        Secundario s = new Secundario("", nombreCompleto, e, new Pais(codPais), -1, email, new Principal(nroDocumentoPrincipal), telefono);
-        s.validar();
-        opPersona.guardar(null, s);
-        vista.mensajeExito("cliente_Alta.jsp", "Cliente del tipo cuenta secundaria dado de alta correctamente.");
+    public void altaSecundario(String nombreCompleto, String codPais, String email, String telefono, String nroDocumento, String nroDocumentoPrincipal) {
+        try {
+            Empresa e = new Empresa("526283747346"); //EMPRESA HARDCODEADA
+            Secundario s = new Secundario("", nombreCompleto, e, new Pais(codPais), -1, email, new Principal(nroDocumentoPrincipal), telefono);
+            s.validar();
+            opPersona.guardar(null, s);
+            vista.mensajeExito("cliente_Alta.jsp", "Cliente del tipo cuenta secundaria dado de alta correctamente.");
         } catch (ProgramException ex) {
-            vista.mensajeError("cliente_Alta.jsp",ex.getMessage());
+            vista.mensajeError("cliente_Alta.jsp", ex.getMessage());
         } catch (Exception ex) {
             vista.mensajeError("cliente_Alta.jsp", ex.getMessage());
         }
@@ -99,7 +99,7 @@ public class ControladorManejoClientes {
             principalesYSecundarios.addAll(opPersona.buscar(null, "Modelo.Secundario"));
             vista.mostrarTablaClientesBajaInicio(principalesYSecundarios);
         } catch (Exception ex) {
-            vista.mensajeError("cliente_Baja", "Error en la carga de clientes");
+            vista.mensajeError("cliente_Baja.jsp", "Error en la carga de clientes");
         }
         
     }
@@ -123,46 +123,36 @@ public class ControladorManejoClientes {
             }
             
         } catch (Exception ex) {
-            vista.mensajeError("cliente_Baja", "Error al dar de baja el cliente");
+            vista.mensajeError("cliente_Baja.jsp", "Error al dar de baja el cliente");
         }
         
         
     }
 
-    //SE CAE SI BORRO UN PRINCIPAL Y UN SECUNDARIO A LA VEZ
-    //Borro los clientes seleccionados de los checkboxes
+    //Borro los clientes seleccionados de los checkboxes (pueden ser principales y/o secundarios)
     public void borrarClientesSeleccionados(String[] listaNombresDeUsuariosDeClientes) {
 
-        String borrados = "";
+        int cantCliBorrados = 0;
         
-        if(!listaNombresDeUsuariosDeClientes[0].equals("")){ //se seleccionó al menos un cliente para borrar
+        if (!listaNombresDeUsuariosDeClientes[0].equals("")) { //se seleccionó al menos un cliente para borrar
             //en el frontend tira todos los nombres de usuarios de los check en la posición [0], por eso convierto a string y luego a array para poder recorrer
             String cadena = listaNombresDeUsuariosDeClientes[0].toString();
-            String[]cadenaConvertida = cadena.split(",");
+            String[] cadenaConvertida = cadena.split(",");
 
-            
-            for (String nombreUsuarioCli : cadenaConvertida) { 
-                //recorro cada nombre de usuario, me traigo la persona que tiene ese usuario y lo borro
-                
-                try {
-                    borrados+=nombreUsuarioCli + " - ";
-                    opPersona.borrar(new Secundario(nombreUsuarioCli));
-                    
+            for (String nombreUsuarioCli : cadenaConvertida) {                
+                try {                    
+                    opPersona.borrar(new Secundario(nombreUsuarioCli));//tanto secundarios como principales
+                    cantCliBorrados+=1;
                 } catch (Exception ex) {
-                    //vista.mensajeErrorBajaClientes("Ocurrió un error al borrar el cliente");
-                    System.out.println("No es principal");
+                    vista.mensajeErrorBajaClientes("Ocurrió un error al borrar el cliente");                    
                 }
-                
-                
-  
+
             }
-            vista.mostrarMensajeExitoClienteBorrado("Se eliminaron los clientes: " + borrados); //devuelvo cadena que es el string que tiene los nombres de usuarios a borrar
-        }else{
+            vista.mostrarMensajeExitoClienteBorrado("Se eliminaron" + " " + cantCliBorrados + " " + "clientes."); 
+        } else {
             vista.mensajeNoSeleccionasteClientes("Debes seleccionar al menos un cliente para borrar");
         }
-        
-        
-        
+  
     }
     
     
