@@ -22,59 +22,55 @@
         <script type="text/javascript" src="bootstrap-4.5.2-dist/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="js/functions.js"></script>
         <script type="text/javascript" src="js/events.js"></script>
-        
+
     </head>
-    
+
     <body class="w3-light-grey">
         <script>
-            
-           mostrarTablaPaquetesPaqueteBaja();
-           
-           function mostrarTablaPaquetesPaqueteBaja(){
-               $.get("ManejoPaquetesServlet?accion=generarTablaPaquetesBaja", function(data){
-                  document.getElementById("spanPaquetesPaqueteBaja").innerHTML=data; 
-               });
-               
-           }   
-           
-            function buscarPaquetesBaja(){
-                        var idPaquete = $("#txtbxIdPaqueteBaja").val();
-                        var nombre = $("#txtbxNombrePaqueteBaja").val();
-                        var costoA = $("#txtbxCostoBrutoAPaqueteBaja").val();
-                        var costoB = $("#txtbxCostoBrutoBPaqueteBaja").val();
-                        
-                       $.get("ManejoPaquetesServlet?accion=buscarPaquetes&idPaquete=" + idPaquete + "&nombrePaquete=" + nombre + "&costoA=" + costoA + "&costoB=" + costoB, function (data) {
-<<<<<<< HEAD:web/paquete_BajaModificacion.jsp
-                       document.getElementById("tblPaquetesPaqueteBaja").innerHTML = data;
-=======
-                       document.getElementById("tblPaquetesPaqueteBaja").innerHTML = data;//ver si corresponde ponerlo en el span
->>>>>>> 0bf2b5bb3c840412050a305d332be0176762239e:web/paquete_Baja.jsp
-                       document.getElementById("spanMensaje").innerHTML = "";
-                   });
-               }
 
-               function borrarPaquetesSeleccionados() {
-                   var listaSeleccionados = new Array();
-                   $("input:checkbox:checked").each(
-                           function () {
-                               listaSeleccionados.push($(this).val());
-                           }
-                   );
-                   $.get("ManejoPaquetesServlet?accion=borrarPaquetes&listaPaquetes=" + listaSeleccionados, function (data) {
-                       document.getElementById("spanMensaje").innerHTML = data; //muestro mensaje modal
-                       mostrarTablaPaquetesPaqueteBaja();//Refresco tabla
-                   });
+            mostrarTablaPaquetesPaqueteBaja();
 
-               }
+            function mostrarTablaPaquetesPaqueteBaja() {
+                $.get("ManejoPaquetesServlet?accion=generarTablaPaquetesBaja", function (data) {
+                    document.getElementById("spanPaquetesPaqueteBaja").innerHTML = data;
+                });
+
+            }
+
+            function buscarPaquetesBaja() {
+                var idPaquete = $("#txtbxIdPaqueteBaja").val();
+                var nombre = $("#txtbxNombrePaqueteBaja").val();
+                var costoA = $("#txtbxCostoBrutoAPaqueteBaja").val();
+                var costoB = $("#txtbxCostoBrutoBPaqueteBaja").val();
+
+                $.get("ManejoPaquetesServlet?accion=buscarPaquetes&idPaquete=" + idPaquete + "&nombrePaquete=" + nombre + "&costoA=" + costoA + "&costoB=" + costoB, function (data) {
+                    document.getElementById("tblPaquetesPaqueteBaja").innerHTML = data;
+                    document.getElementById("spanMensaje").innerHTML = "";
+                });
+            }
+
+            function borrarPaquetesSeleccionados() {
+                var listaSeleccionados = new Array();
+                $("input:checkbox:checked").each(
+                        function () {
+                            listaSeleccionados.push($(this).val());
+                        }
+                );
+                $.get("ManejoPaquetesServlet?accion=borrarPaquetes&listaPaquetes=" + listaSeleccionados, function (data) {
+                    document.getElementById("spanMensaje").innerHTML = data; //muestro mensaje modal
+                    mostrarTablaPaquetesPaqueteBaja();//Refresco tabla
+                });
+
+            }
         </script>
 
         <div class="w3-bar w3-top w3-black w3-large" id="divBarraSuperior">
             <button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey" onclick="w3_open();"><i class="fa fa-bars"></i> &nbsp;Menu</button>
             <span class="w3-bar-item w3-right">LogoEmpresa</span>
         </div>
-        
+
         <!-- Sidebar/menu -->
-         <nav class="w3-sidebar w3-collapse w3-white w3-animate-left" id="mySidebar"><br>
+        <nav class="w3-sidebar w3-collapse w3-white w3-animate-left" id="mySidebar"><br>
             <div class="w3-container w3-row">
                 <div class="w3-col s4">
                     <img src="resources/avatar3.png" class="w3-circle w3-margin-right" id="imgPerfil">
@@ -82,15 +78,15 @@
                 <div class="w3-col s8 w3-bar">
                     <span>Bienvenido, <strong>NombrePersonaEmpresa</strong></span><br> <!-- CAMBIAR POR NOMBRE DE PERSONA DE LA EMPRESA -->
                     <!-- ICONOS DEBAJO DE PERFIL DE USUARIO -->
-                        <a href="#" class="w3-bar-item w3-button"><i class="fa fa-sign-out"></i></a>
-                        <a href="#" class="w3-bar-item w3-button"><i class="fa fa-cogs"></i></a>
-                    
+                    <a href="#" class="w3-bar-item w3-button"><i class="fa fa-sign-out"></i></a>
+                    <a href="#" class="w3-bar-item w3-button"><i class="fa fa-cogs"></i></a>
+
                 </div>
             </div>
 
             <hr>
-          
-                <div class="w3-bar-block">
+
+            <div class="w3-bar-block">
                 <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>&nbsp; Cerrar Menu</a>
                 <a href="index.jsp" class="w3-bar-item w3-button w3-padding"><i class="fa fa-home fa-fw"></i>&nbsp; Inicio</a><br><br>
                 <div class="w3-dropdown-hover w3-mobile">
@@ -150,64 +146,57 @@
                 <h5><b><i class="fa fa fa-cubes fa-fw"></i> Modificaci&oacute;n de Paquete</b></h5>
                 <%}%> 
             </header>
-                <div class="form">
-                    <form>
-                        <div><h5 class="nb-title-left">Ingrese los filtros por los que desea buscar</h5></div>
-                        <div class="margin-top20"><label for="txtbxIdPaqueteBaja">Id Paquete: </label><input type="number" class="nb-input nb-input-number-sinFlechas" id="txtbxIdPaqueteBaja" name="txtbxIdPaqueteBaja"/></div>
-                        <div class="margin-top20"><label for="txtbxNombrePaqueteBaja">Nombre: </label><input type="text" class="nb-input" id="txtbxNombrePaqueteBaja" name="txtbxNombrePaqueteBaja"/></div>
-                        <div class="margin-top20">
-                            <label for="txtbxCostoBrutoAPaqueteBaja">Costo bruto entre : </label>
-                            <input type="number" class="nb-input-sinSize nb-input-number-sinFlechas" id="txtbxCostoBrutoAPaqueteBaja" name="txtbxCostoBrutoAPaqueteBaja"/>
-                            <label id="lblAndPaqueteBaja"> y </label>
-                            <input type="number" class="nb-input-sinSize nb-input-number-sinFlechas margin-left20" id="txtbxCostoBrutoBPaqueteBaja" name="txtbxCostoBrutoBPaqueteBaja"/>
-                        </div>     
-                        <hr>        
-                        <div class="botonera">
-                            <input type="button" id="btnBuscarPaquetesBaja" class="submitSearch" value="Buscar">
-                            <input type="reset" class="limpiarCampos" value="Limpiar campos">    
+            <div class="form">
+                <form>
+                    <div><h5 class="nb-title-left">Ingrese los filtros por los que desea buscar</h5></div>
+                    <div class="margin-top20"><label for="txtbxIdPaqueteBaja">Id Paquete: </label><input type="number" class="nb-input nb-input-number-sinFlechas" id="txtbxIdPaqueteBaja" name="txtbxIdPaqueteBaja"/></div>
+                    <div class="margin-top20"><label for="txtbxNombrePaqueteBaja">Nombre: </label><input type="text" class="nb-input" id="txtbxNombrePaqueteBaja" name="txtbxNombrePaqueteBaja"/></div>
+                    <div class="margin-top20">
+                        <label for="txtbxCostoBrutoAPaqueteBaja">Costo bruto entre : </label>
+                        <input type="number" class="nb-input-sinSize nb-input-number-sinFlechas" id="txtbxCostoBrutoAPaqueteBaja" name="txtbxCostoBrutoAPaqueteBaja"/>
+                        <label id="lblAndPaqueteBaja"> y </label>
+                        <input type="number" class="nb-input-sinSize nb-input-number-sinFlechas margin-left20" id="txtbxCostoBrutoBPaqueteBaja" name="txtbxCostoBrutoBPaqueteBaja"/>
+                    </div>     
+                    <hr>        
+                    <div class="botonera">
+                        <input type="button" id="btnBuscarPaquetesBaja" class="submitSearch" value="Buscar">
+                        <input type="reset" class="limpiarCampos" value="Limpiar campos">    
+                    </div>
+                    <hr>
+                    <div>
+                        <h5 class="nb-title-center">Lista de Paquetes</h5>
+                    </div>
+                    <span id="spanPaquetesPaqueteBaja" name="generarTablaPaquetesBaja"></span>
+            </div>  
+
+            <div class="margin-top20">
+                <div class="botonera">
+                    <%if (tipoJSP.equals("baja")) {%>
+                    <input type="button" class="submitBaja" id="btnBorrarPaquetesSeleccionados" value="Borrar">                                      
+                    <%} else if (tipoJSP.equals("modificacion")) {%>
+                    <input type="button" class="submitModificacion" id="btnModificarPaqueteSeleccionado" value="Modificar">
+                    <%}%> 
+                </div>
+                <%if (msg != null) {%>
+                <div>
+                    <p class="message"><%=msg%></p>                        
+                </div>
+                <%}%>
+                <div id="divModal" class="w3-modal">
+                    <div class="w3-modal-content w3-animate-zoom" >
+                        <div class="w3-container">
+                            <span id="spanBtnCerrar" class="w3-button w3-display-topright">&times;</span>
+                            <br>
+                            <span id="spanMensaje"></span>
+                            <br>
+                            <br>
                         </div>
-                        <div class="margin-top20">
-<<<<<<< HEAD:web/paquete_BajaModificacion.jsp
-                        <div class="botonera">
-                            <%if (tipoJSP.equals("baja")) {%>
-                            <input type="button" class="submitBaja" id="btnBorrarPaquetesSeleccionados" value="Borrar">                                      
-                            <%} else if (tipoJSP.equals("modificacion")) {%>
-                            <input type="button" class="submitModificacion" id="btnModificarPaqueteSeleccionado" value="Modificar">
-                            <%}%> 
-                        </div>
-                        </div>
-=======
-                            <div>
-                                <h5 class="nb-title-center">Lista de Paquetes</h5>
-                            </div>
-                            <span id="spanPaquetesPaqueteBaja" name="generarTablaPaquetesBaja"></span>
-                        </div>  
->>>>>>> 0bf2b5bb3c840412050a305d332be0176762239e:web/paquete_Baja.jsp
-                        
-                        <div class="margin-top20">
-                            <div class="botonera">
-                                <input type="button" class="submitBaja" id="btnBorrarPaquetesSeleccionados" value="Borrar">
-                            </div>
-                            <%if (msg != null) {%>
-                            <div>
-                                <p class="message"><%=msg%></p>                        
-                            </div>
-                            <%}%>
-                            <div id="divModal" class="w3-modal">
-                                <div class="w3-modal-content w3-animate-zoom" >
-                                    <div class="w3-container">
-                                        <span id="spanBtnCerrar" class="w3-button w3-display-topright">&times;</span>
-                                        <br>
-                                        <span id="spanMensaje"></span>
-                                        <br>
-                                        <br>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
+                    </div>
                 </div>
             </div>
-        </div>
-    </body>
+        </form>
+    </div>
+</div>
+</div>
+</body>
 </html>

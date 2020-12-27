@@ -7,8 +7,6 @@ import Modelo.Paquete;
 import Resources.DTOs.DTORangoNumerosStr;
 import controlador.Interfaces.IVistaManejoPaquetes;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class ControladorManejoPaquetes {
     /*Estado*/
@@ -33,31 +31,13 @@ public class ControladorManejoPaquetes {
             filtro+=" Paquetes.idPaquete='"+idPaquete+"' AND ";
         }
         filtro+=" Paquetes.nombrePaquete LIKE '%"+nombre+"%' AND ";
-<<<<<<< HEAD
-        if(rango.esRango()){
-=======
         if(rango.esRango()){//si se ingresaron costoA y costoB
->>>>>>> 0bf2b5bb3c840412050a305d332be0176762239e
-            filtro+=" Paquetes.costoBruto BETWEEN '"+costoA+"' AND '"+costoB+"' ";
-        }else{//entra acá si alguno de los costos no se ingresó o si los dos vienen vacios (si los dos vienen vacios, no entra a ninguno de los ifs)
-            if(!costoA.equals("")){//si se ingresó un costoA
-                filtro+=" Paquetes.costoBruto > '"+costoA+"'";
-            }
-            if(!costoB.equals("")){//si se ingresó un costoB
-                filtro+=" Paquetes.costoBruto < '"+costoB+"'";
-            }
+            filtro+=" Paquetes.costoBruto BETWEEN '"+costoA+"' AND '"+costoB+"' AND ";
         }
         
         if(filtro.endsWith("AND ")){
             filtro = filtro.substring(0, filtro.length()-5);
         }
-<<<<<<< HEAD
-        if (filtro.endsWith("AND ")) {
-            filtro = filtro.substring(0, filtro.length() - 5);
-        }
-=======
-        
->>>>>>> 0bf2b5bb3c840412050a305d332be0176762239e
         if(filtro.equals(" WHERE ")){
             filtro=null;
         }
