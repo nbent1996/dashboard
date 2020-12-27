@@ -46,6 +46,28 @@ public class ControladorManejoDispositivos{
             vista.mensajeError("dispositivo_Alta.jsp", ex.getMessage());
         }
     }
+    public String getFiltroProcesado(String nroSerie, String estado){
+        String filtro = " WHERE ";
+       
+        filtro+=" dis.nroSerie LIKE '%"+nroSerie+"%' AND ";
+        filtro+=" dis.estado LIKE '%"+estado+"%' ";
+        
+        if(filtro.endsWith("AND ")){
+            filtro = filtro.substring(0, filtro.length()-5);
+        }
+        if(filtro.equals(" WHERE ")){
+            filtro=null;
+        }
+
+        return filtro;
+    }
+    public void generarTablaDispositivos(String filtro){
+        try{
+            vista.generarTablaDispositivos("tblDispositivosDispositivoBaja", opDispositivo.buscar(filtro, null));
+        }catch(Exception ex){
+            vista.mensajeError("dispositivo_BajaModificacion.jsp", "Error al generar la tabla de dispositivos.");
+        }
+    }
         public void cargarTiposDispositivos() {
             try{
                 //vista.mostrarTiposDispositivos(opTipoDispositivo.buscar(" WHERE nombreCategoria='"+categoria+"' ",null));

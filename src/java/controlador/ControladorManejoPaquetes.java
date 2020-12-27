@@ -28,9 +28,12 @@ public class ControladorManejoPaquetes {
         if(idPaquete!=-1){
             filtro+=" Paquetes.idPaquete='"+idPaquete+"' AND ";
         }
-        filtro+=" Paquetes.nombrePaquete LIKE '%"+nombre+"%' ";
+        filtro+=" Paquetes.nombrePaquete LIKE '%"+nombre+"%' AND ";
         if(rango.esRango()){
             filtro+=" Paquetes.costoBruto BETWEEN '"+costoA+"' AND '"+costoB+"' ";
+        }
+        if (filtro.endsWith("AND ")) {
+            filtro = filtro.substring(0, filtro.length() - 5);
         }
         if(filtro.equals(" WHERE ")){
             filtro=null;
@@ -48,7 +51,7 @@ public class ControladorManejoPaquetes {
         try{
             vista.generarTablaPaquetes("tblPaquetesPaqueteBaja", opPaquete.buscar(filtro,null), new Moneda("UYU","Pesos Uruguayos","$")); //MONEDA HARDCODEADA, OBTENERLA DESDE LA IDENTIFICACION TRIBUTARIA DE LA SESSION
         }catch(Exception ex){
-            vista.mensajeError("paquete_Baja.jsp","Error al generar la tabla de paquetes de dispositivos.");
+            vista.mensajeError("paquete_BajaModificacion.jsp","Error al generar la tabla de paquetes de dispositivos.");
         }
     }
     /*Comportamiento*/

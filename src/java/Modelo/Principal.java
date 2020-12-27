@@ -60,6 +60,12 @@ public Principal(int nroCliente){
     this.usuarioSistema = "";
     this.nroCliente = nroCliente;
 }
+/*NRO CLIENTE + NOMBRE COMPLETO + EMPRESA*/
+public Principal(int nroCliente, String nombreCompleto, Empresa e){
+    this.nroCliente = nroCliente;
+    this.nombreCompleto = nombreCompleto;
+    this.empresaAsociada = e;
+}
 /*Constructores*/
 
 /*Comportamiento*/

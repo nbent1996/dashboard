@@ -165,6 +165,34 @@ public class Funciones {
                 retorno+="</table>";    
             return retorno;
         }
+        public static String tablaDispositivos(String idTabla, ArrayList<Dispositivo> items) throws ProgramException{
+            String retorno = "";
+            retorno+="<table id='"+idTabla+"' class='w3-table-all'>\n";
+            /*Cabezales*/
+            retorno+="<tr>\n";
+                retorno+="<th>Nro de Serie</th>\n";
+                retorno+="<th>Estado</th>\n";
+                retorno+="<th>Tipo de Dispositivo</th>\n";
+                retorno+="<th>Cliente asociado</th>\n";
+            retorno+="</tr>\n";
+            /*Contenido*/
+            for(Dispositivo d: items){
+                    Cliente cli = d.getClienteAsociado();
+                    retorno+="<tr>\n";
+                    retorno+="<td>"+d.getNroSerie()+"</td>\n";
+                    retorno+="<td>"+d.getEstado()+"</td>\n";
+                    retorno+="<td>"+d.getTipoDispositivo().toString(3)+"</td>\n";
+                    if(cli!=null && cli.getNombreCompleto()!=null){
+                        retorno+="<td>"+d.getClienteAsociado().toString(1)+"</td>\n";
+                    }else{
+                        retorno+="<td>No asignado</td>\n";
+                    }
+                    retorno+="<td><input type='checkbox' class='w3-check' value='"+d.getNroSerie()+"' name='"+d.getNroSerie()+"'></td>\n";
+                    retorno+="</tr>\n";
+                }
+                retorno+="</table>";    
+            return retorno;
+        }
         public static String tablaUsuarios(ArrayList<Persona> opciones, String boton) {
         String tabla = "";       
         for (Persona obj : opciones) {

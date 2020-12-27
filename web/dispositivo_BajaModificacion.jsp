@@ -1,11 +1,18 @@
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%
+    String msg = request.getParameter("msg");
+    String tipoJSP = request.getParameter("tipo");
+%>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Envío de Notificaciones</title>
-         <!--CSS-->  
+        <%if (tipoJSP.equals("baja")) {%>
+        <title>Baja de Dispositivo</title>
+        <%} else if (tipoJSP.equals("modificacion")) {%>
+        <title>Modificaci&oacute;n de Dispositivo</title>
+        <%}%> 
+        <!--CSS-->  
         <link rel="stylesheet" href="css/styles.css">
         <link rel="stylesheet" href="css/stylesCustom.css">
         <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css">
@@ -16,17 +23,46 @@
         <script type="text/javascript" src="js/functions.js"></script>
         <script type="text/javascript" src="js/events.js"></script>
     </head>
-    <body class="w3-light-grey">
-        <script>
-            
+    
+    <body class="w3-light-grey">  
+        <script>   
+             mostrarTablaDispositivosDispositivoBaja();
+             function mostrarTablaDispositivosDispositivoBaja(){
+               $.get("ManejoDispositivosServlet?accion=generarTablaDispositivosBaja", function(data){
+                  document.getElementById("spanDispositivosDispositivoBaja").innerHTML=data; 
+               }); 
+           }   
+            function buscarDispositivosBaja(){
+                var nroSerie = $("#txtbxNroSerieDispositivoBaja").val();
+                var estado = $("#selEstadoDispositivoBaja").val();
+                        
+                $.get("ManejoDispositivosServlet?accion=buscarDispositivos&nroSerie=" + nroSerie + "&estado=" + estado, function (data) {
+                document.getElementById("tblDispositivosDispositivoBaja").innerHTML = data;
+                document.getElementById("spanMensaje").innerHTML = "";
+                });
+            }
+            function borrarDispositivosSeleccionados() {
+                   var listaSeleccionados = new Array();
+                   $("input:checkbox:checked").each(
+                           function () {
+                               listaSeleccionados.push($(this).val());
+                           }
+                   );
+                   $.get("ManejoDispositivosServlet?accion=borrarDispositivos&listaDispositivos=" + listaSeleccionados, function (data) {
+                       document.getElementById("spanMensaje").innerHTML = data; //muestro mensaje modal
+                       mostrarTablaDispositivosPaqueteBaja();//Refresco tabla
+                   });
+
+               }
         </script>
+        
         <div class="w3-bar w3-top w3-black w3-large" id="divBarraSuperior">
             <button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey" onclick="w3_open();"><i class="fa fa-bars"></i> &nbsp;Menu</button>
             <span class="w3-bar-item w3-right">LogoEmpresa</span>
         </div>
         
         <!-- Sidebar/menu -->
-         <nav class="w3-sidebar w3-collapse w3-white w3-animate-left" id="mySidebar"><br>
+        <nav class="w3-sidebar w3-collapse w3-white w3-animate-left" id="mySidebar"><br>
             <div class="w3-container w3-row">
                 <div class="w3-col s4">
                     <img src="resources/avatar3.png" class="w3-circle w3-margin-right" id="imgPerfil">
@@ -92,16 +128,58 @@
             </div>
 
         </nav>
+       
         <!-- !PAGE CONTENT! -->
         <div class="ABMContainer">
-
             <!-- Header -->
             <header class="w3-container estilosHeader">
-                <h5><b><i class="fa fa-bell"></i> Envío de Notificaciones</b></h5>
+                <%if (tipoJSP.equals("baja")) {%>
+                <h5><b><i class="fa fa-video-camera fa-fw"></i> Baja de Dispositivo</b></h5>
+                <%} else if (tipoJSP.equals("modificacion")) {%>
+                <h5><b><i class="fa fa-video-camera fa-fw"></i> Modificaci&oacute;n de Dispositivo</b></h5>
+                <%}%> 
             </header>
-            <div class="form">
-            </div>
- 
-        </div>        
+                <div class="form">
+                    <form>
+                        <div><label for="txtbxNroSerieDispositivoBaja">Número de Serie: </label><input type="text" class="nb-input" id="txtbxNroSerieDispositivoBaja" name="txtbxNroSerieDispositivoBaja"/></div>
+                        <div><label for="selEstadoDispositivoBaja">Estado: </label>
+                            <select id="selEstadoDispositivoBaja" class="nb-input" name="selEstadoDispositivoBaja">
+                                <option value="" selected="true">Cualquiera</option>
+                                <option value="Nuevo">Nuevo</option>
+                                <option value="Usado-OK">Usado-OK</option>
+                                <option value="Usado-Reparar">Usado-Reparar</option>
+                            </select>
+                        </div>
+                    <hr>
+                    <div class="margin-top20">
+                        <div class="botonera">
+                            <input type="button" class ="submitSearch" onclick="buscarDispositivoBaja()" id="btnBuscarDispositivoBaja" value="Buscar">
+                            <input type="reset" class="limpiarCampos" value="Limpiar campos">    
+                        </div>
+                    </div>
+                    </form>
+                    <div class="margin-top20"><div><h5 class="nb-title-center">Lista de Dispositivos</h5></div><span id="spanDispositivosDispositivoBaja" name="generarTablaDispositivosBaja"></div>  
+                    <div class="margin-top20">
+                        <div class="botonera">
+                            <%if (tipoJSP.equals("baja")) {%>
+                            <input type="button" class="submitBaja" id="btnBorrarDispositivosSeleccionados" value="Borrar">                                      
+                            <%} else if (tipoJSP.equals("modificacion")) {%>
+                            <input type="button" class="submitModificacion" id="btnModificarDispositivoSeleccionado" value="Modificar">
+                            <%}%> 
+                        </div>
+                        <div id="divModal" class="w3-modal">
+                            <div class="w3-modal-content w3-animate-zoom" >
+                                <div class="w3-container">
+                                    <span id="spanBtnCerrar" class="w3-button w3-display-topright">&times;</span>
+                                    <br>
+                                    <span id="spanMensaje"></span>
+                                    <br>
+                                    <br>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>   
     </body>
 </html>

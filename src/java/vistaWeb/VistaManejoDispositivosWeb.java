@@ -1,6 +1,7 @@
 package vistaWeb;
 
 import Modelo.Categoria;
+import Modelo.Dispositivo;
 import Modelo.Funciones;
 import Modelo.ProgramException;
 import Modelo.TipoDispositivo;
@@ -41,18 +42,28 @@ public class VistaManejoDispositivosWeb implements IVistaManejoDispositivos{
             case "formAltaDispositivo":
                  this.altaDispositivo(request, response);
             break;
-            case "formBajaDispositivo":
-            
+            case "generarTablaDispositivosBaja":
+                this.generarTablaDispositivos(request, response);
             break;
-            
-            case "formModificacionDispositivo":
-            
-            break;
-            case "buscarCliente":
-                
+            case "buscarDispositivos":
+                generarTablaDispositivos(request, response);
             break;
             
         }
+    }
+    private void generarTablaDispositivos(HttpServletRequest request, HttpServletResponse response){
+        this.request = request;
+        this.response = response;
+        String nroSerie = request.getParameter("nroSerie");
+        String estado = request.getParameter("estado");
+        if(nroSerie ==null){
+            nroSerie = "";
+        }
+        if(estado == null){
+            estado = "";
+        }
+        String filtro = this.controlador.getFiltroProcesado(nroSerie, estado);
+        this.controlador.generarTablaDispositivos(filtro);
     }
     private void cargarTiposDispositivos(){
         //String cat = request.getParameter("categoria");
@@ -110,6 +121,16 @@ public class VistaManejoDispositivosWeb implements IVistaManejoDispositivos{
 //        this.controlador.cargarCategorias();
 //    }
     /*Comportamiento*/
+
+    @Override
+    public void generarTablaDispositivos(String idTabla, ArrayList<Dispositivo> items) {
+        try{
+            String componente = Funciones.tablaDispositivos(idTabla, items);
+            out.write(componente + "\n\n");
+        }catch(ProgramException ex){
+            mensajeError("dispositivo_BajaModificacion.jsp","Error al generar la tabla de Dispositivos.");
+        }
+    }
 
 
     

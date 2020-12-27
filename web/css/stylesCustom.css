@@ -196,6 +196,21 @@ select{
 }
 /*cliente_Alta.jsp*/
 
+/*cliente_Baja.jsp*/
+#txtbNroClienteBaja{
+    position:relative;
+    left:35px;
+}
+#txtbEmailClienteBaja{
+    position:relative;
+    left:125px
+}
+#txtbNombreCompletoBajaCli{
+    position:relative;
+    left:15px;
+}
+/*cliente_Baja.jsp*/
+
 /*paquete_Alta.jsp*/
 #txtbxNombrePaqueteAlta{
     position:relative;
@@ -226,6 +241,18 @@ select{
     left:42px;
 }
 /*dispositivo_Alta.jsp*/
+
+/*dispositivo_Baja.jsp*/
+#txtbxNroSerieDispositivoBaja{
+    position:relative;
+    left:15px;
+}
+#selEstadoDispositivoBaja{
+    position:relative;
+    left:85px;
+}
+/*dispositivo_Baja.jsp*/
+
 /*suscripcion_Alta.jsp*/
 #spanContenidoClienteAsociadoB{
     position:relative;

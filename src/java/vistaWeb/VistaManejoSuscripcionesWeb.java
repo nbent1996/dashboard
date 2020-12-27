@@ -116,7 +116,7 @@ public class VistaManejoSuscripcionesWeb implements IVistaManejoSuscripciones{
             String componente = Funciones.tablaSuscripciones(idTabla, items);
             out.write(componente + "\n\n");
         }catch(ProgramException ex){
-            mensajeError("suscripcion_Baja.jsp","Error al generar la tabla de suscripciones.");
+            mensajeError("suscripcion_BajaModificacion.jsp","Error al generar la tabla de suscripciones.");
         }
     }
     @Override

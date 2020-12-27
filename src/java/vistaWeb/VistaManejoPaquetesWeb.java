@@ -117,7 +117,7 @@ public class VistaManejoPaquetesWeb implements IVistaManejoPaquetes{
             String componente = Funciones.tablaPaquetes(idTabla, items, moneda);
             out.write(componente + "\n\n");
         }catch(ProgramException ex){
-            mensajeError("paquete_Baja.jsp","Error al generar la tabla de Paquetes de dispositivos.");
+            mensajeError("paquete_BajaModificacion.jsp","Error al generar la tabla de Paquetes de dispositivos.");
         }
     }
     /*Comportamiento*/

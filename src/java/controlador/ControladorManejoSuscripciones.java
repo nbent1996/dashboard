@@ -63,7 +63,7 @@ public class ControladorManejoSuscripciones {
         try{
             vista.generarTablaSuscripciones("tblSuscripcionesSuscripcionBaja", opSuscripcion.buscar(filtro, null));
         }catch(Exception ex){
-            vista.mensajeError("suscripcion_Baja.jsp","Error al generar la tabla de suscripciones.");
+            vista.mensajeError("suscripcion_BajaModificacion.jsp","Error al generar la tabla de suscripciones.");
         }
     }
     public void generarTablaPaquetes(){

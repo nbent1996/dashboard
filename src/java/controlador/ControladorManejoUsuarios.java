@@ -79,7 +79,7 @@ public class ControladorManejoUsuarios{
             listaUsuarios = opPersona.buscar(" WHERE OperadoresDashboard.usuarioSistema like '%"+nombreUsuarioBaja+"%' AND Personas.nombreCompleto LIKE '%"+nombreCompletoUsuarioBaja+"%' " , "Modelo.Operador");
             vista.mostrarTablaConUsuariosABorrar(listaUsuarios);
             } catch (Exception ex) {
-                vista.mensajeError("usuario_Baja.jsp","Error al dar de baja el usuario");
+                vista.mensajeError("usuario_BajaModificacion.jsp","Error al dar de baja el usuario");
             }
         }
     

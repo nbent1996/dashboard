@@ -112,26 +112,32 @@ public OpDispositivo(String usuarioSistema){
         ArrayList<String> listaSQL = new ArrayList<>();
         ArrayList<Dispositivo> lista = new ArrayList<>();
         String nroSerie="", estado="";
-        TipoDispositivo tipo;
+        TipoDispositivo tipo=null;
         Empresa empresaAsociada;
         Cliente clienteAsociado;
-        String sql = "SELECT nroSerie, estado, idTipoDispositivo, identificacionTributaria, nroCliente from Dispositivos ";
+        String sql = "SELECT dis.nroSerie, dis.estado, dis.idTipoDispositivo, dis.identificacionTributaria, pri.nroCliente, per.nombreCompleto \n" +
+                     "from Principales pri RIGHT JOIN Dispositivos dis ON pri.nroCliente = dis.nroCliente LEFT JOIN Personas per ON pri.usuarioSistema = per.usuarioSistema ";
         if(filtro!=null){
             sql+=filtro;
-            sql+= " AND eliminado = 'N' ";
+            sql+= " AND dis.eliminado = 'N' ";
         }else{
-            sql+= " WHERE eliminado = 'N' ";
+            sql+= " WHERE dis.eliminado = 'N' ";
         }
         
         listaSQL.add(sql);
         try{
             ResultSet rs = database.consultar(sql);
             while(rs.next()){
-                nroSerie = rs.getString("nroSerie");
-                estado = rs.getString("estado");
-                tipo = new TipoDispositivo(rs.getInt("idTipoDispositivo"));
-                empresaAsociada = new Empresa(rs.getString("identificacionTributaria"));
-                clienteAsociado = new Principal(rs.getString("identificacionTributaria"));
+                nroSerie = rs.getString("dis.nroSerie");
+                estado = rs.getString("dis.estado");
+                int idTipoDispositivo = rs.getInt("dis.idTipoDispositivo");
+                ResultSet rsTipoDispositivo = database.consultar("SELECT nombre, modelo, tipoComunicacion FROM TiposDispositivos WHERE idTipoDispositivo='"+idTipoDispositivo+"' ");
+                while(rsTipoDispositivo.next()){
+                    tipo = new TipoDispositivo(idTipoDispositivo, rsTipoDispositivo.getString("modelo"), rsTipoDispositivo.getString("nombre"), rsTipoDispositivo.getString("tipoComunicacion"));
+                }
+                rsTipoDispositivo.close();
+                empresaAsociada = new Empresa(rs.getString("dis.identificacionTributaria"));
+                clienteAsociado = new Principal(rs.getInt("pri.nroCliente"), rs.getString("per.nombreCompleto"),empresaAsociada);
                 lista.add(new Dispositivo(nroSerie, estado, tipo, empresaAsociada, clienteAsociado));
             }
             rs.close();

@@ -38,6 +38,21 @@ public void validar() throws ProgramException{
         throw new ProgramException(retorno);
     }
 }
+public String toString(int modo) throws ProgramException{
+            String retorno = "ERROR ToString";
+        switch(modo){
+            case 1:
+                retorno = this.nombreCompleto + " (" + this.nroCliente + ")";
+            break;
+            case 2:
+                retorno = this.nombreCompleto;
+            break;
+        }
+        if(retorno.equals("ERROR ToString")){
+            throw new ProgramException(retorno);
+        }
+        return retorno;
+}
 /*Comportamiento*/
 
 /*Getters y Setters*/
