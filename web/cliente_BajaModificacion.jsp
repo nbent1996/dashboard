@@ -54,7 +54,7 @@
                     );
                         $.get("ManejoClientesServlet?accion=borrarClientes&listaClientes=" + listaClientesSeleccionados, function (data) {
 
-                        document.getElementById("spanMensaje").innerHTML = data; //muestro mensaje modal
+                        document.getElementById("spanMensaje").innerHTML = data; //muestro mensaje modal                  
                         mostrarTablaClientes();//Refresco tabla
                     });
 

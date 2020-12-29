@@ -11,6 +11,7 @@ function load(){
     /*usuario_Alta.jsp*/
     
     /*cliente_Alta.jsp*/
+    $("#btnConfirmarAltaCliente").click(eventoAltaCliente);
     $("#selTipoCliente").on("change", changeTipoCliente);
     modificarVisibilidad(new Array("#divPrincipal", "#divSecundario"), "ocultar");
     modificarVisibilidad(new Array("#divPrincipal"), "mostrar");
@@ -93,6 +94,7 @@ function load(){
 
 
 }
+
 function abrirModal(){
     $("#divModal").css("display","block");
     $("#mySidebar").css("z-index", "0");
@@ -107,6 +109,11 @@ function eventoBuscarPaquetesBaja(){
 }
 function eventoBorrarUsuarioBaja(){
     borrarUsuariosSeleccionados();   
+    abrirModal();
+}
+
+function eventoAltaCliente(){
+    altaCliente();
     abrirModal();
 }
 

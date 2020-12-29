@@ -21,24 +21,68 @@
     
     <body class="w3-light-grey">
         <script>
-            mostrarTiposDocumento();
-               function mostrarTiposDocumento(){
+            //mostrarTiposDocumento();
+            
+            mostrarCombos();
+            
+               function mostrarCombos(){
                 $.get("ManejoClientesServlet?accion=comboTiposDocumento", function(data){
                     document.getElementById("selTiposDocumentoClienteAlta").innerHTML=data;
                 });
-            }
-            mostrarPaises();
-               function mostrarPaises(){
+                
+                /*setTimeout(function(){
+                    //.get....
+                }, 1000);*/
+                
                 $.get("ManejoClientesServlet?accion=comboPaises", function(data){
                     document.getElementById("selPaisesResidenciaClienteAlta").innerHTML=data;
                 });
+  
             }
-            /*    mostrarUsuarioSistema();
-                function mostrarUsuarioSistema(){
-                $.get("ManejoClientesServlet?accion=generarUsuario", function(data){
-                    document.getElementById("lblUsuarioSistema").innerHTML=data;
+            
+            function altaCliente(){
+                
+                
+                var nroDocumento = $("#txtbxNroDocumentoClienteAlta").val();
+                var nombreCompleto = $("#txtbxNombreCompletoClienteAlta").val();
+                var telefono = $("#txtbxTelefonoClienteAlta").val();
+                var email = $("#txtbxEmailClienteAlta").val();
+                var tipoDocumento = $("#lstTiposDocumento").val();
+                var codPais = $("#lstPaises").val();
+                                
+                var tipoCliente = $("#selTipoCliente").val(); //YA ESTÁ PREDEFINIDO, PUEDE SER TITULAR O SECUNDARIO           
+                var servicioActivo = "NoSeleccionado"; //SI ES TITULAR APARECE, SINO NO APARECE Y VA COMO "NO SELECCIONADO"
+                var nroDocCliPrin = $("#txtbxNroDocPrincipalClienteAlta").val(); //SOLO SI EL CLIENTE A DAR DE ALTA ES SECUNDARIO
+                
+                    //CONTROLO SI SE SELECCIONA EL CHECKBOX DE SERVICIO ACTIVO
+                    $("input:checkbox:checked").each(   
+                        function() {
+                            servicioActivo = "Seleccionado";
+                        }
+                    );
+                
+                $.get("ManejoClientesServlet?accion=formAltaCliente&nroDocumento=" + nroDocumento + 
+                        "&nombreCompleto=" + nombreCompleto + "&telefono=" + telefono + "&email=" + email + 
+                        "&tipoDocumento=" + tipoDocumento + "&codPais=" + codPais + "&tipoCliente=" + tipoCliente + 
+                        "&servicioActivo=" + servicioActivo + "&nroDocCliPrin=" + nroDocCliPrin, function (data) {
+                            
+                            document.getElementById("spanMensaje").innerHTML = data;
+                            if(data!=null){
+                                limpiarCampos();
+                            }
                 });
-            }*/
+                
+ 
+            }
+            function limpiarCampos(){
+                $("#txtbxNroDocumentoClienteAlta").val("");
+                $("#txtbxNombreCompletoClienteAlta").val("");
+                $("#txtbxTelefonoClienteAlta").val("");
+                $("#txtbxEmailClienteAlta").val("");                  
+                $("#txtbxNroDocPrincipalClienteAlta").val("");
+            }
+            
+            
         </script>
 
         <div class="w3-bar w3-top w3-black w3-large" id="divBarraSuperior">
@@ -121,35 +165,51 @@
             <header class="w3-container estilosHeader">
                 <h5><b><i class="fa fa-address-card"></i> Alta de Clientes</b></h5>
             </header>
+            
                 <div class="form">
-                    <form id="formAltaCliente" name="formAltaCliente" onsubmit="return validarAltaCliente(this)"  action="ManejoClientesServlet" method="post">
+                    <form>
                         <!--<div><label>Usuario Sistema: <span id="lblUsuarioSistema" class='spanUsuario' name="generarUsuario"></span></div>-->
-                        <div class="margin-top20"><label for="txtbxNroDocumentoClienteAlta">N&uacute;mero de Documento:</label>
-                        <input type="text" id="txtbxNroDocumentoClienteAlta" class="nb-input" name="txtbxNroDocumentoClienteAlta" required="true"/></div>
+                        <div class="margin-top20">
+                            <label for="txtbxNroDocumentoClienteAlta">N&uacute;mero de Documento:</label>
+                            <input type="text" id="txtbxNroDocumentoClienteAlta" class="nb-input" name="txtbxNroDocumentoClienteAlta" required="true"/>
+                        </div>
                         
-                        <div class="margin-top20"><label for="selTiposDocumentoClienteAlta">Tipo de documento:</label>
-                        <span id="selTiposDocumentoClienteAlta" name="comboTiposDocumento"></span></div>
+                        <div class="margin-top20">
+                            <label for="selTiposDocumentoClienteAlta">Tipo de documento:</label>
+                            <span id="selTiposDocumentoClienteAlta" name="comboTiposDocumento"></span>
+                        </div>
                         
-                        <div class="margin-top20"><label for="txtbxNombreCompletoClienteAlta">Nombre completo:</label>
-                        <input type="text" id="txtbxNombreCompletoClienteAlta" class="nb-input" name="txtbxNombreCompletoClienteAlta" required="true"/></div>
+                        <div class="margin-top20">
+                            <label for="txtbxNombreCompletoClienteAlta">Nombre completo:</label>
+                            <input type="text" id="txtbxNombreCompletoClienteAlta" class="nb-input" name="txtbxNombreCompletoClienteAlta" required="true"/>
+                        </div>
                         
-                        <div class="margin-top20"><label for="selPaisesResidenciaClienteAlta">Pais de nacionalidad:</label>
-                        <span id="selPaisesResidenciaClienteAlta" name="comboPaises"></span></div>
+                        <div class="margin-top20">
+                            <label for="selPaisesResidenciaClienteAlta">Pais de nacionalidad:</label>
+                            <span id="selPaisesResidenciaClienteAlta" name="comboPaises"></span>
+                        </div>
                         
-                        <div class="margin-top20"><label for="txtbxEmailClienteAlta">Email:</label>
-                        <input type="email" id="txtbxEmailClienteAlta" class="nb-input" name="txtbxEmailClienteAlta" required="true"/></div>
+                        <div class="margin-top20">
+                            <label for="txtbxEmailClienteAlta">Email:</label>
+                            <input type="email" id="txtbxEmailClienteAlta" class="nb-input" name="txtbxEmailClienteAlta" required="true"/>
+                        </div>
                         
-                        <div class="margin-top20"><label for="txtbxTelefonoClienteAlta" >Telefono:</label>
-                        <input type="text" id="txtbxTelefonoClienteAlta" class="nb-input" name="txtbxTelefonoClienteAlta" required="true"/></div>
+                        <div class="margin-top20">
+                            <label for="txtbxTelefonoClienteAlta" >Telefono:</label>
+                            <input type="text" id="txtbxTelefonoClienteAlta" class="nb-input" name="txtbxTelefonoClienteAlta" required="true"/>
+                        </div>
+                        
                         <div class="borderDiv margin-top20">
-                        <div><label for="selTipoCliente">Tipo de cliente</label></div>
-                        <select id="selTipoCliente" class="nb-input" name="selTipoCliente">
-                                <option value="Principal" selected="true">Titular</option>
-                                <option value="Secundario">Cuenta secundaria</option>
-                        </select>
+                                <div>
+                                    <label for="selTipoCliente">Tipo de cliente</label>
+                                </div>
+                                <select id="selTipoCliente" class="nb-input" name="selTipoCliente">
+                                    <option value="Principal" selected="true">Titular</option>
+                                    <option value="Secundario">Cuenta secundaria</option>
+                                </select>
                                 <div id="divPrincipal">
-                                    <input type="checkbox" class="w3-check" id="chkServicioActivoClienteAlta" name="chkServicioActivo">
-                                    <label for="chkServicioActivoClienteAlta"> Servicio activo</label>
+                                        <input type="checkbox" class="w3-check" id="chkServicioActivoClienteAlta" name="chkServicioActivo">
+                                        <label for="chkServicioActivoClienteAlta"> Servicio activo</label>
                                 </div>
                                 <div id="divSecundario">
                                     <label for="txtbxNroDocPrincipalClienteAlta">N&uacute;mero de Documento cuenta Titular:</label>
@@ -158,18 +218,18 @@
                         </div>
                         <hr>        
                         <div class="botonera">
-                        <input type="submit" class="submitAlta" value="confirmar">
-                        <input type="reset" class="limpiarCampos" value="Limpiar campos">    
+                            <input type="button" class="submitAlta" id="btnConfirmarAltaCliente" value="confirmar">
+                            <input type="reset" class="limpiarCampos" value="Limpiar campos">    
                         </div>
                         
-                        <span id="mensajeAlta"></span>
-                        <input type="hidden" name="accion" value="formAltaCliente">
+                                    <span id="mensajeAlta"></span>
+                                    <input type="hidden" name="accion" value="formAltaCliente">
                         <div id="divModal" class="w3-modal">
                             <div class="w3-modal-content w3-animate-zoom" >
                                 <div class="w3-container">
                                     <span id="spanBtnCerrar" class="w3-button w3-display-topright">&times;</span>
                                     <br>
-                                    <span id="spanMensaje"></span>
+                                        <span id="spanMensaje"></span>
                                     <br>
                                     <br>
                                 </div>
@@ -177,7 +237,7 @@
                         </div>
                     </form>
                 </div>
-
+            
             </div>
         </div>
     </body>

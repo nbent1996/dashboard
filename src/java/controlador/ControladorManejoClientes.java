@@ -41,38 +41,49 @@ public class ControladorManejoClientes {
             Principal p = new Principal("", nombreCompleto, e, new Pais(codPais), -1, email, nroDocumento, servicioActivo, new TipoDocumento(tipoDocumento), telefono);
             p.validar();
             opPersona.guardar(null, p);
-            vista.mensajeExito("cliente_Alta.jsp", "Cliente del tipo titular dado de alta correctamente.");
+            //vista.mensajeExito("cliente_Alta.jsp", "Cliente del tipo titular dado de alta correctamente.");
+            vista.mensajeAltaClienteOK("Cliente titular dado de alta correctamente");
         } catch (ProgramException ex) {
-            vista.mensajeError("cliente_Alta.jsp", ex.getMessage());
+            vista.mensajeAltaClienteError(ex.getMessage());
         } catch (Exception ex) {
-            vista.mensajeError("cliente_Alta.jsp", ex.getMessage());
+            vista.mensajeAltaClienteError("Ocurrió un error, póngase en contacto con el administrador");
         }
     }
+    
     public void altaSecundario(String nombreCompleto, String codPais, String email, String telefono, String nroDocumento, String nroDocumentoPrincipal) {
         try {
             Empresa e = new Empresa("526283747346"); //EMPRESA HARDCODEADA
             Secundario s = new Secundario("", nombreCompleto, e, new Pais(codPais), -1, email, new Principal(nroDocumentoPrincipal), telefono);
             s.validar();
             opPersona.guardar(null, s);
-            vista.mensajeExito("cliente_Alta.jsp", "Cliente del tipo cuenta secundaria dado de alta correctamente.");
+            //vista.mensajeExito("cliente_Alta.jsp", "Cliente del tipo cuenta secundaria dado de alta correctamente.");
+            vista.mensajeAltaClienteOK("Cliente secundario dado de alta correctamente");
         } catch (ProgramException ex) {
-            vista.mensajeError("cliente_Alta.jsp", ex.getMessage());
+            vista.mensajeAltaClienteError(ex.getMessage());
         } catch (Exception ex) {
-            vista.mensajeError("cliente_Alta.jsp", ex.getMessage());
+            vista.mensajeAltaClienteError("Ocurrió un error, póngase en contacto con el administrador");
         }
     }
   public void cargarPaises() {
+      
+        ArrayList<Pais> listaPaises = new ArrayList();
+      
         try {
-            vista.mostrarPaises(opPais.obtenerTodos());
+            listaPaises = opPais.obtenerTodos();
+            vista.mostrarPaises(listaPaises);
         } catch (Exception ex) {
-            vista.mensajeError("cliente_Alta.jsp", "Error en la carga de paises");
+            //vista.mensajeError("cliente_Alta.jsp", "Error en la carga de paises");// si devuelvo un mensaje en el mismo span que si hay error en la carga de tipos de documento se duplica vista
         }
     }
   public void cargarTiposDocumento(){
+      
+        ArrayList<TipoDocumento> listaTiposDocumento = new ArrayList();
+      
         try {
-            vista.mostrarTiposDocumento(opTipoDocumento.obtenerTodos());
+            listaTiposDocumento = opTipoDocumento.obtenerTodos();
+            vista.mostrarTiposDocumento(listaTiposDocumento);
         } catch (Exception ex) {
-            vista.mensajeError("cliente_Alta.jsp", "Error en la carga de tipos de documento.");
+            //vista.mensajeError("cliente_Alta.jsp", "Se ha producido un error");
         }
   }
   public void generarUsuarioSistema(){
