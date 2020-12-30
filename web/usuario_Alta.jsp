@@ -39,6 +39,35 @@
                 });              
             }
             
+            function altaUsuario(){
+
+                var usuarioAlta = $("#txtbxUserUsuarioAlta").val();
+                var nombreCompletoAlta = $("#txtbxNombreCompletoUsuarioAlta").val();
+                var generoUsuarioAlta = $("#selGenero").val();
+                var codPaisAlta = $("#selPaises").val();
+                var tipoUsuarioAlta = $("#selTiposUsuarios").val();
+                
+                $.get("ManejoUsuariosServlet?accion=formAltaUsuarios&usuarioAlta=" + usuarioAlta +
+                       "&nombreCompletoAlta=" + nombreCompletoAlta + "&generoUsuarioAlta=" + generoUsuarioAlta + 
+                       "&codPaisAlta=" + codPaisAlta + "&tipoUsuarioAlta=" + tipoUsuarioAlta, function(data){
+                            document.getElementById("spanMensaje").innerHTML=data;
+                                if(data!=null){
+                                    limpiarCampos();
+                                }
+                });
+                
+            }
+            
+            function limpiarCampos(){
+                $("#txtbxUserUsuarioAlta").val("");
+                $("#txtbxNombreCompletoUsuarioAlta").val("");  
+                $("#selGenero").prop('selectedIndex',0);
+                $("#selTiposUsuarios").prop('selectedIndex',0);
+                $("#selPaises").prop('selectedIndex',0);
+            }
+            
+            
+            
         </script>
         
         
@@ -120,26 +149,39 @@
                 <h5><b><i class="fa fa-users"></i> Alta de Usuario</b></h5>
             </header>
                 <div class="form">
-                    <form name="formAltaUsuario" action="ManejoUsuariosServlet" method="post" onsubmit="return validarAltaUsuario(this)">
-                        <div><label for="txtbxUserUsuarioAlta">Usuario Backoffice: </label><input type="text" id="txtbxUserUsuarioAlta" class="nb-input" name="txtbxUserUsuarioAlta" required="true"/></div>
+                    <form>
+                        <div>
+                            <label for="txtbxUserUsuarioAlta">Usuario Dashboard: </label>
+                            <input type="text" id="txtbxUserUsuarioAlta" class="nb-input" name="txtbxUserUsuarioAlta" required="true"/>
+                        </div>
                         <!--<div class="margin-top20">
                             <label for="txtbxPasswordAlta">Contraseña: </label><input type="password" class="nb-input" id="txtbxPasswordUsuarioAlta" name="txtbxPasswordAlta" required="true"/>
                             <span class="spanVerClave"><input type="checkbox" class="w3-check" id="chkVerPasswordAltaUsuario" name="chkVerPasswordAltaUsuario">
                             <label for="chkVerPasswordAltaUsuario"> Ver clave</label></span>
                         </div>-->
                         
-                        <div class="margin-top20"><label for="txtbxNombreCompletoAlta">Nombre completo: </label><input type="text" id="txtbxNombreCompletoUsuarioAlta" class="nb-input" name="txtbxNombreCompletoAlta" required="true"/></div>
+                        <div class="margin-top20">
+                            <label for="txtbxNombreCompletoAlta">Nombre completo: </label>
+                            <input type="text" id="txtbxNombreCompletoUsuarioAlta" class="nb-input" name="txtbxNombreCompletoAlta" required="true"/>
+                        </div>
                         <div class="margin-top20"><label for="selGenero">Genero: </label>
                              <select id="selGenero" class="nb-input" name="selGenero">
                                 <option value="Masculino" selected="true">Masculino</option>
                                 <option value="Femenino">Femenino</option>
-                            </select></div>
-                        <div class="margin-top20"><label for="selPaises">Pais de nacionalidad: </label><span id="spanPaises"></span></div>
-                        <div class="margin-top20"><label for="selTiposUsuarios">Tipo de usuario:</label><span id="spanTiposUsuarios"></span></div>
+                            </select>
+                        </div>
+                        <div class="margin-top20">
+                            <label for="selPaises">Pais de nacionalidad: </label>
+                            <span id="spanPaises"></span>
+                        </div>
+                        <div class="margin-top20">
+                            <label for="selTiposUsuarios">Tipo de usuario:</label>
+                            <span id="spanTiposUsuarios"></span>
+                        </div>
                         <input type="hidden" name="accion" value="formAlta">
                         <hr>
                         <div class="botonera">
-                            <input type="submit" class="submitAlta" value="confirmar">
+                            <input type="button" class="submitAlta" id="btnAltaUsuario" value="confirmar">
                             <input type="reset" class="limpiarCampos" value="Limpiar campos">    
                         </div>
                         <%if (msg != null) {%>

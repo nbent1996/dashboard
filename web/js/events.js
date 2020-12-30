@@ -6,7 +6,9 @@ function load(){
     /*GENERALES*/
     
     /*ALTAS*/
-    /*usuario_Alta.jsp*/
+    
+    /*usuario_Alta.jsp*/   
+    $("#btnAltaUsuario").click(eventoAltaUsuario);
     $("#chkVerPasswordAltaUsuario").click(mostrarOcultarPassword);
     /*usuario_Alta.jsp*/
     
@@ -114,6 +116,11 @@ function eventoBorrarUsuarioBaja(){
 
 function eventoAltaCliente(){
     altaCliente();
+    abrirModal();
+}
+
+function eventoAltaUsuario(){
+    altaUsuario();
     abrirModal();
 }
 

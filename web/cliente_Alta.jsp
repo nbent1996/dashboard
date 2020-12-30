@@ -64,12 +64,11 @@
                 $.get("ManejoClientesServlet?accion=formAltaCliente&nroDocumento=" + nroDocumento + 
                         "&nombreCompleto=" + nombreCompleto + "&telefono=" + telefono + "&email=" + email + 
                         "&tipoDocumento=" + tipoDocumento + "&codPais=" + codPais + "&tipoCliente=" + tipoCliente + 
-                        "&servicioActivo=" + servicioActivo + "&nroDocCliPrin=" + nroDocCliPrin, function (data) {
-                            
+                        "&servicioActivo=" + servicioActivo + "&nroDocCliPrin=" + nroDocCliPrin, function (data) {                      
                             document.getElementById("spanMensaje").innerHTML = data;
-                            if(data!=null){
-                                limpiarCampos();
-                            }
+                                if(data!=null){
+                                    limpiarCampos();
+                                }
                 });
                 
  
@@ -80,6 +79,9 @@
                 $("#txtbxTelefonoClienteAlta").val("");
                 $("#txtbxEmailClienteAlta").val("");                  
                 $("#txtbxNroDocPrincipalClienteAlta").val("");
+                $("#lstTiposDocumento").prop('selectedIndex',0);
+                $("#lstPaises").prop('selectedIndex',0);
+                $("#selTipoCliente").prop('selectedIndex',0);
             }
             
             
