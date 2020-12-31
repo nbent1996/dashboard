@@ -30,9 +30,9 @@
             mostrarCombos();  
             
             function mostrarCombos(){
-                $.get("ManejoUsuariosServlet?accion=comboPaises", function(data){
+                /*$.get("ManejoUsuariosServlet?accion=comboPaises", function(data){
                     document.getElementById("spanPaises").innerHTML=data;
-                });
+                });*/
                 
                 $.get("ManejoUsuariosServlet?accion=comboTipos", function(data){
                     document.getElementById("spanTiposUsuarios").innerHTML=data;
@@ -170,10 +170,23 @@
                                 <option value="Femenino">Femenino</option>
                             </select>
                         </div>
+                        
                         <div class="margin-top20">
-                            <label for="selPaises">Pais de nacionalidad: </label>
-                            <span id="spanPaises"></span>
+                            <label for="selPaises">Pais de nacionalidad:</label>
+                            <select id="selPaises" class="nb-input" name="selPaises">
+                                    <option value="URU" selected="true">Uruguay</option>
+                                    <option value="ARG">Argentina</option>
+                                    <option value="BRA">Brasil</option>
+                                    <option value="BOL">Bolivia</option>
+                                    <option value="CHI">Chile</option>
+                                    <option value="COL">Colombia</option>
+                                    <option value="PAR">Paraguay</option>
+                                    <option value="PER">Perú</option>
+                                    <option value="VEN">Venezuela</option>
+                            </select>
+                            <!--<span id="spanPaises"></span>-->
                         </div>
+                        
                         <div class="margin-top20">
                             <label for="selTiposUsuarios">Tipo de usuario:</label>
                             <span id="spanTiposUsuarios"></span>
