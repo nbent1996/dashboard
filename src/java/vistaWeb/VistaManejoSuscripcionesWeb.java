@@ -35,15 +35,15 @@ public class VistaManejoSuscripcionesWeb implements IVistaManejoSuscripciones{
         String accion = request.getParameter("accion");
         switch (accion) {
             case "generarTablaPaquetes":
-                this.generarTablaPaquetes();
+                generarTablaPaquetes();
                 break;
             case "generarTablaSuscripcionesBaja":
-                this.generarTablaSuscripciones(request, response);
+                generarTablaSuscripciones(request, response);
             break;
             case "formAltaSuscripcion":
-                this.altaSuscripcion(request, response);
+                altaSuscripcion(request, response);
                 break;
-            case "formBajaSuscripcion":
+            case "borrarSuscripciones":
 
                 break;
 
@@ -58,17 +58,22 @@ public class VistaManejoSuscripcionesWeb implements IVistaManejoSuscripciones{
     private void generarTablaSuscripciones(HttpServletRequest request, HttpServletResponse response){
         this.request = request;
         this.response = response;
+        
         String idSuscripcionStr = request.getParameter("idSuscripcion");
+        
         int idSuscripcion = -1;
+        
         if(idSuscripcionStr !=null && !idSuscripcionStr.equals("")){
             idSuscripcion = Integer.parseInt(idSuscripcionStr);
         }
+        
         String fechaInicioAStr = request.getParameter("fechaInicioA");
         String fechaFinAStr = request.getParameter("fechaFinA");
         String fechaInicioBStr = request.getParameter("fechaInicioB");
         String fechaFinBStr = request.getParameter("fechaFinB"); 
-        String activa = request.getParameter("activa");
-        String tiempoContrato = request.getParameter("tiempoContrato");
+        String activa = request.getParameter("activa");//siempre es "S" por defecto
+        String tiempoContrato = request.getParameter("tiempoContrato");//siempre es 6 meses (0.5) por defecto
+        
         if(fechaInicioAStr==null){
             fechaInicioAStr = "";
         }
@@ -85,7 +90,7 @@ public class VistaManejoSuscripcionesWeb implements IVistaManejoSuscripciones{
             activa = "";
         }else{
             if(!activa.equals("")){
-                activa = "Y";
+                activa = "S";
             }else{
                 activa = "N";
             }
@@ -93,9 +98,28 @@ public class VistaManejoSuscripcionesWeb implements IVistaManejoSuscripciones{
         if(tiempoContrato==null){
             tiempoContrato = "";
         }
-        String filtro = this.controlador.getFiltroProcesado(idSuscripcion, fechaInicioAStr, fechaFinAStr,fechaInicioBStr, fechaFinBStr, activa, tiempoContrato);  
-        this.controlador.generarTablaSuscripciones(filtro);
+        
+        if(NoseleccionaronFiltros(idSuscripcion, fechaInicioAStr, fechaFinAStr, fechaInicioBStr, fechaFinBStr, activa, tiempoContrato)){
+            controlador.generarTablaSuscripciones(null);
+        }else{//se seleccionó al menos un filtro para buscar
+            String filtro = controlador.getFiltroProcesado(idSuscripcion, fechaInicioAStr, fechaFinAStr,fechaInicioBStr, fechaFinBStr, activa, tiempoContrato);  
+            controlador.generarTablaSuscripciones(filtro);
+        }
+        
+        
+        
     }
+    
+    private boolean NoseleccionaronFiltros(int idSuscripcion, String fechaInicioAStr, String fechaFinAStr, String fechaInicioBStr, String fechaFinBStr, String activa, String tiempoContrato) {
+        if(idSuscripcion== -1 && fechaInicioAStr.equals("") && fechaFinAStr.equals("") && fechaInicioBStr.equals("") && fechaFinBStr.equals("") && activa.equals("") && tiempoContrato.equals("")){
+            return true;//no hay filtros seleccionados
+        }
+        return false;//seleccionaron filtros
+    }
+    
+    
+    
+    
     private void altaSuscripcion(HttpServletRequest request, HttpServletResponse response) {
 
         this.request = request;
@@ -113,12 +137,13 @@ public class VistaManejoSuscripcionesWeb implements IVistaManejoSuscripciones{
     @Override
     public void generarTablaSuscripciones(String idTabla, ArrayList<Suscripcion> items) {
         try{
-            String componente = Funciones.tablaSuscripciones(idTabla, items);
-            out.write(componente + "\n\n");
+            String componente = Funciones.tablaSuscripciones(idTabla, items);//si items es vacio no muestra nada
+            out.write(componente + "\n\n");                    
         }catch(ProgramException ex){
             mensajeError("suscripcion_BajaModificacion.jsp","Error al generar la tabla de suscripciones.");
         }
     }
+    
     @Override
     public void mensajeError(String nombreJSP, String texto) {
         destino = nombreJSP+"?msg=" + texto;
@@ -140,6 +165,8 @@ public class VistaManejoSuscripcionesWeb implements IVistaManejoSuscripciones{
     }
     
     /*Comportamiento*/
+
+    
 
 
 

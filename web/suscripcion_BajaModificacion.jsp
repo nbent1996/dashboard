@@ -26,12 +26,50 @@
     
     <body class="w3-light-grey">
         <script>
+            
            mostrarTablaSuscripcionesSuscripcionBaja();
+           
            function mostrarTablaSuscripcionesSuscripcionBaja(){
                $.get("ManejoSuscripcionesServlet?accion=generarTablaSuscripcionesBaja", function(data){
                   document.getElementById("spanSuscripcionesSuscripcionBaja").innerHTML=data; 
                });
-           }   
+               
+            }
+               
+           function buscarSuscripcion(){
+               
+               var idSuscripcion = $("#txtbxIdSuscripcionBaja").val();
+               var fechaInicioA = $("#calFechaInicioA").val();
+               var fechaInicioB = $("#calFechaInicioB").val();
+               var tiempoContrato = $("#selTiempoContratoSuscripcionBaja").val();
+               var fechaFinA = $("#calFechaFinA").val();   
+               var fechaFinB = $("#calFechaFinB").val(); 
+               var activa = $("#selActivaSuscripcionBaja").val();
+
+               $.get("ManejoSuscripcionesServlet?accion=generarTablaSuscripcionesBaja&idSuscripcion=" + idSuscripcion + "&fechaInicioA=" + fechaInicioA + 
+                    "&fechaInicioB=" + fechaInicioB + "&tiempoContrato=" + tiempoContrato + "&fechaFinA=" + fechaFinA + "&fechaFinB=" + fechaFinB + "&activa=" + activa , function(data){
+                            document.getElementById("spanSuscripcionesSuscripcionBaja").innerHTML = data;
+                            document.getElementById("spanMensaje").innerHTML = ""; //MÉTODO PARA LIMPIAR CAMPO
+               });
+           }
+               
+               
+           function borrarSuscripcionesSeleccionadas(){ //falta toda esta funcionalidad
+               var listaSuscripcionesSeleccionadas = new Array();
+                    $("input:checkbox:checked").each(   
+                        function() {
+                            listaSuscripcionesSeleccionadas.push($(this).val());
+                            //alert("El checkbox con valor " + $(this).val() + " está seleccionado");
+                        }
+                    );
+                        $.get("ManejoSuscripcionesServlet?accion=borrarSuscripciones&listaSuscripciones=" + listaSuscripcionesSeleccionadas, function (data) {
+
+                        document.getElementById("spanMensaje").innerHTML = data; //muestro mensaje modal                  
+                        mostrarTablaSuscripcionesSuscripcionBaja();//Refresco tabla
+                    });
+           }    
+               
+              
         </script>
         <div class="w3-bar w3-top w3-black w3-large" id="divBarraSuperior">
             <button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey" onclick="w3_open();"><i class="fa fa-bars"></i> &nbsp;Menu</button>
@@ -119,10 +157,17 @@
             <div class="form">
                 <div><h5 class="nb-title-left">Ingrese los filtros por los que desea buscar</h5></div>
                 <form>
-                    <div><label for="txtbxIdSuscripcionBaja">Id Suscripcion: </label><input type="number"  class="nb-input nb-input-number-sinFlechas" id="txtbxIdSuscripcionBaja" name="txtbxIdSuscripcionBaja"></div>
+                    <div>
+                        <label for="txtbxIdSuscripcionBaja">Id Suscripcion: </label>
+                        <input type="number" class="nb-input nb-input-number-sinFlechas" id="txtbxIdSuscripcionBaja" name="txtbxIdSuscripcionBaja">
+                    </div>
                     <div class="margin-top20"><label>Fecha de inicio entre: </label>
-                        <span id="spanFechasInicio"><input type="date" class="nb-input-sinSize" id="calFechaInicioA" name="calFechaInicioA"><label>&nbsp;&nbsp; y &nbsp;&nbsp;</label>
-                        <input type="date" class="nb-input-sinSize" id="calFechaInicioB" name="calFechaInicioB"></span></div>
+                        <span id="spanFechasInicio">
+                        <input type="date" class="nb-input-sinSize" id="calFechaInicioA" name="calFechaInicioA">
+                        <label>&nbsp;&nbsp; y &nbsp;&nbsp;</label>
+                        <input type="date" class="nb-input-sinSize" id="calFechaInicioB" name="calFechaInicioB">
+                        </span>
+                    </div>
                     <div class="margin-top20">
                         <label for="selTiempoContratoSuscripcionBaja">Tiempo de contrato:</label>
                             <select id="selTiempoContratoSuscripcionBaja" class="nb-input" name="selTiempoContratoSuscripcionBaja">
@@ -134,22 +179,32 @@
                             </select>
                     </div>
                     <div class="margin-top20"><label>Fecha de fin entre: </label>
-                        <span id="spanFechasFin"><input type="date" class="nb-input-sinSize" id="calFechaFinA" name="calFechaFinA"><label>&nbsp;&nbsp; y &nbsp;&nbsp;</label>
-                        <input type="date" class="nb-input-sinSize" id="calFechaFinB" name="calFechaFinB"></span></div>
-                    <div class="margin-top20"><label for="selActivaSuscripcionBaja">Activa? :</label>
-                    <select id="selActivaSuscripcionBaja" class="nb-input" name="selActivaSuscripcionBaja">
-                                <option value="true" selected="true">Si</option>
-                                <option value="false">No</option>
-                            </select>
+                        <span id="spanFechasFin">
+                        <input type="date" class="nb-input-sinSize" id="calFechaFinA" name="calFechaFinA">
+                        <label>&nbsp;&nbsp; y &nbsp;&nbsp;</label>
+                        <input type="date" class="nb-input-sinSize" id="calFechaFinB" name="calFechaFinB">
+                        </span>
+                    </div>
+                    <div class="margin-top20">
+                        <label for="selActivaSuscripcionBaja">Activa? :</label>
+                        <select id="selActivaSuscripcionBaja" class="nb-input" name="selActivaSuscripcionBaja">
+                            <option value="true" selected="true">Si</option>
+                            <option value="false">No</option>
+                        </select>
                     </div>
                     <hr>
                     <div class="margin-top20">
-                    <div class="botonera">
-                        <input type="button" class ="submitSearch" onclick="buscarSuscripcion();" id="btnBuscarSuscripcion" value="Buscar">
-                        <input type="reset" class="limpiarCampos" value="Limpiar campos">                            
+                        <div class="botonera">
+                            <input type="button" class ="submitSearch" onclick="buscarSuscripcion()" id="btnBuscarSuscripcion" value="Buscar">
+                            <input type="reset" class="limpiarCampos" value="Limpiar campos">                            
+                        </div>
                     </div>
-                    </div>
-                    <div class="margin-top20"><div><h5 class="nb-title-center">Lista de Suscripciones</h5></div><span id="spanSuscripcionesSuscripcionBaja" name="generarTablaSuscripcionesBaja"></div>  
+                    <div class="margin-top20">
+                        <div>
+                            <h5 class="nb-title-center">Lista de Suscripciones</h5>
+                        </div>
+                        <span id="spanSuscripcionesSuscripcionBaja" name="generarTablaSuscripcionesBaja"></span>
+                    </div>  
                     <div class="margin-top20">
                     <div class="botonera">
                                     <%
@@ -171,7 +226,7 @@
                             </div>
                         </div>
                     </div>
-                    </form>
+                    
                      <%if (msg != null) {%>
                     <div>
                         <p class="message"><%=msg%></p>                        

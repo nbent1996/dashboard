@@ -5,9 +5,11 @@ import Datos.OpPaquete;
 import Datos.OpSuscripcion;
 import Datos.OpTipoDispositivo;
 import Modelo.Moneda;
+import Modelo.Suscripcion;
 import Resources.DTOs.DTOFechas;
 import Resources.DTOs.Fecha;
 import controlador.Interfaces.IVistaManejoSuscripciones;
+import java.util.ArrayList;
 
 public class ControladorManejoSuscripciones {
     /*Estado*/
@@ -59,13 +61,21 @@ public class ControladorManejoSuscripciones {
         
         return retorno;
     }
+    
     public void generarTablaSuscripciones(String filtro){
-        try{
-            vista.generarTablaSuscripciones("tblSuscripcionesSuscripcionBaja", opSuscripcion.buscar(filtro, null));
+        try{            
+            if(filtro!=null){//Se seleccionó al menos un filtro
+                ArrayList<Suscripcion> suscripcionesFiltradas = new ArrayList();
+                suscripcionesFiltradas = opSuscripcion.buscar(filtro, null);
+                vista.generarTablaSuscripciones("tblSuscripcionesSuscripcionBaja", suscripcionesFiltradas);
+            }else{//filtro es nulo si no hay filtros seleccionados
+                vista.generarTablaSuscripciones("tblSuscripcionesSuscripcionBaja", opSuscripcion.obtenerTodos());
+            }
         }catch(Exception ex){
             vista.mensajeError("suscripcion_BajaModificacion.jsp","Error al generar la tabla de suscripciones.");
         }
     }
+    
     public void generarTablaPaquetes(){
         try{
             vista.generarTablaPaquetes("tblPaquetesSuscripcionAlta", opPaquete.obtenerTodos(), new Moneda("UYU","Pesos Uruguayos","$")); //MONEDA HARDCODEADA, OBTENERLA DESDE LA IDENTIFICACION TRIBUTARIA DE LA SESSION
