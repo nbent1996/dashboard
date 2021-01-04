@@ -84,4 +84,36 @@ public class ControladorManejoSuscripciones {
         }
     }
     /*Comportamiento*/
+
+    public void borrarSuscripcionesSeleccionadas(String[] listaIdSuscripciones) {
+        
+        int cantSuscripcionesBorradas = 0;
+        
+        if (!listaIdSuscripciones[0].equals("")){ //se seleccionó al menos un cliente para borrar
+            //en el frontend tira todos los nombres de usuarios de los check en la posición [0], por eso convierto a string y luego a array para poder recorrer
+            String cadena = listaIdSuscripciones[0].toString();
+            String[] cadenaConvertida = cadena.split(",");
+
+            for (String unIdSuscripcion : cadenaConvertida) {                
+                try {
+                    Suscripcion suscripcionBuscada = opSuscripcion.buscar(" WHERE Suscripciones.idSuscripcion='" + unIdSuscripcion + "' " , null).get(0);
+                    opSuscripcion.borrar(suscripcionBuscada);
+                    //opPersona.borrar(new Secundario(nombreUsuarioCli));//tanto secundarios como principales
+                    cantSuscripcionesBorradas+=1;
+                } catch (Exception ex) {
+                    vista.mensajeErrorBajaSuscripciones("Ocurrió un error al borrar la suscripción");                    
+                }
+
+            }
+            vista.mostrarMensajeExitoSuscripcionBorrada("Se eliminaron" + " " + cantSuscripcionesBorradas + " " + "suscripciones."); 
+        } else {
+            vista.mensajeNoSeleccionasteSuscripciones("Debes seleccionar al menos una suscripción para borrar");
+        }
+
+    }
+    
+    
+    
+    
+    
 }

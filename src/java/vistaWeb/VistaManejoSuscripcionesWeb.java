@@ -14,6 +14,8 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+
 public class VistaManejoSuscripcionesWeb implements IVistaManejoSuscripciones{
     /*Estado*/
     private ControladorManejoSuscripciones controlador;
@@ -44,7 +46,7 @@ public class VistaManejoSuscripcionesWeb implements IVistaManejoSuscripciones{
                 altaSuscripcion(request, response);
                 break;
             case "borrarSuscripciones":
-
+                borrarSuscripciones(request, response);
                 break;
 
             case "formModificacionSuscripcion":
@@ -165,6 +167,32 @@ public class VistaManejoSuscripcionesWeb implements IVistaManejoSuscripciones{
     }
     
     /*Comportamiento*/
+
+    private void borrarSuscripciones(HttpServletRequest request, HttpServletResponse response) {
+        
+        String listaIdSuscripciones[] = request.getParameterValues("listaSuscripciones");
+        this.request = request;
+        this.response = response;
+        
+        controlador.borrarSuscripcionesSeleccionadas(listaIdSuscripciones);
+        
+        
+    }
+
+    @Override
+    public void mensajeErrorBajaSuscripciones(String mensajeErrorAlBorrar) {
+        out.write(mensajeErrorAlBorrar);
+    }
+
+    @Override
+    public void mostrarMensajeExitoSuscripcionBorrada(String mensajeExitoAlBorrar) {
+        out.write(mensajeExitoAlBorrar);
+    }
+
+    @Override
+    public void mensajeNoSeleccionasteSuscripciones(String mensajeNoSeleccion) {
+        out.write(mensajeNoSeleccion);
+    }
 
     
 
