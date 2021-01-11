@@ -18,5 +18,9 @@ public interface IVistaManejoUsuarios {
     public void mostrarTablaConUsuariosABorrar(ArrayList<Persona> listaUsuarios);
     public void mensajeErrorBajaUsuarios(String mensajeError);
     public void mostrarTablaUsuariosBaja(ArrayList<Persona> usuarios);
+
+    public void mensajeAltaUsuarioOK(String altaOK);
+
+    public void mensajeAltaUsuarioError(String altaError);
     
 }

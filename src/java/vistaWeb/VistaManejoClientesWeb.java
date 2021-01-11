@@ -36,16 +36,16 @@ public class VistaManejoClientesWeb implements IVistaManejoClientes{
     public void procesarRequest(HttpServletRequest request, HttpServletResponse response){
         String accion = request.getParameter("accion");
         switch(accion){
-            case "comboPaises":
-                cargarPaises();
-            break;
             case "comboTiposDocumento":
                 cargarTiposDocumento();
             break;
+            case "comboPaises":
+                cargarPaises();
+            break;           
 //            case "generarUsuario":
 //                this.generarUsuarioSistema();
 //            break;
-            case "formAltaCliente":
+            case "formAltaCliente"://este es el del form pero ahora se tiene que suplantar por el del button
                 altaCliente(request, response);
             break;
             case "mostrarTablaClientesInicio":
@@ -64,13 +64,13 @@ public class VistaManejoClientesWeb implements IVistaManejoClientes{
         }
     }
     private void cargarPaises(){
-        this.controlador.cargarPaises();
+        controlador.cargarPaises();
     }
     private void cargarTiposDocumento(){
-        this.controlador.cargarTiposDocumento();
+        controlador.cargarTiposDocumento();
     }
     private void generarUsuarioSistema(){
-        this.controlador.generarUsuarioSistema();
+        controlador.generarUsuarioSistema();
     }
     
     private void cargarTablaClientesBajaInicio() {
@@ -80,22 +80,23 @@ public class VistaManejoClientesWeb implements IVistaManejoClientes{
     private void altaCliente(HttpServletRequest request, HttpServletResponse response){
         this.request = request;
         this.response = response;
-        String tipoCliente = request.getParameter("selTipoCliente");
-        String nroDocumento = request.getParameter("txtbxNroDocumentoClienteAlta");
-        String nombreCompleto = request.getParameter("txtbxNombreCompletoClienteAlta");
-        String codPais = request.getParameter("lstPaises");
-        String email = request.getParameter("txtbxEmailClienteAlta");
-        String telefono = request.getParameter("txtbxTelefonoClienteAlta");
-        String tipoDocumento = request.getParameter("lstTiposDocumento");
+        String tipoCliente = request.getParameter("tipoCliente");
+        String nroDocumento = request.getParameter("nroDocumento");
+        String nombreCompleto = request.getParameter("nombreCompleto");
+        String codPais = request.getParameter("codPais");
+        String email = request.getParameter("email");
+        String telefono = request.getParameter("telefono");
+        String tipoDocumento = request.getParameter("tipoDocumento");
+        
         if(tipoCliente.equals("Principal")){
-            String chkServActivo = request.getParameter("chkServicioActivo");
+            String chkServActivo = request.getParameter("servicioActivo");
             boolean chkActivo = false;
-            if(!chkServActivo.equals("")){
+            if(chkServActivo.equals("Seleccionado")){//PRINCIPAL Y ACTIVO
                 chkActivo = true;
             }
             controlador.altaPrincipal(nroDocumento, nombreCompleto, codPais, email, telefono ,chkActivo, tipoDocumento);
         }else if (tipoCliente.equals("Secundario")){
-            String nroDocumentoPrincipal = request.getParameter("txtbxNroDocPrincipalClienteAlta");
+            String nroDocumentoPrincipal = request.getParameter("nroDocCliPrin");
             controlador.altaSecundario(nombreCompleto, codPais, email, telefono, nroDocumento, nroDocumentoPrincipal);
         }
     } 
@@ -146,6 +147,9 @@ public class VistaManejoClientesWeb implements IVistaManejoClientes{
             System.out.println(texto);
         }      
     }
+    
+    
+    
     /*Comportamiento*/
     
     /*Getters y Setters*/
@@ -185,7 +189,7 @@ public class VistaManejoClientesWeb implements IVistaManejoClientes{
     }
 
     private void borrarClientes(HttpServletRequest request, HttpServletResponse response) {
-        String listaNombresDeUsuariosDeClientes[] = request.getParameterValues("listaClientes"); //(en un principio tomo el nombre de usuario ya que es pk de persona, ver si funciona así o tomar otro atributo) lista de nombres de usuarios (PK) (sacados del value de los checkboxes)
+        String listaNombresDeUsuariosDeClientes[] = request.getParameterValues("listaClientes");
         this.request = request;
         this.response = response;
         
@@ -206,6 +210,16 @@ public class VistaManejoClientesWeb implements IVistaManejoClientes{
     @Override
     public void mensajeNoSeleccionasteClientes(String mensajeNoSeleccion) {
         out.write(mensajeNoSeleccion);
+    }
+
+    @Override
+    public void mensajeAltaClienteOK(String altaOk) {
+        out.write(altaOk);
+    }
+
+    @Override
+    public void mensajeAltaClienteError(String altaError) {
+        out.write(altaError);
     }
 
     

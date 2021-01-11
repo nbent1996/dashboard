@@ -41,11 +41,14 @@ public class ControladorManejoUsuarios{
             Operador operador = new Operador(usuarioAltaUsr, usuarioAltaUsr,nombreCompletoAltaUsr, e,new Pais(codPaisAltaUsr), new TipoUsuario(tipoUsuarioAltaUsr), generoAltaUsr );
             operador.validar();
             opPersona.guardar(null, operador);
-            vista.mensajeExito("usuario_Alta.jsp","Usuario dado de alta correctamente");
+            vista.mensajeAltaUsuarioOK("Usuario dado de alta correctamente");
+            //vista.mensajeExito("usuario_Alta.jsp","Usuario dado de alta correctamente");
         } catch (ProgramException ex) { 
-            vista.mensajeError("usuario_Alta.jsp",ex.getMessage()); 
-        } catch (Exception ex) {        
-            vista.mensajeError("usuario_Alta.jsp","Error al dar de alta el usuario"); 
+            vista.mensajeAltaUsuarioError(ex.getMessage());
+            //vista.mensajeError("usuario_Alta.jsp",ex.getMessage()); 
+        } catch (Exception ex) {      
+            vista.mensajeAltaUsuarioError("Ocurrió un error, póngase en contacto con el administrador");
+            //vista.mensajeError("usuario_Alta.jsp","Error al dar de alta el usuario"); 
         }
     }
     

@@ -19,4 +19,8 @@ public interface IVistaManejoClientes {
     public void mostrarMensajeExitoClienteBorrado(String mensajeExitoAlBorrar);
 
     public void mensajeNoSeleccionasteClientes(String mensajeNoSeleccion);
+
+    public void mensajeAltaClienteOK(String altaOk);
+
+    public void mensajeAltaClienteError(String altaError);
 }

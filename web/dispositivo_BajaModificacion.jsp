@@ -26,34 +26,38 @@
     
     <body class="w3-light-grey">  
         <script>   
+            
              mostrarTablaDispositivosDispositivoBaja();
-             function mostrarTablaDispositivosDispositivoBaja(){
-               $.get("ManejoDispositivosServlet?accion=generarTablaDispositivosBaja", function(data){
-                  document.getElementById("spanDispositivosDispositivoBaja").innerHTML=data; 
-               }); 
-           }   
-            function buscarDispositivosBaja(){
-                var nroSerie = $("#txtbxNroSerieDispositivoBaja").val();
-                var estado = $("#selEstadoDispositivoBaja").val();
-                        
-                $.get("ManejoDispositivosServlet?accion=buscarDispositivos&nroSerie=" + nroSerie + "&estado=" + estado, function (data) {
-                document.getElementById("tblDispositivosDispositivoBaja").innerHTML = data;
-                document.getElementById("spanMensaje").innerHTML = "";
-                });
-            }
-            function borrarDispositivosSeleccionados() {
-                   var listaSeleccionados = new Array();
-                   $("input:checkbox:checked").each(
-                           function () {
-                               listaSeleccionados.push($(this).val());
-                           }
-                   );
-                   $.get("ManejoDispositivosServlet?accion=borrarDispositivos&listaDispositivos=" + listaSeleccionados, function (data) {
-                       document.getElementById("spanMensaje").innerHTML = data; //muestro mensaje modal
-                       mostrarTablaDispositivosPaqueteBaja();//Refresco tabla
-                   });
+             
+                function mostrarTablaDispositivosDispositivoBaja(){
+                   $.get("ManejoDispositivosServlet?accion=generarTablaDispositivosBaja", function(data){
+                      document.getElementById("spanDispositivosDispositivoBaja").innerHTML=data; 
+                   }); 
+                }  
+                
+                function buscarDispositivosBaja(){
+                    var nroSerie = $("#txtbxNroSerieDispositivoBaja").val();
+                    var estado = $("#selEstadoDispositivoBaja").val();
 
-               }
+                    $.get("ManejoDispositivosServlet?accion=buscarDispositivos&nroSerie=" + nroSerie + "&estado=" + estado, function (data) {
+                    document.getElementById("spanDispositivosDispositivoBaja").innerHTML = data;
+                    document.getElementById("spanMensaje").innerHTML = "";
+                    });
+                }
+                
+                function borrarDispositivosSeleccionados() {
+                       var listaSeleccionados = new Array();
+                       $("input:checkbox:checked").each(
+                               function () {
+                                   listaSeleccionados.push($(this).val());
+                               }
+                       );
+                       $.get("ManejoDispositivosServlet?accion=borrarDispositivos&listaDispositivos=" + listaSeleccionados, function (data) {
+                           document.getElementById("spanMensaje").innerHTML = data; //muestro mensaje modal
+                           mostrarTablaDispositivosDispositivoBaja();//Refresco tabla
+                       });
+
+                }
         </script>
         
         <div class="w3-bar w3-top w3-black w3-large" id="divBarraSuperior">
@@ -141,8 +145,9 @@
             </header>
                 <div class="form">
                     <form>
-                        <div><label for="txtbxNroSerieDispositivoBaja">Número de Serie: </label><input type="text" class="nb-input" id="txtbxNroSerieDispositivoBaja" name="txtbxNroSerieDispositivoBaja"/></div>
-                        <div><label for="selEstadoDispositivoBaja">Estado: </label>
+                        <div><h5 class="nb-title-left">Ingrese los filtros por los que desea buscar</h5></div>
+                        <div class="margin-top20"><label for="txtbxNroSerieDispositivoBaja">Número de Serie: </label><input type="text" class="nb-input" id="txtbxNroSerieDispositivoBaja" name="txtbxNroSerieDispositivoBaja"/></div>
+                        <div class="margin-top20"><label for="selEstadoDispositivoBaja">Estado: </label>
                             <select id="selEstadoDispositivoBaja" class="nb-input" name="selEstadoDispositivoBaja">
                                 <option value="" selected="true">Cualquiera</option>
                                 <option value="Nuevo">Nuevo</option>
@@ -151,33 +156,39 @@
                             </select>
                         </div>
                     <hr>
-                    <div class="margin-top20">
+                    
                         <div class="botonera">
-                            <input type="button" class ="submitSearch" onclick="buscarDispositivoBaja()" id="btnBuscarDispositivoBaja" value="Buscar">
+                            <input type="button" class ="submitSearch" onclick="buscarDispositivosBaja()" id="btnBuscarDispositivoBaja" value="Buscar">
                             <input type="reset" class="limpiarCampos" value="Limpiar campos">    
                         </div>
-                    </div>
+                    
                     </form>
-                    <div class="margin-top20"><div><h5 class="nb-title-center">Lista de Dispositivos</h5></div><span id="spanDispositivosDispositivoBaja" name="generarTablaDispositivosBaja"></div>  
+                    <div class="margin-top20">
+                        <div>
+                            <h5 class="nb-title-center">Lista de Dispositivos</h5>
+                        </div>
+                        <span id="spanDispositivosDispositivoBaja"></span>
+                    </div>  
                     <div class="margin-top20">
                         <div class="botonera">
                             <%if (tipoJSP.equals("baja")) {%>
                             <input type="button" class="submitBaja" id="btnBorrarDispositivosSeleccionados" value="Borrar">                                      
-                            <%} else if (tipoJSP.equals("modificacion")) {%>
+                            <%} 
+                            else if (tipoJSP.equals("modificacion")) {%>
                             <input type="button" class="submitModificacion" id="btnModificarDispositivoSeleccionado" value="Modificar">
                             <%}%> 
                         </div>
                         <div id="divModal" class="w3-modal">
-                            <div class="w3-modal-content w3-animate-zoom" >
-                                <div class="w3-container">
-                                    <span id="spanBtnCerrar" class="w3-button w3-display-topright">&times;</span>
-                                    <br>
-                                    <span id="spanMensaje"></span>
-                                    <br>
-                                    <br>
+                                <div class="w3-modal-content w3-animate-zoom" >
+                                    <div class="w3-container">
+                                        <span id="spanBtnCerrar" class="w3-button w3-display-topright">&times;</span>
+                                        <br>
+                                        <span id="spanMensaje"></span>
+                                        <br>
+                                        <br>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
                     </div>
                 </div>
             </div>   

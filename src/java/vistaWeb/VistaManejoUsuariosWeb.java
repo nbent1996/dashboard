@@ -45,7 +45,7 @@ public class VistaManejoUsuariosWeb implements IVistaManejoUsuarios{
             case "comboTipos":
                 cargarTiposUsuario();
             break;            
-            case "formAlta":
+            case "formAltaUsuarios":
                 altaUsuario(request, response);
             break;  
             case "formModificacion":
@@ -80,18 +80,20 @@ public class VistaManejoUsuariosWeb implements IVistaManejoUsuarios{
 
 
     private void altaUsuario(HttpServletRequest request, HttpServletResponse response) {
-        String usuarioAltaUsr = request.getParameter("txtbxUserUsuarioAlta");
-        String nombreCompletoAltaUsr = request.getParameter("txtbxNombreCompletoAlta");
-        String codPaisAltaUsr = request.getParameter("selPaises");
-        String tipoUsuarioAltaUsr = request.getParameter("selTiposUsuarios");
-        String generoUsuarioAltaUsr = request.getParameter("selGenero");
         
         this.request = request;
         this.response = response;
+        
+        String usuarioAltaUsr = request.getParameter("usuarioAlta");
+        String nombreCompletoAltaUsr = request.getParameter("nombreCompletoAlta");
+        String codPaisAltaUsr = request.getParameter("codPaisAlta");
+        String tipoUsuarioAltaUsr = request.getParameter("tipoUsuarioAlta");
+        String generoUsuarioAltaUsr = request.getParameter("generoUsuarioAlta");
 
         controlador.altaUsuario(usuarioAltaUsr, nombreCompletoAltaUsr, codPaisAltaUsr , generoUsuarioAltaUsr, tipoUsuarioAltaUsr);
         
     }
+    
     private void borrarUsuarios(HttpServletRequest request, HttpServletResponse response) {
         String listaNombresDeUsuarios[] = request.getParameterValues("listaUsuarios"); // lista de nombres de usuarios (PK) (sacados del value de los checkboxes)
         this.request = request;
@@ -203,6 +205,16 @@ public class VistaManejoUsuariosWeb implements IVistaManejoUsuarios{
         String componente = Funciones.tablaUsuarios(usuarios, "chkBajaUsuario"); //muestro tabla de los usuarios encontrados con checkbox para seleccionar y borrar
         
         out.write(componente + "\n\n");
+    }
+
+    @Override
+    public void mensajeAltaUsuarioOK(String altaOK) {
+        out.write(altaOK);
+    }
+
+    @Override
+    public void mensajeAltaUsuarioError(String altaError) {
+        out.write(altaError);
     }
 
 

@@ -12,6 +12,8 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+
 public class VistaManejoDispositivosWeb implements IVistaManejoDispositivos{
     /*Estado*/
     private ControladorManejoDispositivos controlador;
@@ -37,18 +39,20 @@ public class VistaManejoDispositivosWeb implements IVistaManejoDispositivos{
 //                this.cargarCategorias();
 //            break;
             case "comboTiposDispositivo":
-                this.cargarTiposDispositivos();
+                cargarTiposDispositivos();
             break;
             case "formAltaDispositivo":
-                 this.altaDispositivo(request, response);
+                 altaDispositivo(request, response);
             break;
-            case "generarTablaDispositivosBaja":
-                this.generarTablaDispositivos(request, response);
-            break;
-            case "buscarDispositivos":
+            case "generarTablaDispositivosBaja"://se ejecuta cuando se inicia el jsp de baja
                 generarTablaDispositivos(request, response);
             break;
-            
+            case "buscarDispositivos"://se ejecuta cuando se busca por filtros en baja
+                generarTablaDispositivos(request, response);
+            break; 
+            case "borrarDispositivos":
+                borrarDispositivos(request, response);
+            break;
         }
     }
     private void generarTablaDispositivos(HttpServletRequest request, HttpServletResponse response){
@@ -130,6 +134,30 @@ public class VistaManejoDispositivosWeb implements IVistaManejoDispositivos{
         }catch(ProgramException ex){
             mensajeError("dispositivo_BajaModificacion.jsp","Error al generar la tabla de Dispositivos.");
         }
+    }
+
+    private void borrarDispositivos(HttpServletRequest request, HttpServletResponse response) {
+        String listaNroSerieDispositivos[] = request.getParameterValues("listaDispositivos"); 
+        this.request = request;
+        this.response = response;
+        
+        controlador.borrarDispositivosSeleccionados(listaNroSerieDispositivos);
+        
+    }
+
+    @Override
+    public void mensajeErrorBajaDispositivos(String errorBorradoDisp) {
+        out.write(errorBorradoDisp);
+    }
+
+    @Override
+    public void mostrarMensajeExitoDispositivoBorrado(String exitoAlBorrarDisp) {
+        out.write(exitoAlBorrarDisp);
+    }
+
+    @Override
+    public void mensajeNoSeleccionasteDispositivos(String noSelecDisp) {
+        out.write(noSelecDisp);
     }
 
 

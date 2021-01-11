@@ -6,11 +6,14 @@ function load(){
     /*GENERALES*/
     
     /*ALTAS*/
-    /*usuario_Alta.jsp*/
+    
+    /*usuario_Alta.jsp*/   
+    $("#btnAltaUsuario").click(eventoAltaUsuario);
     $("#chkVerPasswordAltaUsuario").click(mostrarOcultarPassword);
     /*usuario_Alta.jsp*/
     
     /*cliente_Alta.jsp*/
+    $("#btnConfirmarAltaCliente").click(eventoAltaCliente);
     $("#selTipoCliente").on("change", changeTipoCliente);
     modificarVisibilidad(new Array("#divPrincipal", "#divSecundario"), "ocultar");
     modificarVisibilidad(new Array("#divPrincipal"), "mostrar");
@@ -50,7 +53,7 @@ function load(){
     
     /*suscripcion_Baja.jsp*/
     /*dispositivo_Baja.jsp*/
-    
+    $("#btnBorrarDispositivosSeleccionados").click(eventoBorrarDispositivoBaja);
     /*dispositivo_Baja.jsp*/
     /*BAJAS*/
     /*MODIFICACIONES*/
@@ -93,6 +96,7 @@ function load(){
 
 
 }
+
 function abrirModal(){
     $("#divModal").css("display","block");
     $("#mySidebar").css("z-index", "0");
@@ -110,6 +114,16 @@ function eventoBorrarUsuarioBaja(){
     abrirModal();
 }
 
+function eventoAltaCliente(){
+    altaCliente();
+    abrirModal();
+}
+
+function eventoAltaUsuario(){
+    altaUsuario();
+    abrirModal();
+}
+
 function eventoBorrarClienteBaja(){
     borrarClientesSeleccionados();
     abrirModal();
@@ -118,6 +132,14 @@ function eventoBorrarPaqueteBaja(){
     borrarPaquetesSeleccionados();
     abrirModal();
 }
+
+function eventoBorrarDispositivoBaja(){
+    borrarDispositivosSeleccionados();
+    abrirModal();
+}
+
+
+
 function modificarVisibilidad(listaElementos, accion){
     switch(accion){
         case "mostrar":
