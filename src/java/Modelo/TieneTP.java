@@ -47,7 +47,8 @@ private TipoDispositivo tipoDispositivo;
         
         if (!retorno.equals("")) {
             throw new ProgramException(retorno);
-        }    }
+        }    
+    }
 
     @Override
     public String toString(int modo) throws ProgramException {

@@ -30,6 +30,47 @@
                });
                
            }
+           
+           function altaPaquete(){
+               
+               var nombrePaquete = $("#txtbxNombrePaqueteAlta").val();
+               var costoPaquete = $("#txtbxCostoBrutoPaqueteAlta").val();
+               
+               
+               var listaSeleccionados = new Array();
+               var listaCantidades = new Array();
+               
+                $("input:checkbox:checked").each(
+                        function () {
+                            listaSeleccionados.push($(this).val());                            
+                        }
+                ); 
+        
+                for (var i = 0; i < listaSeleccionados.length; i++) {//recorro la lista de ids y me guardo en una lista el valor de la cantidad ingresada 
+
+                    var nombreIdInput = "#txtbxCant"+listaSeleccionados[i];//armo el nombre del id del input number
+                    var valueInput = $(nombreIdInput).val();//agarro el valor ingresado del input
+                    listaCantidades.push(valueInput);//agrego el valor a la lista. Después paso la lista por parámetro 
+                    
+                }
+        
+                $.get("ManejoPaquetesServlet?accion=altaPaqueteConDispositivos&listaDispositivos=" + listaSeleccionados + "&nombrePaquete=" + nombrePaquete + "&costoPaquete=" + costoPaquete + "&listaCantidades=" + listaCantidades, function (data) {
+                    document.getElementById("spanMensaje").innerHTML = data; //muestro mensaje modal
+                        if(data!=null){
+                            limpiarCampos();
+                        }
+                });
+                
+           }
+           
+           function limpiarCampos(){
+                $("#txtbxNombrePaqueteAlta").val("");
+                $("#txtbxCostoBrutoPaqueteAlta").val("");
+                //limpiar los check y cantidad
+           }
+           
+           
+           
         </script>
 
         <div class="w3-bar w3-top w3-black w3-large" id="divBarraSuperior">
@@ -112,20 +153,47 @@
             <header class="w3-container estilosHeader">
                 <h5><b><i class="fa fa fa-cubes fa-fw"></i> Alta de Paquetes</b></h5>
             </header>
+            
                 <div class="form">
-                    <form id="formAltaPaquete" name="formAltaPaquete" action="ManejoPaquetesServlet" method="post" onsubmit="return validarAltaPaquete(this)">
-                        <div><label for="txtbxNombrePaqueteAlta">Nombre: </label><input type="text" class="nb-input" id="txtbxNombrePaqueteAlta" name="txtbxNombrePaqueteAlta" required="true"/></div>
-                        <div class="margin-top20"><label for="txtbxCostoBruto">Costo bruto: </label><span id="spanMonedaCosto"></span><input type="text" class="nb-input" id="txtbxCostoBrutoPaqueteAlta" name="txtbxCostoBrutoPaqueteAlta" required="true"/></div>
-                        <div class="margin-top20"><div><h5 class="nb-title-center">Dispositivos asignados al Paquete</h5></div><span id="spanTiposDispositivoPaqueteAlta" name="generarTablaTiposDispositivos"></div>
+                    <!--<form id="formAltaPaquete" name="formAltaPaquete" action="ManejoPaquetesServlet" method="post" onsubmit="return validarAltaPaquete(this)">-->
+                    <form>
+                        <div>
+                            <label for="txtbxNombrePaqueteAlta">Nombre: </label>
+                            <input type="text" class="nb-input" id="txtbxNombrePaqueteAlta" name="txtbxNombrePaqueteAlta" required="true"/>
+                        </div>
+                        <div class="margin-top20">
+                            <label for="txtbxCostoBruto">Costo bruto: </label>
+                            <span id="spanMonedaCosto"></span>
+                            <input type="text" class="nb-input" id="txtbxCostoBrutoPaqueteAlta" name="txtbxCostoBrutoPaqueteAlta" required="true"/>
+                        </div>
+                        <div class="margin-top20">
+                            <div>
+                                <h5 class="nb-title-center">Dispositivos asignados al Paquete</h5>
+                            </div>
+                            <span id="spanTiposDispositivoPaqueteAlta" name="generarTablaTiposDispositivos"></span>
+                        </div>
 
                         <hr>        
                         <div class="botonera">
-                        <input type="submit" class="submitAlta" value="confirmar">
-                        <input type="reset" class="limpiarCampos" value="Limpiar campos">    
+                            <input type="button" class="submitAlta" id="btnConfirmarAltaPaquete" value="confirmar">
+                            <input type="reset" class="limpiarCampos" value="Limpiar campos">    
                         </div>
                         
-                        <span id="mensajeAlta"></span>
-                        <input type="hidden" name="accion" value="formAltaCliente">
+                                <span id="mensajeAlta"></span>
+                                <input type="hidden" name="accion" value="formAltaCliente">
+                        
+                        <div id="divModal" class="w3-modal">
+                            <div class="w3-modal-content w3-animate-zoom" >
+                                <div class="w3-container">
+                                    <span id="spanBtnCerrar" class="w3-button w3-display-topright">&times;</span>
+                                    <br>
+                                        <span id="spanMensaje"></span>
+                                    <br>
+                                    <br>
+                                </div>
+                            </div>
+                        </div>
+                        
                         <%if (msg != null) {%>
                         <div>
                             <p class="message"><%=msg%></p>                        

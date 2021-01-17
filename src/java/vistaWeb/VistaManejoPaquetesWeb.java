@@ -44,8 +44,8 @@ public class VistaManejoPaquetesWeb implements IVistaManejoPaquetes{
             case "formAltaPaquete":
                 altaPaquete(request, response);
             break;
-            case "modificarPaquete":
-
+            case "altaPaqueteConDispositivos"://cuando doy de alta los paquetes con los dispositivos seleccionados de los check
+                altaPaqueteConDispositivos(request, response);
             break;
             case "borrarPaquetes":
                  borrarPaquetes(request, response);
@@ -55,6 +55,35 @@ public class VistaManejoPaquetesWeb implements IVistaManejoPaquetes{
             break;
         }
     }
+    
+    private void altaPaqueteConDispositivos(HttpServletRequest request, HttpServletResponse response) {
+        
+        this.request = request;
+        this.response = response;
+        
+        String listaIdDispositivos[] = request.getParameterValues("listaDispositivos"); // lista de id de dispositivos seleccionados
+        String nombrePaquete = request.getParameter("nombrePaquete");
+        String costoBrutoPaquete = request.getParameter("costoPaquete");
+        String listaCantidades[] = request.getParameterValues("listaCantidades");//lista de las cantidades ingresadas en cada dispositivo seleccionado
+        
+//        ArrayList<String> listaCantidadesAux = new ArrayList();//me guardo todas las cantidades
+        //acá puedo sacar cada una de las cantidades ingresadas, en la listaIdDispositivos está cada id de los dispositivos que se seleccionaron, y el id de 
+        //los input number de las cantidades es txtbxCant + idDispositivo
+//        if(!listaIdDispositivos[0].equals("")){//se seleccionó al menos un dispositivo
+//            String cadena = listaIdDispositivos[0].toString();
+//            String[]cadenaConvertida = cadena.split(",");
+//            for (String unId : cadenaConvertida) {
+//                String value = "txtbxCant"+unId;//formo el nombre del value del input number de cantidad
+//                String cantidadIngresada = request.getParameter(value);//agarro el valor del value armado. Puede ser null
+//                listaCantidadesAux.add(cantidadIngresada);//agrego el valor del value a la lista, luego en esta lista en el controlador matchearla con la lista de ids pasados
+//            }
+//            
+//            
+//        }        
+        
+        controlador.altaPaqueteConDispositivos(listaIdDispositivos, listaCantidades, nombrePaquete, costoBrutoPaquete);
+    }
+    
     private void generarTablaTiposDispositivos(){
         this.controlador.generarTablaTiposDispositivos();
     }
@@ -97,6 +126,7 @@ public class VistaManejoPaquetesWeb implements IVistaManejoPaquetes{
         this.request = request;
         this.response = response;
     }
+    
     @Override
     public void mensajeError(String nombreJSP, String texto) {
         destino = nombreJSP+"?msg=" + texto;
@@ -159,6 +189,28 @@ public class VistaManejoPaquetesWeb implements IVistaManejoPaquetes{
     public void mensajeNoSeleccionastePaquetes(String mensajeNoSelecPaquetes) {
         out.write(mensajeNoSelecPaquetes);
     }
+
+    @Override
+    public void errorEnValidacionesAltaPaquete(String mensajeErrorValidaciones) {
+        out.write(mensajeErrorValidaciones);
+    }
+
+    @Override
+    public void errorEnBaseDeDatosAltaPaquete(String mensajeErrorBaseDeDatos) {
+        out.write(mensajeErrorBaseDeDatos);
+    }
+
+    @Override
+    public void exitoAlGuardarPaquete(String mensajeExitoAltaPaquete) {
+        out.write(mensajeExitoAltaPaquete);
+    }
+
+    @Override
+    public void errorLargoListasCantidadYDispositivosAltaPaquete(String mensajeErrorListasCantYTipos) {
+        out.write(mensajeErrorListasCantYTipos);
+    }
+
+    
 
 
     
