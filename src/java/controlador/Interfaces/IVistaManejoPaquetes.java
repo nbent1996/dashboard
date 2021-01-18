@@ -16,4 +16,12 @@ public interface IVistaManejoPaquetes {
     public void mostrarMensajeExitoPaqueteBorrado(String mensajeExitoBaja);
 
     public void mensajeNoSeleccionastePaquetes(String mensajeNoSelecPaquetes);
+
+    public void errorEnValidacionesAltaPaquete(String mensajeErrorValidaciones);
+
+    public void errorEnBaseDeDatosAltaPaquete(String mensajeErrorBaseDeDatos);
+
+    public void exitoAlGuardarPaquete(String mensajeExitoAltaPaquete);
+
+    public void errorLargoListasCantidadYDispositivosAltaPaquete(String mensajeErrorListasCantYTipos);
 }

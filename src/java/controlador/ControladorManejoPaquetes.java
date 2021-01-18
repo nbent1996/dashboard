@@ -2,11 +2,17 @@ package controlador;
 
 import Datos.OpPaquete;
 import Datos.OpTipoDispositivo;
+import Modelo.Empresa;
 import Modelo.Moneda;
 import Modelo.Paquete;
+import Modelo.ProgramException;
+import Modelo.TieneTP;
+import Modelo.TipoDispositivo;
 import Resources.DTOs.DTORangoNumerosStr;
 import controlador.Interfaces.IVistaManejoPaquetes;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ControladorManejoPaquetes {
     /*Estado*/
@@ -84,9 +90,54 @@ public class ControladorManejoPaquetes {
         }else{
             vista.mensajeNoSeleccionastePaquetes("Debes seleccionar al menos un paquete para borrar");
         }
-        
-        
-        
+    }
+    
+    public void altaPaqueteConDispositivos(String[] listaIdDispositivos, String[] listaCantidades, String nombrePaquete, String costoBrutoPaquete) {
+            String cadenaIdDispositivos = listaIdDispositivos[0].toString();
+            String[] cadenaIdDispositivosConvertida = cadenaIdDispositivos.split(",");
+            
+            String cadenaCantidadesDispositivos = listaCantidades[0].toString();
+            String[] cadenaCantidadesDispositivosConvertida = cadenaCantidadesDispositivos.split(",");
+
+            if(cadenaIdDispositivosConvertida.length == cadenaCantidadesDispositivosConvertida.length){//verifico que tengan el mismo largo
+                ArrayList<TieneTP> listaTieneTPDePaqueteACrear = new ArrayList();
+                int contador = 0;
+                
+                for (String unIdTipoDisp : cadenaIdDispositivosConvertida){
+                    try {
+                        TipoDispositivo tipoDisp = opTipoDispositivo.buscar(" WHERE TiposDispositivos.idTipoDispositivo='" + unIdTipoDisp + "' ", null).get(0);
+                        
+                            for (int i = contador; i < cadenaCantidadesDispositivosConvertida.length; i++) {
+                                int cantConvertidaAInt = Integer.valueOf(cadenaCantidadesDispositivosConvertida[i]);//convierto a entero ya que tengo que pasarle un int en el constructor de tieneTP
+                                TieneTP tieneTp = new TieneTP(cantConvertidaAInt, tipoDisp);
+                                tieneTp.validar();//valida que la cantidad sea mayor a cero
+                                listaTieneTPDePaqueteACrear.add(tieneTp);
+                                contador++;
+                                break;//para que vuelva al for principal
+                            }
+                    } catch (ProgramException exc){ //error del validar de TieneTP
+                        vista.errorEnValidacionesAltaPaquete(exc.getMessage());
+                        return;
+                    } catch (Exception ex){ //error de la consulta SQL al traerme el tipo de dispositivo
+                        vista.errorEnBaseDeDatosAltaPaquete("Ocurrió un error al dar de alta el paquete");
+                        return;
+                    }     
+                }         
+                try {//guardo en la base el paquete
+                    Empresa empresaAsociada = new Empresa("526283747346"); //SE DEBE TRAER LA EMPRESA DE LA SESSION
+                    float costoBrutoConvertido = Float.valueOf(costoBrutoPaquete);//convierto a float por constructor de Paquete
+                    Paquete paqACrear = new Paquete(costoBrutoConvertido, nombrePaquete, empresaAsociada, listaTieneTPDePaqueteACrear);
+                    paqACrear.validar();
+                    opPaquete.guardar(null, paqACrear);
+                    vista.exitoAlGuardarPaquete("Paquete dado de alta correctamente");
+                } catch (ProgramException exc) { //error al validar el paquete
+                    vista.errorEnValidacionesAltaPaquete(exc.getMessage());
+                } catch (Exception ex) { //error al insertar en paquete en la bd
+                    vista.errorEnBaseDeDatosAltaPaquete("Ocurrió un error al dar de alta el paquete");
+                }               
+            }else{//las dos listas no tienen el mismo largo, puedo mostrar error directamente
+                vista.errorLargoListasCantidadYDispositivosAltaPaquete("Debe ingresar una cantidad para cada dispositivo seleccionado");
+            }  
     }
 
     public void cargarTablaPaquetesBajaInicio() {
@@ -102,6 +153,10 @@ public class ControladorManejoPaquetes {
         
         
     }
+
+    
+
+    
     
     
     
