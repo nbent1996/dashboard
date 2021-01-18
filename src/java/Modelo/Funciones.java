@@ -4,10 +4,11 @@ package Modelo;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.util.ArrayList;
-import java.util.Optional;
 import java.util.concurrent.ThreadLocalRandom;
 import javax.imageio.ImageIO;
 
@@ -165,16 +166,22 @@ public class Funciones {
                 retorno+="</table>";    
             return retorno;
         }
-        public static String tablaDispositivos(String idTabla, ArrayList<Dispositivo> items) throws ProgramException{
+        public static String tablaDispositivos(String idTabla, ArrayList<Dispositivo> items, boolean exportarPlanilla) throws ProgramException{
             String retorno = "";
-            retorno+="<table id='"+idTabla+"' class='w3-table-all'>\n";
+            String style = "";
+            if(exportarPlanilla){
+               style=" border='1' ";
+            }
+            retorno+="<table id='"+idTabla+"' class='w3-table-all' "+style+" >\n";
             /*Cabezales*/
             retorno+="<tr>\n";
                 retorno+="<th>Nro de Serie</th>\n";
                 retorno+="<th>Estado</th>\n";
                 retorno+="<th>Tipo de Dispositivo</th>\n";
                 retorno+="<th>Cliente asociado</th>\n";
+                if(!exportarPlanilla){
                 retorno+="<th>Seleccionar</th>\n";
+                }
             retorno+="</tr>\n";
             /*Contenido*/
             for(Dispositivo d: items){
@@ -188,7 +195,9 @@ public class Funciones {
                     }else{
                         retorno+="<td>No asignado</td>\n";
                     }
+                    if(!exportarPlanilla){
                     retorno+="<td><input type='checkbox' class='w3-check' value='"+d.getNroSerie()+"' name='"+d.getNroSerie()+"'></td>\n";
+                    }
                     retorno+="</tr>\n";
                 }
                 retorno+="</table>";    
@@ -299,8 +308,18 @@ public class Funciones {
         }
         return prefijo+campo;
     }
-
-    
+    public static byte[] getBytesFromOutputStream(OutputStream f) throws FileNotFoundException, IOException{
+        byte[] buffer = new byte[1024];
+        ByteArrayOutputStream os = new ByteArrayOutputStream();
+        FileInputStream fis = new FileInputStream("fichero.pdf");
+        int read;
+        while((read = fis.read(buffer)) != -1){
+            os.write(buffer, 0, read);
+        }
+        fis.close();
+        os.close();
+        return os.toByteArray();
+    }
     
     
 }

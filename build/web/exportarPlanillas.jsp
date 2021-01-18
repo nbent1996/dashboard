@@ -17,6 +17,15 @@
         <script type="text/javascript" src="js/events.js"></script>
     </head>
     <body class="w3-light-grey">
+        <script>
+                function exportarPlanilla(){
+                    $.get("ExportarPlanillasServlet?accion=exportarPlanillas", function (data) {
+                    document.getElementById("spanMensaje").innerHTML = "";
+                    document.getElementById("spanMensaje").innerHTML = data; //muestro mensaje modal                  
+                    });
+                }    
+            
+        </script>
         
         <div class="w3-bar w3-top w3-black w3-large" id="divBarraSuperior">
             <button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey" onclick="w3_open();"><i class="fa fa-bars"></i> &nbsp;Menu</button>
@@ -98,7 +107,25 @@
                 <h5><b><i class="fa fa-file-text-o"></i> Exportar Planillas</b></h5>
             </header>
             <div class="form">
-            
+                <label>Reportes en planillas excel: </label>
+                    <ul id="ulTablaExportar">
+                        <li><a href="planillaDispositivos.jsp">Dispositivos en existencia</a></li>
+                        <li><a href="planillaPrincipales.jsp">Clientes titulares</a></li>
+                        <li><a href="planillaSecundarios.jsp">Cuentas secundarias</a></li>
+                        <li><a href="planillaTiposDispositivos.jsp">Catalogo de dispositivos</a></li>
+                        <li><a href="planillaSuscripciones.jsp">Suscripciones</a></li>
+                    </ul>
+                <div id="divModal" class="w3-modal">
+                    <div class="w3-modal-content w3-animate-zoom" >
+                        <div class="w3-container">
+                            <span id="spanBtnCerrar" class="w3-button w3-display-topright">&times;</span>
+                            <br>
+                            <span id="spanMensaje"></span>
+                            <br>
+                            <br>
+                        </div>
+                    </div>
+                </div>
             </div> 
         </div>
    

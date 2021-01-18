@@ -312,7 +312,9 @@ select{
     left:107px;
 }
 /*suscripcion_Baja.jsp*/
+/*exportarPlanillas.jsp*/
 
+/*exportarPlanillas.jsp*/
 .borderDiv{
     padding:5px;
     border-style:solid;
@@ -389,7 +391,24 @@ select{
   background: #4DB6AC;
   color:white;
 }
-
+#btnExportarPlanilla {
+  margin-left:20px;
+  font-family: "Roboto", sans-serif;
+  text-transform: uppercase;
+  outline: 0;
+  background: #42A5F5;
+  border: 0;
+  padding: 15px;
+  color: #EEEEEE;
+  font-size: 14px;
+  -webkit-transition: all 0.3 ease;
+  transition: all 0.3 ease;
+  cursor: pointer;
+}
+#btnExportarPlanilla:hover {
+  background: #64B5F6;
+  color:white;
+}
 .form .botonera{
     width:100%;
     text-align:center;

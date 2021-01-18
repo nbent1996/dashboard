@@ -39,9 +39,9 @@ public class VistaManejoClientesWeb implements IVistaManejoClientes{
             case "comboTiposDocumento":
                 cargarTiposDocumento();
             break;
-            case "comboPaises":
-                cargarPaises();
-            break;           
+//            case "comboPaises":
+//                cargarPaises();
+//            break;           
 //            case "generarUsuario":
 //                this.generarUsuarioSistema();
 //            break;
@@ -63,12 +63,15 @@ public class VistaManejoClientesWeb implements IVistaManejoClientes{
             break;
         }
     }
-    private void cargarPaises(){
-        controlador.cargarPaises();
-    }
+    
     private void cargarTiposDocumento(){
         controlador.cargarTiposDocumento();
     }
+    
+    private void cargarPaises(){
+        controlador.cargarPaises();
+    }
+    
     private void generarUsuarioSistema(){
         controlador.generarUsuarioSistema();
     }
@@ -103,7 +106,7 @@ public class VistaManejoClientesWeb implements IVistaManejoClientes{
     @Override
     public void mostrarPaises(ArrayList<Pais> paises) {
         try {
-            String componente = Funciones.lista(false, "lstPaises", paises, "changeItemSelected()");
+            String componente = Funciones.lista(false, "selPaises", paises, "changeItemSelected()");
             out.write(componente + "\n\n");
         } catch (ProgramException ex) {
             mensajeError("cliente_Alta.jsp","Error al mostrar los paises.");
@@ -112,7 +115,7 @@ public class VistaManejoClientesWeb implements IVistaManejoClientes{
     @Override
     public void mostrarTiposDocumento(ArrayList<TipoDocumento> tiposDocumento) {
         try{
-            String componente = Funciones.lista(false, "lstTiposDocumento", tiposDocumento, "changeItemSelected()");
+            String componente = Funciones.lista(false, "selTiposDoc", tiposDocumento, "changeItemSelected()");
             out.write(componente + "\n\n");
         }catch(ProgramException ex){
             mensajeError("cliente_Alta.jsp","Error al mostrar los tipos de documento.");
@@ -130,12 +133,12 @@ public class VistaManejoClientesWeb implements IVistaManejoClientes{
 
     @Override
     public void mensajeError(String nombreJSP, String texto) {
-        destino = nombreJSP+"?msg=" + texto;
-        try{
-            response.sendRedirect(destino);
-        }catch(IOException ex){
-            System.out.println(texto);
-        }        
+    destino = nombreJSP+"?msg=" + texto;
+    try{
+        response.sendRedirect(destino);
+    }catch(IOException ex){
+        System.out.println(texto);
+    }        
     }
 
     @Override

@@ -10,4 +10,10 @@ public interface IVistaManejoSuscripciones {
     public void mensajeExito(String nombreJSP, String texto);
     public void generarTablaPaquetes(String idTabla, ArrayList<Paquete> items, Moneda moneda);
     public void generarTablaSuscripciones(String idTabla, ArrayList<Suscripcion> items);
+
+    public void mensajeErrorBajaSuscripciones(String mensajeErrorAlBorrar);
+
+    public void mostrarMensajeExitoSuscripcionBorrada(String mensajeExitoAlBorrar);
+
+    public void mensajeNoSeleccionasteSuscripciones(String mensajeNoSeleccion);
 }

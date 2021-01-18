@@ -39,9 +39,9 @@ public class VistaManejoUsuariosWeb implements IVistaManejoUsuarios{
         String accion = request.getParameter("accion");
         switch(accion){
             
-            case "comboPaises":
-                cargarPaises();
-            break;
+//            case "comboPaises":
+//                cargarPaises();
+//            break;
             case "comboTipos":
                 cargarTiposUsuario();
             break;            

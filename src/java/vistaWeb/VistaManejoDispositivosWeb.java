@@ -38,6 +38,9 @@ public class VistaManejoDispositivosWeb implements IVistaManejoDispositivos{
 //            case "comboCategorias":
 //                this.cargarCategorias();
 //            break;
+            case "generarPlanillaExcelDispositivos":
+                generarTablaDispositivos(request, response);
+            break;
             case "comboTiposDispositivo":
                 cargarTiposDispositivos();
             break;
@@ -129,7 +132,7 @@ public class VistaManejoDispositivosWeb implements IVistaManejoDispositivos{
     @Override
     public void generarTablaDispositivos(String idTabla, ArrayList<Dispositivo> items) {
         try{
-            String componente = Funciones.tablaDispositivos(idTabla, items);
+            String componente = Funciones.tablaDispositivos(idTabla, items, false);
             out.write(componente + "\n\n");
         }catch(ProgramException ex){
             mensajeError("dispositivo_BajaModificacion.jsp","Error al generar la tabla de Dispositivos.");

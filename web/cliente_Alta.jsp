@@ -34,9 +34,9 @@
                     //.get....
                 }, 1000);*/
                 
-                $.get("ManejoClientesServlet?accion=comboPaises", function(data){
+                /*$.get("ManejoClientesServlet?accion=comboPaises", function(data){
                     document.getElementById("selPaisesResidenciaClienteAlta").innerHTML=data;
-                });
+                });*/
   
             }
             
@@ -47,8 +47,8 @@
                 var nombreCompleto = $("#txtbxNombreCompletoClienteAlta").val();
                 var telefono = $("#txtbxTelefonoClienteAlta").val();
                 var email = $("#txtbxEmailClienteAlta").val();
-                var tipoDocumento = $("#lstTiposDocumento").val();
-                var codPais = $("#lstPaises").val();
+                var tipoDocumento = $("#selTiposDoc").val();
+                var codPais = $("#selPaises").val();
                                 
                 var tipoCliente = $("#selTipoCliente").val(); //YA ESTÁ PREDEFINIDO, PUEDE SER TITULAR O SECUNDARIO           
                 var servicioActivo = "NoSeleccionado"; //SI ES TITULAR APARECE, SINO NO APARECE Y VA COMO "NO SELECCIONADO"
@@ -79,8 +79,8 @@
                 $("#txtbxTelefonoClienteAlta").val("");
                 $("#txtbxEmailClienteAlta").val("");                  
                 $("#txtbxNroDocPrincipalClienteAlta").val("");
-                $("#lstTiposDocumento").prop('selectedIndex',0);
-                $("#lstPaises").prop('selectedIndex',0);
+                $("#selTiposDoc").prop('selectedIndex',0);
+                $("#selPaises").prop('selectedIndex',0);
                 $("#selTipoCliente").prop('selectedIndex',0);
             }
             
@@ -177,8 +177,8 @@
                         </div>
                         
                         <div class="margin-top20">
-                            <label for="selTiposDocumentoClienteAlta">Tipo de documento:</label>
-                            <span id="selTiposDocumentoClienteAlta" name="comboTiposDocumento"></span>
+                            <label for="selTiposDoc">Tipo de documento:</label>
+                            <span id="selTiposDocumentoClienteAlta"></span>
                         </div>
                         
                         <div class="margin-top20">
@@ -187,8 +187,19 @@
                         </div>
                         
                         <div class="margin-top20">
-                            <label for="selPaisesResidenciaClienteAlta">Pais de nacionalidad:</label>
-                            <span id="selPaisesResidenciaClienteAlta" name="comboPaises"></span>
+                            <label for="selPaises">Pais de nacionalidad:</label>
+                            <select id="selPaises" class="nb-input" name="selPaises">
+                                    <option value="URU" selected="true">Uruguay</option>
+                                    <option value="ARG">Argentina</option>
+                                    <option value="BRA">Brasil</option>
+                                    <option value="BOL">Bolivia</option>
+                                    <option value="CHI">Chile</option>
+                                    <option value="COL">Colombia</option>
+                                    <option value="PAR">Paraguay</option>
+                                    <option value="PER">Perú</option>
+                                    <option value="VEN">Venezuela</option>
+                            </select>
+                            <!--<span id="selPaisesResidenciaClienteAlta"></span>-->
                         </div>
                         
                         <div class="margin-top20">
@@ -211,7 +222,7 @@
                                 </select>
                                 <div id="divPrincipal">
                                         <input type="checkbox" class="w3-check" id="chkServicioActivoClienteAlta" name="chkServicioActivo">
-                                        <label for="chkServicioActivoClienteAlta"> Servicio activo</label>
+                                        <label for="chkServicioActivoClienteAlta"> Servicio activo?</label>
                                 </div>
                                 <div id="divSecundario">
                                     <label for="txtbxNroDocPrincipalClienteAlta">N&uacute;mero de Documento cuenta Titular:</label>

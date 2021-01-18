@@ -50,7 +50,7 @@ function load(){
     
     /*paquete_Baja.jsp*/
     /*suscripcion_Baja.jsp*/
-    
+    $("#btnBorrarSuscripcionesSeleccionadas").click(eventoBorrarSuscripcionesBaja);
     /*suscripcion_Baja.jsp*/
     /*dispositivo_Baja.jsp*/
     $("#btnBorrarDispositivosSeleccionados").click(eventoBorrarDispositivoBaja);
@@ -135,6 +135,11 @@ function eventoBorrarPaqueteBaja(){
 
 function eventoBorrarDispositivoBaja(){
     borrarDispositivosSeleccionados();
+    abrirModal();
+}
+
+function eventoBorrarSuscripcionesBaja(){
+    borrarSuscripcionesSeleccionadas();
     abrirModal();
 }
 

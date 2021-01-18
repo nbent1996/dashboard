@@ -145,7 +145,7 @@ public class ControladorManejoClientes {
 
         int cantCliBorrados = 0;
         
-        if (!listaNombresDeUsuariosDeClientes[0].equals("")) { //se seleccionó al menos un cliente para borrar
+        if (!listaNombresDeUsuariosDeClientes[0].equals("")){ //se seleccionó al menos un cliente para borrar
             //en el frontend tira todos los nombres de usuarios de los check en la posición [0], por eso convierto a string y luego a array para poder recorrer
             String cadena = listaNombresDeUsuariosDeClientes[0].toString();
             String[] cadenaConvertida = cadena.split(",");
