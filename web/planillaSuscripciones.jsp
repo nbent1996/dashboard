@@ -1,23 +1,25 @@
 <%@page contentType="application/vnd.ms-excel" pageEncoding="UTF-8"%>
-<%@page import="Modelo.Funciones, Datos.OpDispositivo"%>
+<%@page import="Modelo.Funciones, Datos.OpSuscripcion"%>
 <%
-    OpDispositivo op = new OpDispositivo("loginUser");
-    String nombreArchivo = "listaDispositivos.xls";
+    OpSuscripcion op = new OpSuscripcion("loginUser");
+    String nombreArchivo = "listaSuscripciones.xls";
+    response.setCharacterEncoding("UTF-8");
     response.setHeader("Content-Disposition", "inline;filename=" + nombreArchivo);
 %>
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Reporte de dispositivos en existencia</title>
+        <title>Reporte total de suscripciones</title>
+
     </head>
     
     <body class="w3-light-grey">  
         <div class="form">
             <div class="margin-top20">
                 <div>
-                    <h1 class="nb-title-center">Lista de Dispositivos</h1>
+                    <h1 class="nb-title-center">Reporte total de suscripciones</h1>
                 </div>
-                <span id="spanDispositivosPlanilla"><%= Funciones.tablaDispositivos("tblDispositivos", op.obtenerTodos(), true)%></span>
+                <span id="spanDispositivosPlanilla"><%= Funciones.tablaSuscripciones("tblSuscripciones", op.obtenerTodos(), true)%></span>
             </div>  
         </div>
     </body>

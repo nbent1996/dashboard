@@ -126,9 +126,13 @@ public class Funciones {
             retorno+="</table>";
             return retorno;
         }
-        public static String tablaSuscripciones(String idTabla, ArrayList<Suscripcion> items) throws ProgramException{
+        public static String tablaSuscripciones(String idTabla, ArrayList<Suscripcion> items, boolean exportarPlanilla) throws ProgramException{
             String retorno = "";
-            retorno+="<table id='"+idTabla+"' class='w3-table-all'>\n";
+            String style="";
+            if(exportarPlanilla){
+                style=" border='1' ";
+            }
+            retorno+="<table id='"+idTabla+"' class='w3-table-all' "+style+">\n";
             /*Cabezales*/
             retorno+="<tr>\n";
                 retorno+="<th>Id Suscripci&oacute;n</th>\n";
@@ -137,7 +141,9 @@ public class Funciones {
                 retorno+="<th>Fecha de Fin</th>\n";
                 retorno+="<th>Activa</th>\n";
                 retorno+="<th>Paquetes que contiene</th>\n";
+                if(!exportarPlanilla){
                 retorno+="<th>Seleccionado</th>\n";
+                }
             retorno+="</tr>\n";
             /*Contenido*/
             for(Suscripcion s: items){
@@ -160,7 +166,9 @@ public class Funciones {
                     retorno+="<td>"+fechaFin+"</td>\n";
                     retorno+="<td>"+s.getActivaStr()+"</td>\n";
                     retorno+="<td>"+listado+"</td>\n";
+                    if(!exportarPlanilla){
                     retorno+="<td><input type='checkbox' class='w3-check' value='"+s.getIdSuscripcion()+"' name='"+s.getIdSuscripcion()+"'></td>\n";
+                    }
                     retorno+="</tr>\n";
                 }
                 retorno+="</table>";    
@@ -213,22 +221,116 @@ public class Funciones {
         }
         return tabla;
     }
-        public static String tablaClientes(ArrayList<Persona> opciones) {
+        public static String tablaClientes(ArrayList<Persona> opciones, boolean exportarPlanilla) {
         String tabla = "";
         
         for (Persona obj : opciones) {
             tabla += "<tr><td>" + obj.retornarNroCliente() + "</td>" //poli
                     + "<td>" + obj.getNombreCompleto()+ "</td>" +
                       "<td>" + obj.retornarEmail()+ "</td>" + //poli
-                      "<td>" + obj.retornarTipoCli()+ "</td>" //poli                  
-                    + "<td><input type='checkbox' class='w3-check' value='" + obj.getUsuarioSistema() + "' name='" + obj.getUsuarioSistema() + "' </td></tr>";//fijarse acá, porque pongo el value de la PK de persona aunque esa PK para un cliente fue autogenerado y nunca se muestra         
-            
+                      "<td>" + obj.retornarTipoCli()+ "</td>"; //poli  
+                   
+            if (!exportarPlanilla) {
+                tabla += "<td><input type='checkbox' class='w3-check' value='" + obj.getUsuarioSistema() + "' name='" + obj.getUsuarioSistema() + "' </td></tr>";//fijarse acá, porque pongo el value de la PK de persona aunque esa PK para un cliente fue autogenerado y nunca se muestra         
+            }
         }
         return tabla;
     }
+        public static String tablaClientesCompleta(String idTabla, ArrayList<Persona> items, String tipo,boolean exportarPlanilla){
+            String retorno = "";
+            String style = "";
+            if(exportarPlanilla){
+                style=" border='1' ";
+            }
+            retorno+="<table id='"+idTabla+"' class='w3-table-all' "+style+">";
+            if(tipo.equals("Principal")){
+                /*Cabezales*/
+                retorno += "<tr>\n";
+                retorno += "<th>Usuario sistema</th>\n";
+                retorno += "<th>Nombre Completo</th>\n";
+                retorno += "<th>Nro Documento</th>\n";
+                retorno += "<th>Tipo Documento</th>\n";
+                retorno += "<th>Servicio activo</th>\n";
+                retorno += "<th>Nro Cliente</th>\n";
+                retorno += "<th>E-mail</th>\n";
+                retorno += "<th>Telefono</th>\n";
+                retorno += "</tr>\n";
+                /*Contenido*/
+                for(Persona per : items){
+                    Principal p = (Principal)per;
+                    retorno+="<tr>\n";
+                    retorno+="<td>"+p.getUsuarioSistema()+"</td>\n";
+                    retorno+="<td>"+p.getNombreCompleto()+"</td>\n";
+                    retorno+="<td>"+p.getNroDocumento()+"</td>\n";
+                    retorno+="<td>"+p.getTipoDocumento().getCodDocumento()+"</td>\n";
+                    retorno+="<td>"+p.getServicioActivoStr()+"</td>\n";
+                    retorno+="<td>"+p.getNroCliente()+"</td>\n";
+                    retorno+="<td>"+p.getEmail()+"</td>\n";
+                    retorno+="<td>"+p.getTelefono()+"</td>\n";
+                    retorno+="</tr>\n";  
+                }
+            retorno+="</table>";
 
-                                    
-        
+            }else if(tipo.equals("Secundario")){
+                            /*Cabezales*/
+                retorno += "<tr>\n";
+                retorno += "<th>Usuario sistema</th>\n";
+                retorno += "<th>Nombre Completo</th>\n";
+                retorno += "<th>Documento titular</th>\n";
+                retorno += "<th>Nro Cliente</th>\n";
+                retorno += "<th>E-mail</th>\n";
+                retorno += "<th>Telefono</th>\n";
+                retorno += "</tr>\n";
+                /*Contenido*/
+                for(Persona per : items){
+                    Secundario p = (Secundario)per;
+                    retorno+="<tr>\n";
+                    retorno+="<td>"+p.getUsuarioSistema()+"</td>\n";
+                    retorno+="<td>"+p.getNombreCompleto()+"</td>\n";
+                    retorno+="<td>"+p.getPrincipalAsociado().getNroDocumento()+"</td>\n";
+                    retorno+="<td>"+p.getNroCliente()+"</td>\n";
+                    retorno+="<td>"+p.getEmail()+"</td>\n";
+                    retorno+="<td>"+p.getTelefono()+"</td>\n";
+                    retorno+="</tr>\n";  
+                }
+            retorno+="</table>";
+            }    
+            return retorno;
+        }
+        public static String tablaTiposDispositivos(String idTabla, ArrayList<TipoDispositivo> items, boolean exportarPlanilla) throws ProgramException{
+            String retorno = "";
+            String style="";
+            if(exportarPlanilla){
+                style=" border='1' ";
+            }
+            retorno+="<table id='"+idTabla+"' class='w3-table-all' "+style+">\n";
+            /*Cabezales*/
+            retorno+="<tr>\n";
+                retorno+="<th>Id Tipo Dispositivo</th>\n";
+                retorno+="<th>Modelo</th>\n";
+                retorno+="<th>Nombre</th>\n";
+                retorno+="<th>Tipo de comunicaci&oacute;n</th>\n";
+                retorno+="<th>Categoria</th>\n";
+                if(!exportarPlanilla){
+                    retorno+="<th>Seleccionado</th>\n";                    
+                }
+            retorno+="</tr>\n";
+            /*Contenido*/
+            for(TipoDispositivo td : items){
+                retorno += "<tr>\n";
+                retorno += "<td>" + td.getIdTipoDispositivo() + "</td>\n";
+                retorno += "<td>" + td.getModelo() + "</td>\n";
+                retorno += "<td>" + td.getNombre() + "</td>\n";
+                retorno += "<td>" + td.getTipoComunicacion() + "</td>\n";
+                retorno += "<td>" + td.getCategoria().getNombreCategoria() + "</td>\n";
+                if (!exportarPlanilla) {
+                    retorno += "<td><input type='checkbox' class='w3-check' value='" + td.getIdTipoDispositivo() + "' name='" + td.getIdTipoDispositivo() + "'></td>\n";
+                }
+                retorno += "</tr>\n";
+            }
+            retorno+="</table>";
+            return retorno;                          
+        }
         
         
     /*HTML*/   

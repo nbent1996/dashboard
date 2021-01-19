@@ -3,12 +3,14 @@
 <%
     OpDispositivo op = new OpDispositivo("loginUser");
     String nombreArchivo = "listaDispositivos.xls";
+    response.setCharacterEncoding("UTF-8");
     response.setHeader("Content-Disposition", "inline;filename=" + nombreArchivo);
 %>
 <!DOCTYPE html>
 <html>
     <head>
         <title>Reporte de dispositivos en existencia</title>
+
     </head>
     
     <body class="w3-light-grey">  

@@ -162,8 +162,7 @@ public class VistaManejoClientesWeb implements IVistaManejoClientes{
     //muestro tabla de todos los clientes (principales y secundarios) para seleccionar y dar de baja
     @Override
     public void mostrarTablaClientesBajaInicio(ArrayList<Persona> principalesYSecundarios) {
-        String componente = Funciones.tablaClientes(principalesYSecundarios);
-        
+        String componente = Funciones.tablaClientes(principalesYSecundarios, false);
         out.write(componente + "\n\n");
     }
 

@@ -110,9 +110,9 @@
                 <label>Reportes en planillas excel: </label>
                     <ul id="ulTablaExportar">
                         <li><a href="planillaDispositivos.jsp">Dispositivos en existencia</a></li>
-                        <li><a href="planillaPrincipales.jsp">Clientes titulares</a></li>
-                        <li><a href="planillaSecundarios.jsp">Cuentas secundarias</a></li>
-                        <li><a href="planillaTiposDispositivos.jsp">Catalogo de dispositivos</a></li>
+                        <li><a href="planillaClientes.jsp?tipo=Principal">Clientes titulares</a></li>
+                        <li><a href="planillaClientes.jsp?tipo=Secundario">Cuentas secundarias</a></li>
+                        <li><a href="planillaTiposDispositivo.jsp">Catalogo de Paquetes</a></li>
                         <li><a href="planillaSuscripciones.jsp">Suscripciones</a></li>
                     </ul>
                 <div id="divModal" class="w3-modal">

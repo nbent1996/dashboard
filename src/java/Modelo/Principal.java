@@ -134,6 +134,13 @@ public Principal(int nroCliente, String nombreCompleto, Empresa e){
             throw new ProgramException(retorno);
         }
     }
+    public String getServicioActivoStr(){
+        String retorno = "Si";
+        if(!this.servicioActivo){
+            retorno="No";
+        }
+        return retorno;
+    }
 /*Comportamiento*/
 
 /*Getters y Setters*/

@@ -5,8 +5,13 @@
         <group>
             <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/web/planillaDispositivos.jsp</file>
             <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/src/java/Modelo/Funciones.java</file>
+            <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/src/java/Datos/OpPersona.java</file>
+            <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/web/suscripcion_Alta.jsp</file>
+            <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/web/planillaTiposDispositivo.jsp</file>
+            <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/web/planillaSuscripciones.jsp</file>
             <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/web/exportarPlanillas.jsp</file>
-            <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/web/planillaPrincipales.jsp</file>
+            <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/src/java/vistaWeb/VistaManejoSuscripcionesWeb.java</file>
+            <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/src/java/Modelo/Principal.java</file>
         </group>
     </open-files>
 </project-private>

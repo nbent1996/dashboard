@@ -139,7 +139,7 @@ public class VistaManejoSuscripcionesWeb implements IVistaManejoSuscripciones{
     @Override
     public void generarTablaSuscripciones(String idTabla, ArrayList<Suscripcion> items) {
         try{
-            String componente = Funciones.tablaSuscripciones(idTabla, items);//si items es vacio no muestra nada
+            String componente = Funciones.tablaSuscripciones(idTabla, items, false);//si items es vacio no muestra nada
             out.write(componente + "\n\n");                    
         }catch(ProgramException ex){
             mensajeError("suscripcion_BajaModificacion.jsp","Error al generar la tabla de suscripciones.");

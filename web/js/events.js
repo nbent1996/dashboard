@@ -21,7 +21,7 @@ function load(){
     /*cliente_Alta.jsp*/
     
     /*paquete_Alta.jsp*/
-    $("#btnConfirmarAltaPaquete").click(eventoAltaPaquete);
+    
     /*paquete_Alta.jsp*/
     
     
@@ -116,11 +116,6 @@ function eventoBorrarUsuarioBaja(){
 
 function eventoAltaCliente(){
     altaCliente();
-    abrirModal();
-}
-
-function eventoAltaPaquete(){
-    altaPaquete();
     abrirModal();
 }
 
