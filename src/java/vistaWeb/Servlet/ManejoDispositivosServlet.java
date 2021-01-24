@@ -21,6 +21,27 @@ public class ManejoDispositivosServlet extends HttpServlet {
         VistaManejoDispositivosWeb vista = new VistaManejoDispositivosWeb(request, response);
         vista.procesarRequest(request, response);
     }
+    
+    
+//    protected void processRequest(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
+//        response.setContentType("text/html;charset=UTF-8");
+//        
+//        String accion = request.getParameter("accion");
+//        if(accion!=null && accion.equals("comboTiposDispositivo")){
+//            VistaManejoDispositivosWeb vista = new VistaManejoDispositivosWeb(request, response);
+//            request.getSession(true).setAttribute("vistaDispositivo", vista);//la session se debe crear en el login, modificar parametro a false en ese caso
+//            vista.procesarRequest(request, response);
+//        }else{//ya existe una vista
+//            VistaManejoDispositivosWeb vista = (VistaManejoDispositivosWeb) request.getSession(false).getAttribute("vistaDispositivo");
+//            vista.procesarRequest(request, response);
+//        }
+//        
+//        
+//        
+//        
+//    }
+    
+    
 
     
     @Override

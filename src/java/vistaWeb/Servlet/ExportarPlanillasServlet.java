@@ -8,7 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import vistaWeb.VistaExportarPlanillasWeb;
+//import vistaWeb.VistaExportarPlanillasWeb;
 
 
 @WebServlet(name = "ExportarPlanillasServlet", urlPatterns = {"/ExportarPlanillasServlet"})
@@ -18,8 +18,8 @@ public class ExportarPlanillasServlet extends HttpServlet {
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        VistaExportarPlanillasWeb vista = new VistaExportarPlanillasWeb(request, response);
-        vista.procesarRequest(request, response);
+        //VistaExportarPlanillasWeb vista = new VistaExportarPlanillasWeb(request, response);
+        //vista.procesarRequest(request, response);
     }
 
     

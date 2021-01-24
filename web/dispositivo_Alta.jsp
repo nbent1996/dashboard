@@ -27,17 +27,78 @@
                        document.getElementById("selCategoriaDispositivoAlta").innerHTML=data; 
                     });
                 }*/
+                /*crearVista();
+                function crearVista(){
+                    $.get("ManejoDispositivosServlet?accion=new");
+                }*/
+               
+                
                 cargarTiposDispositivo();
                 function cargarTiposDispositivo(){
                     $.get("ManejoDispositivosServlet?accion=comboTiposDispositivo", function(data){
                        document.getElementById("selTipoDispositivoDispositivoAlta").innerHTML=data; 
                     });
                 }
-                 function buscarCliente(){
-                $.get("ManejoDispositivosServlet?accion=buscarCliente", function(data){
-                    document.getElementById("spClienteEncontrado").innerHTML=data;
-                });
+                
+                
+                
+                
+                function buscarCliente(){
+                     
+                    var nroDocumento = $("#txtbxNroDocCliPrincipal").val();
+                     
+                    $.get("ManejoDispositivosServlet?accion=buscarCliente&nroDocumento=" + nroDocumento, function(data){
+                        
+
+                            document.getElementById("spanClienteAsociado").innerHTML=data;
+                        
+        
+                        
+                        
+                        /*if(data!=null){//encuentra el cliente, lo muestro en el span
+                            document.getElementById("spanClienteAsociado").innerHTML=data;
+                        }else{//no encuentra el cliente, muestro mensaje modal de que no se encontró
+                            document.getElementById("spanMensaje").innerHTML = data;
+                        }*/
+                        
+                        
+                    });
                 }
+                
+                function altaDispositivo(){
+                    
+                    
+                    
+                    var nroSerie = $("#txtbxNroSerieDispositivoAlta").val();
+                    var estado = $("#selEstadoDispositivoAlta").val();
+                    var tipoDispositivo = $("#selTiposDispositivo").val();      
+                    
+                    $.get("ManejoDispositivosServlet?accion=altaDispositivo&nroSerie=" + nroSerie + "&estado=" + estado + "&tipoDispositivo=" + tipoDispositivo, function(data){
+                        
+                        document.getElementById("spanMensaje").innerHTML = data;
+                        
+                                if(data!=null){
+                                    limpiarCampos();
+                                }
+                            
+                    });
+                    
+                    
+                }
+                
+                function limpiarCampos(){
+                $("#txtbxNroSerieDispositivoAlta").val("");
+                $("#selEstadoDispositivoAlta").prop('selectedIndex',0);
+                $("#selTiposDispositivo").prop('selectedIndex',0);                
+                $("#txtbxNroDocCliPrincipal").val(""); 
+                
+                document.getElementById("spanClienteAsociado").innerHTML="Ninguno seleccionado";
+            }
+                
+                
+                
+                
+                
         </script>
 
         
@@ -122,31 +183,58 @@
                 <h5><b><i class="fa fa-video-camera fa-fw"></i> Alta de Dispositivos </b></h5>
             </header>
                 <div class="form">    
-                    <form name="formAltaDispositivo" action="ManejoDispositivosServlet" method="post" onsubmit="return validarAltaDispositivo(this)">  
-                        <div><label for="txtbxNroSerieDispositivoAlta">Número de Serie: </label><input type="text" class="nb-input" id="txtbxNroSerieDispositivoAlta" name="txtbxNroSerieDispositivoAlta" required="true"/></div>
-                        <div><label for="selEstadoDispositivoAlta">Estado: </label>
+                    <form>  
+                        
+                        <div>
+                            <label for="txtbxNroSerieDispositivoAlta">Número de Serie: </label>
+                            <input type="text" class="nb-input" id="txtbxNroSerieDispositivoAlta" name="txtbxNroSerieDispositivoAlta" required="true"/>
+                        </div>
+                        
+                        <div>
+                            <label for="selEstadoDispositivoAlta">Estado: </label>
                             <select id="selEstadoDispositivoAlta" class="nb-input" name="selEstadoDispositivoAlta">
                                 <option value="Nuevo" selected="true">Nuevo</option>
                                 <option value="Usado-OK">Usado-OK</option>
                                 <option value="Usado-Reparar">Usado-Reparar</option>
                             </select>
                         </div>
-                        <div><label for="txtbxUsuarioClienteDispositivoAlta">Cliente (Nro de cliente):</label><span id="spanContenidoClienteAsociado"><span id="spanClienteAsociado" name="spanClienteAsociado">No seleccionado</span><input type="button" class="margin-left20 submitSearch" value="Buscar Cliente"/></span></div>
+                        
+                        <div class="margin-top20">
+                            <label for="selTipoDispositivoDispositivoAlta">Tipo de dispositivo:</label>
+                            <span id="selTipoDispositivoDispositivoAlta"></span>
+                        </div>
+                        
+                        <br>
+                        
+                        <div>
+                            <label for="txtbxUsuarioClienteDispositivoAlta">Desea asociarlo a un cliente?</label>
+                            <hr>
+                            <span id="spanContenidoClienteAsociado">                               
+                                <input type="text" class="nb-input" id="txtbxNroDocCliPrincipal" name="txtbxNroDocCliPrincipal" placeholder="Nro de documento"/>                                
+                                <input type="button" class="margin-left20 submitSearch" value="Buscar Cliente" onclick="buscarCliente()"/>
+                                <br>
+                                <span id="spanClienteAsociado" name="spanClienteAsociado">Ninguno seleccionado</span>
+                            </span>
+                        </div>
                         <!--<div class="margin-top20"><label for="selCategoriaDispositivoAlta">Categoria:</label>
                         <span id="selCategoriaDispositivoAlta" name="comboCategorias"></span></div>-->
-                        <div class="margin-top20"><label for="selTipoDispositivoDispositivoAlta">Tipo de dispositivo:</label>
-                        <span id="selTipoDispositivoDispositivoAlta" name="comboTipoDispositivos"></span></div>
-                        <hr>        
+                        
+                        <hr> 
+                        
                         <div class="botonera">
-                        <input type="submit" class="submitAlta" value="confirmar">
-                        <input type="reset" class="limpiarCampos" value="Limpiar campos">    
+                            <input type="button" class="submitAlta" id="btnConfirmarAltaDispositivo" onclick="altaDispositivo()" value="confirmar">
+                            <input type="reset" class="limpiarCampos" value="Limpiar campos">    
                         </div>
-                        <input type="hidden" name="accion" value="formAltaDispositivo">
-                        <%if (msg != null) {%>
-                        <div>
-                            <p class="message"><%=msg%></p>                        
-                        </div>
-                        <%}%>
+                        
+                        <!--<input type="hidden" name="accion" value="formAltaDispositivo">-->
+                        
+                            <%if (msg != null) {%>
+                            <div>
+                                <p class="message"><%=msg%></p>                        
+                            </div>
+                            <%}%>
+                        
+                        
                         <div id="divModal" class="w3-modal">
                             <div class="w3-modal-content w3-animate-zoom" >
                                 <div class="w3-container">
@@ -156,10 +244,11 @@
                                     <br>
                                     <br>
                                 </div>
-                            </div>
+                            </div>                   
+                        </div>
+                            
                     </form>
                 </div>
-            </div>
         </div>
     </body>
 </html>

@@ -2,6 +2,7 @@ package controlador.Interfaces;
 
 import Modelo.Categoria;
 import Modelo.Dispositivo;
+import Modelo.Principal;
 import Modelo.TipoDispositivo;
 import java.util.ArrayList;
 
@@ -17,4 +18,16 @@ public interface IVistaManejoDispositivos {
     public void mostrarMensajeExitoDispositivoBorrado(String exitoAlBorrarDisp);
 
     public void mensajeNoSeleccionasteDispositivos(String noSelecDisp);
+
+    public void noSeIngresoDocumentoCliente(String noIngresoNroDoc);
+
+    public void mostrarClienteEncontradoAltaDisp(Principal nombreCompletoCliente);
+
+    public void errorBuscarCliente(String errorAlbuscar);
+
+    public void mensajeAltaDispositivoOk(String mensajeOk);
+
+    public void mensajeErrorValidacionesAltaDispositivo(String mensajeErrorValidaciones);
+
+    public void mensajeErrorSqlAltaDispositivo(String mensajeErrorSql);
 }

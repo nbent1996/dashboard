@@ -32,7 +32,7 @@ function load(){
     /*suscripcion_Alta.jsp*/
     
     /*dispositivo_Alta.jsp*/
-    
+    $("#btnConfirmarAltaDispositivo").click(eventoAltaDispositivo);
     /*dispositivo_Alta.jsp*/
     /*ALTAS*/
     
@@ -116,6 +116,11 @@ function eventoBorrarUsuarioBaja(){
 
 function eventoAltaCliente(){
     altaCliente();
+    abrirModal();
+}
+
+function eventoAltaDispositivo(){
+    altaDispositivo();
     abrirModal();
 }
 
