@@ -2,14 +2,21 @@ package controlador;
 
 import Datos.OpMoneda;
 import Datos.OpPaquete;
+import Datos.OpPersona;
 import Datos.OpSuscripcion;
 import Datos.OpTipoDispositivo;
 import Modelo.Moneda;
+import Modelo.Paquete;
+import Modelo.Principal;
+import Modelo.ProgramException;
 import Modelo.Suscripcion;
 import Resources.DTOs.DTOFechas;
 import Resources.DTOs.Fecha;
 import controlador.Interfaces.IVistaManejoSuscripciones;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ControladorManejoSuscripciones {
     /*Estado*/
@@ -18,6 +25,7 @@ public class ControladorManejoSuscripciones {
     private OpPaquete opPaquete;
     private OpTipoDispositivo opTipoDispositivo;
     private OpMoneda opMoneda;
+    private OpPersona opPersona;
     /*Estado*/
     
     /*Constructores*/
@@ -27,6 +35,7 @@ public class ControladorManejoSuscripciones {
         this.opTipoDispositivo = new OpTipoDispositivo("bentancor");
         this.opSuscripcion = new OpSuscripcion("bentancor");
         this.opMoneda = new OpMoneda("bentancor");
+        this.opPersona = new OpPersona("bentancor");
     }
     /*Constructores*/
     
@@ -72,7 +81,7 @@ public class ControladorManejoSuscripciones {
                 vista.generarTablaSuscripciones("tblSuscripcionesSuscripcionBaja", opSuscripcion.obtenerTodos());
             }
         }catch(Exception ex){
-            vista.mensajeError("suscripcion_BajaModificacion.jsp","Error al generar la tabla de suscripciones.");
+            //vista.mensajeError("suscripcion_BajaModificacion.jsp","Error al generar la tabla de suscripciones.");
         }
     }
     
@@ -80,7 +89,7 @@ public class ControladorManejoSuscripciones {
         try{
             vista.generarTablaPaquetes("tblPaquetesSuscripcionAlta", opPaquete.obtenerTodos(), new Moneda("UYU","Pesos Uruguayos","$")); //MONEDA HARDCODEADA, OBTENERLA DESDE LA IDENTIFICACION TRIBUTARIA DE LA SESSION
         }catch(Exception ex){
-            vista.mensajeError("suscripcion_Alta.jsp","Error al generar la tabla de paquetes de dispositivos.");
+            //vista.mensajeError("suscripcion_Alta.jsp","Error al generar la tabla de paquetes de dispositivos.");
         }
     }
     /*Comportamiento*/
@@ -111,6 +120,88 @@ public class ControladorManejoSuscripciones {
         }
 
     }
+
+    public void buscarClienteParaAsociarSuscripcion(String nroDocCliente) {
+        
+        if(nroDocCliente.isEmpty()){
+            vista.noSeIngresoDocumentoCliente("No se ingresó un número de documento para buscar");
+        }else{
+            try {
+                Principal p = (Principal) opPersona.buscar(" WHERE Principales.nroDocumento='"+nroDocCliente+"' ","Modelo.Principal").get(0);
+                
+                //mando el cliente para mostrar el nombre completo y guardar en la session el objeto cliente
+                //para despues asociarlo con la suscripcion
+                vista.mostrarClienteEncontradoAltaSuscripcion(p);
+                
+            } catch (Exception ex) {
+                vista.errorBuscarCliente("No se encontró un cliente con el documento ingresado");
+            }
+            
+        }
+  
+    }
+    
+    //Puede venir el clienteSeleccionado como null
+    public void altaSuscripcionConPaquetes(String[] listaIdPaquetes, DTOFechas fechaInicioSuscripcion, String tiempoContrato, Principal clienteSeleccionado) {
+        
+        //es obligatorio tener un cliente para asociar (está en la session)
+        //calcular la fecha de finalizacion del contrato de acuerdo al tiempo del contrato
+        
+        ArrayList<Paquete> listaPaquetes = new ArrayList();
+        
+        if(clienteSeleccionado!=null){
+                   
+            if(!listaIdPaquetes[0].equals("")){//se seleccionó al menos un paquete
+
+                String cadenaIdPaquetes = listaIdPaquetes[0].toString();
+                String[] cadenaIdPaquetesConvertida = cadenaIdPaquetes.split(",");
+
+                //Calendar cal = Calendar.getInstance();
+                
+                //int anioVencimientoContrato = cal.get(Calendar.YEAR) + duracionContrato;
+                
+                int duracionContrato = Integer.parseInt(tiempoContrato);
+                Fecha fechaInicio = fechaInicioSuscripcion.getFechaA();
+                int anioVencimientoSuscripcion = fechaInicio.getYear() + duracionContrato;
+                
+                int diaVencimientoSuscripcion = fechaInicio.getDay();
+                int mesVencimientoSuscripcion = fechaInicio.getMonth();
+                
+                Fecha fechaFin = new Fecha(diaVencimientoSuscripcion, mesVencimientoSuscripcion, anioVencimientoSuscripcion);
+                DTOFechas fechaFinSuscripcion = new DTOFechas(fechaFin);
+                
+                for (String unId : cadenaIdPaquetesConvertida) {
+
+                    try {
+                        Paquete unPaquete = opPaquete.buscar(" WHERE Paquetes.idPaquete='"+ unId + "' ", null).get(0);                        
+                        listaPaquetes.add(unPaquete);                        
+                    } catch (Exception ex) {
+                        //error en consultas sql
+                        vista.errorSqlPaquetesSeleccionadosAltaSuscripcion("Ocurrió un error al obtener los paquetes seleccionados");
+                    }
+                }
+
+                try {
+                    //AGREGADO EL CLIENTE PRINCIPAL AL CONSTRUCTOR
+                    Suscripcion nuevaSuscripcion = new Suscripcion(fechaInicioSuscripcion, (float)duracionContrato, fechaFinSuscripcion, true, listaPaquetes, clienteSeleccionado);
+                    nuevaSuscripcion.validar();
+                    opSuscripcion.guardar(null, nuevaSuscripcion); //NO GUARDA LOS PAQUETES
+                    vista.exitoAlCrearSuscripcion("Suscripción dada de alta correctamente");
+                } catch (ProgramException ex) {//error en validaciones de la suscripcion
+                    vista.errorValidacionesDeSuscripcion(ex.getMessage());
+                } catch (Exception exe) {//error sql al guardar la suscripcion
+                    vista.errorSqlInsertarSuscripcion("Ocurrió un error al dar de alta la suscripción");
+                }
+                
+            }else{//no se seleccionó un paquete
+                vista.mensajeSeleccionarPaquetesAltaSuscripcion("Debes seleccionar al menos un paquete");
+            }  
+        }else{//no seleccionó un cliente
+            vista.mensajeSeleccionarClienteAltaSuscripcion("Debes seleccionar un cliente");
+        }
+    }
+    
+    
     
     
     

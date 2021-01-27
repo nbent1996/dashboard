@@ -21,6 +21,7 @@
     
     <body class="w3-light-grey">
         <script>
+            
            mostrarTablaPaquetes();
            function mostrarTablaPaquetes(){
                $.get("ManejoSuscripcionesServlet?accion=generarTablaPaquetes", function(data){
@@ -28,7 +29,46 @@
                });
                
            }
+           
+           function buscarCliente(){
+               
+                    var nroDocumento = $("#txtbxNroDocCliPrincipal").val();
+                     
+                    $.get("ManejoSuscripcionesServlet?accion=buscarCliente&nroDocumento=" + nroDocumento, function(data){
+ 
+                            document.getElementById("spanClienteAsociado").innerHTML=data;
+                        
+                    });
+            }
+           
+           
+           function altaSuscripcion(){
+               
+               var tiempoContrato = $("#selTiempoContrato").val();  
+               
+               var listaPaquetesSeleccionados = new Array();
+                    
+                    $("input:checkbox:checked").each(
+                        function () {
+                            listaPaquetesSeleccionados.push($(this).val());                            
+                        }
+                    ); 
+                    
+                    $.get("ManejoSuscripcionesServlet?accion=altaSuscripcion&tiempoContrato=" + tiempoContrato + "&listaPaquetesSeleccionados=" + listaPaquetesSeleccionados, function(data){
+                        
+                        document.getElementById("spanMensaje").innerHTML = data;
+                        //FALTA IMPLEMENTAR EL LIMPIAR CAMPOS
+                                //if(data!=null){
+                                    //limpiarCampos();
+                                //}
+                            
+                    });
+           }
+           
+           
         </script>
+        
+        
         <div class="w3-bar w3-top w3-black w3-large" id="divBarraSuperior">
             <button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey" onclick="w3_open();"><i class="fa fa-bars"></i> &nbsp;Menu</button>
             <span class="w3-bar-item w3-right">LogoEmpresa</span>
@@ -108,26 +148,62 @@
                 <h5><b><i class="fa fa-suitcase"></i> Alta de Suscripciones</b></h5>
             </header>
                 <div class="form">           
-                    <form name="formAltaSuscripcion" action="ManejoSuscripcionServlet" method="post" onsubmit="return validarAltaSuscripcion(this)">
-                        <div><label>Fecha de inicio: </label><span id="spanFechaInicio"></span></div>
-                        <div class="margin-top20"><label for="selTiempoContrato">Tiempo de contrato:</label>
+                    <form>
+                        
+                        <div>
+                            <label>Fecha de inicio: </label>
+                            <span id="spanFechaInicio"></span>
+                            <input type="hidden" value="fechaInicioSuscripcionHidden" name="fechaInicioSuscripcionHidden">
+                        </div>
+                        
+                        <div class="margin-top20">
+                            <label for="selTiempoContrato">Tiempo de contrato:</label>
                             <select id="selTiempoContrato" class="nb-input" name="selTiempoContrato">
-                                <option value="0.5" selected="true">6 meses</option>
-                                <option value="1">1 año</option>
+                                <option value="1" selected="true">1 año</option>
                                 <option value="2">2 años</option>
                                 <option value="3">3 años</option>
                                 <option value="4">4 años</option>
                             </select>
                         </div>
-                        <div><label for="txtbxUsuarioClienteSuscripcionAlta">Cliente titular (Nro de cliente):</label><span id="spanContenidoClienteAsociadoB"><span id="spanClienteAsociadoB">No seleccionado</span><input type="button" class="margin-left20 submitSearch" value="Buscar Cliente"/></span></div>
-                        <div class="margin-top20"><div><h5 class="nb-title-center">Paquetes asignados a la suscripci&oacute;n</h5></div><span id="spanPaquetesSuscripcionAlta" name="generarTablaPaquetes"></div>
-                        <hr>        
-                         <div class="botonera">
-                        <input type="submit" class="submitAlta" value="confirmar">
-                        <input type="reset" class="limpiarCampos" value="Limpiar campos">    
+                        
+                        <div>
+                            <label for="txtbxUsuarioClienteSuscripcionAlta">Cliente titular:</label>
+                            <span id="spanContenidoClienteAsociadoB">
+                                <input type="text" class="nb-input" id="txtbxNroDocCliPrincipal" name="txtbxNroDocCliPrincipal" placeholder="Nro de documento"/>
+                                <input type="button" class="margin-left20 submitSearch" value="Buscar Cliente" onclick="buscarCliente()"/>
+                                <br>
+                                <span id="spanClienteAsociado">Ninguno seleccionado</span>                
+                            </span>
                         </div>
-                        <span id="mensajeAlta"></span>
-                        <input type="hidden" name="accion" value="formAltaSuscripcion">
+                        
+                        <hr>
+                        
+                        <div class="margin-top20">
+                            <div>
+                                <h5 class="nb-title-center">Paquetes asignados a la suscripci&oacute;n</h5>
+                            </div>
+                            <span id="spanPaquetesSuscripcionAlta" name="generarTablaPaquetes"></span>
+                        </div>
+                        
+                        <hr>
+                        
+                        <div class="botonera">
+                            <input type="button" class="submitAlta" id="btnConfirmarAltaSuscripcion" value="confirmar">
+                            <input type="reset" class="limpiarCampos" value="Limpiar campos">    
+                        </div>
+                        
+                        <div id="divModal" class="w3-modal">
+                            <div class="w3-modal-content w3-animate-zoom" >
+                                <div class="w3-container">
+                                    <span id="spanBtnCerrar" class="w3-button w3-display-topright">&times;</span>
+                                    <br>
+                                    <span id="spanMensaje"></span>
+                                    <br>
+                                    <br>
+                                </div>
+                            </div>                   
+                        </div>
+                        
                     </form>
                 </div>
             </div>

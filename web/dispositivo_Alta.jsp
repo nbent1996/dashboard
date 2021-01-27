@@ -51,17 +51,7 @@
                         
 
                             document.getElementById("spanClienteAsociado").innerHTML=data;
-                        
-        
-                        
-                        
-                        /*if(data!=null){//encuentra el cliente, lo muestro en el span
-                            document.getElementById("spanClienteAsociado").innerHTML=data;
-                        }else{//no encuentra el cliente, muestro mensaje modal de que no se encontró
-                            document.getElementById("spanMensaje").innerHTML = data;
-                        }*/
-                        
-                        
+
                     });
                 }
                 

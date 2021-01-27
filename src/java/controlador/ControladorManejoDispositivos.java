@@ -44,10 +44,9 @@ public class ControladorManejoDispositivos{
         }else{
             try {
                 Principal p = (Principal) opPersona.buscar(" WHERE Principales.nroDocumento='"+nroDocCliente+"' ","Modelo.Principal").get(0);
-                //clienteEncontradoAltaDispositivo = p; //guardo el cliente para despues asociarlo con el dispositivo
                 
-                vista.mostrarClienteEncontradoAltaDisp(p);//mando el cliente para mostrar el nombre completo y guardar en la session el objeto cliente
-                //este cliente hay que guardarlo para despues asociarlo con el dispositivo
+                vista.mostrarClienteEncontradoAltaDisp(p);//mando el cliente para mostrar el nombre completo y guardar en la session el objeto cliente y despues asociarlo con el dispositivo a dar de alta
+
             } catch (Exception ex) {
                 vista.errorBuscarCliente("No se encontró un cliente con el documento ingresado");
             }
