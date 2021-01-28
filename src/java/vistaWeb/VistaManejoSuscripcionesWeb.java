@@ -3,6 +3,7 @@ package vistaWeb;
 import Modelo.Funciones;
 import Modelo.Moneda;
 import Modelo.Paquete;
+import Modelo.Principal;
 import Modelo.ProgramException;
 import Modelo.Suscripcion;
 import Resources.DTOs.DTOFechas;
@@ -12,6 +13,8 @@ import controlador.Interfaces.IVistaManejoSuscripciones;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -38,25 +41,71 @@ public class VistaManejoSuscripcionesWeb implements IVistaManejoSuscripciones{
         switch (accion) {
             case "generarTablaPaquetes":
                 generarTablaPaquetes();
-                break;
+            break;
             case "generarTablaSuscripcionesBaja":
                 generarTablaSuscripciones(request, response);
             break;
-            case "formAltaSuscripcion":
+            case "altaSuscripcion":
                 altaSuscripcion(request, response);
-                break;
+            break;
+            case "buscarCliente":
+                buscarClienteAsociarSuscripcionAlta(request, response);
+            break;
             case "borrarSuscripciones":
                 borrarSuscripciones(request, response);
-                break;
+            break;
 
             case "formModificacionSuscripcion":
 
             break;
         }
     }
+    
+    
     private void generarTablaPaquetes(){
-        this.controlador.generarTablaPaquetes();
+        controlador.generarTablaPaquetes();
     }
+    
+    
+    private void buscarClienteAsociarSuscripcionAlta(HttpServletRequest request, HttpServletResponse response) {
+        this.request = request;
+        
+        String nroDocCliente = request.getParameter("nroDocumento");
+        
+        controlador.buscarClienteParaAsociarSuscripcion(nroDocCliente);
+        
+    }
+    
+    private void altaSuscripcion(HttpServletRequest request, HttpServletResponse response) {
+        this.request = request;
+        this.response = response;
+        
+//        Calendar cal = Calendar.getInstance();
+//        
+//        int dia = cal.get(Calendar.DAY_OF_MONTH);
+//        int mes = cal.get(Calendar.MONTH);
+//        int anio = cal.get(Calendar.YEAR);
+
+        //Fecha fechaActual = new Fecha();
+        
+        Fecha fechaActual = new Fecha();//seteo fecha actual acá ya que no la puedo traer del jsp
+        
+        String listaIdPaquetes[] = request.getParameterValues("listaPaquetesSeleccionados"); // lista de id de paquetes seleccionados       
+        DTOFechas fechaInicioSuscripcion = new DTOFechas(fechaActual);
+        String tiempoContrato = request.getParameter("tiempoContrato");
+        
+        //Obtengo el cliente seleccionado guardado en la session
+        //puede ser null si es que no seleccionó cliente, lo controlo en el controlador
+        Principal clienteSeleccionado = (Principal)request.getSession().getAttribute("clienteSeleccionadoAltaSuscripcion");
+        
+        
+        //calcular fecha fin de acuerdo al tiempo de contrato
+        controlador.altaSuscripcionConPaquetes(listaIdPaquetes, fechaInicioSuscripcion, tiempoContrato, clienteSeleccionado);
+        
+        
+    }
+    
+    
     private void generarTablaSuscripciones(HttpServletRequest request, HttpServletResponse response){
         this.request = request;
         this.response = response;
@@ -119,21 +168,15 @@ public class VistaManejoSuscripcionesWeb implements IVistaManejoSuscripciones{
         return false;//seleccionaron filtros
     }
     
-    
-    
-    
-    private void altaSuscripcion(HttpServletRequest request, HttpServletResponse response) {
 
-        this.request = request;
-        this.response = response;
-    }
+    
     @Override
     public void generarTablaPaquetes(String idTabla , ArrayList<Paquete> items, Moneda moneda){
         try{
             String componente = Funciones.tablaPaquetes(idTabla, items, moneda);
             out.write(componente + "\n\n");
         }catch(ProgramException ex){
-            mensajeError("suscripcion_Alta.jsp","Error al generar la tabla de Paquetes de dispositivos.");
+            //mensajeError("suscripcion_Alta.jsp","Error al generar la tabla de Paquetes de dispositivos.");
         }
     }
     @Override
@@ -142,7 +185,7 @@ public class VistaManejoSuscripcionesWeb implements IVistaManejoSuscripciones{
             String componente = Funciones.tablaSuscripciones(idTabla, items, false);//si items es vacio no muestra nada
             out.write(componente + "\n\n");                    
         }catch(ProgramException ex){
-            mensajeError("suscripcion_BajaModificacion.jsp","Error al generar la tabla de suscripciones.");
+            //mensajeError("suscripcion_BajaModificacion.jsp","Error al generar la tabla de suscripciones.");
         }
     }
     
@@ -193,6 +236,58 @@ public class VistaManejoSuscripcionesWeb implements IVistaManejoSuscripciones{
     public void mensajeNoSeleccionasteSuscripciones(String mensajeNoSeleccion) {
         out.write(mensajeNoSeleccion);
     }
+
+    @Override
+    public void errorBuscarCliente(String errorBuscarCliente) {
+        
+        out.write(errorBuscarCliente);
+    }
+
+    @Override
+    public void mostrarClienteEncontradoAltaSuscripcion(Principal clientePrincipalEncontrado) {
+        //guardo al cliente en la session creada anteriormente para obtenerlo luego en el alta de suscripcion
+        request.getSession(false).setAttribute("clienteSeleccionadoAltaSuscripcion", clientePrincipalEncontrado);
+        out.write(clientePrincipalEncontrado.getNombreCompleto());
+    }
+
+    @Override
+    public void noSeIngresoDocumentoCliente(String noIngresoDocumentoDeCliente) {
+        out.write(noIngresoDocumentoDeCliente);
+    }
+
+    @Override
+    public void errorSqlPaquetesSeleccionadosAltaSuscripcion(String errorPaquetesSeleccionados) {
+        out.write(errorPaquetesSeleccionados);
+    }
+
+    @Override
+    public void exitoAlCrearSuscripcion(String exitoAltaSuscripcion) {
+        request.getSession().removeAttribute("clienteSeleccionadoAltaSuscripcion");
+        out.write(exitoAltaSuscripcion);
+    }
+
+    @Override
+    public void errorValidacionesDeSuscripcion(String errorValidarSuscripcion) {
+        out.write(errorValidarSuscripcion);
+    }
+
+    @Override
+    public void errorSqlInsertarSuscripcion(String errorInsertarSuscripcion) {
+        request.getSession().removeAttribute("clienteSeleccionadoAltaSuscripcion");
+        out.write(errorInsertarSuscripcion);
+    }
+
+    @Override
+    public void mensajeSeleccionarPaquetesAltaSuscripcion(String debesSeleccionarPaquetes) {
+        out.write(debesSeleccionarPaquetes);
+    }
+
+    @Override
+    public void mensajeSeleccionarClienteAltaSuscripcion(String debesSeleccionarCliente) {
+        out.write(debesSeleccionarCliente);
+    }
+
+    
 
     
 

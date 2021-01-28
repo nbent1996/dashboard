@@ -11,10 +11,11 @@ private float tiempoContrato;
 private DTOFechas fechaFin;
 private boolean activa;
 private ArrayList<Paquete> listaPaquetes;
+private Principal clientePrincipal;//AGREGADO
 /*Estado*/
 
 /*Constructores*/
-/*FULL*/
+/*FULL SIN PRINCIPAL*/ //SE USA EN BUSCAR DE OPSUSCRIPCION
 public Suscripcion(int idSuscripcion, DTOFechas fechaInicio, float tiempoContrato, DTOFechas fechaFin, boolean activa, ArrayList<Paquete> listaPaquetes) {
         this.idSuscripcion = idSuscripcion;
         this.fechaInicio = fechaInicio;
@@ -23,15 +24,26 @@ public Suscripcion(int idSuscripcion, DTOFechas fechaInicio, float tiempoContrat
         this.activa = activa;
         this.listaPaquetes = listaPaquetes;
     }
+/*FULL CON PRINCIPAL AGREGADO*/
+public Suscripcion(int idSuscripcion, DTOFechas fechaInicio, float tiempoContrato, DTOFechas fechaFin, boolean activa, ArrayList<Paquete> listaPaquetes, Principal principal) {
+        this.idSuscripcion = idSuscripcion;
+        this.fechaInicio = fechaInicio;
+        this.tiempoContrato = tiempoContrato;
+        this.fechaFin = fechaFin;
+        this.activa = activa;
+        this.listaPaquetes = listaPaquetes;
+        this.clientePrincipal = principal;//AGREGADO
+    }
 
 /*ID -1 FULL*/
-public Suscripcion(DTOFechas fechaInicio, float tiempoContrato, DTOFechas fechaFin, boolean activa, ArrayList<Paquete> listaPaquetes) {
+public Suscripcion(DTOFechas fechaInicio, float tiempoContrato, DTOFechas fechaFin, boolean activa, ArrayList<Paquete> listaPaquetes, Principal principal) {
         this.idSuscripcion = -1;
         this.fechaInicio = fechaInicio;
         this.tiempoContrato = tiempoContrato;
         this.fechaFin = fechaFin;
         this.activa = activa;
         this.listaPaquetes = listaPaquetes;
+        this.clientePrincipal = principal;//AGREGADO
     }
 
 /*FULL SIN PAQUETES*/
@@ -67,7 +79,7 @@ public Suscripcion(DTOFechas fechaInicio, float tiempoContrato, DTOFechas fechaF
         
         /*Campos expresamente numéricos*/
         if(!(this.tiempoContrato>0 && this.tiempoContrato<=4)){
-            retorno +="El tiempo de contrato debe tener una duración entre 0.5 y 4 años.\n";
+            retorno +="El tiempo de contrato debe tener una duración entre 1 y 4 años.\n";
         }
         
         if (!retorno.equals("")) {
@@ -178,7 +190,18 @@ public Suscripcion(DTOFechas fechaInicio, float tiempoContrato, DTOFechas fechaF
     public void setListaPaquetes(ArrayList<Paquete> listaPaquetes) {
         this.listaPaquetes = listaPaquetes;
     }
+    
+    public Principal getClientePrincipal() {
+        return clientePrincipal;
+    }
+
+    public void setClientePrincipal(Principal clientePrincipal) {
+        this.clientePrincipal = clientePrincipal;
+    }
+    
 /*Getters y Setters*/
+
+    
 
 
 

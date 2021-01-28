@@ -1,44 +1,44 @@
 package controlador;
 
-import Datos.OpDispositivo;
-import Datos.OpPersona;
-import Datos.OpSuscripcion;
-import Datos.OpTipoDispositivo;
-import Modelo.Dispositivo;
-import Modelo.Persona;
-import Modelo.Principal;
-import Modelo.Secundario;
-import Modelo.Suscripcion;
-import Modelo.TipoDispositivo;
-import controlador.Interfaces.IVistaExportarPlanillas;
-import java.io.FileOutputStream;
-import java.io.OutputStream;
-import java.util.ArrayList;
-import javax.servlet.http.HttpServletResponse;
-import org.apache.poi.ss.usermodel.CellStyle;
-import org.apache.poi.ss.usermodel.Font;
-import org.apache.poi.xssf.usermodel.XSSFCell;
-import org.apache.poi.xssf.usermodel.XSSFRow;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+//import Datos.OpDispositivo;
+//import Datos.OpPersona;
+//import Datos.OpSuscripcion;
+//import Datos.OpTipoDispositivo;
+//import Modelo.Dispositivo;
+//import Modelo.Persona;
+//import Modelo.Principal;
+//import Modelo.Secundario;
+//import Modelo.Suscripcion;
+//import Modelo.TipoDispositivo;
+//import controlador.Interfaces.IVistaExportarPlanillas;
+//import java.io.FileOutputStream;
+//import java.io.OutputStream;
+//import java.util.ArrayList;
+//import javax.servlet.http.HttpServletResponse;
+//import org.apache.poi.ss.usermodel.CellStyle;
+//import org.apache.poi.ss.usermodel.Font;
+//import org.apache.poi.xssf.usermodel.XSSFCell;
+//import org.apache.poi.xssf.usermodel.XSSFRow;
+//import org.apache.poi.xssf.usermodel.XSSFSheet;
+//import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-public class ControladorExportarPlanillas {
-    /*Estado*/
-    private IVistaExportarPlanillas vista;
-    private OpDispositivo opDispositivo;
-    private OpTipoDispositivo opTipoDispositivo;
-    private OpSuscripcion opSuscripcion;
-    private OpPersona opPersona;
-    /*Estado*/
-    
-    /*Constructores*/
-    public ControladorExportarPlanillas(IVistaExportarPlanillas vista){
-        this.vista = vista;
-        this.opPersona = new OpPersona("bentancor");
-        this.opSuscripcion = new OpSuscripcion("bentancor");
-        this.opTipoDispositivo = new OpTipoDispositivo("bentancor");
-        this.opDispositivo = new OpDispositivo("bentancor");
-    }
+//public class ControladorExportarPlanillas {
+//    /*Estado*/
+//    private IVistaExportarPlanillas vista;
+//    private OpDispositivo opDispositivo;
+//    private OpTipoDispositivo opTipoDispositivo;
+//    private OpSuscripcion opSuscripcion;
+//    private OpPersona opPersona;
+//    /*Estado*/
+//    
+//    /*Constructores*/
+//    public ControladorExportarPlanillas(IVistaExportarPlanillas vista){
+//        this.vista = vista;
+//        this.opPersona = new OpPersona("bentancor");
+//        this.opSuscripcion = new OpSuscripcion("bentancor");
+//        this.opTipoDispositivo = new OpTipoDispositivo("bentancor");
+//        this.opDispositivo = new OpDispositivo("bentancor");
+//    }
     /*Constructores*/
     
     /*Comportamiento*/
@@ -160,4 +160,4 @@ public class ControladorExportarPlanillas {
 //
 //    }
     /*Comportamiento*/
-}
+//}

@@ -10,6 +10,8 @@ import Modelo.Principal;
 import Modelo.ProgramException;
 import Modelo.TipoDispositivo;
 import controlador.Interfaces.IVistaManejoDispositivos;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ControladorManejoDispositivos{
     /*Estado*/
@@ -18,6 +20,8 @@ public class ControladorManejoDispositivos{
     private OpTipoDispositivo opTipoDispositivo;
     private OpCategoria opCategoria;
     private OpPersona opPersona;
+    
+    //private Principal clienteEncontradoAltaDispositivo;
     /*Estado*/
     
     /*Constructores*/
@@ -31,19 +35,40 @@ public class ControladorManejoDispositivos{
     /*Constructores*/
     
     /*Comportamiento*/
-    public void altaDispositivo(String nroSerie, String estado, String tipoDispositivo, String nroDocumentoPrincipalAsociado){
+    
+    
+    public void buscarClienteParaAsociarDispositivo(String nroDocCliente) {
+        
+        if(nroDocCliente.isEmpty()){
+            vista.noSeIngresoDocumentoCliente("No se ingresó un número de documento para buscar");
+        }else{
+            try {
+                Principal p = (Principal) opPersona.buscar(" WHERE Principales.nroDocumento='"+nroDocCliente+"' ","Modelo.Principal").get(0);
+                
+                vista.mostrarClienteEncontradoAltaDisp(p);//mando el cliente para mostrar el nombre completo y guardar en la session el objeto cliente y despues asociarlo con el dispositivo a dar de alta
+
+            } catch (Exception ex) {
+                vista.errorBuscarCliente("No se encontró un cliente con el documento ingresado");
+            }
+            
+        }
+        
+        
+    }
+    
+    //el cliente principal puede ser nulo ya que se puede dar de alta un dispositivo sin cliente asociado
+    public void altaDispositivo(String nroSerie, String estado, String tipoDispositivo, Principal clientePrincipalSeleccionado){
         try{
             Empresa e = new Empresa("526283747346"); //EMPRESA HARDCODEADA, SE DEBE TOMAR DE LA SESSION
-            Principal p = (Principal) opPersona.buscar(" WHERE Principales.nroDocumento='"+nroDocumentoPrincipalAsociado+"' ","Modelo.Principal").get(0);
             TipoDispositivo tD = opTipoDispositivo.buscar(" WHERE TiposDispositivos.modelo='"+tipoDispositivo+"' ",null).get(0);
-            Dispositivo d = new Dispositivo(nroSerie, estado, tD, e, p);
+            Dispositivo d = new Dispositivo(nroSerie, estado, tD, e, clientePrincipalSeleccionado);
             d.validar();
             opDispositivo.guardar(null,d);
-            vista.mensajeExito("dispositivo_Alta.jsp", "Dispositivo dado de alta correctamente.");
+            vista.mensajeAltaDispositivoOk("Dispositivo dado de alta correctamente.");
         } catch (ProgramException ex) {
-            vista.mensajeError("dispositivo_Alta.jsp",ex.getMessage());
+            vista.mensajeErrorValidacionesAltaDispositivo(ex.getMessage());
         } catch (Exception ex) {
-            vista.mensajeError("dispositivo_Alta.jsp", ex.getMessage());
+            vista.mensajeErrorSqlAltaDispositivo("Ocurrió un error al dar de alta el dispositivo");
         }
     }
     public String getFiltroProcesado(String nroSerie, String estado){
@@ -73,7 +98,7 @@ public class ControladorManejoDispositivos{
                 //vista.mostrarTiposDispositivos(opTipoDispositivo.buscar(" WHERE nombreCategoria='"+categoria+"' ",null));
                 vista.mostrarTiposDispositivos(opTipoDispositivo.obtenerTodos());
             }catch(Exception ex){
-                vista.mensajeError("dispositivo_Alta.jsp","Error en la carga de tipos de dispositivos.");
+                //vista.mensajeError("dispositivo_Alta.jsp","Error en la carga de tipos de dispositivos.");
             }
         }
         public void cargarCategorias(){
@@ -109,6 +134,8 @@ public class ControladorManejoDispositivos{
         }
         
     }
+
+    
     
     
     

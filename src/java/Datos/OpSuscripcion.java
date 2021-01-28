@@ -42,10 +42,11 @@ public OpSuscripcion(String usuarioSistema){
         if(!c.getActiva()){
             activaStr = "N";
         }
-        listaSQL.add("INSERT INTO Suscripciones (fechaInicio, tiempoContrato, fechaFin, activa) values "
-                + "('"+c.getFechaInicio().getFechaAStr(1)+"','"+c.getTiempoContrato()+"','"+c.getFechaFin().getFechaAStr(1)+"','"+activaStr+"')");
+        //AGREGADO EL CLIENTE PRINCIPAL
+        listaSQL.add("INSERT INTO Suscripciones (fechaInicio, tiempoContrato, fechaFin, activa, nroDocumentoTitular) values "
+                + "('"+c.getFechaInicio().getFechaAStr(1)+"','"+c.getTiempoContrato()+"','"+c.getFechaFin().getFechaAStr(1)+"','"+activaStr+"','"+c.getClientePrincipal().getNroDocumento()+"')");
         try{
-            database.actualizarMultiple(listaSQL, "UPDATE");
+            database.actualizarMultiple(listaSQL, "INSERT");//TENÍA VALOR UPDATE, SE CAMBIÓ POR INSERT
         }catch(SQLException ex){
             registroConsola(this.usuarioSistema, listaSQL, "Alta", ex.getMessage());
             throw ex;
