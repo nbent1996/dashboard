@@ -45,7 +45,15 @@ public Suscripcion(DTOFechas fechaInicio, float tiempoContrato, DTOFechas fechaF
         this.listaPaquetes = listaPaquetes;
         this.clientePrincipal = principal;//AGREGADO
     }
-
+/*ID -1 SIN PRINCIPAL*/
+public Suscripcion(DTOFechas fechaInicio, float tiempoContrato, DTOFechas fechaFin, boolean activa, ArrayList<Paquete> listaPaquetes) {
+        this.idSuscripcion = -1;
+        this.fechaInicio = fechaInicio;
+        this.tiempoContrato = tiempoContrato;
+        this.fechaFin = fechaFin;
+        this.activa = activa;
+        this.listaPaquetes = listaPaquetes;
+    }
 /*FULL SIN PAQUETES*/
 public Suscripcion(int idSuscripcion, DTOFechas fechaInicio, float tiempoContrato, DTOFechas fechaFin, boolean activa) {
         this.idSuscripcion = idSuscripcion;

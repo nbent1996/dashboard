@@ -13,10 +13,9 @@ import controlador.Interfaces.IVistaManejoSuscripciones;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 
 public class VistaManejoSuscripcionesWeb implements IVistaManejoSuscripciones{
@@ -26,11 +25,13 @@ public class VistaManejoSuscripcionesWeb implements IVistaManejoSuscripciones{
     private HttpServletRequest request;
     private HttpServletResponse response;
     private PrintWriter out;
+    private HttpSession sesion;
     /*Estado*/
     /*Constructores*/
     public VistaManejoSuscripcionesWeb(HttpServletRequest request, HttpServletResponse response) throws IOException{
         this.response = response;
         this.out = response.getWriter();
+        this.sesion = request.getSession();
         controlador = new ControladorManejoSuscripciones(this);
     }
     /*Constructores*/
@@ -79,45 +80,32 @@ public class VistaManejoSuscripcionesWeb implements IVistaManejoSuscripciones{
     private void altaSuscripcion(HttpServletRequest request, HttpServletResponse response) {
         this.request = request;
         this.response = response;
-        
 //        Calendar cal = Calendar.getInstance();
 //        
 //        int dia = cal.get(Calendar.DAY_OF_MONTH);
 //        int mes = cal.get(Calendar.MONTH);
 //        int anio = cal.get(Calendar.YEAR);
-
         //Fecha fechaActual = new Fecha();
-        
         Fecha fechaActual = new Fecha();//seteo fecha actual acá ya que no la puedo traer del jsp
-        
         String listaIdPaquetes[] = request.getParameterValues("listaPaquetesSeleccionados"); // lista de id de paquetes seleccionados       
         DTOFechas fechaInicioSuscripcion = new DTOFechas(fechaActual);
         String tiempoContrato = request.getParameter("tiempoContrato");
-        
         //Obtengo el cliente seleccionado guardado en la session
         //puede ser null si es que no seleccionó cliente, lo controlo en el controlador
         Principal clienteSeleccionado = (Principal)request.getSession().getAttribute("clienteSeleccionadoAltaSuscripcion");
-        
-        
         //calcular fecha fin de acuerdo al tiempo de contrato
         controlador.altaSuscripcionConPaquetes(listaIdPaquetes, fechaInicioSuscripcion, tiempoContrato, clienteSeleccionado);
-        
-        
     }
     
     
     private void generarTablaSuscripciones(HttpServletRequest request, HttpServletResponse response){
         this.request = request;
-        this.response = response;
-        
+        this.response = response; 
         String idSuscripcionStr = request.getParameter("idSuscripcion");
-        
         int idSuscripcion = -1;
-        
         if(idSuscripcionStr !=null && !idSuscripcionStr.equals("")){
             idSuscripcion = Integer.parseInt(idSuscripcionStr);
         }
-        
         String fechaInicioAStr = request.getParameter("fechaInicioA");
         String fechaFinAStr = request.getParameter("fechaFinA");
         String fechaInicioBStr = request.getParameter("fechaInicioB");
@@ -155,10 +143,7 @@ public class VistaManejoSuscripcionesWeb implements IVistaManejoSuscripciones{
         }else{//se seleccionó al menos un filtro para buscar
             String filtro = controlador.getFiltroProcesado(idSuscripcion, fechaInicioAStr, fechaFinAStr,fechaInicioBStr, fechaFinBStr, activa, tiempoContrato);  
             controlador.generarTablaSuscripciones(filtro);
-        }
-        
-        
-        
+        }    
     }
     
     private boolean NoseleccionaronFiltros(int idSuscripcion, String fechaInicioAStr, String fechaFinAStr, String fechaInicioBStr, String fechaFinBStr, String activa, String tiempoContrato) {
@@ -208,18 +193,11 @@ public class VistaManejoSuscripcionesWeb implements IVistaManejoSuscripciones{
             System.out.println(texto);
         }      
     }
-    
-    /*Comportamiento*/
-
-    private void borrarSuscripciones(HttpServletRequest request, HttpServletResponse response) {
-        
+      private void borrarSuscripciones(HttpServletRequest request, HttpServletResponse response) {
         String listaIdSuscripciones[] = request.getParameterValues("listaSuscripciones");
         this.request = request;
         this.response = response;
-        
-        controlador.borrarSuscripcionesSeleccionadas(listaIdSuscripciones);
-        
-        
+        controlador.borrarSuscripcionesSeleccionadas(listaIdSuscripciones); 
     }
 
     @Override
@@ -287,11 +265,13 @@ public class VistaManejoSuscripcionesWeb implements IVistaManejoSuscripciones{
         out.write(debesSeleccionarCliente);
     }
 
-    
-
-    
-
-
+/*Comportamiento*/
+/*Getters y Setters*/
+    @Override
+    public HttpSession getSession() {
+        return sesion;
+    }
+/*Getters y Setters*/    
 
 
 }

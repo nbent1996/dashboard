@@ -6,12 +6,11 @@ import Datos.OpPersona;
 import Datos.OpTipoDispositivo;
 import Modelo.Dispositivo;
 import Modelo.Empresa;
+import Modelo.Operador;
 import Modelo.Principal;
 import Modelo.ProgramException;
 import Modelo.TipoDispositivo;
 import controlador.Interfaces.IVistaManejoDispositivos;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class ControladorManejoDispositivos{
     /*Estado*/
@@ -20,17 +19,18 @@ public class ControladorManejoDispositivos{
     private OpTipoDispositivo opTipoDispositivo;
     private OpCategoria opCategoria;
     private OpPersona opPersona;
-    
+    private Operador userLogueado;
     //private Principal clienteEncontradoAltaDispositivo;
     /*Estado*/
     
     /*Constructores*/
     public ControladorManejoDispositivos(IVistaManejoDispositivos vista) {
         this.vista = vista;
-        this.opDispositivo = new OpDispositivo("bentancor");
-        this.opTipoDispositivo = new OpTipoDispositivo("bentancor");
-        this.opCategoria = new OpCategoria("bentancor");
-        this.opPersona = new OpPersona("bentancor");
+        this.userLogueado = (Operador) vista.getSession().getAttribute("OperadorLogueado");
+        this.opDispositivo = new OpDispositivo(this.userLogueado.getUsuarioSistema());
+        this.opTipoDispositivo = new OpTipoDispositivo(this.userLogueado.getUsuarioSistema());
+        this.opCategoria = new OpCategoria(this.userLogueado.getUsuarioSistema());
+        this.opPersona = new OpPersona(this.userLogueado.getUsuarioSistema());
     }
     /*Constructores*/
     

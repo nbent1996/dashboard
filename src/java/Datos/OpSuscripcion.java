@@ -2,6 +2,7 @@ package Datos;
 
 import Modelo.LogSistema;
 import Modelo.Paquete;
+import Modelo.Principal;
 import Modelo.QueryEjecutada;
 import Modelo.Suscripcion;
 import Resources.DTOs.DTOFechas;
@@ -42,11 +43,15 @@ public OpSuscripcion(String usuarioSistema){
         if(!c.getActiva()){
             activaStr = "N";
         }
-        //AGREGADO EL CLIENTE PRINCIPAL
         listaSQL.add("INSERT INTO Suscripciones (fechaInicio, tiempoContrato, fechaFin, activa, nroDocumentoTitular) values "
                 + "('"+c.getFechaInicio().getFechaAStr(1)+"','"+c.getTiempoContrato()+"','"+c.getFechaFin().getFechaAStr(1)+"','"+activaStr+"','"+c.getClientePrincipal().getNroDocumento()+"')");
+        if(c.getListaPaquetes()!=null && !c.getListaPaquetes().isEmpty()){
+        for(Paquete p: c.getListaPaquetes()){
+                listaSQL.add("INSERT INTO PoseeSP(idSuscripcion, idPaquete) values(?, "+p.getIdPaquete()+")");
+        }
+        }
         try{
-            database.actualizarMultiple(listaSQL, "INSERT");//TENÍA VALOR UPDATE, SE CAMBIÓ POR INSERT
+            database.actualizarMultiple(listaSQL, "INSERT");
         }catch(SQLException ex){
             registroConsola(this.usuarioSistema, listaSQL, "Alta", ex.getMessage());
             throw ex;
@@ -104,13 +109,14 @@ public OpSuscripcion(String usuarioSistema){
         int idSuscripcion = -1;
         DTOFechas fechaInicio, fechaFin;
         int anioInicio, mesInicio, diaInicio, anioFin, mesFin, diaFin;
+        String nroDocumentoTitular = "";
         float tiempoContrato;
         boolean activa;
         ArrayList<String> listaSQL = new ArrayList<>();
         String sql ="";
         sql = "SELECT day(fechaInicio) as 'diaInicio', month(fechaInicio) as 'mesInicio', year(fechaInicio) as 'anioInicio', "
                    + " tiempoContrato, activa, idSuscripcion, "
-                +    " day(fechaFin) as 'diaFin', month(fechaFin) as 'mesFin', year(fechaFin) as 'anioFin' from Suscripciones ";
+                +    " day(fechaFin) as 'diaFin', month(fechaFin) as 'mesFin', year(fechaFin) as 'anioFin', nroDocumentoTitular from Suscripciones ";
         if(filtro!=null){
             sql+= filtro;
             sql+=" AND Suscripciones.eliminado='N' ";
@@ -148,7 +154,13 @@ public OpSuscripcion(String usuarioSistema){
                 }
                 rsListaPaquetes.close();
                 /*Lista de paquetes*/
-                Suscripcion s = new Suscripcion(idSuscripcion, fechaInicio, tiempoContrato,fechaFin, activa, listaPaquetes);
+                
+                /*Cliente asociado*/
+                nroDocumentoTitular = rs.getString("nroDocumentoTitular");
+                Suscripcion s = new Suscripcion(idSuscripcion, fechaInicio, tiempoContrato, fechaFin, activa, listaPaquetes, new Principal(nroDocumentoTitular));
+                
+                /*Cliente asociado*/
+                
                 lista.add(s);
             }
             rs.close();

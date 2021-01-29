@@ -12,6 +12,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 
 public class VistaManejoClientesWeb implements IVistaManejoClientes{
@@ -21,6 +22,7 @@ public class VistaManejoClientesWeb implements IVistaManejoClientes{
     private String destino;
     private HttpServletRequest request;
     private HttpServletResponse response;
+    private HttpSession sesion;
     private PrintWriter out;
     /*Estado*/
 
@@ -28,6 +30,7 @@ public class VistaManejoClientesWeb implements IVistaManejoClientes{
      public VistaManejoClientesWeb(HttpServletRequest request, HttpServletResponse response) throws IOException {
         this.response = response;
         this.out = response.getWriter();
+        this.sesion = request.getSession();
         controlador = new ControladorManejoClientes(this);
     }
     /*Constructores*/
@@ -151,14 +154,6 @@ public class VistaManejoClientesWeb implements IVistaManejoClientes{
         }      
     }
     
-    
-    
-    /*Comportamiento*/
-    
-    /*Getters y Setters*/
-    
-    /*Getters y Setters*/
-
     //muestro tabla de todos los clientes (principales y secundarios) para seleccionar y dar de baja
     @Override
     public void mostrarTablaClientesBajaInicio(ArrayList<Persona> principalesYSecundarios) {
@@ -181,13 +176,6 @@ public class VistaManejoClientesWeb implements IVistaManejoClientes{
         }else{//si no se ingresó un nro de cliente            
             controlador.mostrarClientesFiltradosTabla(nroClienteBaja, emailClienteBaja, nombreCompletoClienteBaja);
         }
-        
-        
-        
-        
-        
-        
-        
     }
 
     private void borrarClientes(HttpServletRequest request, HttpServletResponse response) {
@@ -223,6 +211,17 @@ public class VistaManejoClientesWeb implements IVistaManejoClientes{
     public void mensajeAltaClienteError(String altaError) {
         out.write(altaError);
     }
+/*Comportamiento*/
+    
+ /*Getters y Setters*/
+    @Override
+    public HttpSession getSession() {
+        return sesion;
+    }
+/*Getters y Setters*/
+
+
+
 
     
 

@@ -11,6 +11,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 
 public class VistaManejoPaquetesWeb implements IVistaManejoPaquetes{
@@ -19,13 +20,15 @@ public class VistaManejoPaquetesWeb implements IVistaManejoPaquetes{
     private String destino;
     private HttpServletRequest request;
     private HttpServletResponse response;
-    private PrintWriter out;    
+    private PrintWriter out;   
+    private HttpSession sesion;
     /*Estado*/
     
     /*Constructores*/
     public VistaManejoPaquetesWeb(HttpServletRequest request, HttpServletResponse response) throws IOException{
         this.response = response;
         this.out = response.getWriter();
+        this.sesion = request.getSession();
         controlador = new ControladorManejoPaquetes(this);
     }
     /*Constructores*/
@@ -57,15 +60,12 @@ public class VistaManejoPaquetesWeb implements IVistaManejoPaquetes{
     }
     
     private void altaPaqueteConDispositivos(HttpServletRequest request, HttpServletResponse response) {
-        
         this.request = request;
-        this.response = response;
-        
+        this.response = response;  
         String listaIdDispositivos[] = request.getParameterValues("listaDispositivos"); // lista de id de dispositivos seleccionados
         String nombrePaquete = request.getParameter("nombrePaquete");
         String costoBrutoPaquete = request.getParameter("costoPaquete");
-        String listaCantidades[] = request.getParameterValues("listaCantidades");//lista de las cantidades ingresadas en cada dispositivo seleccionado
-        
+        String listaCantidades[] = request.getParameterValues("listaCantidades");//lista de las cantidades ingresadas en cada dispositivo seleccionado 
 //        ArrayList<String> listaCantidadesAux = new ArrayList();//me guardo todas las cantidades
         //acá puedo sacar cada una de las cantidades ingresadas, en la listaIdDispositivos está cada id de los dispositivos que se seleccionaron, y el id de 
         //los input number de las cantidades es txtbxCant + idDispositivo
@@ -80,25 +80,18 @@ public class VistaManejoPaquetesWeb implements IVistaManejoPaquetes{
 //            
 //            
 //        }        
-        
         controlador.altaPaqueteConDispositivos(listaIdDispositivos, listaCantidades, nombrePaquete, costoBrutoPaquete);
     }
     
     private void generarTablaTiposDispositivos(){
         this.controlador.generarTablaTiposDispositivos();
     }
-    
-    
     private void cargarTablaPaquetesBajaInicio(){
         controlador.cargarTablaPaquetesBajaInicio();
-    }
-    
-    
+    } 
     private void generarTablaPaquetesFiltrados(HttpServletRequest request, HttpServletResponse response) {
-        
         this.request = request;
         this.response = response;
-
         String idPaqueteStr = request.getParameter("idPaquete");
         int idPaquete = -1;
         if (idPaqueteStr != null && !idPaqueteStr.equals("")) {//controla que se haya ingresado un idPaquete en el filtro para parsearlo
@@ -119,9 +112,6 @@ public class VistaManejoPaquetesWeb implements IVistaManejoPaquetes{
         String filtro = this.controlador.getFiltroProcesado(idPaquete, nombre, costoA, costoB);
         this.controlador.generarTablaPaquetes(filtro);
     }
-    
-    
-    
     private void altaPaquete(HttpServletRequest request, HttpServletResponse response){
         this.request = request;
         this.response = response;
@@ -136,7 +126,6 @@ public class VistaManejoPaquetesWeb implements IVistaManejoPaquetes{
             System.out.println(texto);
         }        
     }
-
     @Override
     public void mensajeExito(String nombreJSP, String texto) {
         destino = nombreJSP+"?msg=" + texto;
@@ -146,7 +135,6 @@ public class VistaManejoPaquetesWeb implements IVistaManejoPaquetes{
             System.out.println(texto);
         }      
     }
-
     @Override
     public void generarTablaTiposDispositivos(String idTabla, ArrayList<TipoDispositivo> items) {
         try{
@@ -165,9 +153,7 @@ public class VistaManejoPaquetesWeb implements IVistaManejoPaquetes{
             mensajeError("paquete_BajaModificacion.jsp","Error al generar la tabla de Paquetes de dispositivos.");
         }
     }
-    /*Comportamiento*/
-
-    private void borrarPaquetes(HttpServletRequest request, HttpServletResponse response) {
+       private void borrarPaquetes(HttpServletRequest request, HttpServletResponse response) {
         String listaIdPaquetes[] = request.getParameterValues("listaPaquetes"); // lista de id de paquetes seleccionados
         this.request = request;
         this.response = response;
@@ -209,10 +195,12 @@ public class VistaManejoPaquetesWeb implements IVistaManejoPaquetes{
     public void errorLargoListasCantidadYDispositivosAltaPaquete(String mensajeErrorListasCantYTipos) {
         out.write(mensajeErrorListasCantYTipos);
     }
+/*Comportamiento*/
+/*Getters y Setters*/
+    @Override
+    public HttpSession getSession() {
+        return sesion;
+    }
+/*Getters y Setters*/
 
-    
-
-
-    
-    
 }

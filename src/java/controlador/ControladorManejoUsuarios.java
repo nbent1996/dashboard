@@ -23,14 +23,16 @@ public class ControladorManejoUsuarios{
     private OpEmpresa opEmpresa;
     private OpPais opPais;
     private OpTipoUsuario opTipoUsuario;
+    private Operador userLogueado;
     /*Estado*/
     
     /*Constructores*/
     public ControladorManejoUsuarios(IVistaManejoUsuarios vista) {
         this.vista = vista;
-        this.opPersona = new OpPersona("bentancor");
-        this.opPais = new OpPais("bentancor");
-        this.opTipoUsuario = new OpTipoUsuario("bentancor");
+        this.userLogueado = (Operador) vista.getSession().getAttribute("OperadorLogueado");
+        this.opPersona = new OpPersona(this.userLogueado.getUsuarioSistema());
+        this.opPais = new OpPais(this.userLogueado.getUsuarioSistema());
+        this.opTipoUsuario = new OpTipoUsuario(this.userLogueado.getUsuarioSistema());
     }
     /*Constructores*/
 

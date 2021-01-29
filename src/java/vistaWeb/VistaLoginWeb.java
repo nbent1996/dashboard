@@ -64,7 +64,7 @@ public class VistaLoginWeb implements IVistaLogin{
         
         destino = "index.jsp";
         
-        HttpSession sesion = request.getSession(true);
+        HttpSession sesion = request.getSession();
         sesion.setAttribute("OperadorLogueado", operadorLogin);
         
         try {

@@ -4,6 +4,7 @@ import Datos.OpPaquete;
 import Datos.OpTipoDispositivo;
 import Modelo.Empresa;
 import Modelo.Moneda;
+import Modelo.Operador;
 import Modelo.Paquete;
 import Modelo.ProgramException;
 import Modelo.TieneTP;
@@ -11,21 +12,21 @@ import Modelo.TipoDispositivo;
 import Resources.DTOs.DTORangoNumerosStr;
 import controlador.Interfaces.IVistaManejoPaquetes;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class ControladorManejoPaquetes {
     /*Estado*/
     private IVistaManejoPaquetes vista;
     private OpPaquete opPaquete;
     private OpTipoDispositivo opTipoDispositivo;
+    private Operador userLogueado;
     /*Estado*/
     
     /*Constructores*/
     public ControladorManejoPaquetes(IVistaManejoPaquetes vista){
         this.vista = vista;
-        this.opPaquete = new OpPaquete("bentancor");
-        this.opTipoDispositivo = new OpTipoDispositivo("bentancor");
+        this.userLogueado = (Operador) vista.getSession().getAttribute(this.userLogueado.getUsuarioSistema());
+        this.opPaquete = new OpPaquete(this.userLogueado.getUsuarioSistema());
+        this.opTipoDispositivo = new OpTipoDispositivo(this.userLogueado.getUsuarioSistema());
     }
     /*Constructores*/
     
@@ -141,24 +142,13 @@ public class ControladorManejoPaquetes {
     }
 
     public void cargarTablaPaquetesBajaInicio() {
-        
-        ArrayList<Paquete> paquetes = new ArrayList();
-        
+        ArrayList<Paquete> paquetes = new ArrayList(); 
         try {
             paquetes = opPaquete.obtenerTodos();
             vista.generarTablaPaquetes("tblPaquetesPaqueteBaja", paquetes, new Moneda("UYU","Pesos Uruguayos","$")); //MONEDA HARDCODEADA, OBTENERLA DESDE LA IDENTIFICACION TRIBUTARIA DE LA SESSION
         } catch (Exception ex) {
             vista.mensajeError("paquetes_Baja.jsp", "Error en la carga de paquetes");
         }
-        
-        
     }
 
-    
-
-    
-    
-    
-    
-    
 }

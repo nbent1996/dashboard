@@ -6,6 +6,7 @@ import Datos.OpPersona;
 import Datos.OpSuscripcion;
 import Datos.OpTipoDispositivo;
 import Modelo.Moneda;
+import Modelo.Operador;
 import Modelo.Paquete;
 import Modelo.Principal;
 import Modelo.ProgramException;
@@ -14,9 +15,6 @@ import Resources.DTOs.DTOFechas;
 import Resources.DTOs.Fecha;
 import controlador.Interfaces.IVistaManejoSuscripciones;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class ControladorManejoSuscripciones {
     /*Estado*/
@@ -26,16 +24,18 @@ public class ControladorManejoSuscripciones {
     private OpTipoDispositivo opTipoDispositivo;
     private OpMoneda opMoneda;
     private OpPersona opPersona;
+    private Operador userLogueado;
     /*Estado*/
     
     /*Constructores*/
     public ControladorManejoSuscripciones(IVistaManejoSuscripciones vista){
         this.vista = vista;
-        this.opPaquete = new OpPaquete("bentancor");
-        this.opTipoDispositivo = new OpTipoDispositivo("bentancor");
-        this.opSuscripcion = new OpSuscripcion("bentancor");
-        this.opMoneda = new OpMoneda("bentancor");
-        this.opPersona = new OpPersona("bentancor");
+        this.userLogueado = (Operador) vista.getSession().getAttribute("OperadorLogueado");
+        this.opPaquete = new OpPaquete(this.userLogueado.getUsuarioSistema());
+        this.opTipoDispositivo = new OpTipoDispositivo(this.userLogueado.getUsuarioSistema());
+        this.opSuscripcion = new OpSuscripcion(this.userLogueado.getUsuarioSistema());
+        this.opMoneda = new OpMoneda(this.userLogueado.getUsuarioSistema());
+        this.opPersona = new OpPersona(this.userLogueado.getUsuarioSistema());
     }
     /*Constructores*/
     

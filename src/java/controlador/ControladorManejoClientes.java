@@ -5,6 +5,7 @@ import Datos.OpPais;
 import Datos.OpPersona;
 import Datos.OpTipoDocumento;
 import Modelo.Empresa;
+import Modelo.Operador;
 import Modelo.Pais;
 import Modelo.Persona;
 import Modelo.Principal;
@@ -13,8 +14,6 @@ import Modelo.Secundario;
 import Modelo.TipoDocumento;
 import controlador.Interfaces.IVistaManejoClientes;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class ControladorManejoClientes {
     /*Estado*/
@@ -23,14 +22,16 @@ public class ControladorManejoClientes {
     private OpEmpresa opEmpresa;
     private OpPais opPais;
     private OpTipoDocumento opTipoDocumento;
+    private Operador userLogueado;
     /*Estado*/
     /*Constructores*/
     public ControladorManejoClientes(IVistaManejoClientes vista){
         this.vista = vista;
-        this.opPersona = new OpPersona("bentancor");
-        this.opEmpresa = new OpEmpresa("bentancor");
-        this.opPais = new OpPais("bentancor");
-        this.opTipoDocumento = new OpTipoDocumento("bentancor");
+        this.userLogueado = (Operador) vista.getSession().getAttribute("OperadorLogueado");
+        this.opPersona = new OpPersona(this.userLogueado.getUsuarioSistema());
+        this.opEmpresa = new OpEmpresa(this.userLogueado.getUsuarioSistema());
+        this.opPais = new OpPais(this.userLogueado.getUsuarioSistema());
+        this.opTipoDocumento = new OpTipoDocumento(this.userLogueado.getUsuarioSistema());
     }
     /*Constructores*/
     
