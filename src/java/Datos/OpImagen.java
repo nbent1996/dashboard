@@ -17,8 +17,8 @@ private String usuarioSistema;
 /*Constructores*/
 public OpImagen(String usuarioSistema){
     this.database = database.getInstancia();
-    this.logging = new OpLogSistema();
-    this.usuarioSistema = usuarioSistema;
+this.usuarioSistema = usuarioSistema;
+    this.logging = new OpLogSistema(this.usuarioSistema);
 }
 /*Constructores*/
 

@@ -17,8 +17,8 @@ public class OpTipoDocumento implements IOperaciones<TipoDocumento, String> {
     /*Constructores*/
     public OpTipoDocumento(String usuarioSistema){
         this.database = Database.getInstancia();
-        this.logging = new OpLogSistema();
-        this.usuarioSistema = usuarioSistema;
+this.usuarioSistema = usuarioSistema;
+    this.logging = new OpLogSistema(this.usuarioSistema);
     }
     /*Constructores*/
     

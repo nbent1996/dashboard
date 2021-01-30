@@ -54,6 +54,9 @@ select{
 .margin-left20{
     margin-left:20px;
 }
+.margin-bottom-50{
+    margin-bottom:50px;
+}
 .espaciador{
     position:absolute;
     top:3vw;
@@ -64,6 +67,8 @@ select{
 #mySidebar{
     z-index:3;
     width:300px;
+    position:relative;
+    top:40px;
 }
 #imgPerfil{
     width:46px;

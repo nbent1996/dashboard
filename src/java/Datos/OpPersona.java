@@ -2,6 +2,7 @@ package Datos;
 
 import Modelo.Empresa;
 import Modelo.Funciones;
+import Modelo.Idioma;
 import Modelo.LogSistema;
 import Modelo.Operador;
 import Modelo.Pais;
@@ -11,7 +12,6 @@ import Modelo.QueryEjecutada;
 import Modelo.Secundario;
 import Modelo.TipoDocumento;
 import Modelo.TipoUsuario;
-import java.io.File;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -28,8 +28,8 @@ private String usuarioSistema;
 /*Constructores*/
 public OpPersona(String usuarioSistema){
     this.database = Database.getInstancia();
-    this.logging = new OpLogSistema();
-    this.usuarioSistema = usuarioSistema;
+this.usuarioSistema = usuarioSistema;
+    this.logging = new OpLogSistema(this.usuarioSistema);
 }
 /*Constructores*/
 
@@ -285,6 +285,8 @@ public OpPersona(String usuarioSistema){
         String nroCliente, email, telefono; /*Tabla Cliente*/
         String nroDocumento, servicioActivo, codDocumento; /*Tabla Principales*/
         String nroDocumentoPrincipal; /*Tabla Secundarios*/
+        String nombreEmpresa, razonSocial, idioma, pais;
+        Float impuestos;
         String sqlA ="", sqlB="", sqlC="";
         ResultSet rs = null;
         ArrayList<String> listaSQL = new ArrayList<>();
@@ -292,12 +294,12 @@ public OpPersona(String usuarioSistema){
             
             switch (extras) {
                 case "Modelo.Operador":
-                    sqlA = "SELECT Personas.usuarioSistema, Personas.nombreCompleto, Personas.codigo, Personas.identificacionTributaria, OperadoresDashboard.nombre, OperadoresDashboard.genero from Personas, OperadoresDashboard ";
+                    sqlA = "SELECT Personas.usuarioSistema, Personas.nombreCompleto, Personas.codigo, Personas.identificacionTributaria, OperadoresDashboard.nombre, OperadoresDashboard.genero, Empresas.nombre, Empresas.razonSocial, Empresas.impuestos, Empresas.nombreIdioma, Empresas.codigo from Personas, OperadoresDashboard, Empresas ";
                     if (filtro != null) {
                         sqlA += filtro;
-                        sqlA += " AND Personas.usuarioSistema = OperadoresDashboard.usuarioSistema AND Personas.eliminado='N' AND OperadoresDashboard.usuarioSistema!='loginUser' AND OperadoresDashboard.eliminado='N' ";
+                        sqlA += " AND Personas.usuarioSistema = OperadoresDashboard.usuarioSistema AND Personas.eliminado='N' AND OperadoresDashboard.usuarioSistema!='loginUser' AND Personas.identificacionTributaria=Empresas.identificacionTributaria AND OperadoresDashboard.eliminado='N' ";
                     } else {
-                        sqlA += " WHERE Personas.usuarioSistema = OperadoresDashboard.usuarioSistema  AND Personas.eliminado='N' AND OperadoresDashboard.usuarioSistema!='loginUser' AND OperadoresDashboard.eliminado='N' ";
+                        sqlA += " WHERE Personas.usuarioSistema = OperadoresDashboard.usuarioSistema  AND Personas.eliminado='N' AND OperadoresDashboard.usuarioSistema!='loginUser' AND Personas.identificacionTributaria=Empresas.identificacionTributaria AND OperadoresDashboard.eliminado='N' ";
                     }
                     rs = database.consultar(sqlA);
                     while(rs.next()){
@@ -305,9 +307,17 @@ public OpPersona(String usuarioSistema){
                         nombreCompleto = rs.getString("nombreCompleto");
                         codigo = rs.getString("codigo");
                         identificacionTributaria = rs.getString("identificacionTributaria");
+                        /*Atributos empresa*/
+                        nombreEmpresa = rs.getString("Empresas.nombre");
+                        razonSocial = rs.getString("Empresas.razonSocial");
+                        idioma = rs.getString("Empresas.nombreIdioma");
+                        pais = rs.getString("Empresas.codigo");
+                        impuestos = rs.getFloat("Empresas.impuestos");
+                        /*Atributos empresa*/
+                        Empresa emp = new Empresa(identificacionTributaria, nombreEmpresa, razonSocial, impuestos, new Idioma(idioma), new Pais(pais));
                         nombreTipoUsuario = rs.getString("nombre");
                         genero = rs.getString("genero");
-                        personas.add(new Operador("", usuarioSistema, nombreCompleto, new Empresa(identificacionTributaria),new Pais(codigo),new TipoUsuario(nombreTipoUsuario), genero));
+                        personas.add(new Operador("", usuarioSistema, nombreCompleto, emp,new Pais(codigo),new TipoUsuario(nombreTipoUsuario), genero));
                     }
                     rs.close();
                     listaSQL.add(sqlA);

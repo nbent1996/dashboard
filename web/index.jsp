@@ -1,7 +1,11 @@
 
+<%@page import="Modelo.Empresa"%>
+<%@page import="Modelo.Operador"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
     String msg = request.getParameter("msg");
+    Operador operador = (Operador) request.getSession().getAttribute("OperadorLogueado");
+    Empresa empresa = operador.getEmpresaAsociada();
 %>
 <!DOCTYPE html>
 <html>
@@ -27,7 +31,7 @@
             
         </script>
        <div class="w3-bar w3-top w3-black w3-large" id="divBarraSuperior">
-            <button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey" onclick="w3_open();"><i class="fa fa-bars"></i> &nbsp;Menu</button>
+            <button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey " onclick="w3_open();"><i class="fa fa-bars"></i> &nbsp;Menu</button>
             <span class="w3-bar-item w3-right">LogoEmpresa</span>
         </div>
         
@@ -35,14 +39,22 @@
          <nav class="w3-sidebar w3-collapse w3-white w3-animate-left" id="mySidebar"><br>
             <div class="w3-container w3-row">
                 <div class="w3-col s4">
-                    <img src="resources/avatar3.png" class="w3-circle w3-margin-right" id="imgPerfil">
+                    <%if(operador.getGenero().equals("Masculino")){%>
+                    <img src="resources/avatarHombre.png" class="w3-circle w3-margin-right" id="imgPerfil">
+                    <%}else if(operador.getGenero().equals("Femenino")){%>
+                    <img src="resources/avatarMujer.png" class="w3-circle w3-margin-right" id="imgPerfil">
+                    <%}%>
                 </div>
                 <div class="w3-col s8 w3-bar">
-                    <span>Bienvenido, <strong>NombrePersonaEmpresa</strong></span><br> <!-- CAMBIAR POR NOMBRE DE PERSONA DE LA EMPRESA -->
-                    <!-- ICONOS DEBAJO DE PERFIL DE USUARIO -->
-                        <a href="#" class="w3-bar-item w3-button"><i class="fa fa-sign-out"></i></a>
-                        <a href="#" class="w3-bar-item w3-button"><i class="fa fa-cogs"></i></a>
+                    <%if(operador.getGenero().equals("Masculino")){%>
+                        <span>Bienvenido, <strong><%= operador.getNombreCompleto()%></strong></span><br>    
+                    <%}else if(operador.getGenero().equals("Femenino")){%>
+                        <span>Bienvenida, <strong><%= operador.getNombreCompleto()%></strong></span><br>    
+                    <%}%>
                     
+                     
+                    <!-- ICONOS DEBAJO DE PERFIL DE USUARIO -->
+                        <a href="login.jsp" class="w3-bar-item w3-button"><i class="fa fa-sign-out"></i></a>                    
                 </div>
             </div>
 
@@ -102,7 +114,7 @@
         <div class="ABMContainer">
             <!-- Header -->
             <header class="w3-container estilosHeader">
-                <h5><b><i class="fa fa-dashboard"></i> Dashboard NombreEmpresa</b></h5>
+                <h5><b><i class="fa fa-dashboard"></i> Dashboard <span><%= empresa.getNombre()%></span></b></h5>
             </header>
             <div class="form">
             <div class="w3-row-padding w3-margin-bottom">

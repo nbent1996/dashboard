@@ -9,12 +9,14 @@ public class OpLogSistema implements IOperaciones<LogSistema, Integer>{
 
 
 /*Estado*/
-    Database database;
+    private Database database;
+    private String usuarioSistema;
 /*Estado*/
 
 /*Constructores*/
-public OpLogSistema(){
+public OpLogSistema(String usuarioSistema){
     database = Database.getInstancia();
+    this.usuarioSistema = usuarioSistema;
 }
 /*Constructores*/
 
@@ -32,7 +34,7 @@ public OpLogSistema(){
     public LogSistema insertar(LogSistema c) throws Exception, SQLException {/*Usuario Sistema hardcodeado resolver eso*/
         ArrayList<String> listaSQL  = new ArrayList();
         String textoError = c.getTextoError().replace("'","");
-        String sql = "INSERT INTO LogsSistema (usuarioSistema, operacion, textoError) values ('bentancor','"+c.getOperacion()+"','"+textoError+"')";
+        String sql = "INSERT INTO LogsSistema (usuarioSistema, operacion, textoError) values ('"+this.usuarioSistema+"','"+c.getOperacion()+"','"+textoError+"')";
         listaSQL.add(sql);
         for (QueryEjecutada q: c.getListaQuerys()){
             String query = q.getTextoQuery();

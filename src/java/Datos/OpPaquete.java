@@ -24,8 +24,8 @@ private String usuarioSistema;
 /*Constructores*/
 public OpPaquete(String usuarioSistema){
     this.database = Database.getInstancia();
-    this.logging = new OpLogSistema();
-    this.usuarioSistema = usuarioSistema;
+this.usuarioSistema = usuarioSistema;
+    this.logging = new OpLogSistema(this.usuarioSistema);
 }
 /*Constructores*/
 

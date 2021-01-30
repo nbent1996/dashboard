@@ -7,6 +7,7 @@ import java.io.IOException;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
+import org.junit.Ignore;
 public class TestFunciones {
     
     public TestFunciones() {
@@ -16,7 +17,7 @@ public class TestFunciones {
     public void setUp(){
     
     }
-    @Test
+    @Ignore
     public void testCadenaAleatoria(){
         String str1 = Funciones.generarCadenaAleatoria(1);
         String str2 = Funciones.generarCadenaAleatoria(10);
@@ -29,13 +30,13 @@ public class TestFunciones {
         System.out.println(str3);
         
     }
-    @Test
+    @Ignore
     public void testIsNumeric(){
         assertTrue(!Funciones.isNumeric("adsfadsfads"));
         assertTrue(Funciones.isNumeric(""));
         assertTrue(Funciones.isNumeric("1156651"));
     }
-    @Test
+    @Ignore
     public void testFirstLetterUpperCase(){
         assertEquals("", Funciones.FirstLetterUpperCase(""));
         assertEquals(null, Funciones.FirstLetterUpperCase(null));
@@ -48,7 +49,7 @@ public class TestFunciones {
     @Test
     public void testGetArrayBytes(){
         try {
-            byte[] array = Funciones.getArrayBytes("C:\\Users\\nicol\\Desktop\\Proyecto\\dashboard\\web\\resources\\alfacomLogo.png");
+            byte[] array = Funciones.getArrayBytes("C:\\Users\\nicol\\Desktop\\Proyecto\\dashboard\\web\\resources\\cablevisionLogo1.png");
             String imagen = "";
             for(int i=0 ; i<=array.length-1;i++){
                 imagen+=array[i]+"\n";
