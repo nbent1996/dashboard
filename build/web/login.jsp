@@ -4,7 +4,6 @@
 
 <%
     String msg = request.getParameter("msg");
-    request.getSession().removeAttribute("OperadorLogueado");
 %>
 
 <!DOCTYPE html>

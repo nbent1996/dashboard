@@ -3,25 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/src/java/Datos/OpCategoria.java</file>
             <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/src/java/vistaWeb/VistaLoginWeb.java</file>
-            <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/web/index.jsp</file>
+            <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/src/java/controlador/ControladorInicio.java</file>
             <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/src/java/vistaWeb/VistaManejoClientesWeb.java</file>
-            <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/test/TestingModelo/TestFunciones.java</file>
-            <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/test/TestingDatos/TestPersonas.java</file>
+            <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/src/java/vistaWeb/VistaManejoDispositivosWeb.java</file>
+            <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/src/java/controlador/Interfaces/IVistaInicio.java</file>
+            <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/src/java/vistaWeb/VistaInicioWeb.java</file>
             <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/src/java/controlador/ControladorManejoClientes.java</file>
-            <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/src/java/Modelo/Operador.java</file>
-            <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/src/java/controlador/ControladorManejoDispositivos.java</file>
-            <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/src/java/Datos/Database.java</file>
-            <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/src/java/Datos/OpImagen.java</file>
-            <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/src/java/Modelo/Empresa.java</file>
+            <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/src/java/controlador/Interfaces/IVistaManejoClientes.java</file>
             <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/web/css/stylesCustom.css</file>
-            <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/src/java/controlador/ControladorLogin.java</file>
-            <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/src/java/Datos/OpPersona.java</file>
-            <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/web/login.jsp</file>
-            <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/src/java/Modelo/Imagen.java</file>
-            <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/web/paquete_Alta.jsp</file>
-            <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/test/TestingDatos/TestImagenes.java</file>
         </group>
     </open-files>
 </project-private>

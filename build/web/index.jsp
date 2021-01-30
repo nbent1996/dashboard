@@ -6,6 +6,7 @@
     String msg = request.getParameter("msg");
     Operador operador = (Operador) request.getSession().getAttribute("OperadorLogueado");
     Empresa empresa = operador.getEmpresaAsociada();
+    
 %>
 <!DOCTYPE html>
 <html>
@@ -32,7 +33,17 @@
         </script>
        <div class="w3-bar w3-top w3-black w3-large" id="divBarraSuperior">
             <button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey " onclick="w3_open();"><i class="fa fa-bars"></i> &nbsp;Menu</button>
-            <span class="w3-bar-item w3-right">LogoEmpresa</span>
+            <span class="w3-bar-item w3-right">
+                <% if(empresa.getNombre().equals("ColCable")){%>
+                    <img src="resources/Colcable-logo2.png" class="imgEmpresa"/>
+                <%}else if (empresa.getNombre().equals("Cablevision")){%>
+                    <img src="resources/cablevisionLogo1.png" class="imgEmpresa"/>
+                <%}else if (empresa.getNombre().equals("Directv")){%>
+                    <img src="resources/directvLogo3.png" class="imgEmpresa"/>
+                <%}else if (empresa.getNombre().equals("Sky")){%>
+                    <img src="resources/skyLogo4.png" class="imgEmpresa"/>
+                <%}%>
+            </span>
         </div>
         
         <!-- Sidebar/menu -->
@@ -117,48 +128,48 @@
                 <h5><b><i class="fa fa-dashboard"></i> Dashboard <span><%= empresa.getNombre()%></span></b></h5>
             </header>
             <div class="form">
-            <div class="w3-row-padding w3-margin-bottom">
-                <div class="w3-quarter">
-                    <div class="w3-container w3-light-blue w3-text-white w3-padding-16">
-                        <div class="w3-left"><i class="fa fa-handshake-o w3-xxlarge"></i></div>
-                        <div class="w3-right">
-                            <h3>52</h3> <!-- Cantidad suscripciones -->
+                <div class="w3-row-padding w3-margin-bottom">
+                    <div class="w3-quarter">
+                        <div class="w3-container w3-light-blue w3-text-white w3-padding-16">
+                            <div class="w3-left"><i class="fa fa-users w3-xxlarge"></i></div>
+                            <div class="w3-right">
+                                <h3>420</h3> <!-- Cantidad clientes totales -->
+                            </div>
+                            <div class="w3-clear"></div>
+                            <h4>Clientes totales</h4>
                         </div>
-                        <div class="w3-clear"></div>
-                        <h4>Suscripciones</h4>
+                    </div>
+                    <div class="w3-quarter">
+                        <div class="w3-container w3-light-blue w3-text-white w3-padding-16">
+                            <div class="w3-left"><i class="fa fa-user-times w3-xxlarge"></i></div>
+                            <div class="w3-right">
+                                <h3>3</h3> <!-- Cantidad clientes morosos -->
+                            </div>
+                            <div class="w3-clear"></div>
+                            <h4>Clientes Morosos</h4>
+                        </div>
+                    </div>
+                    <div class="w3-quarter">
+                        <div class="w3-container w3-light-blue w3-text-white w3-padding-16">
+                            <div class="w3-left"><i class="fa fa-video-camera w3-xxlarge"></i></div>
+                            <div class="w3-right">
+                                <h3>8</h3> <!-- Cantidad nuevos clientes -->
+                            </div>
+                            <div class="w3-clear"></div>
+                            <h5>Dispositivos en uso</h5>
+                        </div>
+                    </div>
+                    <div class="w3-quarter">
+                        <div class="w3-container w3-light-blue w3-text-white w3-padding-16">
+                            <div class="w3-left"><i class="fa fa-handshake-o w3-xxlarge"></i></div>
+                            <div class="w3-right">
+                                <h3>52</h3> <!-- Cantidad suscripciones -->
+                            </div>
+                            <div class="w3-clear"></div>
+                            <h4>Suscripciones</h4>
+                        </div>
                     </div>
                 </div>
-                <div class="w3-quarter">
-                    <div class="w3-container w3-light-blue w3-text-white w3-padding-16">
-                        <div class="w3-left"><i class="fa fa-user-times w3-xxlarge"></i></div>
-                        <div class="w3-right">
-                            <h3>3</h3> <!-- Cantidad clientes morosos -->
-                        </div>
-                        <div class="w3-clear"></div>
-                        <h4>Clientes Morosos</h4>
-                    </div>
-                </div>
-                <div class="w3-quarter">
-                    <div class="w3-container w3-light-blue w3-text-white w3-padding-16">
-                        <div class="w3-left"><i class="fa fa-users w3-xxlarge"></i></div>
-                        <div class="w3-right">
-                            <h3>420</h3> <!-- Cantidad clientes totales -->
-                        </div>
-                        <div class="w3-clear"></div>
-                        <h4>Clientes totales</h4>
-                    </div>
-                </div>
-                <div class="w3-quarter">
-                    <div class="w3-container w3-light-blue w3-text-white w3-padding-16">
-                        <div class="w3-left"><i class="fa fa-user-plus w3-xxlarge"></i></div>
-                        <div class="w3-right">
-                            <h3>8</h3> <!-- Cantidad nuevos clientes -->
-                        </div>
-                        <div class="w3-clear"></div>
-                        <h4>Nuevos clientes</h4>
-                    </div>
-                </div>
-            </div>
 
             <div class="w3-panel">
                 <div class="w3-row-padding">

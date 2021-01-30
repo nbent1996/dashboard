@@ -26,16 +26,9 @@ public class VistaInicioWeb implements IVistaInicio {
     public VistaInicioWeb(HttpServletRequest request, HttpServletResponse response) throws IOException{
         this.response = response;
         this.request = request;
-        /*Session harcodeada con usuario Bentancor*/
-        sesion = request.getSession(true);
-        sesion.setAttribute("OperadorLogueado", new Operador("Bentancor", "Nicolás Bentancor", new Empresa("526283747346"), new Pais("URU", "Uruguay"), new TipoUsuario("administrador"),"Masculino"));
-        /*Session harcodeada con usuario Bentancor*/
-        
         this.out = response.getWriter();
+        this.sesion = request.getSession();
         this.controlador = new ControladorInicio(this);
-        
-
-
     }
 /*Constructores*/
 
