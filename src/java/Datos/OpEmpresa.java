@@ -3,6 +3,7 @@ package Datos;
 import Modelo.Empresa;
 import Modelo.Idioma;
 import Modelo.LogSistema;
+import Modelo.Operador;
 import Modelo.Pais;
 import Modelo.QueryEjecutada;
 import java.sql.ResultSet;
@@ -13,13 +14,13 @@ public class OpEmpresa implements IOperaciones<Empresa, String> {
 /*Estado*/
 private static Database database;
 private OpLogSistema logging;
-private String usuarioSistema;
+private Operador usuarioSistema;
 /*Estado*/
 
 /*Constructores*/
-public OpEmpresa(String usuarioSistema){
+public OpEmpresa(Operador usuarioSistema){
     this.database = Database.getInstancia();
-this.usuarioSistema = usuarioSistema;
+    this.usuarioSistema = usuarioSistema;
     this.logging = new OpLogSistema(this.usuarioSistema);
 }
 /*Constructores*/
@@ -44,20 +45,20 @@ this.usuarioSistema = usuarioSistema;
         ResultSet validarConsistencia = database.consultar("SELECT * FROM Empresas WHERE identificacionTributaria='"+c.getIdentificacionTributaria()+"' ");
         if(validarConsistencia.next()){
             validarConsistencia.close();
-            registroConsola(this.usuarioSistema, listaSQL, "Alta", "La identificación tributaria de la empresa ya existe en el sistema.");
+            registroConsola(this.usuarioSistema.getUsuarioSistema(), listaSQL, "Alta", "La identificación tributaria de la empresa ya existe en el sistema.");
             throw new Exception("La identificación tributaria de la empresa ya existe en el sistema.");
         }
         validarConsistencia.close();
         /*Validar que la identificacionTributaria no exista ya en el sistema.*/
         database.actualizarMultiple(listaSQL, "UPDATE");
         }catch(SQLException ex){
-            registroConsola(this.usuarioSistema, listaSQL, "Alta", ex.getMessage());
+            registroConsola(this.usuarioSistema.getUsuarioSistema(), listaSQL, "Alta", ex.getMessage());
             throw ex;
         }catch(Exception ex){
-            registroConsola(this.usuarioSistema, listaSQL, "Alta", ex.getMessage());
+            registroConsola(this.usuarioSistema.getUsuarioSistema(), listaSQL, "Alta", ex.getMessage());
             throw ex;
         }
-        return registroConsola(this.usuarioSistema, listaSQL, "Alta", "NOERROR");  
+        return registroConsola(this.usuarioSistema.getUsuarioSistema(), listaSQL, "Alta", "NOERROR");  
     }
 
     @Override
@@ -67,13 +68,13 @@ this.usuarioSistema = usuarioSistema;
         try{
             database.actualizarMultiple(listaSQL, "UPDATE");
         }catch(SQLException ex){
-            registroConsola(this.usuarioSistema, listaSQL, "Modificación", ex.getMessage());
+            registroConsola(this.usuarioSistema.getUsuarioSistema(), listaSQL, "Modificación", ex.getMessage());
             throw ex;
         }catch(Exception ex){
-            registroConsola(this.usuarioSistema, listaSQL, "Modificación", ex.getMessage());
+            registroConsola(this.usuarioSistema.getUsuarioSistema(), listaSQL, "Modificación", ex.getMessage());
             throw ex;
         }
-        return registroConsola(this.usuarioSistema, listaSQL, "Modificación", "NOERROR");  
+        return registroConsola(this.usuarioSistema.getUsuarioSistema(), listaSQL, "Modificación", "NOERROR");  
     }
 
     @Override
@@ -92,7 +93,7 @@ this.usuarioSistema = usuarioSistema;
                 validarConsistencia = database.consultar("SELECT * FROM "+str+" WHERE identificacionTributaria='" + c.getIdentificacionTributaria() + "' ");
                 if (validarConsistencia.next()) {
                     validarConsistencia.close();
-                    registroConsola(this.usuarioSistema, listaSQL, "Baja", "No se puede eliminar a la empresa porque hay "+str+" asociadas a la misma.");
+                    registroConsola(this.usuarioSistema.getUsuarioSistema(), listaSQL, "Baja", "No se puede eliminar a la empresa porque hay "+str+" asociadas a la misma.");
                     throw new Exception("No se puede eliminar a la empresa porque hay "+str+" asociadas a la misma.");
                 }
                 validarConsistencia.close();
@@ -100,13 +101,13 @@ this.usuarioSistema = usuarioSistema;
             /*Validaciones, que la empresa no tenga Facturas, Personas, Dispositivos o Paquetes asociados.*/
             database.actualizarMultiple(listaSQL, "UPDATE");
         }catch(SQLException ex){
-            registroConsola(this.usuarioSistema, listaSQL, "Baja", ex.getMessage());
+            registroConsola(this.usuarioSistema.getUsuarioSistema(), listaSQL, "Baja", ex.getMessage());
             throw ex;
         }catch(Exception ex){
-            registroConsola(this.usuarioSistema, listaSQL, "Baja", ex.getMessage());
+            registroConsola(this.usuarioSistema.getUsuarioSistema(), listaSQL, "Baja", ex.getMessage());
             throw ex;
         }
-        return registroConsola(this.usuarioSistema, listaSQL, "Baja", "NOERROR");
+        return registroConsola(this.usuarioSistema.getUsuarioSistema(), listaSQL, "Baja", "NOERROR");
     
     }
 
@@ -146,13 +147,13 @@ this.usuarioSistema = usuarioSistema;
             rs.close();
         
         }catch(SQLException ex){
-            registroConsola(this.usuarioSistema,listaSQL, "Búsqueda", ex.getMessage());
+            registroConsola(this.usuarioSistema.getUsuarioSistema(),listaSQL, "Búsqueda", ex.getMessage());
             throw ex;
         }catch(Exception ex){
-            registroConsola(this.usuarioSistema,listaSQL, "Búsqueda", ex.getMessage());
+            registroConsola(this.usuarioSistema.getUsuarioSistema(),listaSQL, "Búsqueda", ex.getMessage());
             throw ex;
         }
-         registroConsola(this.usuarioSistema,listaSQL, "Búsqueda", "NOERROR");
+         registroConsola(this.usuarioSistema.getUsuarioSistema(),listaSQL, "Búsqueda", "NOERROR");
          return lista;   
     }
 

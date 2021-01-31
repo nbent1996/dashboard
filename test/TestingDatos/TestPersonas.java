@@ -24,7 +24,7 @@ public class TestPersonas {
 
     @Before
     public void setUp(){
-        this.op = new OpPersona("bentancor");
+        this.op = new OpPersona(new Operador("bentancor", "Nicolás Bentancor", new Empresa("526283747346"),new Pais("URU"),new TipoUsuario("administrador"), "Masculino"));
     }
     
     @Test

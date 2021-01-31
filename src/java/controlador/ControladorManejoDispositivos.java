@@ -27,10 +27,10 @@ public class ControladorManejoDispositivos{
     public ControladorManejoDispositivos(IVistaManejoDispositivos vista) {
         this.vista = vista;
         this.userLogueado = (Operador) vista.getSession().getAttribute("OperadorLogueado");
-        this.opDispositivo = new OpDispositivo(this.userLogueado.getUsuarioSistema());
-        this.opTipoDispositivo = new OpTipoDispositivo(this.userLogueado.getUsuarioSistema());
-        this.opCategoria = new OpCategoria(this.userLogueado.getUsuarioSistema());
-        this.opPersona = new OpPersona(this.userLogueado.getUsuarioSistema());
+        this.opDispositivo = new OpDispositivo(this.userLogueado);
+        this.opTipoDispositivo = new OpTipoDispositivo(this.userLogueado);
+        this.opCategoria = new OpCategoria(this.userLogueado);
+        this.opPersona = new OpPersona(this.userLogueado);
     }
     /*Constructores*/
     

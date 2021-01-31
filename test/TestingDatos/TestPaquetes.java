@@ -2,9 +2,12 @@ package TestingDatos;
 
 import Datos.OpPaquete;
 import Modelo.Empresa;
+import Modelo.Operador;
+import Modelo.Pais;
 import Modelo.Paquete;
 import Modelo.TieneTP;
 import Modelo.TipoDispositivo;
+import Modelo.TipoUsuario;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import static org.junit.Assert.assertEquals;
@@ -21,7 +24,7 @@ public class TestPaquetes {
     
     @Before
     public void setUp(){
-        this.op = new OpPaquete("bentancor");
+        this.op = new OpPaquete(new Operador("bentancor", "Nicolás Bentancor", new Empresa("526283747346"),new Pais("URU"),new TipoUsuario("administrador"), "Masculino"));
     }
     
     @Test

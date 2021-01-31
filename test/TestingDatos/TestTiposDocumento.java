@@ -1,7 +1,11 @@
 package TestingDatos;
 
 import Datos.OpTipoDocumento;
+import Modelo.Empresa;
+import Modelo.Operador;
+import Modelo.Pais;
 import Modelo.TipoDocumento;
+import Modelo.TipoUsuario;
 import java.sql.SQLException;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,7 +19,7 @@ public class TestTiposDocumento {
     
     @Before
     public void setUp() {
-        op = new OpTipoDocumento("bentancor");
+        op = new OpTipoDocumento(new Operador("bentancor", "Nicolás Bentancor", new Empresa("526283747346"),new Pais("URU"),new TipoUsuario("administrador"), "Masculino"));
     }
 
     @Test

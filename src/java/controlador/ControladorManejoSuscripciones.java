@@ -31,11 +31,11 @@ public class ControladorManejoSuscripciones {
     public ControladorManejoSuscripciones(IVistaManejoSuscripciones vista){
         this.vista = vista;
         this.userLogueado = (Operador) vista.getSession().getAttribute("OperadorLogueado");
-        this.opPaquete = new OpPaquete(this.userLogueado.getUsuarioSistema());
-        this.opTipoDispositivo = new OpTipoDispositivo(this.userLogueado.getUsuarioSistema());
-        this.opSuscripcion = new OpSuscripcion(this.userLogueado.getUsuarioSistema());
-        this.opMoneda = new OpMoneda(this.userLogueado.getUsuarioSistema());
-        this.opPersona = new OpPersona(this.userLogueado.getUsuarioSistema());
+        this.opPaquete = new OpPaquete(this.userLogueado);
+        this.opTipoDispositivo = new OpTipoDispositivo(this.userLogueado);
+        this.opSuscripcion = new OpSuscripcion(this.userLogueado);
+        this.opMoneda = new OpMoneda(this.userLogueado);
+        this.opPersona = new OpPersona(this.userLogueado);
     }
     /*Constructores*/
     

@@ -1,6 +1,9 @@
 package TestingDatos;
 
 import Datos.OpTipoUsuario;
+import Modelo.Empresa;
+import Modelo.Operador;
+import Modelo.Pais;
 import Modelo.Privilegio;
 import Modelo.TipoUsuario;
 import java.sql.SQLException;
@@ -18,7 +21,7 @@ public class TestTiposUsuarios {
     
     @Before
     public void setUp(){
-        this.op = new OpTipoUsuario("bentancor");
+        this.op = new OpTipoUsuario(new Operador("bentancor", "Nicolás Bentancor", new Empresa("526283747346"),new Pais("URU"),new TipoUsuario("administrador"), "Masculino"));
     }
     
     @Test

@@ -4,7 +4,10 @@ import controlador.Interfaces.IVistaLogin;
 import Datos.OpImagen;
 import Datos.OpPersona;
 import Datos.OpTipoUsuario;
+import Modelo.Empresa;
 import Modelo.Operador;
+import Modelo.Pais;
+import Modelo.TipoUsuario;
 
 public class ControladorLogin {
     /*Estado*/
@@ -16,9 +19,9 @@ public class ControladorLogin {
     /*Constructores*/
     public ControladorLogin(IVistaLogin vista){
         this.vista = vista;
-        this.opPersona = new OpPersona("loginUser");
-        this.opTipoUsuario = new OpTipoUsuario("loginUser");
-        this.opImagen = new OpImagen("loginUser");
+        this.opPersona = new OpPersona(new Operador("loginUser", "Bot", new Empresa("526283747346"),new Pais("URU"),new TipoUsuario("administrador"), "Masculino"));
+        this.opTipoUsuario = new OpTipoUsuario(new Operador("loginUser", "Bot", new Empresa("526283747346"),new Pais("URU"),new TipoUsuario("administrador"), "Masculino"));
+        this.opImagen = new OpImagen(new Operador("loginUser", "Bot", new Empresa("526283747346"),new Pais("URU"),new TipoUsuario("administrador"), "Masculino"));
         
     }
     /*Constructores*/

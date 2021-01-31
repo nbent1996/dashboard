@@ -1,7 +1,11 @@
 package TestingDatos;
 
 import Datos.OpMoneda;
+import Modelo.Empresa;
 import Modelo.Moneda;
+import Modelo.Operador;
+import Modelo.Pais;
+import Modelo.TipoUsuario;
 import java.sql.SQLException;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,7 +19,7 @@ public class TestMonedas {
     
     @Before
     public void setUp() {
-        op = new OpMoneda("bentancor");
+        op = new OpMoneda(new Operador("bentancor", "Nicolás Bentancor", new Empresa("526283747346"),new Pais("URU"),new TipoUsuario("administrador"), "Masculino"));
     }
 
     @Test

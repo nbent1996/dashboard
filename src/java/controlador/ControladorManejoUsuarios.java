@@ -30,9 +30,9 @@ public class ControladorManejoUsuarios{
     public ControladorManejoUsuarios(IVistaManejoUsuarios vista) {
         this.vista = vista;
         this.userLogueado = (Operador) vista.getSession().getAttribute("OperadorLogueado");
-        this.opPersona = new OpPersona(this.userLogueado.getUsuarioSistema());
-        this.opPais = new OpPais(this.userLogueado.getUsuarioSistema());
-        this.opTipoUsuario = new OpTipoUsuario(this.userLogueado.getUsuarioSistema());
+        this.opPersona = new OpPersona(this.userLogueado);
+        this.opPais = new OpPais(this.userLogueado);
+        this.opTipoUsuario = new OpTipoUsuario(this.userLogueado);
     }
     /*Constructores*/
 

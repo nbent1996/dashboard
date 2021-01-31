@@ -15,8 +15,8 @@ private OpPersona opPersona;
 /*Constructores*/
 public ControladorInicio(IVistaInicio vista){
     this.vista = vista;
-    this.opImagen = new OpImagen(vista.getOperadorLogueado().getUsuarioSistema());
-    this.opPersona = new OpPersona(vista.getOperadorLogueado().getUsuarioSistema());
+    this.opImagen = new OpImagen(vista.getOperadorLogueado());
+    this.opPersona = new OpPersona(vista.getOperadorLogueado());
 }
 /*Constructores*/
 

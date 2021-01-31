@@ -1,7 +1,10 @@
 package TestingDatos;
 
 import Datos.OpPais;
+import Modelo.Empresa;
+import Modelo.Operador;
 import Modelo.Pais;
+import Modelo.TipoUsuario;
 import java.sql.SQLException;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,7 +18,7 @@ public class TestPaises {
     
     @Before
     public void setUp() {
-        op = new OpPais("bentancor");
+        op = new OpPais(new Operador("bentancor", "Nicolás Bentancor", new Empresa("526283747346"),new Pais("URU"),new TipoUsuario("administrador"), "Masculino"));
     }
 
     @Test

@@ -1,6 +1,7 @@
 package Datos;
 
 import Modelo.LogSistema;
+import Modelo.Operador;
 import Modelo.Pais;
 import Modelo.QueryEjecutada;
 import java.sql.ResultSet;
@@ -13,13 +14,13 @@ public class OpPais implements IOperaciones<Pais, String> {
 /*Estado*/
 private static Database database;
 private OpLogSistema logging;
-private String usuarioSistema;
+private Operador usuarioSistema;
 /*Estado*/
 
 /*Constructores*/
-public OpPais(String usuarioSistema){
+public OpPais(Operador usuarioSistema){
     this.database = Database.getInstancia();
-this.usuarioSistema = usuarioSistema;
+    this.usuarioSistema = usuarioSistema;
     this.logging = new OpLogSistema(this.usuarioSistema);
 }
 /*Constructores*/
@@ -77,13 +78,13 @@ this.usuarioSistema = usuarioSistema;
         }
         rs.close();
         }catch(SQLException ex){
-            registroConsola(this.usuarioSistema, listaSQL, "Búsqueda", ex.getMessage());
+            registroConsola(this.usuarioSistema.getUsuarioSistema(), listaSQL, "Búsqueda", ex.getMessage());
             throw ex;
         }catch(Exception ex){
-            registroConsola(this.usuarioSistema,listaSQL, "Búsqueda", ex.getMessage());
+            registroConsola(this.usuarioSistema.getUsuarioSistema(),listaSQL, "Búsqueda", ex.getMessage());
             throw ex;
         }
-        registroConsola(this.usuarioSistema,listaSQL, "Búsqueda", "NOERROR");
+        registroConsola(this.usuarioSistema.getUsuarioSistema(),listaSQL, "Búsqueda", "NOERROR");
         return lista;
     }
 

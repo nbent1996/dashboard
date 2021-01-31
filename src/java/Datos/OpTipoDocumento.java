@@ -1,6 +1,7 @@
 package Datos;
 
 import Modelo.LogSistema;
+import Modelo.Operador;
 import Modelo.QueryEjecutada;
 import Modelo.TipoDocumento;
 import java.sql.ResultSet;
@@ -11,13 +12,13 @@ public class OpTipoDocumento implements IOperaciones<TipoDocumento, String> {
     /*Estado*/
     private static Database database;
     private OpLogSistema logging; 
-    private String usuarioSistema;
+    private Operador usuarioSistema;
     /*Estado*/
     
     /*Constructores*/
-    public OpTipoDocumento(String usuarioSistema){
+    public OpTipoDocumento(Operador usuarioSistema){
         this.database = Database.getInstancia();
-this.usuarioSistema = usuarioSistema;
+    this.usuarioSistema = usuarioSistema;
     this.logging = new OpLogSistema(this.usuarioSistema);
     }
     /*Constructores*/
@@ -75,13 +76,13 @@ this.usuarioSistema = usuarioSistema;
         }
             rs.close();
         } catch (SQLException ex) {
-            registroConsola(this.usuarioSistema, listaSQL, "Búsqueda", ex.getMessage());
+            registroConsola(this.usuarioSistema.getUsuarioSistema(), listaSQL, "Búsqueda", ex.getMessage());
             throw ex;
         } catch (Exception ex) {
-            registroConsola(this.usuarioSistema, listaSQL, "Búsqueda", ex.getMessage());
+            registroConsola(this.usuarioSistema.getUsuarioSistema(), listaSQL, "Búsqueda", ex.getMessage());
             throw ex;
         }
-        registroConsola(this.usuarioSistema, listaSQL, "Búsqueda", "NOERROR");
+        registroConsola(this.usuarioSistema.getUsuarioSistema(), listaSQL, "Búsqueda", "NOERROR");
         return lista;
     }
 

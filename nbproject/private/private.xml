@@ -3,17 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/web/suscripcion_BajaModificacion.jsp</file>
-            <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/web/cliente_BajaModificacion.jsp</file>
-            <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/src/java/vistaWeb/VistaManejoClientesWeb.java</file>
-            <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/web/cliente_Alta.jsp</file>
-            <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/web/paquete_BajaModificacion.jsp</file>
-            <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/web/usuario_BajaModificacion.jsp</file>
-            <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/src/java/controlador/ControladorManejoClientes.java</file>
-            <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/web/css/stylesCustom.css</file>
-            <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/src/java/vistaWeb/VistaManejoUsuariosWeb.java</file>
-            <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/web/usuario_Alta.jsp</file>
-            <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/web/dispositivo_BajaModificacion.jsp</file>
+            <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/src/java/Datos/Database.java</file>
         </group>
     </open-files>
 </project-private>

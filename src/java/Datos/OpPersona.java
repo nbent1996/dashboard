@@ -22,13 +22,13 @@ public class OpPersona implements IOperaciones<Persona, String> {
 /*Estado*/
 private static Database database;
 private OpLogSistema logging;
-private String usuarioSistema;
+private Operador usuarioSistema;
 /*Estado*/
 
 /*Constructores*/
-public OpPersona(String usuarioSistema){
+public OpPersona(Operador usuarioSistema){
     this.database = Database.getInstancia();
-this.usuarioSistema = usuarioSistema;
+    this.usuarioSistema = usuarioSistema;
     this.logging = new OpLogSistema(this.usuarioSistema);
 }
 /*Constructores*/
@@ -169,13 +169,13 @@ this.usuarioSistema = usuarioSistema;
         }
         
         }catch(SQLException ex){
-            registroConsola(this.usuarioSistema, listaCompleta, "Alta", ex.getMessage());
+            registroConsola(this.usuarioSistema.getUsuarioSistema(), listaCompleta, "Alta", ex.getMessage());
             throw ex;
         }catch(Exception ex){
-            registroConsola(this.usuarioSistema, listaCompleta, "Alta", ex.getMessage());
+            registroConsola(this.usuarioSistema.getUsuarioSistema(), listaCompleta, "Alta", ex.getMessage());
             throw ex;
         }
-        return registroConsola(this.usuarioSistema, listaCompleta, "Alta", "NOERROR");
+        return registroConsola(this.usuarioSistema.getUsuarioSistema(), listaCompleta, "Alta", "NOERROR");
     }
 
     @Override
@@ -189,7 +189,7 @@ this.usuarioSistema = usuarioSistema;
             validarDependencias = database.consultar("SELECT * FROM Personas WHERE Personas.usuarioSistema='" + c.getUsuarioSistema() + "' ");
             if (validarDependencias.next()) {
                 validarDependencias.close();
-                registroConsola(this.usuarioSistema, listaSQL, "Modificación", "El usuario que usted desea asignar ya está en uso en el sistema.");
+                registroConsola(this.usuarioSistema.getUsuarioSistema(), listaSQL, "Modificación", "El usuario que usted desea asignar ya está en uso en el sistema.");
                 throw new Exception("El usuario que usted desea asignar ya está en uso en el sistema.");
             }
             validarDependencias.close();
@@ -223,13 +223,13 @@ this.usuarioSistema = usuarioSistema;
         }
         database.actualizarMultiple(listaSQL, "UPDATE");
         }catch(SQLException ex){
-            registroConsola(this.usuarioSistema, listaSQL, "Modificación", ex.getMessage());
+            registroConsola(this.usuarioSistema.getUsuarioSistema(), listaSQL, "Modificación", ex.getMessage());
             throw ex;
         }catch(Exception ex){
-            registroConsola(this.usuarioSistema, listaSQL, "Modificación", ex.getMessage());
+            registroConsola(this.usuarioSistema.getUsuarioSistema(), listaSQL, "Modificación", ex.getMessage());
             throw ex;
         }
-        return registroConsola(this.usuarioSistema, listaSQL, "Modificación", "NOERROR");    
+        return registroConsola(this.usuarioSistema.getUsuarioSistema(), listaSQL, "Modificación", "NOERROR");    
     }
 
     @Override
@@ -262,13 +262,13 @@ this.usuarioSistema = usuarioSistema;
         try{
         database.actualizarMultiple(listaSQL, "UPDATE");
         }catch(SQLException ex){
-            registroConsola(this.usuarioSistema, listaSQL, "Baja", ex.getMessage());
+            registroConsola(this.usuarioSistema.getUsuarioSistema(), listaSQL, "Baja", ex.getMessage());
             throw ex;
         }catch(Exception ex){
-            registroConsola(this.usuarioSistema, listaSQL, "Baja", ex.getMessage());
+            registroConsola(this.usuarioSistema.getUsuarioSistema(), listaSQL, "Baja", ex.getMessage());
             throw ex;
         }
-        return registroConsola(this.usuarioSistema, listaSQL, "Baja", "NOERROR");
+        return registroConsola(this.usuarioSistema.getUsuarioSistema(), listaSQL, "Baja", "NOERROR");
     }
 
     @Override
@@ -378,11 +378,11 @@ this.usuarioSistema = usuarioSistema;
             }
         }
         catch(SQLException ex){
-            registroConsola(this.usuarioSistema, listaSQL, "Búsqueda", ex.getLocalizedMessage());
+            registroConsola(this.usuarioSistema.getUsuarioSistema(), listaSQL, "Búsqueda", ex.getLocalizedMessage());
             throw ex;
         }
         catch(Exception ex){
-            registroConsola(this.usuarioSistema, listaSQL, "Búsqueda", ex.getLocalizedMessage());
+            registroConsola(this.usuarioSistema.getUsuarioSistema(), listaSQL, "Búsqueda", ex.getLocalizedMessage());
             throw ex;
         }
         return personas;

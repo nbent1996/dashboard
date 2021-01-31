@@ -5,6 +5,7 @@ import Modelo.Empresa;
 import Modelo.Factura;
 import Modelo.LogSistema;
 import Modelo.Moneda;
+import Modelo.Operador;
 import Modelo.Principal;
 import Modelo.QueryEjecutada;
 import Modelo.Suscripcion;
@@ -21,13 +22,13 @@ public class OpFactura implements IOperaciones<Factura, Integer> {
 /*Estado*/
 private static Database database;
 private OpLogSistema logging;
-private String usuarioSistema;
+private Operador usuarioSistema;
 /*Estado*/
 
 /*Constructores*/
-public OpFactura(String usuarioSistema){
-    this.database = Database.getInstancia();
-this.usuarioSistema = usuarioSistema;
+public OpFactura(Operador usuarioSistema){
+    this.database = Database.getInstancia();    
+    this.usuarioSistema = usuarioSistema;
     this.logging = new OpLogSistema(this.usuarioSistema);
 }
 /*Constructores*/
@@ -51,13 +52,13 @@ this.usuarioSistema = usuarioSistema;
         try{
             database.actualizarMultiple(listaSQL, "INSERT");
         }catch(SQLException ex){
-            registroConsola(this.usuarioSistema,listaSQL, "Alta", ex.getMessage());
+            registroConsola(this.usuarioSistema.getUsuarioSistema(),listaSQL, "Alta", ex.getMessage());
             throw ex;
         }catch(Exception ex){
-            registroConsola(this.usuarioSistema,listaSQL, "Alta", ex.getMessage());
+            registroConsola(this.usuarioSistema.getUsuarioSistema(),listaSQL, "Alta", ex.getMessage());
             throw ex;
         }
-        return registroConsola(this.usuarioSistema,listaSQL, "Alta", "NOERROR");
+        return registroConsola(this.usuarioSistema.getUsuarioSistema(),listaSQL, "Alta", "NOERROR");
     }
 
     @Override
@@ -77,13 +78,13 @@ this.usuarioSistema = usuarioSistema;
         try{
             database.actualizarMultiple(listaSQL, "UPDATE");
         }catch(SQLException ex){
-            registroConsola(this.usuarioSistema,listaSQL, "Modificación", ex.getMessage());
+            registroConsola(this.usuarioSistema.getUsuarioSistema(),listaSQL, "Modificación", ex.getMessage());
             throw ex;
         }catch(Exception ex){
-            registroConsola(this.usuarioSistema,listaSQL, "Modificación", ex.getMessage());
+            registroConsola(this.usuarioSistema.getUsuarioSistema(),listaSQL, "Modificación", ex.getMessage());
             throw ex;
         }
-        return registroConsola(this.usuarioSistema,listaSQL, "Modificación", "NOERROR");
+        return registroConsola(this.usuarioSistema.getUsuarioSistema(),listaSQL, "Modificación", "NOERROR");
     }
 
     @Override
@@ -100,13 +101,13 @@ this.usuarioSistema = usuarioSistema;
         try{
             database.actualizarMultiple(listaSQL,"UPDATE");
         }catch(SQLException ex){
-            registroConsola(this.usuarioSistema,listaSQL, "Baja", ex.getMessage());
+            registroConsola(this.usuarioSistema.getUsuarioSistema(),listaSQL, "Baja", ex.getMessage());
             throw ex;
         }catch(Exception ex){
-            registroConsola(this.usuarioSistema,listaSQL, "Baja", ex.getMessage());
+            registroConsola(this.usuarioSistema.getUsuarioSistema(),listaSQL, "Baja", ex.getMessage());
             throw ex;
         }
-        return registroConsola(this.usuarioSistema,listaSQL, "Baja", "NOERROR");    
+        return registroConsola(this.usuarioSistema.getUsuarioSistema(),listaSQL, "Baja", "NOERROR");    
     }
 
     @Override
@@ -180,13 +181,13 @@ this.usuarioSistema = usuarioSistema;
             }
             rs.close();
         }catch(SQLException ex){
-            registroConsola(this.usuarioSistema,listaSQL, "Búsqueda", ex.getMessage());
+            registroConsola(this.usuarioSistema.getUsuarioSistema(),listaSQL, "Búsqueda", ex.getMessage());
             throw ex;
         }catch(Exception ex){
-            registroConsola(this.usuarioSistema,listaSQL, "Búsqueda", ex.getMessage());
+            registroConsola(this.usuarioSistema.getUsuarioSistema(),listaSQL, "Búsqueda", ex.getMessage());
             throw ex;
         }
-         registroConsola(this.usuarioSistema,listaSQL, "Búsqueda", "NOERROR");
+         registroConsola(this.usuarioSistema.getUsuarioSistema(),listaSQL, "Búsqueda", "NOERROR");
          return lista;   
     }
     @Override
@@ -204,19 +205,19 @@ this.usuarioSistema = usuarioSistema;
         listaSQL.add("UPDATE Facturas set eliminado='Y' WHERE idFactura in("+listaIdsStr+")");
         /*Validaciones*/
         if(listaIds.isEmpty()){
-            registroConsola(this.usuarioSistema,listaSQL, "Baja", "ERROR: Lista de IDs llegó vacia al metodo borradoMultiplePorIds");
+            registroConsola(this.usuarioSistema.getUsuarioSistema(),listaSQL, "Baja", "ERROR: Lista de IDs llegó vacia al metodo borradoMultiplePorIds");
         }
         /*Validaciones*/
         try{
             database.actualizarMultiple(listaSQL,"UPDATE");
         }catch(SQLException ex){
-            registroConsola(this.usuarioSistema,listaSQL, "Baja", ex.getMessage());
+            registroConsola(this.usuarioSistema.getUsuarioSistema(),listaSQL, "Baja", ex.getMessage());
             throw ex;
         }catch(Exception ex){
-            registroConsola(this.usuarioSistema,listaSQL, "Baja", ex.getMessage());
+            registroConsola(this.usuarioSistema.getUsuarioSistema(),listaSQL, "Baja", ex.getMessage());
             throw ex;
         }
-        return registroConsola(this.usuarioSistema,listaSQL, "Baja", "NOERROR");    
+        return registroConsola(this.usuarioSistema.getUsuarioSistema(),listaSQL, "Baja", "NOERROR");    
     }
 
     @Override

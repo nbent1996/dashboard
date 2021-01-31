@@ -2,6 +2,7 @@ package Datos;
 
 import Modelo.Categoria;
 import Modelo.LogSistema;
+import Modelo.Operador;
 import Modelo.QueryEjecutada;
 import Modelo.TipoDispositivo;
 import java.sql.ResultSet;
@@ -12,13 +13,13 @@ public class OpTipoDispositivo implements IOperaciones<TipoDispositivo, Integer>
 /*Estado*/
 private static Database database;
 private OpLogSistema logging;
-private String usuarioSistema;
+private Operador usuarioSistema;
 /*Estado*/
 
 /*Constructores*/
-public OpTipoDispositivo(String usuarioSistema){
+public OpTipoDispositivo(Operador usuarioSistema){
     this.database = Database.getInstancia();
-this.usuarioSistema = usuarioSistema;
+    this.usuarioSistema = usuarioSistema;
     this.logging = new OpLogSistema(this.usuarioSistema);
 }
 /*Constructores*/
@@ -42,13 +43,13 @@ this.usuarioSistema = usuarioSistema;
         try{
             database.actualizarMultiple(listaSQL, "UPDATE");
         }catch(SQLException ex){
-            registroConsola(this.usuarioSistema, listaSQL, "Alta", ex.getMessage());
+            registroConsola(this.usuarioSistema.getUsuarioSistema(), listaSQL, "Alta", ex.getMessage());
             throw ex;
         }catch(Exception ex){
-            registroConsola(this.usuarioSistema,listaSQL,  "Alta", ex.getMessage());
+            registroConsola(this.usuarioSistema.getUsuarioSistema(),listaSQL,  "Alta", ex.getMessage());
             throw ex;
         }
-        return registroConsola(this.usuarioSistema, listaSQL, "Alta", "NOERROR");
+        return registroConsola(this.usuarioSistema.getUsuarioSistema(), listaSQL, "Alta", "NOERROR");
     }
 
     @Override
@@ -63,7 +64,7 @@ this.usuarioSistema = usuarioSistema;
             validarConsistencia = database.consultar("SELECT * FROM TiposDispositivos WHERE modelo='" + c.getModelo() + "' ");
             if (validarConsistencia.next()) {
                 validarConsistencia.close();
-                registroConsola(this.usuarioSistema,listaSQL, "Modificación", "El modelo que usted desea asignar ya está en uso en el sistema.");
+                registroConsola(this.usuarioSistema.getUsuarioSistema(),listaSQL, "Modificación", "El modelo que usted desea asignar ya está en uso en el sistema.");
                 throw new Exception("El modelo que usted desea asignar ya está en uso en el sistema.");
             }
             validarConsistencia.close();
@@ -71,13 +72,13 @@ this.usuarioSistema = usuarioSistema;
             }
             database.actualizarMultiple(listaSQL, "UPDATE");
         } catch (SQLException ex) {
-            registroConsola(this.usuarioSistema,listaSQL, "Modificación", ex.getMessage());
+            registroConsola(this.usuarioSistema.getUsuarioSistema(),listaSQL, "Modificación", ex.getMessage());
             throw ex;
         } catch (Exception ex) {
-            registroConsola(this.usuarioSistema,listaSQL, "Modificación", ex.getMessage());
+            registroConsola(this.usuarioSistema.getUsuarioSistema(),listaSQL, "Modificación", ex.getMessage());
             throw ex;
         }
-        return registroConsola(this.usuarioSistema,listaSQL, "Modificación", "NOERROR");
+        return registroConsola(this.usuarioSistema.getUsuarioSistema(),listaSQL, "Modificación", "NOERROR");
     }
 
     @Override
@@ -89,7 +90,7 @@ this.usuarioSistema = usuarioSistema;
         validarConsistencia = database.consultar("SELECT * FROM TieneTP WHERE idTipoDispositivo ='"+c.getIdTipoDispositivo()+"' AND eliminado='N' ");
         if(validarConsistencia.next()){
             validarConsistencia.close();
-            registroConsola(this.usuarioSistema,listaSQL, "Baja", "El Tipo de Dispositivo que usted desea borrar existe en algún Paquete.");
+            registroConsola(this.usuarioSistema.getUsuarioSistema(),listaSQL, "Baja", "El Tipo de Dispositivo que usted desea borrar existe en algún Paquete.");
             throw new Exception("El Tipo de Dispositivo que usted desea borrar existe en algún Paquete.");
         }
         validarConsistencia.close();
@@ -97,13 +98,13 @@ this.usuarioSistema = usuarioSistema;
         try{
             database.actualizarMultiple(listaSQL, "UPDATE");
         }catch(SQLException ex){
-            registroConsola(this.usuarioSistema,listaSQL, "Baja", ex.getMessage());
+            registroConsola(this.usuarioSistema.getUsuarioSistema(),listaSQL, "Baja", ex.getMessage());
             throw ex;
         }catch(Exception ex){
-            registroConsola(this.usuarioSistema,listaSQL, "Baja", ex.getMessage());
+            registroConsola(this.usuarioSistema.getUsuarioSistema(),listaSQL, "Baja", ex.getMessage());
             throw ex;
         }
-        return registroConsola(this.usuarioSistema,listaSQL, "Baja", "NOERROR");
+        return registroConsola(this.usuarioSistema.getUsuarioSistema(),listaSQL, "Baja", "NOERROR");
     }
 
     @Override
@@ -139,13 +140,13 @@ this.usuarioSistema = usuarioSistema;
             }
             rs.close();
         }catch(SQLException ex){
-            registroConsola(this.usuarioSistema, listaSQL, "Búsqueda", ex.getMessage());
+            registroConsola(this.usuarioSistema.getUsuarioSistema(), listaSQL, "Búsqueda", ex.getMessage());
             throw ex;   
         }catch(Exception ex){
-            registroConsola(this.usuarioSistema, listaSQL, "Búsqueda", ex.getMessage());
+            registroConsola(this.usuarioSistema.getUsuarioSistema(), listaSQL, "Búsqueda", ex.getMessage());
             throw ex;
         }
-        registroConsola(this.usuarioSistema, listaSQL, "Búsqueda", "NOERROR");
+        registroConsola(this.usuarioSistema.getUsuarioSistema(), listaSQL, "Búsqueda", "NOERROR");
         return lista;
     }
 
@@ -164,14 +165,14 @@ this.usuarioSistema = usuarioSistema;
         validarConsistencia = database.consultar("SELECT * FROM TieneTP WHERE idTipoDispositivo in(" +listaIdsStr+ ") and eliminado = 'N' ");
         if(validarConsistencia.next()){
             validarConsistencia.close();
-            registroConsola(this.usuarioSistema,listaSQL, "Baja", "Alguno de los Tipos de Dispositivos que usted desea borrar existe en algún Paquete.");
+            registroConsola(this.usuarioSistema.getUsuarioSistema(),listaSQL, "Baja", "Alguno de los Tipos de Dispositivos que usted desea borrar existe en algún Paquete.");
             throw new Exception("Alguno de los Tipos de Dispositivos que usted desea borrar existe en algún Paquete.");
         }
         validarConsistencia.close();
         /*Validar que este tipo de dispositivo no exista en ningun paquete de suscripción*/    
         /*Validar lista de IDs vacia*/
         if(listaIds.isEmpty()){
-            return registroConsola(this.usuarioSistema,listaSQL, "Baja", "ERROR: Lista de IDs llegó vacia al metodo borradoMultiplePorIds");
+            return registroConsola(this.usuarioSistema.getUsuarioSistema(),listaSQL, "Baja", "ERROR: Lista de IDs llegó vacia al metodo borradoMultiplePorIds");
         }
         /*Validar lista de IDs vacia*/
         
@@ -180,13 +181,13 @@ this.usuarioSistema = usuarioSistema;
         try{
             database.actualizarMultiple(listaSQL,"UPDATE");
         }catch(SQLException ex){
-            registroConsola(this.usuarioSistema,listaSQL, "Baja", ex.getMessage());
+            registroConsola(this.usuarioSistema.getUsuarioSistema(),listaSQL, "Baja", ex.getMessage());
             throw ex;
         }catch(Exception ex){
-            registroConsola(this.usuarioSistema,listaSQL, "Baja", ex.getMessage());
+            registroConsola(this.usuarioSistema.getUsuarioSistema(),listaSQL, "Baja", ex.getMessage());
             throw ex;
         }
-        return registroConsola(this.usuarioSistema,listaSQL, "Baja", "NOERROR");    
+        return registroConsola(this.usuarioSistema.getUsuarioSistema(),listaSQL, "Baja", "NOERROR");    
     }
 
     @Override

@@ -28,10 +28,10 @@ public class ControladorManejoClientes {
     public ControladorManejoClientes(IVistaManejoClientes vista){
         this.vista = vista;
         this.userLogueado = (Operador) vista.getSession().getAttribute("OperadorLogueado");
-        this.opPersona = new OpPersona(this.userLogueado.getUsuarioSistema());
-        this.opEmpresa = new OpEmpresa(this.userLogueado.getUsuarioSistema());
-        this.opPais = new OpPais(this.userLogueado.getUsuarioSistema());
-        this.opTipoDocumento = new OpTipoDocumento(this.userLogueado.getUsuarioSistema());
+        this.opPersona = new OpPersona(this.userLogueado);
+        this.opEmpresa = new OpEmpresa(this.userLogueado);
+        this.opPais = new OpPais(this.userLogueado);
+        this.opTipoDocumento = new OpTipoDocumento(this.userLogueado);
     }
     /*Constructores*/
     

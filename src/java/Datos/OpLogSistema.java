@@ -1,6 +1,7 @@
 package Datos;
 
 import Modelo.LogSistema;
+import Modelo.Operador;
 import Modelo.QueryEjecutada;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -10,11 +11,11 @@ public class OpLogSistema implements IOperaciones<LogSistema, Integer>{
 
 /*Estado*/
     private Database database;
-    private String usuarioSistema;
+    private Operador usuarioSistema;
 /*Estado*/
 
 /*Constructores*/
-public OpLogSistema(String usuarioSistema){
+public OpLogSistema(Operador usuarioSistema){
     database = Database.getInstancia();
     this.usuarioSistema = usuarioSistema;
 }

@@ -1,8 +1,12 @@
 package TestingDatos;
 
 import Datos.OpImagen;
+import Modelo.Empresa;
 import Modelo.Funciones;
 import Modelo.Imagen;
+import Modelo.Operador;
+import Modelo.Pais;
+import Modelo.TipoUsuario;
 import java.sql.SQLException;
 import static org.junit.Assert.fail;
 import org.junit.Before;
@@ -14,7 +18,7 @@ public class TestImagenes {
     
     @Before
     public void setUp(){
-        this.op = new OpImagen("bentancor");
+        this.op = new OpImagen(new Operador("bentancor", "Nicolás Bentancor", new Empresa("526283747346"),new Pais("URU"),new TipoUsuario("administrador"), "Masculino"));
     }
     @Test
     public void testINSERT(){

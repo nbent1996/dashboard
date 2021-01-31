@@ -1,9 +1,13 @@
 package TestingDatos;
 
 import Datos.OpSuscripcion;
+import Modelo.Empresa;
+import Modelo.Operador;
+import Modelo.Pais;
 import Modelo.Paquete;
 import Modelo.Principal;
 import Modelo.Suscripcion;
+import Modelo.TipoUsuario;
 import Resources.DTOs.DTOFechas;
 import Resources.DTOs.Fecha;
 import java.sql.SQLException;
@@ -22,7 +26,7 @@ public class TestSuscripciones {
     
     @Before
     public void setUp(){
-        this.op = new OpSuscripcion("bentancor");
+        this.op = new OpSuscripcion(new Operador("bentancor", "Nicolás Bentancor", new Empresa("526283747346"),new Pais("URU"),new TipoUsuario("administrador"), "Masculino"));
     }
     
     @Test

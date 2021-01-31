@@ -25,8 +25,8 @@ public class ControladorManejoPaquetes {
     public ControladorManejoPaquetes(IVistaManejoPaquetes vista){
         this.vista = vista;
         this.userLogueado = (Operador) vista.getSession().getAttribute(this.userLogueado.getUsuarioSistema());
-        this.opPaquete = new OpPaquete(this.userLogueado.getUsuarioSistema());
-        this.opTipoDispositivo = new OpTipoDispositivo(this.userLogueado.getUsuarioSistema());
+        this.opPaquete = new OpPaquete(this.userLogueado);
+        this.opTipoDispositivo = new OpTipoDispositivo(this.userLogueado);
     }
     /*Constructores*/
     

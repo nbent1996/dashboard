@@ -2,7 +2,11 @@ package TestingDatos;
 
 import Datos.OpTipoDispositivo;
 import Modelo.Categoria;
+import Modelo.Empresa;
+import Modelo.Operador;
+import Modelo.Pais;
 import Modelo.TipoDispositivo;
+import Modelo.TipoUsuario;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import static org.junit.Assert.assertEquals;
@@ -17,7 +21,7 @@ public class TestOpTipoDispositivo {
     
     @Before
     public void setUp(){
-        this.op = new OpTipoDispositivo("bentancor");
+        this.op = new OpTipoDispositivo(new Operador("bentancor", "Nicolás Bentancor", new Empresa("526283747346"),new Pais("URU"),new TipoUsuario("administrador"), "Masculino"));
     }
     
     @Test

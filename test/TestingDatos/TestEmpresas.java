@@ -3,7 +3,9 @@ package TestingDatos;
 import Datos.OpEmpresa;
 import Modelo.Empresa;
 import Modelo.Idioma;
+import Modelo.Operador;
 import Modelo.Pais;
+import Modelo.TipoUsuario;
 import java.sql.SQLException;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -18,7 +20,7 @@ public class TestEmpresas {
     }
     @Before
     public void setUp(){
-        this.op = new OpEmpresa("bentancor");
+        this.op = new OpEmpresa(new Operador("bentancor", "Nicolás Bentancor", new Empresa("526283747346"),new Pais("URU"),new TipoUsuario("administrador"), "Masculino"));
     }
     
     @Test

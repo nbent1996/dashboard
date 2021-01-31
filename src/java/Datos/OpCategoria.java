@@ -2,6 +2,7 @@ package Datos;
 
 import Modelo.Categoria;
 import Modelo.LogSistema;
+import Modelo.Operador;
 import Modelo.QueryEjecutada;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,11 +12,11 @@ public class OpCategoria implements IOperaciones<Categoria, Integer>{
 /*Estado*/
 private static Database database;
 private OpLogSistema logging;
-private String usuarioSistema;
+private Operador usuarioSistema;
 /*Estado*/
 
 /*Constructores*/
-public OpCategoria(String usuarioSistema){
+public OpCategoria(Operador usuarioSistema){
     this.database = Database.getInstancia();
     this.usuarioSistema = usuarioSistema;
     this.logging = new OpLogSistema(this.usuarioSistema);
@@ -41,13 +42,13 @@ public OpCategoria(String usuarioSistema){
         try{
         database.actualizarMultiple(listaSQL, "UPDATE");
         }catch(SQLException ex){
-            registroConsola(this.usuarioSistema,listaSQL, "Alta", ex.getMessage());
+            registroConsola(this.usuarioSistema.getUsuarioSistema(),listaSQL, "Alta", ex.getMessage());
             throw ex;
         }catch(Exception ex){
-            registroConsola(this.usuarioSistema,listaSQL, "Alta", ex.getMessage());
+            registroConsola(this.usuarioSistema.getUsuarioSistema(),listaSQL, "Alta", ex.getMessage());
             throw ex;
         }
-        log = registroConsola(this.usuarioSistema,listaSQL, "Alta", "NOERROR");
+        log = registroConsola(this.usuarioSistema.getUsuarioSistema(),listaSQL, "Alta", "NOERROR");
         return log;
     }
 
@@ -87,13 +88,13 @@ public OpCategoria(String usuarioSistema){
         }
         rs.close();
         }catch(SQLException ex){
-            registroConsola(this.usuarioSistema,listaSQL, "Búsqueda", ex.getMessage());
+            registroConsola(this.usuarioSistema.getUsuarioSistema(),listaSQL, "Búsqueda", ex.getMessage());
             throw ex;   
         }catch(Exception ex){
-            registroConsola(this.usuarioSistema,listaSQL, "Búsqueda", ex.getMessage());
+            registroConsola(this.usuarioSistema.getUsuarioSistema(),listaSQL, "Búsqueda", ex.getMessage());
             throw ex;
         }
-        registroConsola(this.usuarioSistema,listaSQL, "Búsqueda", "NOERROR");
+        registroConsola(this.usuarioSistema.getUsuarioSistema(),listaSQL, "Búsqueda", "NOERROR");
         return lista;
     }
 
