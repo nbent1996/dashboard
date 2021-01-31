@@ -127,7 +127,7 @@ public class VistaManejoUsuariosWeb implements IVistaManejoUsuarios {
     @Override
     public void mostrarPaises(ArrayList<Pais> paises) {
         try {
-            String componente = Funciones.lista(false, "selPaises", paises, "changeItemSelected()");
+            String componente = Funciones.lista(false, "selPaisesUsuario", paises, "changeItemSelected()");
             out.write(componente + "\n\n");
         } catch (ProgramException ex) {
             mensajeError("usuario_Alta.jsp", "Error al mostrar los paises.");

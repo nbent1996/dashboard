@@ -109,7 +109,7 @@ public class VistaManejoClientesWeb implements IVistaManejoClientes{
     @Override
     public void mostrarPaises(ArrayList<Pais> paises) {
         try {
-            String componente = Funciones.lista(false, "selPaises", paises, "changeItemSelected()");
+            String componente = Funciones.lista(false, "selPaisesCliente", paises, "changeItemSelected()");
             out.write(componente + "\n\n");
         } catch (ProgramException ex) {
             mensajeError("cliente_Alta.jsp","Error al mostrar los paises.");

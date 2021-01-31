@@ -21,7 +21,9 @@ public ControladorInicio(IVistaInicio vista){
 /*Constructores*/
 
 /*Comportamiento*/
-    
+    public void obtenerEstadisticas(){
+        
+    }
 /*Comportamiento*/
 
 /*Getters y Setters*/

@@ -8,6 +8,7 @@ import controlador.ControladorInicio;
 import controlador.Interfaces.IVistaInicio;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -36,10 +37,13 @@ public class VistaInicioWeb implements IVistaInicio {
     public void procesarRequest(HttpServletRequest request, HttpServletResponse response){
         String accion= request.getParameter("accion");
         switch(accion){
-            case "inicio":
-                
+            case "estadisticasInicio":
+                  this.obtenerEstadisticas();
             break;
         }
+    }
+    private void obtenerEstadisticas(){
+        this.controlador.obtenerEstadisticas();
     }
     @Override
     public void mensajeError(String nombreJSP, String texto) {
@@ -64,13 +68,20 @@ public class VistaInicioWeb implements IVistaInicio {
     public Operador getOperadorLogueado() {
         return (Operador) sesion.getAttribute("operadorLogueado");
     }
+    @Override
+    public void mostrarEstadisticas(ArrayList<Integer> items) {
+    
+    }
+    
+    
 /*Comportamiento*/
 
 /*Getters y Setters*/
 
 /*Getters y Setters*/
 
-
-
-
 }
+
+
+
+

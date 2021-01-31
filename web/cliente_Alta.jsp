@@ -1,7 +1,11 @@
+<%@page import="Modelo.Empresa"%>
+<%@page import="Modelo.Operador"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%
     String msg = request.getParameter("msg");
+    Operador operador = (Operador) request.getSession().getAttribute("OperadorLogueado");
+    Empresa empresa = operador.getEmpresaAsociada();
 %>
 <html>
     <head>
@@ -48,7 +52,7 @@
                 var telefono = $("#txtbxTelefonoClienteAlta").val();
                 var email = $("#txtbxEmailClienteAlta").val();
                 var tipoDocumento = $("#selTiposDoc").val();
-                var codPais = $("#selPaises").val();
+                var codPais = $("#selPaisesCliente").val();
                                 
                 var tipoCliente = $("#selTipoCliente").val(); //YA ESTÁ PREDEFINIDO, PUEDE SER TITULAR O SECUNDARIO           
                 var servicioActivo = "NoSeleccionado"; //SI ES TITULAR APARECE, SINO NO APARECE Y VA COMO "NO SELECCIONADO"
@@ -80,30 +84,48 @@
                 $("#txtbxEmailClienteAlta").val("");                  
                 $("#txtbxNroDocPrincipalClienteAlta").val("");
                 $("#selTiposDoc").prop('selectedIndex',0);
-                $("#selPaises").prop('selectedIndex',0);
+                $("#selPaisesCliente").prop('selectedIndex',0);
                 $("#selTipoCliente").prop('selectedIndex',0);
             }
             
             
         </script>
 
-        <div class="w3-bar w3-top w3-black w3-large" id="divBarraSuperior">
-            <button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey" onclick="w3_open();"><i class="fa fa-bars"></i> &nbsp;Menu</button>
-            <span class="w3-bar-item w3-right">LogoEmpresa</span>
+       <div class="w3-bar w3-top w3-black w3-large" id="divBarraSuperior">
+            <button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey " onclick="w3_open();"><i class="fa fa-bars"></i> &nbsp;Menu</button>
+            <span class="w3-bar-item w3-right">
+                <% if(empresa.getNombre().equals("ColCable")){%>
+                    <img src="resources/Colcable-logo2.png" class="imgEmpresa"/>
+                <%}else if (empresa.getNombre().equals("Cablevision")){%>
+                    <img src="resources/cablevisionLogo1.png" class="imgEmpresa"/>
+                <%}else if (empresa.getNombre().equals("Directv")){%>
+                    <img src="resources/directvLogo3.png" class="imgEmpresa"/>
+                <%}else if (empresa.getNombre().equals("Sky")){%>
+                    <img src="resources/skyLogo4.png" class="imgEmpresa"/>
+                <%}%>
+            </span>
         </div>
         
         <!-- Sidebar/menu -->
          <nav class="w3-sidebar w3-collapse w3-white w3-animate-left" id="mySidebar"><br>
             <div class="w3-container w3-row">
                 <div class="w3-col s4">
-                    <img src="resources/avatar3.png" class="w3-circle w3-margin-right" id="imgPerfil">
+                    <%if(operador.getGenero().equals("Masculino")){%>
+                    <img src="resources/avatarHombre.png" class="w3-circle w3-margin-right" id="imgPerfil">
+                    <%}else if(operador.getGenero().equals("Femenino")){%>
+                    <img src="resources/avatarMujer.png" class="w3-circle w3-margin-right" id="imgPerfil">
+                    <%}%>
                 </div>
                 <div class="w3-col s8 w3-bar">
-                    <span>Bienvenido, <strong>NombrePersonaEmpresa</strong></span><br> <!-- CAMBIAR POR NOMBRE DE PERSONA DE LA EMPRESA -->
-                    <!-- ICONOS DEBAJO DE PERFIL DE USUARIO -->
-                        <a href="#" class="w3-bar-item w3-button"><i class="fa fa-sign-out"></i></a>
-                        <a href="#" class="w3-bar-item w3-button"><i class="fa fa-cogs"></i></a>
+                    <%if(operador.getGenero().equals("Masculino")){%>
+                        <span>Bienvenido, <strong><%= operador.getNombreCompleto()%></strong></span><br>    
+                    <%}else if(operador.getGenero().equals("Femenino")){%>
+                        <span>Bienvenida, <strong><%= operador.getNombreCompleto()%></strong></span><br>    
+                    <%}%>
                     
+                     
+                    <!-- ICONOS DEBAJO DE PERFIL DE USUARIO -->
+                        <a href="login.jsp" class="w3-bar-item w3-button"><i class="fa fa-sign-out"></i></a>                    
                 </div>
             </div>
 
@@ -188,7 +210,7 @@
                         
                         <div class="margin-top20">
                             <label for="selPaises">Pais de nacionalidad:</label>
-                            <select id="selPaises" class="nb-input" name="selPaises">
+                            <select id="selPaisesCliente" class="nb-input" name="selPaises">
                                     <option value="URU" selected="true">Uruguay</option>
                                     <option value="ARG">Argentina</option>
                                     <option value="BRA">Brasil</option>

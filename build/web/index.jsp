@@ -133,40 +133,40 @@
                         <div class="w3-container w3-light-blue w3-text-white w3-padding-16">
                             <div class="w3-left"><i class="fa fa-users w3-xxlarge"></i></div>
                             <div class="w3-right">
-                                <h3>420</h3> <!-- Cantidad clientes totales -->
+                                <h3 name="clientesRegistrados"></h3> <!-- Cantidad clientes totales -->
                             </div>
                             <div class="w3-clear"></div>
-                            <h4>Clientes totales</h4>
+                            <h4>Clientes Registrados</h4>
                         </div>
                     </div>
                     <div class="w3-quarter">
                         <div class="w3-container w3-light-blue w3-text-white w3-padding-16">
-                            <div class="w3-left"><i class="fa fa-user-times w3-xxlarge"></i></div>
+                            <div class="w3-left"><i class="fa fa-user-circle w3-xxlarge"></i></div>
                             <div class="w3-right">
-                                <h3>3</h3> <!-- Cantidad clientes morosos -->
+                                <h3 name="cuentasSecundarias"></h3> <!-- Cantidad cuentas secundarias -->
                             </div>
                             <div class="w3-clear"></div>
-                            <h4>Clientes Morosos</h4>
+                            <h4>Cuentas Secundarias</h4>
                         </div>
                     </div>
                     <div class="w3-quarter">
                         <div class="w3-container w3-light-blue w3-text-white w3-padding-16">
                             <div class="w3-left"><i class="fa fa-video-camera w3-xxlarge"></i></div>
                             <div class="w3-right">
-                                <h3>8</h3> <!-- Cantidad nuevos clientes -->
+                                <h3 name="dispositivosRegistrados"></h3> <!-- Cantidad Dispositivos en uso -->
                             </div>
                             <div class="w3-clear"></div>
-                            <h5>Dispositivos en uso</h5>
+                            <h4>Dispositivos Registrados</h4>
                         </div>
                     </div>
                     <div class="w3-quarter">
                         <div class="w3-container w3-light-blue w3-text-white w3-padding-16">
                             <div class="w3-left"><i class="fa fa-handshake-o w3-xxlarge"></i></div>
                             <div class="w3-right">
-                                <h3>52</h3> <!-- Cantidad suscripciones -->
+                                <h3 name="suscripciones"></h3> <!-- Cantidad suscripciones -->
                             </div>
                             <div class="w3-clear"></div>
-                            <h4>Suscripciones</h4>
+                            <h4>Suscripciones activas</h4>
                         </div>
                     </div>
                 </div>

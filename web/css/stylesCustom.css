@@ -140,6 +140,10 @@ select{
     position:relative;
     left:20px;
 }
+#selPaisesUsuario{
+    position:relative;
+    left:22px;
+}
 #txtbxUserUsuarioAlta{
     position:relative;
     left:36px;
@@ -187,9 +191,9 @@ select{
     position:relative;
     left:136px;
 }
-#formAltaCliente #selPaisesResidenciaClienteAlta{
+#selPaisesCliente{
     position:relative;
-    left:54px;
+    left:57px;
 }
 #selTiposDocumentoClienteAlta{
     position:relative;
