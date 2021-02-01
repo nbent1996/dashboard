@@ -1,9 +1,6 @@
 package vistaWeb;
 
-import Modelo.Empresa;
 import Modelo.Operador;
-import Modelo.Pais;
-import Modelo.TipoUsuario;
 import controlador.ControladorInicio;
 import controlador.Interfaces.IVistaInicio;
 import java.io.IOException;
@@ -43,7 +40,7 @@ public class VistaInicioWeb implements IVistaInicio {
         }
     }
     private void obtenerEstadisticas(){
-        this.controlador.obtenerEstadisticas();
+        //this.controlador.obtenerEstadisticasA();
     }
     @Override
     public void mensajeError(String nombreJSP, String texto) {

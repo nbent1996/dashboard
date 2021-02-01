@@ -6,7 +6,7 @@
     String msg = request.getParameter("msg");
     Operador operador = (Operador) request.getSession().getAttribute("OperadorLogueado");
     Empresa empresa = operador.getEmpresaAsociada();
-    
+
 %>
 <!DOCTYPE html>
 <html>
@@ -29,49 +29,49 @@
     </head>
     <body class="w3-light-grey">
         <script>
-            
+
         </script>
-       <div class="w3-bar w3-top w3-black w3-large" id="divBarraSuperior">
+        <div class="w3-bar w3-top w3-black w3-large" id="divBarraSuperior">
             <button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey " onclick="w3_open();"><i class="fa fa-bars"></i> &nbsp;Menu</button>
             <span class="w3-bar-item w3-right">
-                <% if(empresa.getNombre().equals("ColCable")){%>
-                    <img src="resources/Colcable-logo2.png" class="imgEmpresa"/>
-                <%}else if (empresa.getNombre().equals("Cablevision")){%>
-                    <img src="resources/cablevisionLogo1.png" class="imgEmpresa"/>
-                <%}else if (empresa.getNombre().equals("Directv")){%>
-                    <img src="resources/directvLogo3.png" class="imgEmpresa"/>
-                <%}else if (empresa.getNombre().equals("Sky")){%>
-                    <img src="resources/skyLogo4.png" class="imgEmpresa"/>
+                <% if (empresa.getNombre().equals("ColCable")) {%>
+                <img src="resources/Colcable-logo2.png" class="imgEmpresa"/>
+                <%} else if (empresa.getNombre().equals("Cablevision")) {%>
+                <img src="resources/cablevisionLogo1.png" class="imgEmpresa"/>
+                <%} else if (empresa.getNombre().equals("Directv")) {%>
+                <img src="resources/directvLogo3.png" class="imgEmpresa"/>
+                <%} else if (empresa.getNombre().equals("Sky")) {%>
+                <img src="resources/skyLogo4.png" class="imgEmpresa"/>
                 <%}%>
             </span>
         </div>
-        
+
         <!-- Sidebar/menu -->
-         <nav class="w3-sidebar w3-collapse w3-white w3-animate-left" id="mySidebar"><br>
+        <nav class="w3-sidebar w3-collapse w3-white w3-animate-left" id="mySidebar"><br>
             <div class="w3-container w3-row">
                 <div class="w3-col s4">
-                    <%if(operador.getGenero().equals("Masculino")){%>
+                    <%if (operador.getGenero().equals("Masculino")) {%>
                     <img src="resources/avatarHombre.png" class="w3-circle w3-margin-right" id="imgPerfil">
-                    <%}else if(operador.getGenero().equals("Femenino")){%>
+                    <%} else if (operador.getGenero().equals("Femenino")) {%>
                     <img src="resources/avatarMujer.png" class="w3-circle w3-margin-right" id="imgPerfil">
                     <%}%>
                 </div>
                 <div class="w3-col s8 w3-bar">
-                    <%if(operador.getGenero().equals("Masculino")){%>
-                        <span>Bienvenido, <strong><%= operador.getNombreCompleto()%></strong></span><br>    
-                    <%}else if(operador.getGenero().equals("Femenino")){%>
-                        <span>Bienvenida, <strong><%= operador.getNombreCompleto()%></strong></span><br>    
+                    <%if (operador.getGenero().equals("Masculino")) {%>
+                    <span>Bienvenido, <strong><%= operador.getNombreCompleto()%></strong></span><br>    
+                    <%} else if (operador.getGenero().equals("Femenino")) {%>
+                    <span>Bienvenida, <strong><%= operador.getNombreCompleto()%></strong></span><br>    
                     <%}%>
-                    
-                     
+
+
                     <!-- ICONOS DEBAJO DE PERFIL DE USUARIO -->
-                        <a href="login.jsp" class="w3-bar-item w3-button"><i class="fa fa-sign-out"></i></a>                    
+                    <a href="login.jsp" class="w3-bar-item w3-button"><i class="fa fa-sign-out"></i></a>                    
                 </div>
             </div>
 
             <hr>
-          
-                <div class="w3-bar-block">
+
+            <div class="w3-bar-block">
                 <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>&nbsp; Cerrar Menu</a>
                 <a href="index.jsp" class="w3-bar-item w3-button w3-padding"><i class="fa fa-home fa-fw"></i>&nbsp; Inicio</a><br><br>
                 <div class="w3-dropdown-hover w3-mobile">
@@ -171,93 +171,22 @@
                     </div>
                 </div>
 
-            <div class="w3-panel">
-                <div class="w3-row-padding">
+                <div class="w3-container">
+                    <div class="w3-row-padding">
 
-                    <div class="w3-twothird">
-                        <h5>Últimas interacciones</h5>
-                        <table class="w3-table w3-striped w3-white">
-                            <tbody><tr>
-                                    <td><i class="fa fa-user w3-text-blue w3-large"></i></td>
-                                    <td>Nombre Cliente</td>
-                                    <td><i>Tiempo última interacción</i></td>
-                                </tr>
-                                <tr>
-                                    <td><i class="fa fa-user w3-text-blue w3-large"></i></td>
-                                    <td>Nombre Cliente</td>
-                                    <td><i>Tiempo última interacción</i></td>
-                                </tr>
-                                <tr>
-                                    <td><i class="fa fa-user w3-text-blue w3-large"></i></td>
-                                    <td>Nombre Cliente</td>
-                                    <td><i>Tiempo última interacción</i></td>
-                                </tr>
-                                <tr>
-                                    <td><i class="fa fa-user w3-text-blue w3-large"></i></td>
-                                    <td>Nombre Cliente</td>
-                                    <td><i>Tiempo última interacción</i></td>
-                                </tr>
-                                <tr>
-                                    <td><i class="fa fa-user w3-text-blue w3-large"></i></td>
-                                    <td>Nombre Cliente</td>
-                                    <td><i>Tiempo última interacción</i></td>
-                                </tr>
-                                <tr>
-                                    <td><i class="fa fa-user w3-text-blue w3-large"></i></td>
-                                    <td>Nombre Cliente</td>
-                                    <td><i>Tiempo última interacción</i></td>
-                                </tr>
-                                <tr>
-                                    <td><i class="fa fa-user w3-text-blue w3-large"></i></td>
-                                    <td>Nombre Cliente</td>
-                                    <td><i>Tiempo última interacción</i></td>
-                                </tr>
-                            </tbody></table>
+                        <h5>Nuestros paquetes de suscripci&oacute;n</h5>
                     </div>
                 </div>
-            </div>
-            <hr>
-            <div class="w3-container">
-                <h5>Nuevos Clientes</h5>
-                <ul class="w3-ul w3-card-4 w3-white">
-                    <li class="w3-padding-16">
-                        <span class="w3-xlarge">Nombre último cliente creado</span><br>
-                    </li>
-                    <li class="w3-padding-16">
-                        <span class="w3-xlarge">Nombre penúltimo cliente creado</span><br>
-                    </li>
-                    <li class="w3-padding-16">
-                        <span class="w3-xlarge">Nombre antepenúltimo cliente creado</span><br>
-                    </li>
-                </ul>
-            </div>
-            <hr>
-            <br>
-            <div class="w3-container w3-dark-grey w3-padding-32">
-                <div class="w3-row">
-                    <div class="w3-container w3-third">
-                        <h5 class="w3-bottombar w3-border-green">Demographic</h5>
-                        <p>Language</p>
-                        <p>Country</p>
-                        <p>City</p>
-                    </div>
-                    <div class="w3-container w3-third">
-                        <h5 class="w3-bottombar w3-border-red">System</h5>
-                        <p>Browser</p>
-                        <p>OS</p>
-                        <p>More</p>
-                    </div>
-                    <div class="w3-container w3-third">
-                        <h5 class="w3-bottombar w3-border-orange">Target</h5>
-                        <p>Users</p>
-                        <p>Active</p>
-                        <p>Geo</p>
-                        <p>Interests</p>
+                <hr>
+                <div class="w3-container">
+                    <div class="w3-row-padding">
+
+                        <h5>Cat&aacute;logo de dispositivos</h5>
                     </div>
                 </div>
+                <hr>
+                <!-- End page content -->
             </div>
-            <!-- End page content -->
         </div>
-            </div>
     </body>
 </html>

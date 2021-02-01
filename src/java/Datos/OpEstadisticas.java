@@ -27,15 +27,15 @@ public OpEstadisticas(Operador usuarioSistema){
         ArrayList<Integer> lista = new ArrayList<>();
         ArrayList<String> listaSQL = new ArrayList<>();
         try {
-            listaSQL.add("select count(*) from Personas, Clientes WHERE Personas.usuarioSistema = Clientes.usuarioSistema AND Personas.identificacionTributaria='"+usuarioSistema.getEmpresaAsociada().getIdentificacionTributaria()+"'");
-            listaSQL.add("");
-            listaSQL.add("");
-            listaSQL.add("");
+            listaSQL.add("select count(*) as 'conteo' from Personas, Clientes WHERE Personas.usuarioSistema = Clientes.usuarioSistema AND Personas.identificacionTributaria='"+usuarioSistema.getEmpresaAsociada().getIdentificacionTributaria()+"' ");
+            listaSQL.add("select count(*) as 'conteo' from Personas, Secundarios WHERE Personas.usuarioSistema = Secundarios.usuarioSistema AND Personas.identificacionTributaria='"+usuarioSistema.getEmpresaAsociada().getIdentificacionTributaria()+"' ");
+            listaSQL.add("select count(*) as 'conteo' from Dispositivos WHERE Dispositivos.identificacionTributaria='"+usuarioSistema.getEmpresaAsociada().getIdentificacionTributaria()+"' ");
+            listaSQL.add("select count(*) as 'conteo' from Suscripciones, Principales, Personas WHERE Suscripciones.nroDocumentoTitular = Principales.nroDocumento AND Principales.usuarioSistema = Personas.usuarioSistema AND Suscripciones.activa='S' AND Personas.identificacionTributaria='"+usuarioSistema.getEmpresaAsociada().getIdentificacionTributaria()+"' ");
            
             for(String query : listaSQL){
             ResultSet rs = database.consultar(query);
             rs.next();
-            lista.add(rs.getInt(""));
+            lista.add(rs.getInt("conteo"));
             }
             
         } catch (SQLException ex) {
