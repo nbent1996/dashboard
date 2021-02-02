@@ -120,9 +120,9 @@ public OpDispositivo(Operador usuarioSistema){
                      "from Principales pri RIGHT JOIN Dispositivos dis ON pri.nroCliente = dis.nroCliente LEFT JOIN Personas per ON pri.usuarioSistema = per.usuarioSistema ";
         if(filtro!=null){
             sql+=filtro;
-            sql+= " AND dis.eliminado = 'N' ";
+            sql+= " AND dis.identificacionTributaria='"+this.usuarioSistema.getEmpresaAsociada().getIdentificacionTributaria()+"' AND dis.eliminado = 'N' ";
         }else{
-            sql+= " WHERE dis.eliminado = 'N' ";
+            sql+= " WHERE dis.identificacionTributaria='"+this.usuarioSistema.getEmpresaAsociada().getIdentificacionTributaria()+"' AND dis.eliminado = 'N' ";
         }
         
         listaSQL.add(sql);

@@ -36,10 +36,10 @@ public class TestSuscripciones {
             listaPaquetes.add(new Paquete(1));
             listaPaquetes.add(new Paquete(2));
             listaPaquetes.add(new Paquete(3));
-            Suscripcion s1 = new Suscripcion(new DTOFechas(new Fecha(24,11,2020)), 1, new DTOFechas(new Fecha(1,1,1970)),true,listaPaquetes, new Principal("34569632"));
-            Suscripcion s2 = new Suscripcion(new DTOFechas(new Fecha(23,11,2020)), 0.5F, new DTOFechas(new Fecha(1,1,1970)),true,listaPaquetes, new Principal("34758689"));
-            Suscripcion s3 = new Suscripcion(new DTOFechas(new Fecha(25,11,2020)), 2, new DTOFechas(new Fecha(1,1,1970)),true,listaPaquetes, new Principal("39475896"));
-            Suscripcion s4 = new Suscripcion(new DTOFechas(new Fecha(30,10,2020)), 1.5F, new DTOFechas(new Fecha(1,1,1970)),true,listaPaquetes, new Principal("45263254"));
+            Suscripcion s1 = new Suscripcion(new DTOFechas(new Fecha(24,11,2020)), 1, new DTOFechas(new Fecha(1,1,1970)),true,listaPaquetes, new Principal("34569632"), new Empresa("526283747346"));
+            Suscripcion s2 = new Suscripcion(new DTOFechas(new Fecha(23,11,2020)), 0.5F, new DTOFechas(new Fecha(1,1,1970)),true,listaPaquetes, new Principal("34758689"), new Empresa("526283747346"));
+            Suscripcion s3 = new Suscripcion(new DTOFechas(new Fecha(25,11,2020)), 2, new DTOFechas(new Fecha(1,1,1970)),true,listaPaquetes, new Principal("39475896"), new Empresa("526283747346"));
+            Suscripcion s4 = new Suscripcion(new DTOFechas(new Fecha(30,10,2020)), 1.5F, new DTOFechas(new Fecha(1,1,1970)),true,listaPaquetes, new Principal("45263254"), new Empresa("526283747346"));
 
             
             assertEquals("NOERROR", this.op.insertar(s1).getTextoError());
@@ -62,8 +62,8 @@ public class TestSuscripciones {
             listaPaquetes.add(new Paquete(3));
             try{
             //INSERCIONES PREVIAS
-            Suscripcion s1 = new Suscripcion(new DTOFechas(new Fecha(23,11,2020)), 1, new DTOFechas(new Fecha(1,1,1970)),true, listaPaquetes, new Principal("47563251"));
-            Suscripcion s2 = new Suscripcion(new DTOFechas(new Fecha(19,11,2018)), 2, new DTOFechas(new Fecha(20,11,2020)),false, listaPaquetes, new Principal("48283676"));
+            Suscripcion s1 = new Suscripcion(new DTOFechas(new Fecha(23,11,2020)), 1, new DTOFechas(new Fecha(1,1,1970)),true, listaPaquetes, new Principal("47563251"), new Empresa("526283747346"));
+            Suscripcion s2 = new Suscripcion(new DTOFechas(new Fecha(19,11,2018)), 2, new DTOFechas(new Fecha(20,11,2020)),false, listaPaquetes, new Principal("48283676"), new Empresa("526283747346"));
 
             this.op.insertar(s1);
             this.op.insertar(s2);
@@ -94,8 +94,8 @@ public class TestSuscripciones {
             listaPaquetes.add(new Paquete(2));
             listaPaquetes.add(new Paquete(3));
              //INSERCIONES PREVIAS
-            Suscripcion s1Anterior = new Suscripcion(new DTOFechas(new Fecha(15,11,2020)), 1, new DTOFechas(new Fecha(1,1,1970)),true, listaPaquetes, new Principal("30523215"));
-            Suscripcion s2Anterior = new Suscripcion(new DTOFechas(new Fecha(15,11,2018)), 2, new DTOFechas(new Fecha(20,11,2020)),false, listaPaquetes, new Principal("30654195"));
+            Suscripcion s1Anterior = new Suscripcion(new DTOFechas(new Fecha(15,11,2020)), 1, new DTOFechas(new Fecha(1,1,1970)),true, listaPaquetes, new Principal("30523215"), new Empresa("526283747346"));
+            Suscripcion s2Anterior = new Suscripcion(new DTOFechas(new Fecha(15,11,2018)), 2, new DTOFechas(new Fecha(20,11,2020)),false, listaPaquetes, new Principal("30654195"), new Empresa("526283747346"));
             this.op.insertar(s1Anterior);
             this.op.insertar(s2Anterior);
             
@@ -143,8 +143,8 @@ public class TestSuscripciones {
             listaPaquetes.add(new Paquete(2));
             listaPaquetes.add(new Paquete(3));
            //INSERCIONES PREVIAS
-            Suscripcion s1 = new Suscripcion(new DTOFechas(new Fecha(26,11,2020)), 1, new DTOFechas(new Fecha(1,1,1970)),true, listaPaquetes, new Principal("51367485"));
-            Suscripcion s2 = new Suscripcion(new DTOFechas(new Fecha(22,11,2018)), 2, new DTOFechas(new Fecha(20,11,2020)),false, listaPaquetes, new Principal("56321541"));
+            Suscripcion s1 = new Suscripcion(new DTOFechas(new Fecha(26,11,2020)), 1, new DTOFechas(new Fecha(1,1,1970)),true, listaPaquetes, new Principal("51367485"), new Empresa("526283747346"));
+            Suscripcion s2 = new Suscripcion(new DTOFechas(new Fecha(22,11,2018)), 2, new DTOFechas(new Fecha(20,11,2020)),false, listaPaquetes, new Principal("56321541"), new Empresa("526283747346"));
             this.op.insertar(s1);
             this.op.insertar(s2);
             
@@ -181,8 +181,8 @@ public class TestSuscripciones {
             listaPaquetes.add(new Paquete(1));
             listaPaquetes.add(new Paquete(2));
             listaPaquetes.add(new Paquete(3));
-            Suscripcion s1 = new Suscripcion(new DTOFechas(new Fecha(26,11,2020)), 1, new DTOFechas(new Fecha(1,1,1970)),true, listaPaquetes, new Principal("34569632"));
-            Suscripcion s2 = new Suscripcion(new DTOFechas(new Fecha(22,11,2018)), 2, new DTOFechas(new Fecha(20,11,2020)),false, listaPaquetes, new Principal("34569632"));
+            Suscripcion s1 = new Suscripcion(new DTOFechas(new Fecha(26,11,2020)), 1, new DTOFechas(new Fecha(1,1,1970)),true, listaPaquetes, new Principal("34569632"), new Empresa("526283747346"));
+            Suscripcion s2 = new Suscripcion(new DTOFechas(new Fecha(22,11,2018)), 2, new DTOFechas(new Fecha(20,11,2020)),false, listaPaquetes, new Principal("34569632"), new Empresa("526283747346"));
             this.op.insertar(s1);
             this.op.insertar(s2);
             

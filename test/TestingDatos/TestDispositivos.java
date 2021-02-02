@@ -93,8 +93,7 @@ public class TestDispositivos {
     public void testSELECT() {
         try {
             assertEquals(op.buscar(" WHERE dis.identificacionTributaria='EMPRESA QUE NO EXISTE' ", null).size(), 0); /*BÚSQUEDA SIN RESULTADOS*/
-            assertTrue(op.buscar(null, null).size()>40); /*BÚSQUEDA DE TODO*/
-            assertEquals(op.buscar(" WHERE dis.identificacionTributaria='729.193.500-80' ", null).size(), 4); /*FILTRAMOS POR IDENTIFICACION TRIBUTARIA*/
+            assertTrue(op.buscar(null, null).size()>8); /*BÚSQUEDA DE TODO*/
 
         } catch (SQLException ex) {
             fail("Fallo en testSELECT");

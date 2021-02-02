@@ -5,6 +5,7 @@ import controlador.ControladorLogin;
 import controlador.Interfaces.IVistaLogin;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
@@ -71,6 +72,13 @@ public class VistaLoginWeb implements IVistaLogin{
         sesion.setAttribute("OperadorLogueado", operadorLogin);
         
         try {
+            controlador.crearEstadisticas(operadorLogin);//le paso el operador a metodo que se encarga de instanciar el opEstadisticas
+        } catch (Exception ex) {
+            Logger.getLogger(VistaLoginWeb.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        try {
             response.sendRedirect(destino);
         } catch (IOException ex) {
             Logger.getLogger(VistaLoginWeb.class.getName()).log(Level.SEVERE, null, ex);
@@ -90,6 +98,36 @@ public class VistaLoginWeb implements IVistaLogin{
             Logger.getLogger(VistaLoginWeb.class.getName()).log(Level.SEVERE, null, ex);
         }
         
+    }
+
+    @Override
+    public void establecerEstadisticasEnSession(ArrayList<Integer> listaResultadosEstadisticas) {
+        if(listaResultadosEstadisticas.size()==4){//compruebo que se hayan cargado todas las estadísticas
+            
+            for (int i = 0; i < listaResultadosEstadisticas.size(); i++) {
+                
+                if(i==0){
+                    request.getSession(false).setAttribute("estadisticaClientes", listaResultadosEstadisticas.get(i));
+                }
+                else if(i==1){
+                    request.getSession(false).setAttribute("estadisticaCuentasSecundarias", listaResultadosEstadisticas.get(i));
+                }
+                else if(i==2){
+                    request.getSession(false).setAttribute("estadisticaDispositivos", listaResultadosEstadisticas.get(i));
+                }
+                else if(i==3){
+                    request.getSession(false).setAttribute("estadisticaSuscripciones", listaResultadosEstadisticas.get(i));
+                }
+                
+                
+                
+            }
+            
+                //request.getSession(false).setAttribute("estadisticas", items);//guardo en la session el arraylist conteniendo las estadisticas para agarrarlo en el jsp
+                //out.write(listaResultadosEstadisticas.toString());
+            
+            
+        }
     }
     
 }

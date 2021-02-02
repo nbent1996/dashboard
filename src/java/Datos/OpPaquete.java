@@ -134,9 +134,9 @@ public OpPaquete(Operador usuarioSistema){
         ArrayList<String> listaSQL = new ArrayList<>();
         if(filtro!=null){
             sql+=filtro;
-            sql+=" AND eliminado = 'N' ";
+            sql+=" AND identificacionTributaria='"+this.usuarioSistema.getEmpresaAsociada().getIdentificacionTributaria()+"' AND eliminado = 'N' ";
         }else{
-            sql+=" WHERE eliminado = 'N' ";
+            sql+=" WHERE identificacionTributaria='"+this.usuarioSistema.getEmpresaAsociada().getIdentificacionTributaria()+"' AND eliminado = 'N' ";
         }
         listaSQL.add(sql);
         

@@ -11,21 +11,23 @@ private float tiempoContrato;
 private DTOFechas fechaFin;
 private boolean activa;
 private ArrayList<Paquete> listaPaquetes;
-private Principal clientePrincipal;//AGREGADO
+private Principal clientePrincipal;
+private Empresa empresaAsociada;
 /*Estado*/
 
 /*Constructores*/
 /*FULL SIN PRINCIPAL*/ //SE USA EN BUSCAR DE OPSUSCRIPCION
-public Suscripcion(int idSuscripcion, DTOFechas fechaInicio, float tiempoContrato, DTOFechas fechaFin, boolean activa, ArrayList<Paquete> listaPaquetes) {
+public Suscripcion(int idSuscripcion, DTOFechas fechaInicio, float tiempoContrato, DTOFechas fechaFin, boolean activa, ArrayList<Paquete> listaPaquetes, Empresa empresaAsociada) {
         this.idSuscripcion = idSuscripcion;
         this.fechaInicio = fechaInicio;
         this.tiempoContrato = tiempoContrato;
         this.fechaFin = fechaFin;
         this.activa = activa;
         this.listaPaquetes = listaPaquetes;
+        this.empresaAsociada = empresaAsociada;
     }
 /*FULL CON PRINCIPAL AGREGADO*/
-public Suscripcion(int idSuscripcion, DTOFechas fechaInicio, float tiempoContrato, DTOFechas fechaFin, boolean activa, ArrayList<Paquete> listaPaquetes, Principal principal) {
+public Suscripcion(int idSuscripcion, DTOFechas fechaInicio, float tiempoContrato, DTOFechas fechaFin, boolean activa, ArrayList<Paquete> listaPaquetes, Principal principal, Empresa empresaAsociada) {
         this.idSuscripcion = idSuscripcion;
         this.fechaInicio = fechaInicio;
         this.tiempoContrato = tiempoContrato;
@@ -33,10 +35,11 @@ public Suscripcion(int idSuscripcion, DTOFechas fechaInicio, float tiempoContrat
         this.activa = activa;
         this.listaPaquetes = listaPaquetes;
         this.clientePrincipal = principal;//AGREGADO
-    }
+        this.empresaAsociada = empresaAsociada;    
+}
 
 /*ID -1 FULL*/
-public Suscripcion(DTOFechas fechaInicio, float tiempoContrato, DTOFechas fechaFin, boolean activa, ArrayList<Paquete> listaPaquetes, Principal principal) {
+public Suscripcion(DTOFechas fechaInicio, float tiempoContrato, DTOFechas fechaFin, boolean activa, ArrayList<Paquete> listaPaquetes, Principal principal, Empresa empresaAsociada) {
         this.idSuscripcion = -1;
         this.fechaInicio = fechaInicio;
         this.tiempoContrato = tiempoContrato;
@@ -44,31 +47,35 @@ public Suscripcion(DTOFechas fechaInicio, float tiempoContrato, DTOFechas fechaF
         this.activa = activa;
         this.listaPaquetes = listaPaquetes;
         this.clientePrincipal = principal;//AGREGADO
+        this.empresaAsociada = empresaAsociada;
     }
 /*ID -1 SIN PRINCIPAL*/
-public Suscripcion(DTOFechas fechaInicio, float tiempoContrato, DTOFechas fechaFin, boolean activa, ArrayList<Paquete> listaPaquetes) {
+public Suscripcion(DTOFechas fechaInicio, float tiempoContrato, DTOFechas fechaFin, boolean activa, ArrayList<Paquete> listaPaquetes, Empresa empresaAsociada) {
         this.idSuscripcion = -1;
         this.fechaInicio = fechaInicio;
         this.tiempoContrato = tiempoContrato;
         this.fechaFin = fechaFin;
         this.activa = activa;
         this.listaPaquetes = listaPaquetes;
+        this.empresaAsociada = empresaAsociada;
     }
 /*FULL SIN PAQUETES*/
-public Suscripcion(int idSuscripcion, DTOFechas fechaInicio, float tiempoContrato, DTOFechas fechaFin, boolean activa) {
+public Suscripcion(int idSuscripcion, DTOFechas fechaInicio, float tiempoContrato, DTOFechas fechaFin, boolean activa, Empresa empresaAsociada) {
         this.idSuscripcion = idSuscripcion;
         this.fechaInicio = fechaInicio;
         this.tiempoContrato = tiempoContrato;
         this.fechaFin = fechaFin;
         this.activa = activa;
+        this.empresaAsociada = empresaAsociada; 
     }
 /*ID -1 SIN PAQUETES*/
-public Suscripcion(DTOFechas fechaInicio, float tiempoContrato, DTOFechas fechaFin, boolean activa) {
+public Suscripcion(DTOFechas fechaInicio, float tiempoContrato, DTOFechas fechaFin, boolean activa, Empresa empresaAsociada) {
         this.idSuscripcion = -1;
         this.fechaInicio = fechaInicio;
         this.tiempoContrato = tiempoContrato;
         this.fechaFin = fechaFin;
         this.activa = activa;
+        this.empresaAsociada = empresaAsociada;
     }
 /*Constructores*/
 /*Comportamiento*/

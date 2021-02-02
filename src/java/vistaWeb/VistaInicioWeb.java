@@ -81,8 +81,26 @@ public class VistaInicioWeb implements IVistaInicio {
         
         if(items.size()==4){//compruebo que se hayan cargado todas las estadísticas
             
+            for (int i = 0; i < items.size(); i++) {
+                
+                if(i==0){
+                    request.getSession(false).setAttribute("estadisticaClientes", items.get(i));
+                }
+                else if(i==1){
+                    request.getSession(false).setAttribute("estadisticaCuentasSecundarias", items.get(i));
+                }
+                else if(i==2){
+                    request.getSession(false).setAttribute("estadisticaDispositivos", items.get(i));
+                }
+                else if(i==3){
+                    request.getSession(false).setAttribute("estadisticaSuscripciones", items.get(i));
+                }
+                
+                
+                
+            }
             
-                request.getSession(false).setAttribute("estadisticas", items);//guardo en la session el arraylist conteniendo las estadisticas para agarrarlo en el jsp
+                //request.getSession(false).setAttribute("estadisticas", items);//guardo en la session el arraylist conteniendo las estadisticas para agarrarlo en el jsp
                 out.write(items.toString());
             
             

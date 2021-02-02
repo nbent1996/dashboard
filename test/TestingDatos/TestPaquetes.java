@@ -58,14 +58,14 @@ public class TestPaquetes {
         listaTieneTPp2.add(new TieneTP(4, new TipoDispositivo(3)));
         listaTieneTPp2.add(new TieneTP(1, new TipoDispositivo(2)));
         listaTieneTPp2.add(new TieneTP(2, new TipoDispositivo(1)));
-        Paquete p1 = new Paquete(350,"Paquete 4", new Empresa("729.193.500-80"));
-        Paquete p2 = new Paquete(351,"Paquete 5", new Empresa("729.193.500-80"), listaTieneTPp2);
+        Paquete p1 = new Paquete(350,"Paquete 4", new Empresa("526283747346"));
+        Paquete p2 = new Paquete(351,"Paquete 5", new Empresa("526283747346"), listaTieneTPp2);
         this.op.insertar(p1);
         this.op.insertar(p2);
         
         //obtener los id de los paquetes insertados
-        p1 = this.op.buscar(" WHERE identificacionTributaria='729.193.500-80' AND nombrePaquete='Paquete 4' ", null).get(0);
-        p2 = this.op.buscar(" WHERE identificacionTributaria='729.193.500-80' AND nombrePaquete='Paquete 5' ", null).get(0);
+        p1 = this.op.buscar(" WHERE nombrePaquete='Paquete 4' ", null).get(0);
+        p2 = this.op.buscar(" WHERE nombrePaquete='Paquete 5' ", null).get(0);
        
         /*Búsqueda de un paquete sin lista TieneTP*/
         Paquete p1b = this.op.buscar(" WHERE idPaquete='"+p1.getIdPaquete()+"' ", null).get(0);
@@ -75,8 +75,6 @@ public class TestPaquetes {
         assertTrue((this.op.buscar(" WHERE idPaquete='"+p2.getIdPaquete()+"' ", null).size()==1 && p2b.getListaTieneTP().size()==3));
         /*Búsqueda de todos los paquetes*/
         assertTrue(!this.op.buscar(null,null).isEmpty());
-        /*Búsqueda sin resultados*/
-        assertTrue(this.op.buscar(" WHERE identificacionTributaria='IDENTIFICACION TRIBUTARIA INEXISTENTE'",null).isEmpty());
 
         } catch (SQLException ex) {
             fail("Fallo en testSELECT");
@@ -92,14 +90,14 @@ public class TestPaquetes {
             listaTieneTPp2.add(new TieneTP(4, new TipoDispositivo(3)));
             listaTieneTPp2.add(new TieneTP(1, new TipoDispositivo(2)));
             listaTieneTPp2.add(new TieneTP(2, new TipoDispositivo(1)));
-            Paquete p1Anterior = new Paquete(451,"Paquete 6", new Empresa("729.193.500-80"));
-            Paquete p2Anterior = new Paquete(452,"Paquete 7",new Empresa("729.193.500-80"), listaTieneTPp2);
+            Paquete p1Anterior = new Paquete(451,"Paquete 6", new Empresa("526283747346"));
+            Paquete p2Anterior = new Paquete(452,"Paquete 7",new Empresa("526283747346"), listaTieneTPp2);
             this.op.insertar(p1Anterior);
             this.op.insertar(p2Anterior);
             
             //Obtener los id autogenerados
-            p1Anterior = this.op.buscar(" WHERE costoBruto='"+p1Anterior.getCostoBruto()+"' AND identificacionTributaria='"+p1Anterior.getEmpresaAsociada().getIdentificacionTributaria()+"' ", null).get(0);
-            p2Anterior = this.op.buscar(" WHERE costoBruto='"+p2Anterior.getCostoBruto()+"' AND identificacionTributaria='"+p2Anterior.getEmpresaAsociada().getIdentificacionTributaria()+"' ", null).get(0);
+            p1Anterior = this.op.buscar(" WHERE costoBruto='"+p1Anterior.getCostoBruto()+"' ", null).get(0);
+            p2Anterior = this.op.buscar(" WHERE costoBruto='"+p2Anterior.getCostoBruto()+"' ", null).get(0);
             
             
             //Cambios seteados
@@ -135,14 +133,14 @@ public class TestPaquetes {
             listaTieneTPp2.add(new TieneTP(4, new TipoDispositivo(3)));
             listaTieneTPp2.add(new TieneTP(1, new TipoDispositivo(2)));
             listaTieneTPp2.add(new TieneTP(2, new TipoDispositivo(1)));
-            Paquete p1 = new Paquete(651,"Paquete 8", new Empresa("729.193.500-80"));
-            Paquete p2 = new Paquete(652,"Paquete 9", new Empresa("729.193.500-80"), listaTieneTPp2);
+            Paquete p1 = new Paquete(651,"Paquete 8", new Empresa("526283747346"));
+            Paquete p2 = new Paquete(652,"Paquete 9", new Empresa("526283747346"), listaTieneTPp2);
             this.op.insertar(p1);
             this.op.insertar(p2);
             
              //Obtener los id autogenerados
-            p1 = this.op.buscar(" WHERE costoBruto='"+p1.getCostoBruto()+"' AND identificacionTributaria='"+p1.getEmpresaAsociada().getIdentificacionTributaria()+"' ", null).get(0);
-            p2 = this.op.buscar(" WHERE costoBruto='"+p2.getCostoBruto()+"' AND identificacionTributaria='"+p2.getEmpresaAsociada().getIdentificacionTributaria()+"' ", null).get(0);
+            p1 = this.op.buscar(" WHERE costoBruto='"+p1.getCostoBruto()+"' ", null).get(0);
+            p2 = this.op.buscar(" WHERE costoBruto='"+p2.getCostoBruto()+"' ", null).get(0);
             
             //PRUEBAS DELETE
             assertEquals("NOERROR", this.op.borrar(p1).getTextoError());
@@ -163,14 +161,14 @@ public class TestPaquetes {
             listaTieneTPp2.add(new TieneTP(4, new TipoDispositivo(3)));
             listaTieneTPp2.add(new TieneTP(1, new TipoDispositivo(2)));
             listaTieneTPp2.add(new TieneTP(2, new TipoDispositivo(1)));
-            Paquete p1 = new Paquete(791,"Paquete 10", new Empresa("729.193.500-80"));
-            Paquete p2 = new Paquete(792,"Paquete 11", new Empresa("729.193.500-80"), listaTieneTPp2);
+            Paquete p1 = new Paquete(791,"Paquete 10", new Empresa("526283747346"));
+            Paquete p2 = new Paquete(792,"Paquete 11", new Empresa("526283747346"), listaTieneTPp2);
             this.op.insertar(p1);
             this.op.insertar(p2);
 
             //Obtener los id autogenerados
-            p1 = this.op.buscar(" WHERE costoBruto='" + p1.getCostoBruto() + "' AND identificacionTributaria='" + p1.getEmpresaAsociada().getIdentificacionTributaria() + "' ", null).get(0);
-            p2 = this.op.buscar(" WHERE costoBruto='" + p2.getCostoBruto() + "' AND identificacionTributaria='" + p2.getEmpresaAsociada().getIdentificacionTributaria() + "' ", null).get(0);
+            p1 = this.op.buscar(" WHERE costoBruto='" + p1.getCostoBruto() + "' ", null).get(0);
+            p2 = this.op.buscar(" WHERE costoBruto='" + p2.getCostoBruto() + "' ", null).get(0);
       
             //BORRADO EN CASCADA
             ArrayList<Integer> listaIds = new ArrayList<>();

@@ -180,7 +180,7 @@ public class ControladorManejoSuscripciones {
 
                 try {
                     //AGREGADO EL CLIENTE PRINCIPAL AL CONSTRUCTOR
-                    Suscripcion nuevaSuscripcion = new Suscripcion(fechaInicioSuscripcion, (float)duracionContrato, fechaFinSuscripcion, true, listaPaquetes, clienteSeleccionado);
+                    Suscripcion nuevaSuscripcion = new Suscripcion(fechaInicioSuscripcion, (float)duracionContrato, fechaFinSuscripcion, true, listaPaquetes, clienteSeleccionado, userLogueado.getEmpresaAsociada());
                     nuevaSuscripcion.validar();
                     opSuscripcion.guardar(null, nuevaSuscripcion);
                     vista.exitoAlCrearSuscripcion("Suscripción dada de alta correctamente");

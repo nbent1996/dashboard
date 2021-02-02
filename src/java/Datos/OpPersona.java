@@ -326,9 +326,9 @@ public OpPersona(Operador usuarioSistema){
                     sqlB = "SELECT Personas.usuarioSistema, Personas.nombreCompleto, Personas.codigo, Personas.identificacionTributaria, Principales.nroDocumento, Principales.nroCliente, Principales.servicioActivo, Principales.codDocumento, Clientes.email, Clientes.telefono from Personas, Principales, Clientes ";
                     if (filtro != null) {
                         sqlB += filtro;
-                        sqlB += " AND Personas.usuarioSistema = Principales.usuarioSistema AND Principales.nroCliente = Clientes.nroCliente AND Personas.eliminado='N' AND Principales.eliminado='N' ";
+                        sqlB += " AND Personas.identificacionTributaria='"+this.usuarioSistema.getEmpresaAsociada().getIdentificacionTributaria()+"' AND Personas.usuarioSistema = Principales.usuarioSistema AND Principales.nroCliente = Clientes.nroCliente AND Personas.eliminado='N' AND Principales.eliminado='N' ";
                     } else {
-                        sqlB += " WHERE Personas.usuarioSistema = Principales.usuarioSistema AND Principales.nroCliente = Clientes.nroCliente AND Personas.eliminado='N' AND Principales.eliminado='N' ";
+                        sqlB += " WHERE Personas.identificacionTributaria='"+this.usuarioSistema.getEmpresaAsociada().getIdentificacionTributaria()+"' AND Personas.usuarioSistema = Principales.usuarioSistema AND Principales.nroCliente = Clientes.nroCliente AND Personas.eliminado='N' AND Principales.eliminado='N' ";
                     }
                     rs=database.consultar(sqlB);
                     while(rs.next()){
@@ -355,9 +355,9 @@ public OpPersona(Operador usuarioSistema){
                     sqlC = "SELECT Personas.usuarioSistema, Personas.nombreCompleto, Personas.codigo, Personas.identificacionTributaria, Secundarios.nroDocumento, Secundarios.nroCliente, Clientes.email, Clientes.telefono from Personas, Clientes, Secundarios ";
                     if (filtro != null) {
                         sqlC += filtro;
-                        sqlC += " AND Personas.usuarioSistema = Clientes.usuarioSistema AND Clientes.nroCliente = Secundarios.nroCliente AND Personas.eliminado='N' AND Secundarios.eliminado='N' ";
+                        sqlC += " AND Personas.identificacionTributaria='"+this.usuarioSistema.getEmpresaAsociada().getIdentificacionTributaria()+"' AND Personas.usuarioSistema = Clientes.usuarioSistema AND Clientes.nroCliente = Secundarios.nroCliente AND Personas.eliminado='N' AND Secundarios.eliminado='N' ";
                     } else {
-                        sqlC += " WHERE Personas.usuarioSistema = Clientes.usuarioSistema AND Clientes.nroCliente = Secundarios.nroCliente AND Personas.eliminado='N' AND Secundarios.eliminado='N' ";
+                        sqlC += " WHERE Personas.identificacionTributaria='"+this.usuarioSistema.getEmpresaAsociada().getIdentificacionTributaria()+"' AND Personas.usuarioSistema = Clientes.usuarioSistema AND Clientes.nroCliente = Secundarios.nroCliente AND Personas.eliminado='N' AND Secundarios.eliminado='N' ";
                     }
                     rs=database.consultar(sqlC);
                     while(rs.next()){

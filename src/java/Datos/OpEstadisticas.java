@@ -15,7 +15,7 @@ private Operador usuarioSistema;
 /*Estado*/
 
 /*Constructores*/
-public OpEstadisticas(Operador usuarioSistema){
+public OpEstadisticas(Operador usuarioSistema){ //Lo instancia el ControladorLogin en el metodo crearEstadisticas que se ejecuta cuando se permite el acceso en el login
     this.database = Database.getInstancia();
     this.usuarioSistema = usuarioSistema;
     this.logging = new OpLogSistema(this.usuarioSistema);
@@ -27,10 +27,10 @@ public OpEstadisticas(Operador usuarioSistema){
         ArrayList<Integer> lista = new ArrayList<>();
         ArrayList<String> listaSQL = new ArrayList<>();
         try {
-            listaSQL.add("select count(*) as 'conteo' from Personas, Clientes WHERE Personas.usuarioSistema = Clientes.usuarioSistema AND Personas.identificacionTributaria='"+usuarioSistema.getEmpresaAsociada().getIdentificacionTributaria()+"' ");
-            listaSQL.add("select count(*) as 'conteo' from Personas, Secundarios WHERE Personas.usuarioSistema = Secundarios.usuarioSistema AND Personas.identificacionTributaria='"+usuarioSistema.getEmpresaAsociada().getIdentificacionTributaria()+"' ");
+            listaSQL.add("select count(*) as 'conteo' from Personas, Clientes WHERE Personas.usuarioSistema = Clientes.usuarioSistema AND Personas.identificacionTributaria='"+usuarioSistema.getEmpresaAsociada().getIdentificacionTributaria()+"' AND Personas.usuarioSistema!='loginUser' ");
+            listaSQL.add("select count(*) as 'conteo' from Personas, Secundarios WHERE Personas.usuarioSistema = Secundarios.usuarioSistema AND Personas.identificacionTributaria='"+usuarioSistema.getEmpresaAsociada().getIdentificacionTributaria()+"' AND Personas.usuarioSistema!='loginUser' ");
             listaSQL.add("select count(*) as 'conteo' from Dispositivos WHERE Dispositivos.identificacionTributaria='"+usuarioSistema.getEmpresaAsociada().getIdentificacionTributaria()+"' ");
-            listaSQL.add("select count(*) as 'conteo' from Suscripciones, Principales, Personas WHERE Suscripciones.nroDocumentoTitular = Principales.nroDocumento AND Principales.usuarioSistema = Personas.usuarioSistema AND Suscripciones.activa='S' AND Personas.identificacionTributaria='"+usuarioSistema.getEmpresaAsociada().getIdentificacionTributaria()+"' ");
+            listaSQL.add("select count(*) as 'conteo' from Suscripciones, Principales, Personas WHERE Suscripciones.nroDocumentoTitular = Principales.nroDocumento AND Principales.usuarioSistema = Personas.usuarioSistema AND Suscripciones.activa='S' AND Personas.identificacionTributaria='"+usuarioSistema.getEmpresaAsociada().getIdentificacionTributaria()+"' AND Personas.usuarioSistema!='loginUser' ");
            
             for(String query : listaSQL){
             ResultSet rs = database.consultar(query);
