@@ -156,9 +156,6 @@ public class ControladorManejoSuscripciones {
                 String cadenaIdPaquetes = listaIdPaquetes[0].toString();
                 String[] cadenaIdPaquetesConvertida = cadenaIdPaquetes.split(",");
 
-                //Calendar cal = Calendar.getInstance();
-                
-                //int anioVencimientoContrato = cal.get(Calendar.YEAR) + duracionContrato;
                 
                 int duracionContrato = Integer.parseInt(tiempoContrato);
                 Fecha fechaInicio = fechaInicioSuscripcion.getFechaA();
@@ -185,7 +182,7 @@ public class ControladorManejoSuscripciones {
                     //AGREGADO EL CLIENTE PRINCIPAL AL CONSTRUCTOR
                     Suscripcion nuevaSuscripcion = new Suscripcion(fechaInicioSuscripcion, (float)duracionContrato, fechaFinSuscripcion, true, listaPaquetes, clienteSeleccionado);
                     nuevaSuscripcion.validar();
-                    opSuscripcion.guardar(null, nuevaSuscripcion); //NO GUARDA LOS PAQUETES
+                    opSuscripcion.guardar(null, nuevaSuscripcion);
                     vista.exitoAlCrearSuscripcion("Suscripción dada de alta correctamente");
                 } catch (ProgramException ex) {//error en validaciones de la suscripcion
                     vista.errorValidacionesDeSuscripcion(ex.getMessage());

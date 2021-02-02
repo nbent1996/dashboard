@@ -6,6 +6,8 @@ import controlador.Interfaces.IVistaInicio;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -17,7 +19,9 @@ public class VistaInicioWeb implements IVistaInicio {
     private HttpServletResponse response;
     private HttpSession sesion;
     private PrintWriter out;
-    private String destino;    
+    private String destino;   
+    
+    private Operador operadorLogueado;
 /*Estado*/
 
 /*Constructores*/
@@ -26,7 +30,8 @@ public class VistaInicioWeb implements IVistaInicio {
         this.request = request;
         this.out = response.getWriter();
         this.sesion = request.getSession();
-        this.controlador = new ControladorInicio(this);
+        this.operadorLogueado = (Operador) request.getSession().getAttribute("OperadorLogueado");
+        this.controlador = new ControladorInicio(this, operadorLogueado);
     }
 /*Constructores*/
 
@@ -35,12 +40,16 @@ public class VistaInicioWeb implements IVistaInicio {
         String accion= request.getParameter("accion");
         switch(accion){
             case "estadisticasInicio":
-                  this.obtenerEstadisticas();
+                  obtenerEstadisticas();
             break;
         }
     }
     private void obtenerEstadisticas(){
-        //this.controlador.obtenerEstadisticasA();
+        try {
+            controlador.obtenerEstadisticasA();
+        } catch (Exception ex) {
+            Logger.getLogger(VistaInicioWeb.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     @Override
     public void mensajeError(String nombreJSP, String texto) {
@@ -65,9 +74,22 @@ public class VistaInicioWeb implements IVistaInicio {
     public Operador getOperadorLogueado() {
         return (Operador) sesion.getAttribute("operadorLogueado");
     }
+    
+    
     @Override
     public void mostrarEstadisticas(ArrayList<Integer> items) {
-    
+        
+        if(items.size()==4){//compruebo que se hayan cargado todas las estadísticas
+            
+            
+                request.getSession(false).setAttribute("estadisticas", items);//guardo en la session el arraylist conteniendo las estadisticas para agarrarlo en el jsp
+                out.write(items.toString());
+            
+            
+        }
+        
+        
+        
     }
     
     

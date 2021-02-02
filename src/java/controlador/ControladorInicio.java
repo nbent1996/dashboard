@@ -3,6 +3,7 @@ package controlador;
 import Datos.OpEstadisticas;
 import Datos.OpImagen;
 import Datos.OpPersona;
+import Modelo.Operador;
 import controlador.Interfaces.IVistaInicio;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -17,11 +18,11 @@ private OpEstadisticas opEstadisticas;
 /*Estado*/
 
 /*Constructores*/
-public ControladorInicio(IVistaInicio vista){
+public ControladorInicio(IVistaInicio vista, Operador operadorLogueado){
     this.vista = vista;
-    this.opImagen = new OpImagen(vista.getOperadorLogueado());
-    this.opPersona = new OpPersona(vista.getOperadorLogueado());
-    this.opEstadisticas = new OpEstadisticas(vista.getOperadorLogueado());
+    this.opImagen = new OpImagen(operadorLogueado);
+    this.opPersona = new OpPersona(operadorLogueado);
+    this.opEstadisticas = new OpEstadisticas(operadorLogueado);
 }
 /*Constructores*/
 
@@ -35,6 +36,11 @@ public ControladorInicio(IVistaInicio vista){
             3 -  Suscripciones activas
         De acá en adelante hay que ver como meterlo en el frontend.
         */
+        
+        if(lista!=null){
+            vista.mostrarEstadisticas(lista);
+        }
+        
     }
     public void obtenerEstadisticasB() throws Exception, SQLException{
         

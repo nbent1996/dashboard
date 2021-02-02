@@ -61,12 +61,20 @@
                     $.get("ManejoSuscripcionesServlet?accion=altaSuscripcion&tiempoContrato=" + tiempoContrato + "&listaPaquetesSeleccionados=" + listaPaquetesSeleccionados, function(data){
                         
                         document.getElementById("spanMensaje").innerHTML = data;
-                        //FALTA IMPLEMENTAR EL LIMPIAR CAMPOS
-                                //if(data!=null){
-                                    //limpiarCampos();
-                                //}
+                        
+                                if(data!=null){
+                                    limpiarCampos();
+                                }
                             
                     });
+           }
+           
+           function limpiarCampos(){
+               
+               $("#txtbxNroDocCliPrincipal").val("");
+               $("#selTiempoContrato").prop('selectedIndex',0);
+               
+               document.getElementById("spanClienteAsociado").innerHTML="Ninguno seleccionado";
            }
            
            
