@@ -21,7 +21,6 @@
     
     Empresa empresa = operador.getEmpresaAsociada();
     
-    
 
 %>
 
@@ -49,25 +48,24 @@
 
             //ArrayList <Integer> listaEstadisticas = new ArrayList();
             
-            var listaEstadisticas = new Array();
+            //var listaEstadisticas = new Array();
             
-            mostrarEstadisticas();
+            //mostrarEstadisticas();
             
-            function mostrarEstadisticas(){
-                $.get("InicioServlet?accion=estadisticasInicio", function(data){
+            //function mostrarEstadisticas(){
+              //  $.get("InicioServlet?accion=estadisticasInicio", function(data){
                     //document.getElementById("selTiposDocumentoClienteAlta").innerHTML=data;
-                    alert(data);
-                        if(data!=null){//quiere decir que guardó las estadísticas en la session en la vistaInicioWeb (en un array de ints)
-                            listaEstadisticas.push(data);
-                            
-                            
-                            
-                        }
-        
-                        
-                });
-            }
+                //    alert(data);
+                  //      if(data!=null){//quiere decir que guardó las estadísticas en la session en la vistaInicioWeb (en un array de ints)
+                    //        listaEstadisticas.push(data);
 
+                      //  }
+   
+               // });
+           // }
+
+           //YA NO HAGO ACÁ EL TRABAJO DE LAS ESTADÍSTICAS YA QUE SE EJECUTABA PRIMERO EL CODIGO DEL SCRIPLET Y LUEGO EL CODIGO DE ESTE SCRIPT QUE CREABA LA SESSION
+           //CON LOS DATOS DE LAS ESTADÍSTICAS
 
         </script>
         <div class="w3-bar w3-top w3-black w3-large" id="divBarraSuperior">
@@ -172,7 +170,18 @@
                         <div class="w3-container w3-light-blue w3-text-white w3-padding-16">
                             <div class="w3-left"><i class="fa fa-users w3-xxlarge"></i></div>
                             <div class="w3-right">
-                                <h3 name="clientesRegistrados"></h3> <!-- Cantidad clientes totales -->
+                                <h3 name="clientesRegistrados">
+                                    
+                                    
+                                    <%
+                                        
+                                        Integer estadisticaClientes = (Integer) request.getSession().getAttribute("estadisticaClientes");
+                                        out.print(estadisticaClientes);
+                                        
+                                    %>
+                                    
+                                    
+                                </h3> <!-- Cantidad clientes totales -->
                             </div>
                             <div class="w3-clear"></div>
                             <h4>Clientes Registrados</h4>
@@ -182,7 +191,18 @@
                         <div class="w3-container w3-light-blue w3-text-white w3-padding-16">
                             <div class="w3-left"><i class="fa fa-user-circle w3-xxlarge"></i></div>
                             <div class="w3-right">
-                                <h3 name="cuentasSecundarias"></h3> <!-- Cantidad cuentas secundarias -->
+                                <h3 name="cuentasSecundarias">
+                                    
+                                    
+                                    <%
+                                        
+                                        Integer estadisticaCuentasSecundarias = (Integer) request.getSession().getAttribute("estadisticaCuentasSecundarias");
+                                        out.print(estadisticaCuentasSecundarias);
+                                        
+                                    %>
+                                    
+                                    
+                                </h3> <!-- Cantidad cuentas secundarias -->
                             </div>
                             <div class="w3-clear"></div>
                             <h4>Cuentas Secundarias</h4>
@@ -192,7 +212,18 @@
                         <div class="w3-container w3-light-blue w3-text-white w3-padding-16">
                             <div class="w3-left"><i class="fa fa-video-camera w3-xxlarge"></i></div>
                             <div class="w3-right">
-                                <h3 name="dispositivosRegistrados"></h3> <!-- Cantidad Dispositivos en uso -->
+                                <h3 name="dispositivosRegistrados">
+                                    
+                                    
+                                    <%
+                                        
+                                        Integer estadisticaDispositivos = (Integer) request.getSession().getAttribute("estadisticaDispositivos");
+                                        out.print(estadisticaDispositivos);
+                                        
+                                    %>
+                                    
+                                    
+                                </h3> <!-- Cantidad Dispositivos en uso -->
                             </div>
                             <div class="w3-clear"></div>
                             <h4>Dispositivos Registrados</h4>
@@ -202,7 +233,16 @@
                         <div class="w3-container w3-light-blue w3-text-white w3-padding-16">
                             <div class="w3-left"><i class="fa fa-handshake-o w3-xxlarge"></i></div>
                             <div class="w3-right">
-                                <h3 name="suscripciones"></h3> <!-- Cantidad suscripciones -->
+                                <h3 name="suscripciones">
+                                    
+                                    <%
+                                        
+                                        Integer estadisticaSuscripciones = (Integer) request.getSession().getAttribute("estadisticaSuscripciones");
+                                        out.print(estadisticaSuscripciones);
+                                        
+                                    %>
+                                    
+                                </h3> <!-- Cantidad suscripciones -->
                             </div>
                             <div class="w3-clear"></div>
                             <h4>Suscripciones activas</h4>

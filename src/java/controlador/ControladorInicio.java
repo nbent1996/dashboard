@@ -22,7 +22,7 @@ public ControladorInicio(IVistaInicio vista, Operador operadorLogueado){
     this.vista = vista;
     this.opImagen = new OpImagen(operadorLogueado);
     this.opPersona = new OpPersona(operadorLogueado);
-    this.opEstadisticas = new OpEstadisticas(operadorLogueado);
+    //this.opEstadisticas = new OpEstadisticas(operadorLogueado);
 }
 /*Constructores*/
 

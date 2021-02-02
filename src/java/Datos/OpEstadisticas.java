@@ -15,7 +15,7 @@ private Operador usuarioSistema;
 /*Estado*/
 
 /*Constructores*/
-public OpEstadisticas(Operador usuarioSistema){
+public OpEstadisticas(Operador usuarioSistema){ //Lo instancia el ControladorLogin en el metodo crearEstadisticas que se ejecuta cuando se permite el acceso en el login
     this.database = Database.getInstancia();
     this.usuarioSistema = usuarioSistema;
     this.logging = new OpLogSistema(this.usuarioSistema);
