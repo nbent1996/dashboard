@@ -38,7 +38,7 @@ public class ControladorManejoClientes {
     /*Comportamiento*/
     public void altaPrincipal(String nroDocumento, String nombreCompleto, String codPais, String email, String telefono, boolean servicioActivo, String tipoDocumento) {
         try {
-            Empresa e = new Empresa("526283747346"); //EMPRESA HARDCODEADA
+            Empresa e = new Empresa(userLogueado.getEmpresaAsociada().getIdentificacionTributaria());
             Principal p = new Principal("", nombreCompleto, e, new Pais(codPais), -1, email, nroDocumento, servicioActivo, new TipoDocumento(tipoDocumento), telefono);
             p.validar();
             opPersona.guardar(null, p);
@@ -53,7 +53,7 @@ public class ControladorManejoClientes {
     
     public void altaSecundario(String nombreCompleto, String codPais, String email, String telefono, String nroDocumento, String nroDocumentoPrincipal) {
         try {
-            Empresa e = new Empresa("526283747346"); //EMPRESA HARDCODEADA
+            Empresa e = new Empresa(userLogueado.getEmpresaAsociada().getIdentificacionTributaria());
             Secundario s = new Secundario("", nombreCompleto, e, new Pais(codPais), -1, email, new Principal(nroDocumentoPrincipal), telefono);
             s.validar();
             opPersona.guardar(null, s);

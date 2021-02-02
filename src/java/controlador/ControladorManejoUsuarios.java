@@ -39,7 +39,7 @@ public class ControladorManejoUsuarios{
     /*Comportamiento*/
     public void altaUsuario(String usuarioAltaUsr, String nombreCompletoAltaUsr, String codPaisAltaUsr, String generoAltaUsr, String tipoUsuarioAltaUsr){
         try {
-            Empresa e = new Empresa("526283747346"); //SE DEBE TRAER LA EMPRESA DE LA SESSION
+            Empresa e = new Empresa(userLogueado.getEmpresaAsociada().getIdentificacionTributaria());
             Operador operador = new Operador(usuarioAltaUsr, usuarioAltaUsr,nombreCompletoAltaUsr, e,new Pais(codPaisAltaUsr), new TipoUsuario(tipoUsuarioAltaUsr), generoAltaUsr );
             operador.validar();
             opPersona.guardar(null, operador);
