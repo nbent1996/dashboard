@@ -32,10 +32,10 @@ public OpLogSistema(Operador usuarioSistema){
     }
 
     @Override
-    public LogSistema insertar(LogSistema c) throws Exception, SQLException {/*Usuario Sistema hardcodeado resolver eso*/
+    public LogSistema insertar(LogSistema c) throws Exception, SQLException {
         ArrayList<String> listaSQL  = new ArrayList();
         String textoError = c.getTextoError().replace("'","");
-        String sql = "INSERT INTO LogsSistema (usuarioSistema, operacion, textoError) values ('"+this.usuarioSistema+"','"+c.getOperacion()+"','"+textoError+"')";
+        String sql = "INSERT INTO LogsSistema (usuarioSistema, operacion, textoError) values ('"+this.usuarioSistema.getUsuarioSistema()+"','"+c.getOperacion()+"','"+textoError+"')";
         listaSQL.add(sql);
         for (QueryEjecutada q: c.getListaQuerys()){
             String query = q.getTextoQuery();

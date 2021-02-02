@@ -59,7 +59,7 @@ public class ControladorManejoDispositivos{
     //el cliente principal puede ser nulo ya que se puede dar de alta un dispositivo sin cliente asociado
     public void altaDispositivo(String nroSerie, String estado, String tipoDispositivo, Principal clientePrincipalSeleccionado){
         try{
-            Empresa e = new Empresa("526283747346"); //EMPRESA HARDCODEADA, SE DEBE TOMAR DE LA SESSION
+            Empresa e = new Empresa(userLogueado.getEmpresaAsociada().getIdentificacionTributaria());
             TipoDispositivo tD = opTipoDispositivo.buscar(" WHERE TiposDispositivos.modelo='"+tipoDispositivo+"' ",null).get(0);
             Dispositivo d = new Dispositivo(nroSerie, estado, tD, e, clientePrincipalSeleccionado);
             d.validar();
