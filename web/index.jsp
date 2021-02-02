@@ -1,13 +1,30 @@
 
+<%@page import="java.util.ArrayList"%>
 <%@page import="Modelo.Empresa"%>
 <%@page import="Modelo.Operador"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
     String msg = request.getParameter("msg");
-    Operador operador = (Operador) request.getSession().getAttribute("OperadorLogueado");
+    
+    HttpSession sessionLogin = request.getSession();
+    if (sessionLogin == null) {
+        response.sendRedirect("login.jsp?msg=Debe loguearse");
+        return;
+    }
+    
+    Operador operador = (Operador) sessionLogin.getAttribute("OperadorLogueado");
+    if (operador == null) {
+        response.sendRedirect("login.jsp?msg=Debe loguearse");
+        return;
+    }
+    
+    
     Empresa empresa = operador.getEmpresaAsociada();
+    
+    
 
 %>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -29,6 +46,28 @@
     </head>
     <body class="w3-light-grey">
         <script>
+
+            //ArrayList <Integer> listaEstadisticas = new ArrayList();
+            
+            var listaEstadisticas = new Array();
+            
+            mostrarEstadisticas();
+            
+            function mostrarEstadisticas(){
+                $.get("InicioServlet?accion=estadisticasInicio", function(data){
+                    //document.getElementById("selTiposDocumentoClienteAlta").innerHTML=data;
+                    alert(data);
+                        if(data!=null){//quiere decir que guardó las estadísticas en la session en la vistaInicioWeb (en un array de ints)
+                            listaEstadisticas.push(data);
+                            
+                            
+                            
+                        }
+        
+                        
+                });
+            }
+
 
         </script>
         <div class="w3-bar w3-top w3-black w3-large" id="divBarraSuperior">

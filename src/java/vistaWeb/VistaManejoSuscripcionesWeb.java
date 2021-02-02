@@ -80,12 +80,7 @@ public class VistaManejoSuscripcionesWeb implements IVistaManejoSuscripciones{
     private void altaSuscripcion(HttpServletRequest request, HttpServletResponse response) {
         this.request = request;
         this.response = response;
-//        Calendar cal = Calendar.getInstance();
-//        
-//        int dia = cal.get(Calendar.DAY_OF_MONTH);
-//        int mes = cal.get(Calendar.MONTH);
-//        int anio = cal.get(Calendar.YEAR);
-        //Fecha fechaActual = new Fecha();
+
         Fecha fechaActual = new Fecha();//seteo fecha actual acá ya que no la puedo traer del jsp
         String listaIdPaquetes[] = request.getParameterValues("listaPaquetesSeleccionados"); // lista de id de paquetes seleccionados       
         DTOFechas fechaInicioSuscripcion = new DTOFechas(fechaActual);
