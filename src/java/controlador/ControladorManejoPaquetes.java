@@ -147,7 +147,7 @@ public class ControladorManejoPaquetes {
             paquetes = opPaquete.obtenerTodos();
             vista.generarTablaPaquetes("tblPaquetesPaqueteBaja", paquetes, new Moneda("UYU","Pesos Uruguayos","$")); //MONEDA HARDCODEADA, OBTENERLA DESDE LA IDENTIFICACION TRIBUTARIA DE LA SESSION
         } catch (Exception ex) {
-            vista.mensajeError("paquetes_Baja.jsp", "Error en la carga de paquetes");
+            vista.mensajeError("paquetes_BajaModificacion.jsp", "Error en la carga de paquetes");
         }
     }
 

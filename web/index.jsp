@@ -66,7 +66,15 @@
 
            //YA NO HAGO ACÁ EL TRABAJO DE LAS ESTADÍSTICAS YA QUE SE EJECUTABA PRIMERO EL CODIGO DEL SCRIPLET Y LUEGO EL CODIGO DE ESTE SCRIPT QUE CREABA LA SESSION
            //CON LOS DATOS DE LAS ESTADÍSTICAS
-
+            mostrarTablasInicio();   
+            function mostrarTablasInicio(){
+                    $.get("InicioServlet?accion=mostrarTablaPaquetes", function(data){
+                        document.getElementById("spanNuestrosPaquetesInicio").innerHTML=data;
+                    });
+                    $.get("InicioServlet?accion=mostrarTablaTiposDispositivos", function(data){
+                        document.getElementById("spanCatalogoDispositivosInicio").innerHTML=data;
+                    });
+            }
         </script>
         <div class="w3-bar w3-top w3-black w3-large" id="divBarraSuperior">
             <button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey " onclick="w3_open();"><i class="fa fa-bars"></i> &nbsp;Menu</button>
@@ -254,6 +262,7 @@
                     <div class="w3-row-padding">
 
                         <h5>Nuestros paquetes de suscripci&oacute;n</h5>
+                        <span id="spanNuestrosPaquetesInicio" name="spanNuestrosPaquetesInicio"></span>
                     </div>
                 </div>
                 <hr>
@@ -261,6 +270,7 @@
                     <div class="w3-row-padding">
 
                         <h5>Cat&aacute;logo de dispositivos</h5>
+                        <span id="spanCatalogoDispositivosInicio" name="spanCatalogoDispositivosInicio"></span>
                     </div>
                 </div>
                 <hr>

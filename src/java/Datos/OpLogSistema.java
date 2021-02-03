@@ -24,11 +24,7 @@ public OpLogSistema(Operador usuarioSistema){
 /*Comportamiento*/
     @Override
     public LogSistema guardar(LogSistema cAnterior, LogSistema c) throws Exception, SQLException {
-        if(cAnterior == null){
             return insertar(c);
-        }else{
-            return modificar(cAnterior, c);
-        }
     }
 
     @Override

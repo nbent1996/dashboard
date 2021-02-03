@@ -2,8 +2,12 @@ package controlador;
 
 import Datos.OpEstadisticas;
 import Datos.OpImagen;
+import Datos.OpPaquete;
 import Datos.OpPersona;
+import Datos.OpTipoDispositivo;
 import Modelo.Operador;
+import Modelo.Paquete;
+import Modelo.TipoDispositivo;
 import controlador.Interfaces.IVistaInicio;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -14,6 +18,8 @@ private IVistaInicio vista;
 private OpImagen opImagen;
 private OpPersona opPersona;
 private OpEstadisticas opEstadisticas;
+private OpTipoDispositivo opTipoDispositivo;
+private OpPaquete opPaquete;
 
 /*Estado*/
 
@@ -22,6 +28,8 @@ public ControladorInicio(IVistaInicio vista, Operador operadorLogueado){
     this.vista = vista;
     this.opImagen = new OpImagen(operadorLogueado);
     this.opPersona = new OpPersona(operadorLogueado);
+    this.opTipoDispositivo = new OpTipoDispositivo(operadorLogueado);
+    this.opPaquete = new OpPaquete(operadorLogueado);
     //this.opEstadisticas = new OpEstadisticas(operadorLogueado);
 }
 /*Constructores*/
@@ -42,19 +50,33 @@ public ControladorInicio(IVistaInicio vista, Operador operadorLogueado){
         }
         
     }
-    public void obtenerEstadisticasB() throws Exception, SQLException{
-        
+    public void generarTablaTiposDispositivos() {
+        try{
+        ArrayList<TipoDispositivo> items = opTipoDispositivo.buscar(null, null);
+        vista.mostrarTablaTiposDispositivos(items);
+        }catch(SQLException ex){
+            vista.mensajeError("index.jsp", "Error en la carga del catálogo de dispositivos.");
+        }catch(Exception ex){
+            vista.mensajeError("index.jsp", "Error en la carga del catálogo de dispositivos.");
+
+        }
     }
-    public void obtenerEstadisticasC() throws Exception, SQLException{
-        
+    public void generarTablaPaquetes() {
+        try{
+        ArrayList<Paquete> items = opPaquete.buscar(null, null);
+        vista.mostrarTablaPaquetes(items);
+        }catch(SQLException ex){
+            vista.mensajeError("index.jsp", "Error en la carga del listado de paquetes.");
+        }catch(Exception ex){
+            vista.mensajeError("index.jsp", "Error en la carga del listado de paquetes.");
+
+        }
     }
-    public void obtenerEstadisticasD() throws Exception, SQLException{
-        
-    }
-    
 /*Comportamiento*/
 
 /*Getters y Setters*/
 
 /*Getters y Setters*/
+
+
 }

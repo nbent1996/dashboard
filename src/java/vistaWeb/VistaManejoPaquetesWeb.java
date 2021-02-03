@@ -147,7 +147,7 @@ public class VistaManejoPaquetesWeb implements IVistaManejoPaquetes{
     @Override
     public void generarTablaPaquetes(String idTabla, ArrayList<Paquete> items, Moneda moneda){
         try{
-            String componente = Funciones.tablaPaquetes(idTabla, items, moneda);
+            String componente = Funciones.tablaPaquetes(idTabla, items, moneda, false);
             out.write(componente + "\n\n");
         }catch(ProgramException ex){
             mensajeError("paquete_BajaModificacion.jsp","Error al generar la tabla de Paquetes de dispositivos.");

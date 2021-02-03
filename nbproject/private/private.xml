@@ -2,21 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/src/java/vistaWeb/VistaLoginWeb.java</file>
-            <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/web/index.jsp</file>
-            <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/src/java/Datos/OpPaquete.java</file>
-            <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/src/java/Datos/OpDispositivo.java</file>
-            <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/src/java/Datos/Database.java</file>
-            <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/src/java/Datos/OpEstadisticas.java</file>
-            <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/src/java/controlador/ControladorLogin.java</file>
-            <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/src/java/Datos/OpPersona.java</file>
-            <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/test/TestingDatos/TestPaquetes.java</file>
-            <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/src/java/controlador/ControladorManejoSuscripciones.java</file>
-            <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/web/login.jsp</file>
-            <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/src/java/Datos/OpSuscripcion.java</file>
-            <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/test/TestingDatos/TestDispositivos.java</file>
-            <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/src/java/Modelo/Suscripcion.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

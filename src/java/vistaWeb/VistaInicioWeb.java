@@ -1,6 +1,11 @@
 package vistaWeb;
 
+import Modelo.Funciones;
+import Modelo.Moneda;
 import Modelo.Operador;
+import Modelo.Paquete;
+import Modelo.ProgramException;
+import Modelo.TipoDispositivo;
 import controlador.ControladorInicio;
 import controlador.Interfaces.IVistaInicio;
 import java.io.IOException;
@@ -42,6 +47,12 @@ public class VistaInicioWeb implements IVistaInicio {
             case "estadisticasInicio":
                   obtenerEstadisticas();
             break;
+            case "mostrarTablaPaquetes":
+                this.generarTablaPaquetes();
+            break;
+            case "mostrarTablaTiposDispositivos":
+                this.generarTablaTiposDispositivos();
+            break;
         }
     }
     private void obtenerEstadisticas(){
@@ -50,6 +61,12 @@ public class VistaInicioWeb implements IVistaInicio {
         } catch (Exception ex) {
             Logger.getLogger(VistaInicioWeb.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    private void generarTablaPaquetes(){
+       controlador.generarTablaPaquetes();
+    }
+    private void generarTablaTiposDispositivos(){
+        controlador.generarTablaTiposDispositivos();
     }
     @Override
     public void mensajeError(String nombreJSP, String texto) {
@@ -102,20 +119,35 @@ public class VistaInicioWeb implements IVistaInicio {
             
                 //request.getSession(false).setAttribute("estadisticas", items);//guardo en la session el arraylist conteniendo las estadisticas para agarrarlo en el jsp
                 out.write(items.toString());
-            
-            
         }
-        
-        
-        
     }
-    
+    @Override
+    public void mostrarTablaPaquetes(ArrayList<Paquete> items) {
+        try{
+            String componente = Funciones.tablaPaquetes("tblPaquetesInicio", items, new Moneda("UYU","Pesos Uruguayos","$"), true);
+            out.write(componente + "\n\n");                    
+        }catch(ProgramException ex){
+            System.out.println("ERROR");
+        }
+    }
+
+    @Override
+    public void mostrarTablaTiposDispositivos(ArrayList<TipoDispositivo> items) {
+        try{
+            String componente = Funciones.tablaTiposDispositivos("tblTiposDispositivos",items,true);
+            out.write(componente + "\n\n");  
+        }catch(ProgramException ex){
+            System.out.println("ERROR");
+        }
+    }
     
 /*Comportamiento*/
 
 /*Getters y Setters*/
 
 /*Getters y Setters*/
+
+
 
 }
 

@@ -59,7 +59,7 @@ public class Funciones {
         return lista;
     
     }
-        public static String tablaPaquetes(String idTabla, ArrayList<Paquete> paquetes, Moneda moneda) throws ProgramException{
+        public static String tablaPaquetes(String idTabla, ArrayList<Paquete> paquetes, Moneda moneda, boolean exportarPlanilla) throws ProgramException{
             String retorno = "";
             retorno+="<table id='"+idTabla+"' class='w3-table-all'>\n";
             /*Cabezales*/
@@ -68,7 +68,9 @@ public class Funciones {
                 retorno+="<th>Nombre</th>\n";
                 retorno+="<th>Costo bruto</th>\n";
                 retorno+="<th>Dispositivos que contiene</th>\n";
+                if(!exportarPlanilla){
                 retorno+="<th>Seleccionado</th>\n";
+                }
             retorno+="</tr>\n";
             /*Contenido*/
             for(Paquete p : paquetes){
@@ -85,7 +87,9 @@ public class Funciones {
                     retorno+="<td>"+p.getNombre()+"</td>\n";
                     retorno+="<td>"+moneda.getSimbolo()+" "+p.getCostoBruto()+"</td>\n";
                     retorno+="<td>" +listado+ "</td>\n";
+                    if(!exportarPlanilla){
                     retorno+="<td><input type='checkbox' class='w3-check' value='"+p.getIdPaquete()+"' name='"+p.getIdPaquete()+"'></td>\n";
+                    }
                 retorno+="</tr>\n";
             }
             retorno+="</table>";
