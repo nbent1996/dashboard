@@ -8,13 +8,13 @@
     
     HttpSession sessionLogin = request.getSession(false);
     if (sessionLogin == null) {
-        response.sendRedirect("login.jsp?msg=mensaje 1");
+        response.sendRedirect("login.jsp?msg=Debe Loguearse");
         return;
     }
     
     Operador operador = (Operador) sessionLogin.getAttribute("OperadorLogueado");
     if (operador == null) {
-        response.sendRedirect("login.jsp?msg=mensaje 2");
+        response.sendRedirect("login.jsp?msg=Debe Loguearse");
         return;
     }
    

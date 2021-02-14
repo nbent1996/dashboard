@@ -186,11 +186,7 @@
                         <input type="button" id="btnBuscarPaquetesBaja" class="submitSearch" value="Buscar">
                         <input type="reset" class="limpiarCampos" value="Limpiar campos">    
                     </div>
-<<<<<<< HEAD
                     </form>
-=======
-                </form>
->>>>>>> f0ef2ac3752eae3f925c050d6c180e528b008c47
                     <hr>
                     <div>
                         <h5 class="nb-title-center">Lista de Paquetes</h5>
@@ -223,11 +219,8 @@
                     </div>
                 </div>
             </div>
-<<<<<<< HEAD
-=======
         </div>
->>>>>>> f0ef2ac3752eae3f925c050d6c180e528b008c47
-    </div>
+        </div>
 
 
 </body>

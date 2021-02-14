@@ -2,36 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-<<<<<<< HEAD
-            <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/web/planillaDispositivos.jsp</file>
-            <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/src/java/vistaWeb/VistaLoginWeb.java</file>
-            <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/web/planillaTiposDispositivo.jsp</file>
-            <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/web/index.jsp</file>
-            <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/src/java/controlador/ControladorInicio.java</file>
-            <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/src/java/vistaWeb/Servlet/LoginServlet.java</file>
-            <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/src/java/vistaWeb/VistaInicioWeb.java</file>
-            <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/src/java/vistaWeb/VistaManejoSuscripcionesWeb.java</file>
-            <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/src/java/Datos/Database.java</file>
-            <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/web/css/stylesCustom.css</file>
-            <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/web/dispositivo_BajaModificacion.jsp</file>
-            <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/src/java/controlador/ControladorLogin.java</file>
-            <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/web/cliente_Alta.jsp</file>
-            <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/web/login.jsp</file>
-            <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/web/paquete_BajaModificacion.jsp</file>
-            <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/web/planillaSuscripciones.jsp</file>
-            <file>file:/C:/Users/nicol/Desktop/Proyecto/dashboard/web/planillaClientes.jsp</file>
-=======
-            <file>file:/C:/Users/andre/Desktop/Dashboard/dashboard/web/cliente_BajaModificacion.jsp</file>
-            <file>file:/C:/Users/andre/Desktop/Dashboard/dashboard/src/java/vistaWeb/Servlet/ManejoDispositivosServlet.java</file>
-            <file>file:/C:/Users/andre/Desktop/Dashboard/dashboard/src/java/Datos/OpSuscripcion.java</file>
-            <file>file:/C:/Users/andre/Desktop/Dashboard/dashboard/src/java/vistaWeb/VistaManejoSuscripcionesWeb.java</file>
-            <file>file:/C:/Users/andre/Desktop/Dashboard/dashboard/src/java/controlador/ControladorManejoDispositivos.java</file>
-            <file>file:/C:/Users/andre/Desktop/Dashboard/dashboard/src/java/vistaWeb/VistaManejoDispositivosWeb.java</file>
-            <file>file:/C:/Users/andre/Desktop/Dashboard/dashboard/web/paquete_BajaModificacion.jsp</file>
-            <file>file:/C:/Users/andre/Desktop/Dashboard/dashboard/web/suscripcion_Alta.jsp</file>
-            <file>file:/C:/Users/andre/Desktop/Dashboard/dashboard/src/java/controlador/ControladorManejoSuscripciones.java</file>
->>>>>>> f0ef2ac3752eae3f925c050d6c180e528b008c47
-        </group>
+        <group/>
     </open-files>
 </project-private>
