@@ -186,6 +186,7 @@
                         <input type="button" id="btnBuscarPaquetesBaja" class="submitSearch" value="Buscar">
                         <input type="reset" class="limpiarCampos" value="Limpiar campos">    
                     </div>
+                    </form>
                     <hr>
                     <div>
                         <h5 class="nb-title-center">Lista de Paquetes</h5>
@@ -218,7 +219,6 @@
                     </div>
                 </div>
             </div>
-        </form>
     </div>
 </div>
 </div>

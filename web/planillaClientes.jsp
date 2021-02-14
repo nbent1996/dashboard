@@ -1,7 +1,9 @@
+<%@page import="Modelo.Operador"%>
 <%@page contentType="application/vnd.ms-excel" pageEncoding="UTF-8"%>
 <%@page import="Modelo.Funciones, Datos.OpPersona"%>
 <%
-    OpPersona op = new OpPersona("loginUser");
+    Operador operador = (Operador) request.getSession().getAttribute("OperadorLogueado");
+    OpPersona op = new OpPersona(operador);
     String tipo = request.getParameter("tipo");
     String nombreArchivo = "";
     if(tipo.equals("Principal")){

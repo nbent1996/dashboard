@@ -1,7 +1,9 @@
+<%@page import="Modelo.Operador"%>
 <%@page contentType="application/vnd.ms-excel" pageEncoding="UTF-8"%>
 <%@page import="Modelo.Funciones, Datos.OpDispositivo"%>
 <%
-    OpDispositivo op = new OpDispositivo("loginUser");
+    Operador operador = (Operador) request.getSession().getAttribute("OperadorLogueado");
+    OpDispositivo op = new OpDispositivo(operador);
     String nombreArchivo = "listaDispositivos.xls";
     response.setCharacterEncoding("UTF-8");
     response.setHeader("Content-Disposition", "inline;filename=" + nombreArchivo);

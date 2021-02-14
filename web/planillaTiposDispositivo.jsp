@@ -1,7 +1,9 @@
+<%@page import="Modelo.Operador"%>
 <%@page contentType="application/vnd.ms-excel" pageEncoding="UTF-8"%>
 <%@page import="Modelo.Funciones, Datos.OpTipoDispositivo"%>
 <%
-    OpTipoDispositivo op = new OpTipoDispositivo("loginUser");
+    Operador operador = (Operador) request.getSession().getAttribute("OperadorLogueado");
+    OpTipoDispositivo op = new OpTipoDispositivo(operador);
     String nombreArchivo = "catalogoDispositivos.xls";
     response.setHeader("Content-Disposition", "inline;filename=" + nombreArchivo);
 %>

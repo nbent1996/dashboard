@@ -6,18 +6,18 @@
 <%
     String msg = request.getParameter("msg");
     
-    HttpSession sessionLogin = request.getSession();
+    HttpSession sessionLogin = request.getSession(false);
     if (sessionLogin == null) {
-        response.sendRedirect("login.jsp?msg=Debe loguearse");
+        response.sendRedirect("login.jsp?msg=mensaje 1");
         return;
     }
     
     Operador operador = (Operador) sessionLogin.getAttribute("OperadorLogueado");
     if (operador == null) {
-        response.sendRedirect("login.jsp?msg=Debe loguearse");
+        response.sendRedirect("login.jsp?msg=mensaje 2");
         return;
     }
-    
+   
     
     Empresa empresa = operador.getEmpresaAsociada();
     

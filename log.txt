@@ -1,0 +1,1118 @@
+commit 12fb14ddac28cf1f7ef8f27596cb52043afcaa33
+Author: Nicolás Bentancor <nicolasbentancor1996@hotmail.com>
+Date:   Tue Feb 2 22:31:34 2021 -0300
+
+    actualizacion
+
+commit 744c362955ad665e45c695a4f756949e74e29658
+Author: Nicolás Bentancor <nicolasbentancor1996@hotmail.com>
+Date:   Tue Feb 2 22:28:25 2021 -0300
+
+    Inicio del dashboard finalizado
+
+commit b2333b0060c56d6841bbb8a3af131f7a62b1deca
+Merge: 4a93812 a77fe6c
+Author: Nicolás Bentancor <nicolasbentancor1996@hotmail.com>
+Date:   Tue Feb 2 20:46:58 2021 -0300
+
+    Merge branch 'master' of https://github.com/nbent1996/dashboard
+
+commit 4a93812dbd7243fdb121102490fc9c2b530c9725
+Author: Nicolás Bentancor <nicolasbentancor1996@hotmail.com>
+Date:   Tue Feb 2 20:46:36 2021 -0300
+
+    Filtrado por empresa en todas las tablas OK
+
+commit a77fe6c8297d7d836fea9b672db1c014b33d3dd8
+Merge: 189182f 1a42fbf
+Author: aaureta <57241025+aaureta@users.noreply.github.com>
+Date:   Tue Feb 2 04:41:22 2021 -0300
+
+    Merge branch 'master' of https://github.com/nbent1996/dashboard
+
+commit 189182f05f2c0c834760d4eb4fb71bc0b8acee0b
+Author: aaureta <57241025+aaureta@users.noreply.github.com>
+Date:   Tue Feb 2 04:41:02 2021 -0300
+
+    Panel de estadísticas funcionando OK
+
+commit 1a42fbf3da1cd7e0d0ad62746ba640a0fb827379
+Merge: d256596 1a33747
+Author: Nicolás Bentancor <nicolasbentancor1996@hotmail.com>
+Date:   Mon Feb 1 21:56:27 2021 -0300
+
+    eliminar hardcodeos de identificacionTributaria
+
+commit d256596965cf445190821ffaa27b0943ec221445
+Author: Nicolás Bentancor <nicolasbentancor1996@hotmail.com>
+Date:   Mon Feb 1 21:55:43 2021 -0300
+
+    eliminar hardcodeos de identificacionTributaria
+
+commit 1a33747abce5084822f44993a21cfeda0f262af7
+Author: aaureta <57241025+aaureta@users.noreply.github.com>
+Date:   Mon Feb 1 21:49:15 2021 -0300
+
+    Alta suscripciones versión final. Arreglos en pagina inicio y login
+
+commit 450c9346e0b684ea27b99b963bbc9ea9662f945e
+Author: Nicolás Bentancor <nicolasbentancor1996@hotmail.com>
+Date:   Mon Feb 1 19:07:50 2021 -0300
+
+    estadisticas recuadros celestes hasta controlador ok
+
+commit 475bce71fc63ce04c11792154b37fddfd523ed7f
+Author: Nicolás Bentancor <nicolasbentancor1996@hotmail.com>
+Date:   Sun Jan 31 16:12:40 2021 -0300
+
+    Ahora todos los objetos DAO en vez de tener solo el usuarioSistema tienen el objeto completo
+
+commit d01277155b81586533d56a398f6be86180ad7503
+Author: Nicolás Bentancor <nicolasbentancor1996@hotmail.com>
+Date:   Sun Jan 31 14:34:58 2021 -0300
+
+    actualizacion
+
+commit 59283450d9238c67240e577a33d40f1cffd4e50d
+Author: Nicolás Bentancor <nicolasbentancor1996@hotmail.com>
+Date:   Sat Jan 30 22:29:00 2021 -0300
+
+    Correcciones de maquetado, replicar codigo de scriplets en todos los jsp
+
+commit 1090e1a16efd08735e84257f594ba01b46b6493d
+Author: Nicolás Bentancor <nicolasbentancor1996@hotmail.com>
+Date:   Sat Jan 30 20:18:42 2021 -0300
+
+    Codificacion con scriplets con los logos de las empresas de cable
+
+commit 0ed046feafa3171adbb67509ea856740c3aa33be
+Author: Nicolás Bentancor <nicolasbentancor1996@hotmail.com>
+Date:   Sat Jan 30 01:10:11 2021 -0300
+
+    Personalizacion del maquetado con scriptlets (faltan detalles)
+
+commit fb02a1f30946c0a54bcb7ee75ad536f90a851427
+Author: Nicolás Bentancor <nicolasbentancor1996@hotmail.com>
+Date:   Thu Jan 28 21:41:22 2021 -0300
+
+    Correcciones en OPSuscripcion e implementación de login con session para auditar lo que hace cada usuario
+
+commit 1d126dede3a4d0acb7ba6a0a6d71701c506c76ee
+Merge: 6937df0 fb19c22
+Author: Nicolás Bentancor <nicolasbentancor1996@hotmail.com>
+Date:   Thu Jan 28 15:08:53 2021 -0300
+
+    actualizacion
+
+commit 6937df0ea4d8b384d1426efc3f4f4da418fa5260
+Author: Nicolás Bentancor <nicolasbentancor1996@hotmail.com>
+Date:   Thu Jan 28 15:08:15 2021 -0300
+
+    actualizacion
+
+commit fb19c22b635ce80d78bc5978d262af280ed5ed0b
+Author: aaureta <57241025+aaureta@users.noreply.github.com>
+Date:   Wed Jan 27 20:57:57 2021 -0300
+
+    Alta de suscripción terminada primera versión
+
+commit e11859494a5e408b6d8dc7964187c0842e50856e
+Author: aaureta <57241025+aaureta@users.noreply.github.com>
+Date:   Sun Jan 24 19:41:27 2021 -0300
+
+    Alta de dispositivos terminada con manejo de session
+
+commit f295e14628a4fe9b621ae263c2a35362d47a9039
+Author: Nicolás Bentancor <nicolasbentancor1996@hotmail.com>
+Date:   Tue Jan 19 00:35:06 2021 -0300
+
+    Se exportan 5 planillas excel OK
+
+commit 50e5b43bcbbd50d2fafb3ac88aec1e18f589d531
+Merge: c8e5f58 ef2a510
+Author: Nicolás Bentancor <nicolasbentancor1996@hotmail.com>
+Date:   Mon Jan 18 19:04:36 2021 -0300
+
+    actualizacion
+
+commit c8e5f58e297a408578e699d79578273bb14e16e9
+Merge: b54ca39 5afedf8
+Author: Nicolás Bentancor <nicolasbentancor1996@hotmail.com>
+Date:   Mon Jan 18 19:03:13 2021 -0300
+
+    Exportacion de planilla de dispositivos OK
+
+commit ef2a5109ed7bcb8e08b18f89e0314ede447c1f09
+Author: aaureta <57241025+aaureta@users.noreply.github.com>
+Date:   Sun Jan 17 19:20:13 2021 -0300
+
+    Terminado y probado OK el alta de Paquetes con Ajax
+
+commit b54ca3987d70991ae53440898448f25321841d7b
+Merge: 836290b 6152bd4
+Author: Nicolás Bentancor <nicolasbentancor1996@hotmail.com>
+Date:   Mon Jan 11 18:37:07 2021 -0300
+
+    actualizacion
+
+commit 5afedf802e96c2bb9e5a993cccedaefef4151038
+Author: aaureta <57241025+aaureta@users.noreply.github.com>
+Date:   Sun Jan 3 22:22:59 2021 -0300
+
+    Borrado de suscripciones completo terminado OK
+
+commit 1a98cdeb8b26fb5108f0bd03eca8212eb63d3b05
+Author: aaureta <57241025+aaureta@users.noreply.github.com>
+Date:   Sat Jan 2 21:39:35 2021 -0300
+
+    Baja de suscripciones con filtros funcionando. Falta funcionalidad de borrado
+
+commit b0d4439ef901b0987598dd8d053f2331df1c3d65
+Author: aaureta <57241025+aaureta@users.noreply.github.com>
+Date:   Thu Dec 31 05:01:51 2020 -0300
+
+    Se redujo a solo una carga de combos por llamada Ajax en alta usuarios y clientes (select paises hardcodeados)
+
+commit 836290b6eb92e07d5b570d1c2f299713f4c86791
+Author: Nicolás Bentancor <nicolasbentancor1996@hotmail.com>
+Date:   Tue Dec 29 23:16:41 2020 -0300
+
+    actualizacion
+
+commit 6152bd4171e77337dbb06c75c898abb5bede88ff
+Author: aaureta <57241025+aaureta@users.noreply.github.com>
+Date:   Tue Dec 29 22:54:55 2020 -0300
+
+    Alta de usuarios con Ajax OK
+
+commit 2f96cd531b6ea6f65392df2cbb941bad72dd6670
+Author: aaureta <57241025+aaureta@users.noreply.github.com>
+Date:   Tue Dec 29 05:09:11 2020 -0300
+
+    Alta clientes con Ajax OK
+
+commit 98d9ba3b5185321d7810e3e59fb1eecaf9d8e51e
+Author: aaureta <57241025+aaureta@users.noreply.github.com>
+Date:   Sun Dec 27 20:49:27 2020 -0300
+
+    Baja de dispositivos terminado OK
+
+commit 03da13944bc211dae6de8e877e36a90645388db4
+Author: Nicolás Bentancor <nicolasbentancor1996@hotmail.com>
+Date:   Sat Dec 26 22:23:49 2020 -0300
+
+    actualizacion merge a mano
+
+commit ee0872d9a9df71de1155cac1e8753f11952da0cc
+Merge: 3e7bbc2 0bf2b5b
+Author: Nicolás Bentancor <nicolasbentancor1996@hotmail.com>
+Date:   Sat Dec 26 22:09:53 2020 -0300
+
+    actualizacion
+
+commit 3e7bbc220a8eae17053d83b8b4a2d3c817427bf6
+Author: Nicolás Bentancor <nicolasbentancor1996@hotmail.com>
+Date:   Sat Dec 26 22:08:23 2020 -0300
+
+    Borrar todos los JSP de Modificacion
+    Replicar nueva navegabilidad en todos los jsp
+    Reutilizar todos los JSP de baja para la modificacion de registros (solo maquetado).
+    Maquetado de baja/modificacion de Dispositivos
+    Alinear los textbox (CSS) en baja/modificacion de clientes
+    Corregir todos los metododos getFiltroProcesado de los controladores
+
+commit 0bf2b5bb3c840412050a305d332be0176762239e
+Author: aaureta <57241025+aaureta@users.noreply.github.com>
+Date:   Thu Dec 24 03:36:43 2020 -0300
+
+    Arreglos en altas de usuarios y clientes. Resta implementar Ajax para mensajes modales
+
+commit 6155782d2940565f51c1d2280e45c1845eb3a02f
+Merge: 5de5a4e 917f628
+Author: aaureta <57241025+aaureta@users.noreply.github.com>
+Date:   Wed Dec 23 03:09:24 2020 -0300
+
+    Versión final baja paquetes. Arreglos menores en baja clientes
+
+commit 5de5a4e8e4b6b91d061adfcc9df6701fefc8fa5d
+Author: aaureta <57241025+aaureta@users.noreply.github.com>
+Date:   Wed Dec 23 03:08:45 2020 -0300
+
+    Versión final baja paquetes. Arreglos menores en baja clientes
+
+commit 917f6287e8a58a2aa185040da6452af53b1a5f59
+Author: Nicolás Bentancor <nicolasbentancor1996@hotmail.com>
+Date:   Tue Dec 22 20:45:44 2020 -0300
+
+    Maquetada la baja de suscripcion
+
+commit 847e21994f25f593c60274488c7734efc3b401f2
+Author: Nicolás Bentancor <nicolasbentancor1996@hotmail.com>
+Date:   Mon Dec 21 23:31:17 2020 -0300
+
+    Fix OpPersona Borrar OK
+
+commit f772ddcd81f64a972fc5bd05860f489d78ac3f9d
+Merge: aa26488 9829222
+Author: Nicolás Bentancor <nicolasbentancor1996@hotmail.com>
+Date:   Mon Dec 21 22:25:43 2020 -0300
+
+    Fix borrar OpPersona
+
+commit aa264882ba81b721d969b000bfd01eec9a35fe43
+Author: Nicolás Bentancor <nicolasbentancor1996@hotmail.com>
+Date:   Mon Dec 21 22:25:00 2020 -0300
+
+    Fix borrar OpPersona
+
+commit 7325be66985e64bfdedc418b7f04c80e31798a3d
+Author: Nicolás Bentancor <nicolasbentancor1996@hotmail.com>
+Date:   Mon Dec 21 22:23:39 2020 -0300
+
+    Fix borrar OpPersona
+
+commit 98292220c692513d30a0be2705f7f32ecc0bec4c
+Author: aaureta <57241025+aaureta@users.noreply.github.com>
+Date:   Sun Dec 20 02:17:03 2020 -0300
+
+    Baja de cliente OK, falta corregir borrado Prin y Sec a la vez. Baja Paquetes primera version (hasta controlador)
+
+commit 0dda25bb41079947993204ba3d44e5e1c5a28de4
+Author: Nicolás Bentancor <nicolasbentancor1996@hotmail.com>
+Date:   Sat Dec 19 23:05:12 2020 -0300
+
+    19-12-2020b
+
+commit 4ab56cd39714b6c5b89b9b56f95ce01eacc9412d
+Author: Nicolás Bentancor <nicolasbentancor1996@hotmail.com>
+Date:   Sat Dec 19 22:27:16 2020 -0300
+
+    19-12-2020
+
+commit 62151d760605bfd9ecb6f9441070c7243d949283
+Author: aaureta <57241025+aaureta@users.noreply.github.com>
+Date:   Fri Dec 18 21:15:00 2020 -0300
+
+    Baja de clientes terminado. Falta mostrar mensajes modales
+
+commit 0a2ca431471623d9c19f46de88cf0d039f86c89a
+Merge: 77960b3 32a892d
+Author: aaureta <57241025+aaureta@users.noreply.github.com>
+Date:   Thu Dec 17 03:33:52 2020 -0300
+
+    Baja de clientes con filtrado optimizado, borrado pendiente
+
+commit 77960b3fc638a325bb71d6c0a35d4300e9bd6ded
+Author: aaureta <57241025+aaureta@users.noreply.github.com>
+Date:   Thu Dec 17 03:32:38 2020 -0300
+
+    Baja de clientes con filtrado optimizado, borrado pendiente
+
+commit 32a892da262c1e0bdbf566f755e336e6933cab06
+Author: Nicolás Bentancor <nicolasbentancor1996@hotmail.com>
+Date:   Wed Dec 16 23:06:12 2020 -0300
+
+    Se agrego el atributo nombre a la tabla paquete, maquetado de baja de paquete
+
+commit 1f740527870882d3cf7a309bf83bb6dad239f8f6
+Author: aaureta <57241025+aaureta@users.noreply.github.com>
+Date:   Wed Dec 16 02:49:50 2020 -0300
+
+    Primera versión baja clientes *Tabla inicio muestra clientes OK*  (CON MERGE ARREGLADO)
+
+commit 93f82cab60ff83dc7fe96a3e74dc023171eb1cfe
+Merge: a5ab45f 16898b8
+Author: aaureta <57241025+aaureta@users.noreply.github.com>
+Date:   Wed Dec 16 02:32:17 2020 -0300
+
+    Primera versión baja clientes CON MERGE *Tabla inicio muestra clientes OK*
+
+commit a5ab45fb0899832e9cb80bd7873def4df0f69323
+Author: aaureta <57241025+aaureta@users.noreply.github.com>
+Date:   Wed Dec 16 02:29:13 2020 -0300
+
+    Primera versión baja clientes *Tabla inicio muestra clientes OK*
+
+commit 16898b8d27079ce8215a3f782ae38bfab805e5a9
+Author: Nicolás Bentancor <nicolasbentancor1996@hotmail.com>
+Date:   Tue Dec 15 21:34:29 2020 -0300
+
+    Alta de usuarios reparado, Alta de dispositivos funcional con 2 atributos hardcodeados de momento, faltan mensajes modales en ambos
+
+commit 22e89d3e72d140b89aa0acdd3011cb2000bc2cf4
+Author: aaureta <57241025+aaureta@users.noreply.github.com>
+Date:   Tue Dec 15 02:46:53 2020 -0300
+
+    Baja de usuarios versión final, con mensaje correcto y refresco de tabla
+
+commit ef7fb7f6ec87986007b2d7f50e5f78f815c81d21
+Author: Nicolás Bentancor <nicolasbentancor1996@hotmail.com>
+Date:   Mon Dec 14 22:19:34 2020 -0300
+
+    Reestructura eventos javascript
+
+commit b4404668e7d3c4d74e04b0e7bad5aa4b12efa42a
+Author: Nicolás Bentancor <nicolasbentancor1996@hotmail.com>
+Date:   Mon Dec 14 21:17:23 2020 -0300
+
+    actualización 14-12 21:17
+
+commit 08b0cd214982c4362d9e87df65579c5949879928
+Merge: 348b2cf 1f079ba
+Author: Nicolás Bentancor <nicolasbentancor1996@hotmail.com>
+Date:   Mon Dec 14 19:09:49 2020 -0300
+
+            -Colocar los script embebidos de javascript en html en la parte superior del body (todos los archivos)
+            -Fue eliminado todo el css embebido en html (transferido a stylesCustom.css)
+            -Se eliminó todo el espaciado innecesario en todos los jsp
+            -Reparar ventana modal (ahora la sidebar queda por detrás del fondo negro).
+    Merge branch 'master' of https://github.com/nbent1996/dashboard
+
+commit 348b2cfad12c6b617ae19e6559688c607487985b
+Author: Nicolás Bentancor <nicolasbentancor1996@hotmail.com>
+Date:   Mon Dec 14 17:10:46 2020 -0300
+
+    actualizando private.xml
+
+commit 1f079ba3c2b4c3b53cfc4187bb98caea64969dce
+Author: aaureta <57241025+aaureta@users.noreply.github.com>
+Date:   Mon Dec 14 01:18:23 2020 -0300
+
+    Primera versión mensajes modales en Baja Usuarios
+
+commit 197d932c79673872c6c31ac335d60d711e9e6771
+Author: Nicolás Bentancor <nicolasbentancor1996@hotmail.com>
+Date:   Sun Dec 13 22:07:23 2020 -0300
+
+    Funcionalidad completa en alta de clientes
+
+commit 739c8301c41ce40a32d244ccc6a37f4a557bef31
+Author: Nicolás Bentancor <nicolasbentancor1996@hotmail.com>
+Date:   Sun Dec 13 22:02:07 2020 -0300
+
+    Funcionalidad completa en alta de clientes
+
+commit 599212dc3066e42e54200b1ad4889bb8e51397b0
+Merge: 46b703c 3a2fafc
+Author: Nicolás Bentancor <nicolasbentancor1996@hotmail.com>
+Date:   Sun Dec 13 00:38:02 2020 -0300
+
+    Maquetado de alta de suscripcion y paquete
+
+commit 46b703c8f84b0a1730f2c1b6d0871f06957117bb
+Merge: 3312486 c26e525
+Author: Nicolás Bentancor <nicolasbentancor1996@hotmail.com>
+Date:   Sun Dec 13 00:34:20 2020 -0300
+
+    Maquetado de alta de suscripcion y paquete
+
+commit 3a2fafcf8cc0bfa1d38176dd447595f601c4ba43
+Author: aaureta <57241025+aaureta@users.noreply.github.com>
+Date:   Sat Dec 12 22:07:25 2020 -0300
+
+    Tabla baja usuarios con optimización de filtros
+
+commit 33124868ca99d0247007034e056698c0ad434fad
+Author: Nicolás Bentancor <nicolasbentancor1996@hotmail.com>
+Date:   Sat Dec 12 17:26:23 2020 -0300
+
+    commit 12-12-2020
+
+commit c26e525e127120d3c76b6b66e9ba0963517f00b5
+Author: aaureta <57241025+aaureta@users.noreply.github.com>
+Date:   Fri Dec 11 21:05:48 2020 -0300
+
+    Tabla baja de usuarios terminada, borra simple y multiple
+
+commit 7a5b077721165be001546c2ea0967e579da67b39
+Author: Nicolás Bentancor <nicolasbentancor1996@hotmail.com>
+Date:   Thu Dec 10 22:31:57 2020 -0300
+
+    Se simplifico en todas las maquetas que hay realizadas hasta el momento el manejo de mensajes de error/exito, usando solo 1 metodo para cada cosa.
+    Se intento implementar que un select al cambiar su valor recargue otro select para poder categorizar los tipos de dispositivos y que no queden un monton en un solo select. (sin exito)
+    Se comenzo el maquetado de el alta de suscripciones.
+    Se agrego una clave foranea y se actualizo los diagramas.
+
+commit 9490f9da42b6a536d42fa97f555ee1c3dd954c32
+Author: Nicolás Bentancor <nicolasbentancor1996@hotmail.com>
+Date:   Wed Dec 9 22:31:59 2020 -0300
+
+    Mergeo de archivos 09-12
+
+commit c0c4c7a5fbe09106784e5ac1658cb51fc8dd64e9
+Merge: b0be30d 555dde3
+Author: Nicolás Bentancor <nicolasbentancor1996@hotmail.com>
+Date:   Wed Dec 9 22:24:09 2020 -0300
+
+    Maquetado de alta de dispositivos
+
+commit b0be30df31b1c2dfafbc33b83ed67620f6c27cc0
+Author: Nicolás Bentancor <nicolasbentancor1996@hotmail.com>
+Date:   Wed Dec 9 22:23:40 2020 -0300
+
+    Maquetado de alta de dispositivos
+
+commit 555dde3672bfd46aff6dcbd51e7d8821010b7ab6
+Author: aaureta <57241025+aaureta@users.noreply.github.com>
+Date:   Wed Dec 9 22:21:25 2020 -0300
+
+    Tabla borrar usuario terminada, falta testing. No está mostrando usuario buscado
+
+commit d537025ac7d16d1b3e5483c287cba768e241578c
+Merge: e022fc0 f4865cc
+Author: aaureta <57241025+aaureta@users.noreply.github.com>
+Date:   Tue Dec 8 22:53:36 2020 -0300
+
+    Tabla con checkboxes implementada en baja de usuario. Programar controlador
+
+commit e022fc009c07d36df63c65368525ba22ec3d0218
+Author: aaureta <57241025+aaureta@users.noreply.github.com>
+Date:   Tue Dec 8 22:52:42 2020 -0300
+
+    Tabla con checkboxes implementada en baja de usuario. Programar controlador
+
+commit f4865cc972b1c2dbed6a2317034e8ae59aeafb07
+Merge: 08f2afe 1130260
+Author: Nicolás Bentancor <nicolasbentancor1996@hotmail.com>
+Date:   Tue Dec 8 15:56:53 2020 -0300
+
+    08-12-2020B
+
+commit 08f2afe663006de2463b7011d58fab212402b163
+Author: Nicolás Bentancor <nicolasbentancor1996@hotmail.com>
+Date:   Tue Dec 8 15:10:05 2020 -0300
+
+    08/12/2020
+
+commit 1130260ab9fb10eee01448134d7e436ea8a46879
+Merge: 3eea86e 1e488f6
+Author: aaureta <57241025+aaureta@users.noreply.github.com>
+Date:   Mon Dec 7 22:42:02 2020 -0300
+
+    Tabla en baja de usuarios OK, falta uso de checkboxes
+
+commit 1e488f66c6d3646aaf7d2d32b8061612b484bbb7
+Author: Nicolás Bentancor <nicolasbentancor1996@hotmail.com>
+Date:   Mon Dec 7 22:41:20 2020 -0300
+
+    Maquetado y funcionalidad de Alta de clientes (faltan detalles)
+
+commit 3eea86e8c30c8fffd5b5261c6f10f6760f27ba66
+Author: aaureta <57241025+aaureta@users.noreply.github.com>
+Date:   Mon Dec 7 22:41:20 2020 -0300
+
+    Tabla en baja de usuarios OK, falta uso de checkboxes
+
+commit ce17cbb361311d1602d2ac8e1af25dab4a5586cf
+Merge: 6ff214c a04272c
+Author: Nicolás Bentancor <nicolasbentancor1996@hotmail.com>
+Date:   Mon Dec 7 18:52:48 2020 -0300
+
+    Maquetado alta de cliente completo
+
+commit 6ff214c09d83a9dee8079642dfc5a86d7f921503
+Author: Nicolás Bentancor <nicolasbentancor1996@hotmail.com>
+Date:   Mon Dec 7 18:52:02 2020 -0300
+
+    Maquetado alta de cliente completo
+
+commit a04272c154dbb9ed4e82c7117e1beacda38b7161
+Author: aaureta <57241025+aaureta@users.noreply.github.com>
+Date:   Sun Dec 6 20:29:50 2020 -0300
+
+    Primera versión mostrar tabla en Baja usuario
+
+commit 32cc8740a7c82c9295022b9eef680b576624e68d
+Author: Nicolás Bentancor <nicolasbentancor1996@hotmail.com>
+Date:   Sun Dec 6 18:18:43 2020 -0300
+
+    Maquetado de Alta de clientes en proceso
+
+commit 95b9c77b0378556c8f04045a5941b4f485384a88
+Author: aaureta <57241025+aaureta@users.noreply.github.com>
+Date:   Sat Dec 5 16:01:25 2020 -0300
+
+    Login completo OK
+
+commit be1c2fd69f7d7019cd8794e49874d80c59e491df
+Author: Nicolás Bentancor <nicolasbentancor1996@hotmail.com>
+Date:   Thu Dec 3 21:56:17 2020 -0300
+
+    Mergeo de codigo 03/12/2020
+
+commit 52eab09776302d97ad5efd7578d2eb2673c9ac87
+Merge: 54a26e5 487b491
+Author: Nicolás Bentancor <nicolasbentancor1996@hotmail.com>
+Date:   Thu Dec 3 21:24:09 2020 -0300
+
+    Solucionado el problema con los select
+
+commit 54a26e5edba520d5c0ef002f39fe7daca5272f4d
+Author: Nicolás Bentancor <nicolasbentancor1996@hotmail.com>
+Date:   Thu Dec 3 21:22:46 2020 -0300
+
+    Solucionado el problema con los select
+
+commit 487b4912505212024703fb0c6d93f730b9e0c364
+Merge: 4837941 e08c26a
+Author: aaureta <57241025+aaureta@users.noreply.github.com>
+Date:   Wed Dec 2 22:54:15 2020 -0300
+
+    Login completo primera versión. Error al deployar
+
+commit 483794152537e8698dbb953eff6c1e3ce4c38b58
+Author: aaureta <57241025+aaureta@users.noreply.github.com>
+Date:   Wed Dec 2 22:50:19 2020 -0300
+
+    Login completo primera versión. Error al deployar
+
+commit e08c26aa95f7516e3d9bc38101ddc7ae22e8f22b
+Author: Nicolás Bentancor <nicolasbentancor1996@hotmail.com>
+Date:   Wed Dec 2 21:31:30 2020 -0300
+
+    Se ordenó el codigo.
+
+commit 136efa0b48a80cfae9daa70b2a7abd1783ea6772
+Merge: c02213a 049b293
+Author: Nicolás Bentancor <nicolasbentancor1996@hotmail.com>
+Date:   Wed Dec 2 19:00:50 2020 -0300
+
+    Login maquetado
+
+commit c02213a80c5b3bcf784c534bed684326bfafa03a
+Author: Nicolás Bentancor <nicolasbentancor1996@hotmail.com>
+Date:   Wed Dec 2 18:56:23 2020 -0300
+
+    Login maquetado
+
+commit 049b293280436de6242b7c9331e403763c068027
+Merge: 48cdda1 7809561
+Author: aaureta <57241025+aaureta@users.noreply.github.com>
+Date:   Tue Dec 1 22:58:23 2020 -0300
+
+    Primera versión Frontend suscripciones y paquetes
+
+commit 48cdda1e30b8cd114055afbb297436277b19d434
+Author: aaureta <57241025+aaureta@users.noreply.github.com>
+Date:   Tue Dec 1 22:57:34 2020 -0300
+
+    Primera versión Frontend suscripciones y paquetes
+
+commit 7809561610e9c0160c9956ec2b1c46aa77cf3b66
+Merge: 5c39e92 ec4350b
+Author: Nicolás Bentancor <nicolasbentancor1996@hotmail.com>
+Date:   Tue Dec 1 22:23:10 2020 -0300
+
+    Maquetado de login, inserción de imagenes en mysql, cambiar pag principal a login.jsp
+
+commit 5c39e92c51a79d1878c37e493befaa5facf24745
+Author: Nicolás Bentancor <nicolasbentancor1996@hotmail.com>
+Date:   Tue Dec 1 22:22:22 2020 -0300
+
+    Maquetado de login, inserción de imagenes en mysql, cambiar pag principal a login.jsp
+
+commit ec4350b6172105c405f0cfa30d4be38991d5e408
+Author: aaureta <57241025+aaureta@users.noreply.github.com>
+Date:   Tue Dec 1 12:20:59 2020 -0300
+
+    Primera versión FrontEnd Manejo de clientes
+
+commit c024e2c44038ce248e0e36d9eb8aaf67a313fe88
+Author: Nicolás Bentancor <nicolasbentancor1996@hotmail.com>
+Date:   Tue Dec 1 09:48:56 2020 -0300
+
+    Botonera sidebard con submenús desplegables
+
+commit 9a17465126a35c07d54821af2c768866623520bd
+Merge: de7ab60 88c826f
+Author: Nicolás Bentancor <nicolasbentancor1996@hotmail.com>
+Date:   Mon Nov 30 17:19:36 2020 -0300
+
+    Lógica de negocio para Suscripcion, TieneTP, TipoDispositivo, TipoDocumento, TipoUsuario
+
+commit de7ab60500874a8880e130f32f21af7074debf66
+Author: Nicolás Bentancor <nicolasbentancor1996@hotmail.com>
+Date:   Mon Nov 30 17:18:30 2020 -0300
+
+    Lógica de negocio para Suscripcion, TieneTP, TipoDispositivo, TipoDocumento, TipoUsuario
+
+commit 88c826fb6ca3c7b61c84f2616ab76d60d29a3c31
+Merge: ca4c430 8353d22
+Author: aaureta <57241025+aaureta@users.noreply.github.com>
+Date:   Mon Nov 30 01:30:45 2020 -0300
+
+    Front ABM dispositivos primera versión
+
+commit ca4c43054ab5ebfebc54c196403b623c30ab21ee
+Author: aaureta <57241025+aaureta@users.noreply.github.com>
+Date:   Mon Nov 30 01:29:06 2020 -0300
+
+    Front ABM dispositivos primera versión
+
+commit 8353d22fb6cb62b0989c8f9e446c8f4b2e5cfff7
+Author: Nicolás Bentancor <nicolasbentancor1996@hotmail.com>
+Date:   Sun Nov 29 20:24:17 2020 -0300
+
+    Lógica de negocio para Idioma, Moneda, Operador, Pais, Paquete, Privilegio (con tests ejecutados)
+
+commit a66f32159be286b37f589424857258e3a6560e30
+Merge: cbbfe06 7c54642
+Author: Nicolás Bentancor <nicolasbentancor1996@hotmail.com>
+Date:   Sun Nov 29 16:01:26 2020 -0300
+
+    Logica de negocio para Principal, Secundario, Dispositivos, Empresas OK
+
+commit cbbfe0698f3f60e2ba3dff2340d2c17bcc3c2218
+Author: Nicolás Bentancor <nicolasbentancor1996@hotmail.com>
+Date:   Sun Nov 29 16:00:32 2020 -0300
+
+    Logica de negocio para Principal, Secundario, Dispositivos, Empresas OK
+
+commit 7c54642dcdba6011881526a395e387911e4b2ce9
+Author: aaureta <57241025+aaureta@users.noreply.github.com>
+Date:   Sat Nov 28 23:06:17 2020 -0300
+
+    Maquetado general en todos los JSP
+
+commit ca653d914dcf0f6b3e36969c3be8356a35948cc4
+Merge: c986abb 1a2e202
+Author: Nicolás Bentancor <nicolasbentancor1996@hotmail.com>
+Date:   Fri Nov 27 20:27:53 2020 -0300
+
+    UsuarioSistema autogenerado para objetos Cliente
+
+commit c986abbed2d30ccd8e4e299b8310ef8a160e8a89
+Author: Nicolás Bentancor <nicolasbentancor1996@hotmail.com>
+Date:   Fri Nov 27 20:27:04 2020 -0300
+
+    UsuarioSistema autogenerado para objetos Cliente
+
+commit 1a2e20256c64ccd8b266e063b2c4ea30c488882a
+Merge: 224e949 743e262
+Author: aaureta <57241025+aaureta@users.noreply.github.com>
+Date:   Fri Nov 27 17:54:59 2020 -0300
+
+    Merge branch 'master' of https://github.com/nbent1996/dashboard Andrés
+
+commit 224e9498245a744d24be1046d336de2f1707767e
+Author: aaureta <57241025+aaureta@users.noreply.github.com>
+Date:   Fri Nov 27 17:54:43 2020 -0300
+
+    Maquetado JSP Manejo de usuarios
+
+commit 743e2628c3a881aa23884d22456bda2f4089209b
+Merge: a8eebe7 f428ef5
+Author: Nicolás Bentancor <nicolasbentancor1996@hotmail.com>
+Date:   Fri Nov 27 16:59:08 2020 -0300
+
+    Actualización 27-11
+
+commit a8eebe709dc9600631644f523a88147a4c0a5888
+Author: Nicolás Bentancor <nicolasbentancor1996@hotmail.com>
+Date:   Fri Nov 27 16:58:16 2020 -0300
+
+    Actualización 27-11
+
+commit f428ef520d3501051a4137f27d1ebf6387cd0e84
+Author: aaureta <57241025+aaureta@users.noreply.github.com>
+Date:   Thu Nov 26 22:48:30 2020 -0300
+
+    mostrar combos OK, falta devolver seleccionado a servidor
+
+commit 5fe12de4747779d5d34ad57267c145e3f0238cc1
+Merge: 1798efa 954c7e2
+Author: aaureta <57241025+aaureta@users.noreply.github.com>
+Date:   Wed Nov 25 23:30:42 2020 -0300
+
+    Probar paso de parametros de combos
+
+commit 1798efac46845dffce67231a1683ab26cde62308
+Author: aaureta <57241025+aaureta@users.noreply.github.com>
+Date:   Wed Nov 25 23:30:03 2020 -0300
+
+    Probar paso de parametros de combos
+
+commit 954c7e26f83f020e4612eedc25162ff0ecb3d743
+Merge: 4d5c4ec 1abaa48
+Author: Nicolás Bentancor <nicolasbentancor1996@hotmail.com>
+Date:   Wed Nov 25 20:04:41 2020 -0300
+
+    Test OpSuscripcion y OpPaquetes OK, CAPA DE DATOS 100% FUNCIONAL
+
+commit 4d5c4ec86ea83dbdf785eabaf0d602d6c8f0bc9a
+Author: Nicolás Bentancor <nicolasbentancor1996@hotmail.com>
+Date:   Wed Nov 25 20:03:25 2020 -0300
+
+    Test OpSuscripcion y OpPaquetes OK, CAPA DE DATOS 100% FUNCIONAL
+
+commit 1abaa4825ddd6beb4b3f5c0ef072a01a31e96461
+Author: aaureta <57241025+aaureta@users.noreply.github.com>
+Date:   Tue Nov 24 22:57:35 2020 -0300
+
+    Combos AltaUsuario con datos traídos de la BD OK
+
+commit 7bd400fbeeabdf46d26169defd1887e404283bc6
+Author: Nicolás Bentancor <nicolasbentancor1996@hotmail.com>
+Date:   Tue Nov 24 18:54:46 2020 -0300
+
+    Adaptaciones clase Database para glassfish
+
+commit 6aba54c8c037856adf0d9f317efa8eb92c1b23cf
+Merge: 27b3200 ccbf304
+Author: Nicolás Bentancor <nicolasbentancor1996@hotmail.com>
+Date:   Mon Nov 23 21:45:19 2020 -0300
+
+    OpTiposDipositivos, OpEmpresas Test OK
+
+commit ccbf30465310b9e027f9d30dc91b0d24ff56c836
+Author: aaureta <57241025+aaureta@users.noreply.github.com>
+Date:   Mon Nov 23 21:44:19 2020 -0300
+
+    Prueba Ajax carga tiposUsuarios
+
+commit 27b3200e69ea72a2f9659a8ae398002d1ed2c993
+Author: Nicolás Bentancor <nicolasbentancor1996@hotmail.com>
+Date:   Mon Nov 23 21:43:49 2020 -0300
+
+    OpTiposDipositivos, OpEmpresas Test OK
+
+commit 36384cf7e0f12264c27173019ff754c05f890bc0
+Merge: ed572bd 908c885
+Author: aaureta <57241025+aaureta@users.noreply.github.com>
+Date:   Sun Nov 22 23:51:02 2020 -0300
+
+    agregado carga de combos con ajax, sin testear
+
+commit ed572bd5cafdfd64b879c8d3bea7ab323576ff61
+Author: aaureta <57241025+aaureta@users.noreply.github.com>
+Date:   Sun Nov 22 23:49:35 2020 -0300
+
+    agregado carga de combos con ajax, sin testear
+
+commit 908c8852c5c585f5d31a9b4f13bd671bbb85114c
+Merge: 865eec1 cee46b5
+Author: Nicolás Bentancor <nicolasbentancor1996@hotmail.com>
+Date:   Sun Nov 22 23:46:36 2020 -0300
+
+    OpPersonas, OpTiposUsuario, OpIdiomas, OpPaises, OpTiposDocumento, OpMonedas OK
+
+commit 865eec1dbaaa14544459bb014ca51032f083de64
+Author: Nicolás Bentancor <nicolasbentancor1996@hotmail.com>
+Date:   Sun Nov 22 23:43:22 2020 -0300
+
+    OpPersonas, OpTiposUsuario, OpIdiomas, OpPaises, OpTiposDocumento, OpMonedas OK
+
+commit cee46b574de6d7dd41efe25982036d5574b39b4b
+Merge: 6746fca 4914c1a
+Author: aaureta <57241025+aaureta@users.noreply.github.com>
+Date:   Sun Nov 22 23:36:18 2020 -0300
+
+    agregado carga de combos con ajax, sin testear
+
+commit 6746fca19d3e4e45703e986967106744d70f0551
+Author: aaureta <57241025+aaureta@users.noreply.github.com>
+Date:   Sun Nov 22 23:35:31 2020 -0300
+
+    agregado carga de combos con ajax, sin testear
+
+commit 4914c1ab697e8d3eedcd122409f9556f500d9087
+Merge: 47f5177 540e47e
+Author: Nicolás Bentancor <nicolasbentancor1996@hotmail.com>
+Date:   Sun Nov 22 18:38:53 2020 -0300
+
+    Test OpPersonas OK
+
+commit 47f517739daf2d8aea33d040b2369b3cefbf6225
+Author: Nicolás Bentancor <nicolasbentancor1996@hotmail.com>
+Date:   Sun Nov 22 18:37:45 2020 -0300
+
+    Test OpPersonas OK
+
+commit 540e47e7ebce5a0f25cacd5b4e9d1d5e30e858ca
+Merge: a5f6c33 2735e05
+Author: aaureta <57241025+aaureta@users.noreply.github.com>
+Date:   Sun Nov 22 13:41:29 2020 -0300
+
+    update en manejo de usuarios
+
+commit a5f6c33c2d5a0d66b54e2db72431637a54a9a183
+Author: aaureta <57241025+aaureta@users.noreply.github.com>
+Date:   Sun Nov 22 13:40:39 2020 -0300
+
+    update en manejo de usuarios
+
+commit 2735e054973b905f32d99865e4e06f07a79aee3f
+Merge: 66ec9b8 fcbbb07
+Author: Nicolás Bentancor <nicolasbentancor1996@hotmail.com>
+Date:   Sun Nov 22 00:29:54 2020 -0300
+
+    Testing- OpDispositivos, OpFacturas OK, OpPersonas falta UPDATE Y DELETE
+
+commit 66ec9b88b08627d73ea8f7cfa73d3491ea9db8f8
+Author: Nicolás Bentancor <nicolasbentancor1996@hotmail.com>
+Date:   Sun Nov 22 00:28:42 2020 -0300
+
+    Testing- OpDispositivos, OpFacturas OK, OpPersonas falta UPDATE Y DELETE
+
+commit fcbbb0709c749537ccf9066761c6ec84697e4505
+Author: aaureta <57241025+aaureta@users.noreply.github.com>
+Date:   Sat Nov 21 20:09:26 2020 -0300
+
+    Cambios en abm usuarios
+
+commit 5880483239ebcbe2b89da3146eeea4bf2da8425b
+Merge: 277c432 0f5fb42
+Author: aaureta <57241025+aaureta@users.noreply.github.com>
+Date:   Sat Nov 21 14:35:52 2020 -0300
+
+    Merge branch 'master' of https://github.com/nbent1996/dashboard
+
+commit 277c432a2c4eb3a5ca92e984a61e6b861fd2c5e9
+Author: aaureta <57241025+aaureta@users.noreply.github.com>
+Date:   Sat Nov 21 14:35:37 2020 -0300
+
+    cambio en jsp usuario
+
+commit 0f5fb42dc908fe62cf15569e0f18a293bde1cd47
+Merge: c7cda66 a8ff4c9
+Author: Nicolás Bentancor <nicolasbentancor1996@hotmail.com>
+Date:   Sat Nov 21 01:24:04 2020 -0300
+
+    Avances sobre JUnit, TestCategorias y TestDispositivos
+
+commit c7cda66d7950a5b065b1b11f6c2b25e4b93e6309
+Author: Nicolás Bentancor <nicolasbentancor1996@hotmail.com>
+Date:   Sat Nov 21 01:22:46 2020 -0300
+
+    Avances sobre JUnit, TestCategorias y TestDispositivos
+
+commit a8ff4c9ec48e72400d4e180c1f983e10a5f25af0
+Merge: d845219 7f96591
+Author: aaureta <57241025+aaureta@users.noreply.github.com>
+Date:   Fri Nov 20 17:16:45 2020 -0300
+
+    agregado ProgramException, modificado manejo de controlador usuarios
+
+commit d8452195cae62e405c7e9c514375a8311a74b879
+Author: aaureta <57241025+aaureta@users.noreply.github.com>
+Date:   Fri Nov 20 16:32:12 2020 -0300
+
+    cambio en OpPersona
+
+commit 7f96591cc0bb1d0b9eb5c8b175d9b642157f5b72
+Author: Nicolás Bentancor <nicolasbentancor1996@hotmail.com>
+Date:   Fri Nov 20 16:28:10 2020 -0300
+
+    Programando primer controlador
+
+commit 84fe0acb4cf89183623014213affe3b8418f7519
+Merge: 1cb6caf 34b4ee6
+Author: Nicolás Bentancor <nicolasbentancor1996@hotmail.com>
+Date:   Fri Nov 20 16:09:57 2020 -0300
+
+    Validaciones persona2
+
+commit 1cb6cafca24b1e839038728e9b01905968eb426d
+Merge: 67bacc5 04cca7f
+Author: Nicolás Bentancor <nicolasbentancor1996@hotmail.com>
+Date:   Fri Nov 20 16:08:23 2020 -0300
+
+    Validaciones persona
+
+commit 34b4ee632124f9afcba3fa2506b4bc4e4ebb2d68
+Author: aaureta <57241025+aaureta@users.noreply.github.com>
+Date:   Thu Nov 19 22:44:15 2020 -0300
+
+    modificación en controlador manejo de usuarios
+
+commit 7fc079d04af7c033baa0c6b40b0c94f57c9577b2
+Author: aaureta <57241025+aaureta@users.noreply.github.com>
+Date:   Tue Nov 17 22:44:44 2020 -0300
+
+    Implementacion de método para reuso de servlet en forms
+
+commit 67bacc5fe96fd1fe107891e82e858b28bab4caff
+Author: Nicolás Bentancor <nicolasbentancor1996@hotmail.com>
+Date:   Tue Nov 17 22:30:29 2020 -0300
+
+    Intento sin exito de conectar capa de datos con server
+
+commit 04cca7f352b0493ef74ab882e50d2a98c1ccae1b
+Merge: 85becb7 b4b6c19
+Author: aaureta <57241025+aaureta@users.noreply.github.com>
+Date:   Mon Nov 16 23:00:18 2020 -0300
+
+    Arreglo en css alta usuarios - validaciones en frontend de campos del form
+
+commit 85becb73c4e1ebf8297312bc256f47ba018fcbb5
+Author: aaureta <57241025+aaureta@users.noreply.github.com>
+Date:   Mon Nov 16 22:58:48 2020 -0300
+
+    Arreglo en css alta usuarios - validaciones en frontend de campos del form
+
+commit b4b6c196a7c998f6a02f39613b0631b1ec2224e3
+Author: Nicolás Bentancor <nicolasbentancor1996@hotmail.com>
+Date:   Mon Nov 16 22:31:59 2020 -0300
+
+    Capa de Datos completa
+
+commit 46f8e1c4270dfdef28289e9a6cf6c9b14b70ad58
+Merge: 012fc3e ef786ad
+Author: Nicolás Bentancor <nicolasbentancor1996@hotmail.com>
+Date:   Mon Nov 16 19:10:44 2020 -0300
+
+    Merge branch 'master' of https://github.com/nbent1996/dashboard
+
+commit 012fc3edb9d8eaacff6f55f09d72d8d1ed163841
+Author: Nicolás Bentancor <nicolasbentancor1996@hotmail.com>
+Date:   Mon Nov 16 19:10:27 2020 -0300
+
+    Capa de datos completa sin testing aun
+
+commit ef786ada8b0fab079609fe8f8a4b523d394b7bac
+Author: aaureta <57241025+aaureta@users.noreply.github.com>
+Date:   Mon Nov 16 03:20:24 2020 -0300
+
+    prueba exitosa en alta usuario con MVC (frontend)
+
+commit 7a476e301fe46853808f4b47f594f51896cd7faa
+Merge: c62bc6b fd545ca
+Author: aaureta <57241025+aaureta@users.noreply.github.com>
+Date:   Mon Nov 16 00:50:21 2020 -0300
+
+    prueba resolver bug en servlet
+
+commit c62bc6babadc1694be277b42d3dd60d4fff3d619
+Author: aaureta <57241025+aaureta@users.noreply.github.com>
+Date:   Mon Nov 16 00:46:17 2020 -0300
+
+    prueba de arreglo de bug en servlet
+
+commit fd545ca3adb24312125d4119d9d2e270a9df8ee4
+Author: Nicolás Bentancor <nicolasbentancor1996@hotmail.com>
+Date:   Sun Nov 15 23:59:38 2020 -0300
+
+    Actualización 23:59
+
+commit 4a52513d31392c95ff15fc19622cf98062ccd9c0
+Author: Nicolás Bentancor <nicolasbentancor1996@hotmail.com>
+Date:   Sun Nov 15 23:08:10 2020 -0300
+
+    Actualización 23:08
+
+commit a544392208b917ceb95d7997a891b55dae8eee24
+Author: Nicolás Bentancor <nicolasbentancor1996@hotmail.com>
+Date:   Sun Nov 15 21:11:33 2020 -0300
+
+    Actualización 21:00
+
+commit d98faa7f4ec659eff9e021af58fc28280317d82b
+Merge: 9635208 5ae246f
+Author: Nicolás Bentancor <nicolasbentancor1996@hotmail.com>
+Date:   Sun Nov 15 18:01:19 2020 -0300
+
+    Merge branch 'master' of https://github.com/nbent1996/dashboard
+
+commit 9635208324890776562e11721eea8261edf7fa83
+Author: Nicolás Bentancor <nicolasbentancor1996@hotmail.com>
+Date:   Sun Nov 15 18:01:00 2020 -0300
+
+    OpTiposDispositivos y correcciones OpFacturas
+
+commit 5ae246f24256df36b52990e3e439a5a93e0b4f84
+Author: aaureta <57241025+aaureta@users.noreply.github.com>
+Date:   Sun Nov 15 15:14:06 2020 -0300
+
+    terminado primer ciclo de alta usuario con MVC en frontend
+
+commit fab9da48419d7aad42e7b58c26add9d520701acb
+Author: Nicolás Bentancor <nicolasbentancor1996@hotmail.com>
+Date:   Sun Nov 15 00:16:38 2020 -0300
+
+    Acceso a datos Facturas, Tipos de usuarios completo
+
+commit b4c82ca5168994a7858de710d1d0fa9e9901e268
+Author: Nicolás Bentancor <nicolasbentancor1996@hotmail.com>
+Date:   Sat Nov 14 01:06:20 2020 -0300
+
+    Trabajo en OpFacturas y OpSuscripciones
+
+commit f32a13a3fb6d2c9c38d037c439b15784d1d8a65c
+Merge: 0ccc683 df524e8
+Author: Nicolás Bentancor <nicolasbentancor1996@hotmail.com>
+Date:   Thu Nov 12 22:24:47 2020 -0300
+
+    Avance sobre capa de datos 12-11-2020
+
+commit 0ccc6831dd415791108127b5a9f3824955b09057
+Author: Nicolás Bentancor <nicolasbentancor1996@hotmail.com>
+Date:   Thu Nov 12 22:00:35 2020 -0300
+
+    Avance 12-11 sobre capa de datos, OpPersona en su primer versión de codigo sin testear
+
+commit df524e89126abae8ff7280c1d32e212113017d43
+Author: aaureta <57241025+aaureta@users.noreply.github.com>
+Date:   Thu Nov 12 21:02:47 2020 -0300
+
+    terminada primera versión frontend manejo de usuarios
+
+commit f2ea79f1d6ac221c80ce3716bee5ddb4b7431e85
+Merge: f3cb54e 9efc10d
+Author: aaureta <57241025+aaureta@users.noreply.github.com>
+Date:   Wed Nov 11 22:47:48 2020 -0300
+
+    Merge branch 'master' of https://github.com/nbent1996/dashboard into master
+
+commit f3cb54e7cde808b4eb43f050e239b99af16e8a1e
+Author: aaureta <57241025+aaureta@users.noreply.github.com>
+Date:   Wed Nov 11 22:46:50 2020 -0300
+
+    cambios en frontend registro de usuarios
+
+commit 9efc10da4533d265019a1b54ce4d604c4b0eb04b
+Merge: d6b0052 35e51dd
+Author: Nicolás Bentancor <nicolasbentancor1996@hotmail.com>
+Date:   Wed Nov 11 22:08:04 2020 -0300
+
+    Merge branch 'master' of https://github.com/nbent1996/dashboard into master
+
+commit d6b0052961cfe58cbf1a9af4966a94cbcddbb784
+Author: Nicolás Bentancor <nicolasbentancor1996@hotmail.com>
+Date:   Wed Nov 11 22:07:48 2020 -0300
+
+    Commit 1 11/11/2020 Capa de Datos
+
+commit 35e51dda0a78f02127287e658437bd27ee0ba588
+Merge: 0ccad71 4dcd271
+Author: aaureta <57241025+aaureta@users.noreply.github.com>
+Date:   Wed Nov 11 21:19:50 2020 -0300
+
+    Merge branch 'master' of https://github.com/nbent1996/dashboard into master
+
+commit 0ccad71a98bab26adb3711df61e3c8084e1c9058
+Author: aaureta <57241025+aaureta@users.noreply.github.com>
+Date:   Wed Nov 11 21:18:28 2020 -0300
+
+    cambio de prueba 2
+
+commit 4dcd271b83701a535e5cd2df3fbbcf0455d0370f
+Author: Nicolás Bentancor <nicolasbentancor1996@hotmail.com>
+Date:   Wed Nov 11 21:15:41 2020 -0300
+
+commit 8c8cfec9dc8ae83e9432aba4dfa9e6fe8cd4bdd8
+Author: aaureta <57241025+aaureta@users.noreply.github.com>
+Date:   Wed Nov 11 21:08:17 2020 -0300
+
+    cambio de prueba
+
+commit 5ee5f6afb2a751f3040ed6ccbfbc9ed9a851068b
+Author: Nicolás Bentancor <nicolasbentancor1996@hotmail.com>
+Date:   Wed Nov 11 20:58:53 2020 -0300
+
+    segundo commit, proyecto con todos los archivos
+
+commit df15e0df6db3d72e9cdbfeeaad8750f2c4e8feec
+Author: Nicolás Bentancor <nicolasbentancor1996@hotmail.com>
+Date:   Wed Nov 11 20:24:06 2020 -0300
+
+    Primer commit
