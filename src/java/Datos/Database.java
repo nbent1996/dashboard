@@ -13,13 +13,18 @@ public class Database {
     private static Statement stmt;
     private String modo = "glassfish"; /*local para testing local -- glassfish para testear desde capa de presentación*/
     
-    /*TRABAJANDO CON INSTANCIA LOCAL*/
-     private static String user = "root";
-     private static String pass = "48283674";
-     private static String url = "jdbc:mysql://localhost:3306/alfacomPlatform"+"?user="+user+"&password="+pass+"&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
-    /*TRABAJANDO CON INSTANCIA LOCAL*/
+    /*UTILIZAR ESTAS 3 LINEAS PARA TESTING CON JUNIT*/
+     //private static String user = "root";
+     //private static String pass = "48283674";
+     //private static String url = "jdbc:mysql://localhost:3306/alfacomPlatform"+"?user="+user+"&password="+pass+"&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+    /*UTILIZAR ESTAS 3 LINEAS PARA TESTING CON JUNIT*/
     
-
+     /*UTILIZAR ESTAS 3 LINEAS PARA PRODUCCION(QUE SE PUEDA CONSUMIR EL WEBSERVCE)*/
+     private static String user = "root";
+     private static String pass = "alfacom48282020!";
+     private static String url = "jdbc:mysql://alfacomplatform.cx3teiukxfae.us-east-1.rds.amazonaws.com:3306/alfacomPlatform"+"?user="+user+"&password="+pass+"&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+     /*UTILIZAR ESTAS 3 LINEAS PARA PRODUCCION(QUE SE PUEDA CONSUMIR EL WEBSERVCE)*/
+     
     /*Atributos*/
  /*Constructores*/
 
